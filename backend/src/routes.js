@@ -4,6 +4,8 @@ import multerConfig from './config/multer';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
+import OwnerController from './app/controllers/OwnerController';
+import FoodTruckController from './app/controllers/FoodTruckController';
 import FileController from './app/controllers/FileController';
 
 import authMiddleware from './app/middlewares/auth';
@@ -17,6 +19,11 @@ routes.post('/sessions', SessionController.store);
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
+
+routes.get('/owners', OwnerController.index);
+routes.post('/food-trucks', FoodTruckController.store);
+routes.get('/food-trucks', FoodTruckController.index);
+routes.delete('/food-trucks/:truckId', FoodTruckController.delete);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.delete('/files/:fileId', FileController.store);

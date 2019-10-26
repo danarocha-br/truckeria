@@ -24,7 +24,9 @@ class SessionController {
     });
 
     if (!user) {
-      return res.status(401).json({ error: 'This user was not found.' });
+      return res
+        .status(401)
+        .json({ error: 'Authentication error, please try to login again.' });
     }
 
     if (!(await user.checkPassword(password))) {
