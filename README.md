@@ -1,6 +1,5 @@
 <h1 align="center">
   Truckeria
-  <img alt="Truckeria" title="Truckeria" src="" width="200px" />
 </h1>
 
 <h3 align="center">
@@ -18,7 +17,7 @@
   Mobible
 </h3>
 
-<img width="500" src="example/screenshots/mobile.jpg">
+<img alt="Truckeria" title="Truckeria" width="500" src="example/screenshots/mobile.jpg">
 
 ## Browser Support
 
