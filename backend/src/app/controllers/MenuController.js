@@ -60,7 +60,11 @@ class MenuController {
 
     const foodtruck = req.params.truckId;
 
-    if (!foodtruck) {
+    const isFoodTruck = await FoodTruck.findOne({
+      where: { id: foodtruck },
+    });
+
+    if (!isFoodTruck) {
       return res.status(401).json({
         error: 'You need to select a food-truck profile to create a menu item.',
       });
@@ -78,12 +82,6 @@ class MenuController {
     //     .status(400)
     //     .json({ error: 'This foodtruck does not belong to you.' });
     // }
-
-    if (!foodtruck) {
-      return res.status(401).json({
-        error: 'You need to select a food-truck profile to create a menu item.',
-      });
-    }
 
     /**
      * Create a menu item

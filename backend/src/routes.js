@@ -7,6 +7,7 @@ import SessionController from './app/controllers/SessionController';
 import OwnerController from './app/controllers/OwnerController';
 import FoodTruckController from './app/controllers/FoodTruckController';
 import MenuController from './app/controllers/MenuController';
+import ScheduleController from './app/controllers/ScheduleController';
 import FileController from './app/controllers/FileController';
 
 import authMiddleware from './app/middlewares/auth';
@@ -29,6 +30,17 @@ routes.delete('/food-trucks/:truckId', FoodTruckController.delete);
 routes.get('/food-trucks/:truckId/menu', MenuController.index);
 routes.post('/food-trucks/:truckId/menu', MenuController.store);
 routes.delete('/food-trucks/:truckId/menu/:menuId', MenuController.delete);
+
+routes.get('/food-trucks/:truckId/schedule', ScheduleController.index);
+routes.post('/food-trucks/:truckId/schedule', ScheduleController.store);
+routes.put(
+  '/food-trucks/:truckId/schedule/:scheduleId',
+  ScheduleController.update
+);
+routes.delete(
+  '/food-trucks/:truckId/schedule/:scheduleId',
+  ScheduleController.delete
+);
 
 routes.post('/files', upload.single('file'), FileController.store);
 routes.delete('/files/:fileId', FileController.store);
