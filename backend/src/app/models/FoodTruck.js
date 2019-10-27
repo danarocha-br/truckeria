@@ -26,6 +26,10 @@ class FoodTruck extends Model {
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
     this.belongsTo(models.File, { foreignKey: 'picture_id', as: 'picture' });
+    this.hasMany(models.Menu, {
+      foreignKey: 'foodtruck_id',
+      as: 'foodtruck',
+    });
   }
 }
 

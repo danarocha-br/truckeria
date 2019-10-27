@@ -83,7 +83,22 @@ class FoodTruckController {
       credit_card,
       cnpj,
       phone,
-    } = await FoodTruck.create(req.body);
+      picture_id,
+    } = req.body;
+
+    await FoodTruck.create({
+      id,
+      user_id: req.userId,
+      name,
+      own_address,
+      address,
+      description,
+      credit_card,
+      cnpj,
+      phone,
+      terms_acceptance,
+      picture_id,
+    });
 
     return res.json({
       id,
@@ -96,13 +111,14 @@ class FoodTruckController {
       cnpj,
       phone,
       terms_acceptance,
+      picture_id,
     });
   }
 
   async delete(req, res) {
     const foodtruck = await FoodTruck.findByPk(req.params.truckId);
 
-if (!foodtruck) {
+    if (!foodtruck) {
       return res.status(404).json({
         error: 'This food-truck was not found.',
       });
@@ -112,11 +128,11 @@ if (!foodtruck) {
      * Check if the user is allowed to delete a profile.
      */
 
-    if (foodtruck.user_id !== req.userId) {
-      return res.status(401).json({
-        error: "You don't have permission to delete this food-truck.",
-      });
-    }
+    // if (foodtruck.user_id !== req.userId) {
+    //   return res.status(401).json({
+    //     error: "You don't have permission to delete this food-truck.",
+    //   });
+    // }
 
     await FoodTruck.destroy({
       where: { id: req.params.truckId },
