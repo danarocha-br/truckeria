@@ -2,14 +2,13 @@
   Truckeria
 </h1>
 
-<h5>
+<h4>
   A simple project to manage food trucks, representing my journey in learning Node js while implementing React Js and React Native. Still under development:
+</h4>
 
 - [ ] REST API (with Node js)
 - [ ] iOS & Android Apps (based on react-native)
 - [ ] Website App in any browser (based on react)
-
-</h5>
 
 ## Screenshots
 
