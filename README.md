@@ -1,15 +1,15 @@
-<h1 align="center">
+<h1>
   Truckeria
 </h1>
 
-<h3 align="center">
+<h5>
   A simple project to manage food trucks, representing my journey in learning Node js while implementing React Js and React Native. Still under development:
 
 - [ ] REST API (with Node js)
 - [ ] iOS & Android Apps (based on react-native)
 - [ ] Website App in any browser (based on react)
 
-</h3>
+</h5>
 
 ## Screenshots
 
@@ -17,7 +17,7 @@
   Mobible
 </h3>
 
-<img alt="Truckeria" title="Truckeria" width="500" src="example/screenshots/mobile.jpg">
+<img alt="Truckeria" title="Truckeria" width="800" src="example/screenshots/mobile.jpg">
 
 ## Browser Support
 
@@ -40,19 +40,15 @@ You will need:
 
 You need to install these prerequisites on your computer before you can use "**Truckeria**".
 
-<h4>NodeJS</h4>
-<a href="https://nodejs.org/en/download/package-manager/" target="_blank">with these instructions</a>.
+<h4>NodeJS</h4> <a href="https://nodejs.org/en/download/package-manager/" target="_blank">with these instructions</a>.
 
-<h4>Yarn</h4>
-<a href="https://yarnpkg.com/en/docs/getting-started" target="_blank">with these instructions</a>.
+<h4>Yarn</h4> <a href="https://yarnpkg.com/en/docs/getting-started" target="_blank">with these instructions</a>.
 
-<h4>Docker</h4>
-<a href="https://www.docker.com/get-started" target="_blank">with these instructions</a>.
+<h4>Docker</h4> <a href="https://www.docker.com/get-started" target="_blank">with these instructions</a>.
 
-<h4>PostgreSQL</h4>
-<a href="https://hub.docker.com/_/postgres" target="_blank">with these instructions</a>.
+<h4>PostgreSQL</h4> <a href="https://hub.docker.com/_/postgres" target="_blank">with these instructions</a>.
 
-Some params:
+<h4>Some Params</h4>
 
 <ul>
   <li>POSTGRES_DB=truckeria</li>
@@ -66,7 +62,7 @@ docker run --name truckeria -e POSTGRES_DB=truckeria -e POSTGRES_USER=postgres -
 
 <h4>REST API Client</h4>
 
-Finally, you will need a rest client to test "**Truckeria**". Examples:
+Finally, you will need a rest client to test "**Truckeria**". Here are some:
 
 <ul>
   <li><a href="https://insomnia.rest/" target="_blank">Insomnia</a></li>
