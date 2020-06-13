@@ -1,0 +1,3 @@
+{
+  "plugins": ["macros", "@babel/plugin-syntax-object-rest-spread"]
+}
