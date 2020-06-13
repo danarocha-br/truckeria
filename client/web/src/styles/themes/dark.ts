@@ -1,5 +1,3 @@
-import { lighten } from 'polished';
-
 import colors from './colors';
 
 export default {
