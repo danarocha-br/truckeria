@@ -6,6 +6,8 @@ export default {
 
   red900: '#F36C62',
 
+  green900: '#76C248',
+
   gray900: '#20242A',
   gray800: '#2B3038',
   gray700: '#3D444F',

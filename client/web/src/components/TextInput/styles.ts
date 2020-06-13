@@ -34,7 +34,7 @@ export const Container = styled.span.attrs({
   opacity: ${(props) => (props.disabled || props.loading ? '0.5' : '1')};
 
   & + span {
-   ${tw`my-4`}
+   ${tw`mt-4`}
   }
 
   &:hover:not([disabled])
