@@ -27,12 +27,15 @@ const animateIcon = `
  */
 export const Container = styled.span.attrs({
   className:
-    'relative flex items-center w-full align-top overflow-hidden border rounded-lg mb-4',
+    'relative flex items-center w-full align-top overflow-hidden border rounded-lg ',
 })<UiStates>`
   border-color: ${(props) => props.theme.form.background};
   z-index: 1;
   opacity: ${(props) => (props.disabled || props.loading ? '0.5' : '1')};
 
+  & + span {
+   ${tw`my-4`}
+  }
 
   &:hover:not([disabled])
    {
@@ -56,7 +59,7 @@ export const Container = styled.span.attrs({
 
   & {
     input {
-      ${tw`text-lg bg-transparent w-11/12 absolute flex float-right border-none z-40 focus:outline-none`}
+      ${tw`text-lg bg-transparent w-11/12 absolute flex float-right border-none z-40 focus:outline-none `}
     color: ${(props) => props.theme.form.text};;
         padding: 1.24em 1.4em 0;
         -webkit-appearance: none;
@@ -135,8 +138,10 @@ export const Container = styled.span.attrs({
     &:disabled {
       cursor: not-allowed;
     }
+  }
 
-  }}
+
+  }
 
   & label {
     ${tw`font-medium text-left flex items-center w-full h-full float-right p-0`};
@@ -183,7 +188,7 @@ export const Container = styled.span.attrs({
   }
 `;
 
-export const Error = styled.span`
-  ${tw`text-xs pt-1`}
+export const Error = styled.div`
+  ${tw`text-xs text-left pt-1 mb-3`}
   color: ${(props) => props.theme.colors.error};;
 `;

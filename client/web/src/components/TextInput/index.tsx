@@ -10,6 +10,7 @@ import { ThemeContext } from 'styled-components';
 import { AiFillExclamationCircle } from 'react-icons/ai';
 
 import { Container, Error } from './styles';
+import Spinner from '../Spinner';
 
 interface FormikActions<Values> {
   setFieldValue<Field extends keyof Values>(
@@ -88,7 +89,9 @@ const TextInput: React.SFC<TextInputProps> = ({
             <AiFillExclamationCircle size={20} color={colors.error} />
           ) : null}
           {loading ? (
-            <i className="spinner">{/* <Spinner small /> */}</i>
+            <i className="spinner">
+              <Spinner small />
+            </i>
           ) : null}
         </label>
       </Container>
