@@ -14,6 +14,7 @@ declare module 'styled-components' {
       white: string;
       accent: string;
       text: string;
+      error: string;
     };
 
     form: {
@@ -22,6 +23,7 @@ declare module 'styled-components' {
       label: string;
       text: string;
       focus: string;
+      shade: string;
     };
   }
 }

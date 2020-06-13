@@ -1,3 +1,5 @@
+import { lighten } from 'polished';
+
 import colors from './colors';
 
 export default {
@@ -14,13 +16,15 @@ export default {
     white: colors.white,
     accent: colors.orange100,
     text: colors.gray100,
+    error: colors.red900,
   },
 
   form: {
-    background: colors.gray100,
+    background: colors.gray800,
     icon: colors.gray500,
-    label: colors.gray800,
-    text: colors.gray900,
+    label: colors.gray200,
+    text: colors.white,
     focus: colors.orange900,
+    shade: colors.gray700,
   },
 };
