@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import * as Yup from 'yup';
+import { ThemeContext } from 'styled-components';
 
 import { Container, Content, Background } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
+import Switch from '../../components/Switch';
 
 interface FormValues {
   email: string;
   password: string;
+}
+
+interface Props {
+  toggleTheme(): void;
 }
 
 const SignInSchema = Yup.object().shape({
@@ -21,11 +27,14 @@ const SignInSchema = Yup.object().shape({
     .required('Password is required'),
 });
 
-const SignIn: React.SFC = () => {
+const SignIn: React.SFC<Props> = ({ toggleTheme }) => {
+  const { title } = useContext(ThemeContext);
+
   const initialValues: FormValues = { email: '', password: '' };
 
   return (
     <Container>
+      <Switch onChange={toggleTheme} checked={title === 'light'} />
       <Content>
         <h2 className="text-4xl">Logo</h2>
         <h1>Login</h1>

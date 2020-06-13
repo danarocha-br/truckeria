@@ -25,5 +25,9 @@ declare module 'styled-components' {
       focus: string;
       shade: string;
     };
+
+    button: {
+      success: string;
+    };
   }
 }
