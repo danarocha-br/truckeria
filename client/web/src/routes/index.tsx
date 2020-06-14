@@ -1,21 +1,29 @@
 import React, { useContext } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { ThemeContext } from 'styled-components';
 
 import SignIn from '../pages/Auth/SignIn';
 import Registration from '../pages/Auth/Registration';
+import Dashboard from '../pages/Dashboard';
+import { UserData } from '../pages/App';
 
 interface Props {
   toggleTheme(): void;
+  currentUser: null | UserData | firebase.User;
 }
 
-const Routes: React.FC<Props> = ({ toggleTheme }) => {
+const Routes: React.FC<Props> = ({ toggleTheme, currentUser }) => {
   const { title } = useContext(ThemeContext);
 
   return (
     <Switch>
-      <Route path="/signin" component={SignIn} />
+      <Route
+        path="/login"
+        // render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+        component={SignIn}
+      />
       <Route path="/register" component={Registration} />
+      <Route path="/" exact component={Dashboard} />
     </Switch>
   );
 };

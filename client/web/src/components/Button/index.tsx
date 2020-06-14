@@ -6,12 +6,16 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
 }
 
-const Button: React.SFC<ButtonProps> = ({ label, ...rest }) => {
+const Button: React.SFC<ButtonProps> = ({ label, type, ...rest }) => {
   return (
-    <Container type="button" {...rest}>
+    <Container type={type} {...rest}>
       {label}
     </Container>
   );
+};
+
+Button.defaultProps = {
+  type: 'submit',
 };
 
 export default Button;

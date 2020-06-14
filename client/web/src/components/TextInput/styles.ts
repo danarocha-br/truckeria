@@ -27,7 +27,7 @@ const animateIcon = `
  */
 export const Container = styled.span.attrs({
   className:
-    'relative flex items-center w-full align-top overflow-hidden border rounded-lg ',
+    'relative flex items-center w-full align-top overflow-hidden border rounded ',
 })<UiStates>`
   border-color: ${(props) => props.theme.form.background};
   z-index: 1;

@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
+import { auth, signInWithGoogle } from '../../api/utils';
 
 interface FormValues {
   email: string;
@@ -25,6 +26,16 @@ const SignInSchema = Yup.object().shape({
 const SignIn: React.SFC = () => {
   const initialValues: FormValues = { email: '', password: '' };
 
+  const handleSubmit = async (values: FormValues) => {
+    const { email, password } = values;
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Container>
       {/* <Switch onChange={toggleTheme} checked={title === 'light'} /> */}
@@ -37,9 +48,8 @@ const SignIn: React.SFC = () => {
             initialValues={initialValues}
             validationSchema={SignInSchema}
             onSubmit={(values, actions) => {
-              console.log({ values, actions });
-              alert(JSON.stringify(values, null, 2));
-              actions.setSubmitting(false);
+              handleSubmit(values);
+              // actions.setSubmitting(false);
             }}
             render={() => (
               <Form>
@@ -57,6 +67,11 @@ const SignIn: React.SFC = () => {
                 />
 
                 <Button label="Sign In" />
+                <Button
+                  label="Sign In With Google"
+                  type="button"
+                  onClick={signInWithGoogle}
+                />
 
                 <Link to="/forgot-password">Forgot my password</Link>
               </Form>
