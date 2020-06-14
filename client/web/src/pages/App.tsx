@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect, ReactNode } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useSelector, useDispatch } from 'react-redux';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -12,23 +12,22 @@ import GlobalStyle from '../styles/global';
 import dark from '../styles/themes/dark';
 import light from '../styles/themes/light';
 import usePersistedState from '../utils/usePersistedState';
+import { UserData, setCurrentUser } from '../store/modules/auth/actions';
 
 import Routes from '../routes';
 
-export interface UserData {
-  id?: string;
-}
-// interface FirebaseHookHandlers {
-//   subscribe: () => void;
-//   error: (error: Error) => void;
-//   unsubscribe: () => void;
-//   children?: ReactNode;
-// }
 const App: React.SFC = () => {
   const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
-  const [currentUser, setUser] = useState<UserData | null | firebase.User>(
-    null,
-  );
+  // const currentUser = useSelector<UserData, UserData['currentUser']>(
+  //   (state) => state.currentUser,
+  // );
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme.title === 'dark' ? light : dark);
+  }, [theme.title, setTheme]);
+
+  // currentUser
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -36,28 +35,26 @@ const App: React.SFC = () => {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef?.onSnapshot((snapShot) => {
-          setUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
+          dispatch(
+            setCurrentUser({
+              id: snapShot.id,
+              ...snapShot.data(),
+            }),
+          );
         });
       }
 
-      setUser(userAuth);
+      dispatch(setCurrentUser(userAuth));
     });
 
-    return unsubscribeFromAuth();
-  }, []);
-
-  const toggleTheme = useCallback(() => {
-    setTheme(theme.title === 'dark' ? light : dark);
-  }, [theme.title, setTheme]);
+    return () => unsubscribeFromAuth();
+  }, [dispatch]);
 
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Routes currentUser={currentUser} toggleTheme={toggleTheme} />
+          <Routes toggleTheme={toggleTheme} />
         </BrowserRouter>
         <GlobalStyle />
       </ThemeProvider>

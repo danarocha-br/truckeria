@@ -1,15 +1,16 @@
 import { ActionTypes } from './types';
 
 export interface UserData {
-  currentUser: string | null;
+  currentUser?: string | null | firebase.User;
+  id?: string;
 }
 
-export interface SignInRequestAction {
+export interface setCurrentUser {
   type: ActionTypes.auth_SET_CURRENT_USER;
   payload: string;
 }
 
-export function signInRequest(currentUser: UserData) {
+export function setCurrentUser(currentUser: UserData) {
   return {
     type: ActionTypes.auth_SET_CURRENT_USER,
     payload: currentUser,

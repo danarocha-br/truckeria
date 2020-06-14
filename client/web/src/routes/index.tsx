@@ -11,10 +11,9 @@ import { UserData } from '../pages/App';
 
 interface Props {
   toggleTheme(): void;
-  currentUser: null | UserData | firebase.User;
 }
 
-const Routes: React.FC<Props> = ({ toggleTheme, currentUser }) => {
+const Routes: React.FC<Props> = ({ toggleTheme }) => {
   const { title } = useContext(ThemeContext);
 
   return (
