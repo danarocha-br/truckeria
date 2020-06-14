@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect, ReactNode } from 'react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
-import { auth, createUserProfileDocument } from '../api/utils.js';
+import { auth, createUserProfileDocument } from '../services/utils.js';
 
 import '../styles/main.css';
 import GlobalStyle from '../styles/global';

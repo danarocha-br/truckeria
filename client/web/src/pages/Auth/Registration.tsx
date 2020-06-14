@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth, createUserProfileDocument } from '../../api/utils';
+import { auth, createUserProfileDocument } from '../../services/utils';
 
 interface RegistrationProps {}
 
@@ -73,7 +73,7 @@ const Registration: React.SFC = () => {
                 <TextInput
                   icon={AiOutlineMail}
                   name="email"
-                  type="text"
+                  type="email"
                   label="Your e-mail"
                 />
                 <TextInput

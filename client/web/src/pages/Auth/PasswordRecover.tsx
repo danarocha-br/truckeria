@@ -1,48 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { AiOutlineMail } from 'react-icons/ai';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth, signInWithGoogle } from '../../services/utils';
+import { auth } from '../../services/utils';
 
 interface FormValues {
   email: string;
-  password: string;
 }
+
+type PasswordRecoverProps = RouteComponentProps;
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email('Please provide a valid e-mail.')
     .required('E-mail is required'),
-  password: Yup.string()
-    .min(6, 'Password must contain minimum of 6 caracters.')
-    .required('Password is required'),
 });
 
-const SignIn: React.SFC = () => {
-  const initialValues: FormValues = { email: '', password: '' };
+const PasswordRecover: React.SFC<PasswordRecoverProps> = ({ history }) => {
+  const initialValues: FormValues = { email: '' };
+  const [errors, setErrors] = useState<string[]>([]);
 
   const handleSubmit = async (values: FormValues) => {
-    const { email, password } = values;
+    const { email } = values;
+
+    const config = {
+      url: 'http://localhost:3000/login',
+    };
 
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await auth
+        .sendPasswordResetEmail(email, config)
+        .then(() => {
+          history.push('/login');
+        })
+        .catch(() => {
+          const err = ['E-mail not found. Please try again.'];
+          setErrors(err);
+        });
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <Container>
-      {/* <Switch onChange={toggleTheme} checked={title === 'light'} /> */}
       <AnimatedContainer>
         <Content>
           <h2 className="text-4xl">Logo</h2>
-          <h1>Login</h1>
+          <h1>Recover your Password</h1>
 
           <Formik
             initialValues={initialValues}
@@ -59,32 +68,24 @@ const SignIn: React.SFC = () => {
                   type="email"
                   label="Your e-mail"
                 />
-                <TextInput
-                  icon={AiOutlineLock}
-                  name="password"
-                  type="password"
-                  label="Your password"
-                />
 
-                <Button label="Sign In" />
-                <Button
-                  label="Sign In With Google"
-                  type="button"
-                  onClick={signInWithGoogle}
-                />
+                <Button label="recover password" />
 
-                <Link to="/forgot-password">Forgot my password</Link>
+                <Link to="/login">Back to Login</Link>
               </Form>
             )}
           />
-
-          <Link to="/signup">Register</Link>
+          {errors?.length > 0 && (
+            <ul>
+              {errors.map((err, index) => {
+                return <li key={index}>{err}</li>;
+              })}
+            </ul>
+          )}
         </Content>
       </AnimatedContainer>
-
-      <Background />
     </Container>
   );
 };
 
-export default SignIn;
+export default withRouter(PasswordRecover);

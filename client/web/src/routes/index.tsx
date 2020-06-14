@@ -4,7 +4,9 @@ import { ThemeContext } from 'styled-components';
 
 import SignIn from '../pages/Auth/SignIn';
 import Registration from '../pages/Auth/Registration';
+import PasswordRecover from '../pages/Auth/PasswordRecover';
 import Dashboard from '../pages/Dashboard';
+
 import { UserData } from '../pages/App';
 
 interface Props {
@@ -23,6 +25,7 @@ const Routes: React.FC<Props> = ({ toggleTheme, currentUser }) => {
         component={SignIn}
       />
       <Route path="/register" component={Registration} />
+      <Route path="/forgot-password" component={PasswordRecover} />
       <Route path="/" exact component={Dashboard} />
     </Switch>
   );
