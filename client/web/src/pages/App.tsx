@@ -1,8 +1,11 @@
 import React, { useCallback, useState, useEffect, ReactNode } from 'react';
+import { Provider } from 'react-redux';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 
 import { auth, createUserProfileDocument } from '../services/utils.js';
+import '../config/ReactotronConfig.js';
+import store from '../store';
 
 import '../styles/main.css';
 import GlobalStyle from '../styles/global';
@@ -42,6 +45,8 @@ const App: React.SFC = () => {
 
       setUser(userAuth);
     });
+
+    return unsubscribeFromAuth();
   }, []);
 
   const toggleTheme = useCallback(() => {
@@ -49,12 +54,14 @@ const App: React.SFC = () => {
   }, [theme.title, setTheme]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes currentUser={currentUser} toggleTheme={toggleTheme} />
-      </BrowserRouter>
-      <GlobalStyle />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Routes currentUser={currentUser} toggleTheme={toggleTheme} />
+        </BrowserRouter>
+        <GlobalStyle />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

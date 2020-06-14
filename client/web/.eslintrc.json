@@ -31,6 +31,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-unused-expressions": "off",
+    "camelcase": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
