@@ -416,7 +416,7 @@ ul {
  */
 
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
+  font-family: proxima-nova, sans-serif; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -544,7 +544,7 @@ pre,
 code,
 kbd,
 samp {
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 /**
@@ -5309,19 +5309,15 @@ video {
 }
 
 .rounded-sm{
-  border-radius: 0.125rem;
+  border-radius: .25rem;
 }
 
 .rounded{
-  border-radius: 0.25rem;
-}
-
-.rounded-md{
-  border-radius: 0.375rem;
+  border-radius: .5rem;
 }
 
 .rounded-lg{
-  border-radius: 0.5rem;
+  border-radius: 2rem;
 }
 
 .rounded-full{
@@ -5349,83 +5345,63 @@ video {
 }
 
 .rounded-t-sm{
-  border-top-left-radius: 0.125rem;
-  border-top-right-radius: 0.125rem;
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
 }
 
 .rounded-r-sm{
-  border-top-right-radius: 0.125rem;
-  border-bottom-right-radius: 0.125rem;
+  border-top-right-radius: .25rem;
+  border-bottom-right-radius: .25rem;
 }
 
 .rounded-b-sm{
-  border-bottom-right-radius: 0.125rem;
-  border-bottom-left-radius: 0.125rem;
+  border-bottom-right-radius: .25rem;
+  border-bottom-left-radius: .25rem;
 }
 
 .rounded-l-sm{
-  border-top-left-radius: 0.125rem;
-  border-bottom-left-radius: 0.125rem;
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
 }
 
 .rounded-t{
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
 }
 
 .rounded-r{
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
 }
 
 .rounded-b{
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: .5rem;
+  border-bottom-left-radius: .5rem;
 }
 
 .rounded-l{
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
-}
-
-.rounded-t-md{
-  border-top-left-radius: 0.375rem;
-  border-top-right-radius: 0.375rem;
-}
-
-.rounded-r-md{
-  border-top-right-radius: 0.375rem;
-  border-bottom-right-radius: 0.375rem;
-}
-
-.rounded-b-md{
-  border-bottom-right-radius: 0.375rem;
-  border-bottom-left-radius: 0.375rem;
-}
-
-.rounded-l-md{
-  border-top-left-radius: 0.375rem;
-  border-bottom-left-radius: 0.375rem;
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
 }
 
 .rounded-t-lg{
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
 }
 
 .rounded-r-lg{
-  border-top-right-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 
 .rounded-b-lg{
-  border-bottom-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
 }
 
 .rounded-l-lg{
-  border-top-left-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
 }
 
 .rounded-t-full{
@@ -5465,67 +5441,51 @@ video {
 }
 
 .rounded-tl-sm{
-  border-top-left-radius: 0.125rem;
+  border-top-left-radius: .25rem;
 }
 
 .rounded-tr-sm{
-  border-top-right-radius: 0.125rem;
+  border-top-right-radius: .25rem;
 }
 
 .rounded-br-sm{
-  border-bottom-right-radius: 0.125rem;
+  border-bottom-right-radius: .25rem;
 }
 
 .rounded-bl-sm{
-  border-bottom-left-radius: 0.125rem;
+  border-bottom-left-radius: .25rem;
 }
 
 .rounded-tl{
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: .5rem;
 }
 
 .rounded-tr{
-  border-top-right-radius: 0.25rem;
+  border-top-right-radius: .5rem;
 }
 
 .rounded-br{
-  border-bottom-right-radius: 0.25rem;
+  border-bottom-right-radius: .5rem;
 }
 
 .rounded-bl{
-  border-bottom-left-radius: 0.25rem;
-}
-
-.rounded-tl-md{
-  border-top-left-radius: 0.375rem;
-}
-
-.rounded-tr-md{
-  border-top-right-radius: 0.375rem;
-}
-
-.rounded-br-md{
-  border-bottom-right-radius: 0.375rem;
-}
-
-.rounded-bl-md{
-  border-bottom-left-radius: 0.375rem;
+  border-bottom-left-radius: .5rem;
 }
 
 .rounded-tl-lg{
-  border-top-left-radius: 0.5rem;
+  border-top-left-radius: 2rem;
 }
 
 .rounded-tr-lg{
-  border-top-right-radius: 0.5rem;
+  border-top-right-radius: 2rem;
 }
 
 .rounded-br-lg{
-  border-bottom-right-radius: 0.5rem;
+  border-bottom-right-radius: 2rem;
 }
 
 .rounded-bl-lg{
-  border-bottom-left-radius: 0.5rem;
+  border-bottom-left-radius: 2rem;
 }
 
 .rounded-tl-full{
@@ -6011,15 +5971,7 @@ video {
 }
 
 .font-sans{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.font-serif{
-  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.font-mono{
-  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: proxima-nova, sans-serif;
 }
 
 .font-hairline{
@@ -19047,19 +18999,15 @@ video {
   }
 
   .sm\:rounded-sm{
-    border-radius: 0.125rem;
+    border-radius: .25rem;
   }
 
   .sm\:rounded{
-    border-radius: 0.25rem;
-  }
-
-  .sm\:rounded-md{
-    border-radius: 0.375rem;
+    border-radius: .5rem;
   }
 
   .sm\:rounded-lg{
-    border-radius: 0.5rem;
+    border-radius: 2rem;
   }
 
   .sm\:rounded-full{
@@ -19087,83 +19035,63 @@ video {
   }
 
   .sm\:rounded-t-sm{
-    border-top-left-radius: 0.125rem;
-    border-top-right-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
   }
 
   .sm\:rounded-r-sm{
-    border-top-right-radius: 0.125rem;
-    border-bottom-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .sm\:rounded-b-sm{
-    border-bottom-right-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .sm\:rounded-l-sm{
-    border-top-left-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .sm\:rounded-t{
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
   }
 
   .sm\:rounded-r{
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .sm\:rounded-b{
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .sm\:rounded-l{
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .sm\:rounded-t-md{
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-  }
-
-  .sm\:rounded-r-md{
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .sm\:rounded-b-md{
-    border-bottom-right-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-  }
-
-  .sm\:rounded-l-md{
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .sm\:rounded-t-lg{
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
   }
 
   .sm\:rounded-r-lg{
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .sm\:rounded-b-lg{
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .sm\:rounded-l-lg{
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .sm\:rounded-t-full{
@@ -19203,67 +19131,51 @@ video {
   }
 
   .sm\:rounded-tl-sm{
-    border-top-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
   }
 
   .sm\:rounded-tr-sm{
-    border-top-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
   }
 
   .sm\:rounded-br-sm{
-    border-bottom-right-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .sm\:rounded-bl-sm{
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .sm\:rounded-tl{
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: .5rem;
   }
 
   .sm\:rounded-tr{
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
   }
 
   .sm\:rounded-br{
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .sm\:rounded-bl{
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .sm\:rounded-tl-md{
-    border-top-left-radius: 0.375rem;
-  }
-
-  .sm\:rounded-tr-md{
-    border-top-right-radius: 0.375rem;
-  }
-
-  .sm\:rounded-br-md{
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .sm\:rounded-bl-md{
-    border-bottom-left-radius: 0.375rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .sm\:rounded-tl-lg{
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
   }
 
   .sm\:rounded-tr-lg{
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
   }
 
   .sm\:rounded-br-lg{
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .sm\:rounded-bl-lg{
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .sm\:rounded-tl-full{
@@ -19749,15 +19661,7 @@ video {
   }
 
   .sm\:font-sans{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
-
-  .sm\:font-serif{
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .sm\:font-mono{
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: proxima-nova, sans-serif;
   }
 
   .sm\:font-hairline{
@@ -32786,19 +32690,15 @@ video {
   }
 
   .md\:rounded-sm{
-    border-radius: 0.125rem;
+    border-radius: .25rem;
   }
 
   .md\:rounded{
-    border-radius: 0.25rem;
-  }
-
-  .md\:rounded-md{
-    border-radius: 0.375rem;
+    border-radius: .5rem;
   }
 
   .md\:rounded-lg{
-    border-radius: 0.5rem;
+    border-radius: 2rem;
   }
 
   .md\:rounded-full{
@@ -32826,83 +32726,63 @@ video {
   }
 
   .md\:rounded-t-sm{
-    border-top-left-radius: 0.125rem;
-    border-top-right-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
   }
 
   .md\:rounded-r-sm{
-    border-top-right-radius: 0.125rem;
-    border-bottom-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .md\:rounded-b-sm{
-    border-bottom-right-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .md\:rounded-l-sm{
-    border-top-left-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .md\:rounded-t{
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
   }
 
   .md\:rounded-r{
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .md\:rounded-b{
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .md\:rounded-l{
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .md\:rounded-t-md{
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-  }
-
-  .md\:rounded-r-md{
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .md\:rounded-b-md{
-    border-bottom-right-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-  }
-
-  .md\:rounded-l-md{
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .md\:rounded-t-lg{
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
   }
 
   .md\:rounded-r-lg{
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .md\:rounded-b-lg{
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .md\:rounded-l-lg{
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .md\:rounded-t-full{
@@ -32942,67 +32822,51 @@ video {
   }
 
   .md\:rounded-tl-sm{
-    border-top-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
   }
 
   .md\:rounded-tr-sm{
-    border-top-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
   }
 
   .md\:rounded-br-sm{
-    border-bottom-right-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .md\:rounded-bl-sm{
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .md\:rounded-tl{
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: .5rem;
   }
 
   .md\:rounded-tr{
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
   }
 
   .md\:rounded-br{
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .md\:rounded-bl{
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .md\:rounded-tl-md{
-    border-top-left-radius: 0.375rem;
-  }
-
-  .md\:rounded-tr-md{
-    border-top-right-radius: 0.375rem;
-  }
-
-  .md\:rounded-br-md{
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .md\:rounded-bl-md{
-    border-bottom-left-radius: 0.375rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .md\:rounded-tl-lg{
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
   }
 
   .md\:rounded-tr-lg{
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
   }
 
   .md\:rounded-br-lg{
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .md\:rounded-bl-lg{
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .md\:rounded-tl-full{
@@ -33488,15 +33352,7 @@ video {
   }
 
   .md\:font-sans{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
-
-  .md\:font-serif{
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .md\:font-mono{
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: proxima-nova, sans-serif;
   }
 
   .md\:font-hairline{
@@ -46525,19 +46381,15 @@ video {
   }
 
   .lg\:rounded-sm{
-    border-radius: 0.125rem;
+    border-radius: .25rem;
   }
 
   .lg\:rounded{
-    border-radius: 0.25rem;
-  }
-
-  .lg\:rounded-md{
-    border-radius: 0.375rem;
+    border-radius: .5rem;
   }
 
   .lg\:rounded-lg{
-    border-radius: 0.5rem;
+    border-radius: 2rem;
   }
 
   .lg\:rounded-full{
@@ -46565,83 +46417,63 @@ video {
   }
 
   .lg\:rounded-t-sm{
-    border-top-left-radius: 0.125rem;
-    border-top-right-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
   }
 
   .lg\:rounded-r-sm{
-    border-top-right-radius: 0.125rem;
-    border-bottom-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .lg\:rounded-b-sm{
-    border-bottom-right-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .lg\:rounded-l-sm{
-    border-top-left-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .lg\:rounded-t{
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
   }
 
   .lg\:rounded-r{
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .lg\:rounded-b{
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .lg\:rounded-l{
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .lg\:rounded-t-md{
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-  }
-
-  .lg\:rounded-r-md{
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .lg\:rounded-b-md{
-    border-bottom-right-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-  }
-
-  .lg\:rounded-l-md{
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .lg\:rounded-t-lg{
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
   }
 
   .lg\:rounded-r-lg{
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .lg\:rounded-b-lg{
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .lg\:rounded-l-lg{
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .lg\:rounded-t-full{
@@ -46681,67 +46513,51 @@ video {
   }
 
   .lg\:rounded-tl-sm{
-    border-top-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
   }
 
   .lg\:rounded-tr-sm{
-    border-top-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
   }
 
   .lg\:rounded-br-sm{
-    border-bottom-right-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .lg\:rounded-bl-sm{
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .lg\:rounded-tl{
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: .5rem;
   }
 
   .lg\:rounded-tr{
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
   }
 
   .lg\:rounded-br{
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .lg\:rounded-bl{
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .lg\:rounded-tl-md{
-    border-top-left-radius: 0.375rem;
-  }
-
-  .lg\:rounded-tr-md{
-    border-top-right-radius: 0.375rem;
-  }
-
-  .lg\:rounded-br-md{
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .lg\:rounded-bl-md{
-    border-bottom-left-radius: 0.375rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .lg\:rounded-tl-lg{
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
   }
 
   .lg\:rounded-tr-lg{
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
   }
 
   .lg\:rounded-br-lg{
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .lg\:rounded-bl-lg{
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .lg\:rounded-tl-full{
@@ -47227,15 +47043,7 @@ video {
   }
 
   .lg\:font-sans{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
-
-  .lg\:font-serif{
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .lg\:font-mono{
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: proxima-nova, sans-serif;
   }
 
   .lg\:font-hairline{
@@ -60264,19 +60072,15 @@ video {
   }
 
   .xl\:rounded-sm{
-    border-radius: 0.125rem;
+    border-radius: .25rem;
   }
 
   .xl\:rounded{
-    border-radius: 0.25rem;
-  }
-
-  .xl\:rounded-md{
-    border-radius: 0.375rem;
+    border-radius: .5rem;
   }
 
   .xl\:rounded-lg{
-    border-radius: 0.5rem;
+    border-radius: 2rem;
   }
 
   .xl\:rounded-full{
@@ -60304,83 +60108,63 @@ video {
   }
 
   .xl\:rounded-t-sm{
-    border-top-left-radius: 0.125rem;
-    border-top-right-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
   }
 
   .xl\:rounded-r-sm{
-    border-top-right-radius: 0.125rem;
-    border-bottom-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .xl\:rounded-b-sm{
-    border-bottom-right-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .xl\:rounded-l-sm{
-    border-top-left-radius: 0.125rem;
-    border-bottom-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .xl\:rounded-t{
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
   }
 
   .xl\:rounded-r{
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .xl\:rounded-b{
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .xl\:rounded-l{
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .xl\:rounded-t-md{
-    border-top-left-radius: 0.375rem;
-    border-top-right-radius: 0.375rem;
-  }
-
-  .xl\:rounded-r-md{
-    border-top-right-radius: 0.375rem;
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .xl\:rounded-b-md{
-    border-bottom-right-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-  }
-
-  .xl\:rounded-l-md{
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .xl\:rounded-t-lg{
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
   }
 
   .xl\:rounded-r-lg{
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .xl\:rounded-b-lg{
-    border-bottom-right-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .xl\:rounded-l-lg{
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .xl\:rounded-t-full{
@@ -60420,67 +60204,51 @@ video {
   }
 
   .xl\:rounded-tl-sm{
-    border-top-left-radius: 0.125rem;
+    border-top-left-radius: .25rem;
   }
 
   .xl\:rounded-tr-sm{
-    border-top-right-radius: 0.125rem;
+    border-top-right-radius: .25rem;
   }
 
   .xl\:rounded-br-sm{
-    border-bottom-right-radius: 0.125rem;
+    border-bottom-right-radius: .25rem;
   }
 
   .xl\:rounded-bl-sm{
-    border-bottom-left-radius: 0.125rem;
+    border-bottom-left-radius: .25rem;
   }
 
   .xl\:rounded-tl{
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: .5rem;
   }
 
   .xl\:rounded-tr{
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: .5rem;
   }
 
   .xl\:rounded-br{
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: .5rem;
   }
 
   .xl\:rounded-bl{
-    border-bottom-left-radius: 0.25rem;
-  }
-
-  .xl\:rounded-tl-md{
-    border-top-left-radius: 0.375rem;
-  }
-
-  .xl\:rounded-tr-md{
-    border-top-right-radius: 0.375rem;
-  }
-
-  .xl\:rounded-br-md{
-    border-bottom-right-radius: 0.375rem;
-  }
-
-  .xl\:rounded-bl-md{
-    border-bottom-left-radius: 0.375rem;
+    border-bottom-left-radius: .5rem;
   }
 
   .xl\:rounded-tl-lg{
-    border-top-left-radius: 0.5rem;
+    border-top-left-radius: 2rem;
   }
 
   .xl\:rounded-tr-lg{
-    border-top-right-radius: 0.5rem;
+    border-top-right-radius: 2rem;
   }
 
   .xl\:rounded-br-lg{
-    border-bottom-right-radius: 0.5rem;
+    border-bottom-right-radius: 2rem;
   }
 
   .xl\:rounded-bl-lg{
-    border-bottom-left-radius: 0.5rem;
+    border-bottom-left-radius: 2rem;
   }
 
   .xl\:rounded-tl-full{
@@ -60966,15 +60734,7 @@ video {
   }
 
   .xl\:font-sans{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  }
-
-  .xl\:font-serif{
-    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
-  }
-
-  .xl\:font-mono{
-    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: proxima-nova, sans-serif;
   }
 
   .xl\:font-hairline{
