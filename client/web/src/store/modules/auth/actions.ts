@@ -1,7 +1,7 @@
 import { ActionTypes } from './types';
 
 export interface UserData {
-  currentUser?: string | null | firebase.User;
+  currentUser?: string | null;
   id?: string;
 }
 
