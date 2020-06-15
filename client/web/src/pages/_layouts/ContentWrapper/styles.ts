@@ -12,5 +12,5 @@ export const ColLeft = styled.div`
 
 export const ColRight = styled.div`
   ${tw`h-screen flex flex-col w-1/2 rounded-l-lg`}
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.formPanel};
 `;

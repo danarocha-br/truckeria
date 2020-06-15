@@ -10,7 +10,7 @@ export interface setCurrentUser {
   payload: string;
 }
 
-export function setCurrentUser(currentUser: UserData) {
+export function setCurrentUser(currentUser: UserData | firebase.User | null) {
   return {
     type: ActionTypes.auth_SET_CURRENT_USER,
     payload: currentUser,

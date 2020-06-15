@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { ThemeContext } from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -10,11 +10,7 @@ import Dashboard from '../pages/Dashboard';
 import { auth, createUserProfileDocument } from '../services/utils.js';
 import { setCurrentUser } from '../store/modules/auth/actions';
 
-interface Props {
-  toggleTheme(): void;
-}
-
-const Routes: React.FC<Props> = ({ toggleTheme }) => {
+const Routes: React.FC = () => {
   const { title } = useContext(ThemeContext);
 
   // currentUser

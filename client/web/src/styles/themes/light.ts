@@ -8,8 +8,8 @@ export default {
   colors: {
     primary: colors.red900,
 
-    base: colors.gray100,
-    shade: colors.gray500,
+    base: colors.white,
+    shade: colors.gray100,
     tabbar: colors.white,
     greyMd: colors.gray500,
     greyLight: colors.gray100,
@@ -17,6 +17,7 @@ export default {
     accent: colors.blue300,
     text: colors.gray900,
     error: colors.red900,
+    formPanel: colors.white,
   },
 
   form: {

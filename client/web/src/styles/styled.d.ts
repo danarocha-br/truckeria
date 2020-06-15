@@ -15,6 +15,7 @@ declare module 'styled-components' {
       accent: string;
       text: string;
       error: string;
+      formPanel: string;
     };
 
     form: {

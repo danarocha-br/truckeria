@@ -7,6 +7,10 @@ import SignInBck from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
   ${tw`h-screen flex items-stretch `}
+
+  .logo {
+    ${tw`mb-12`}
+  }
 `;
 
 export const Content = styled.div`
@@ -36,12 +40,12 @@ const animateFromLeft = keyframes`
 `;
 
 export const AnimatedContainer = styled.div`
-  ${tw`flex flex-1 flex-col items-center`}
+  ${tw`flex flex-1 flex-col `}
   place-content: center;
   animation: ${animateFromLeft} 1s;
 
   h1 {
-    ${tw`mb-6 text-2xl`}
+    ${tw`mb-4 text-2xl font-bold`}
   }
 
   form {
@@ -49,12 +53,16 @@ export const AnimatedContainer = styled.div`
     width: 450px;
 
     a {
-      ${tw`text-white block no-underline`}
+      ${tw`text-white block no-underline mt-4`}
       transition: color 0.3s;
 
       &:hover {
-        background: ${shade(0.1, '#fff')};
+        color: ${(props) => shade(0.1, props.theme.colors.primary)};
       }
     }
+  }
+
+  span:first-child {
+    ${tw`text-right mr-8 mt-8`}
   }
 `;

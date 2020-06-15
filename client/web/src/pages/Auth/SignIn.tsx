@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth, signInWithGoogle } from '../../services/utils';
+import { auth, signInWithGoogle } from '../../services/utils.js';
+import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
 interface FormValues {
   email: string;
@@ -38,11 +39,15 @@ const SignIn: React.SFC = () => {
 
   return (
     <Container>
-      {/* <Switch onChange={toggleTheme} checked={title === 'light'} /> */}
       <AnimatedContainer>
+        <span>
+          <Link to="/register">Create an account</Link>
+        </span>
         <Content>
-          <h2 className="text-4xl">Logo</h2>
-          <h1>Login</h1>
+          <Logo className="logo" />
+          <h1>Welcome back!</h1>
+
+          {/* <p>Fill in your details to login:</p> */}
 
           <Formik
             initialValues={initialValues}
@@ -67,18 +72,16 @@ const SignIn: React.SFC = () => {
                 />
 
                 <Button label="Sign In" />
-                <Button
+                {/* <Button
                   label="Sign In With Google"
                   type="button"
                   onClick={signInWithGoogle}
-                />
+                /> */}
 
                 <Link to="/forgot-password">Forgot my password</Link>
               </Form>
             )}
           />
-
-          <Link to="/signup">Register</Link>
         </Content>
       </AnimatedContainer>
 

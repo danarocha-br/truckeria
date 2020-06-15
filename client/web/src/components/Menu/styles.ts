@@ -4,6 +4,13 @@ import tw from 'tailwind.macro';
 export const Container = styled.aside`
   ${tw`h-screen flex flex-col w-1/4 justify-between p-8`}
   background-color: ${(props) => props.theme.colors.base};
+  max-width: 270px;
+  min-width: 200px;
+
+  .logo {
+    width: 156px;
+    text-align: center;
+  }
 `;
 
 export const List = styled.ul``;

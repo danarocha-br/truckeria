@@ -8,7 +8,8 @@ import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth, createUserProfileDocument } from '../../services/utils';
+import { auth, createUserProfileDocument } from '../../services/utils.js';
+import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
 interface RegistrationProps {}
 
@@ -52,9 +53,12 @@ const Registration: React.SFC = () => {
       <Background />
 
       <AnimatedContainer>
+        <span>
+          Already have an account? <Link to="/login">Login</Link>
+        </span>
         <Content>
-          <h2 className="text-4xl">Logo</h2>
-          <h1>Register</h1>
+          <Logo className="logo" />
+          <h1>Welcome back!</h1>
 
           <Formik
             initialValues={initialValues}
@@ -87,8 +91,6 @@ const Registration: React.SFC = () => {
               </Form>
             )}
           />
-
-          <Link to="/signup">Login</Link>
         </Content>
       </AnimatedContainer>
     </Container>

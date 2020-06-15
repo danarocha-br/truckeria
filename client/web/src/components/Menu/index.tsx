@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   AiOutlineCar,
   AiOutlineCalendar,
@@ -6,27 +6,44 @@ import {
   AiOutlinePercentage,
 } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { DefaultTheme } from 'styled-components';
 
 import { Container, List, Profile } from './styles';
-import Item from './Item';
+import NavItem from './NavItem';
 import ProfileImage from '../../assets/sign-in-background.png';
+import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
+import Switch from '../Switch';
+
+import dark from '../../styles/themes/dark';
+import light from '../../styles/themes/light';
+import usePersistedState from '../../utils/usePersistedState';
 
 export interface MenuProps {}
 
 const Menu: React.SFC<MenuProps> = () => {
+  const [theme, setTheme] = usePersistedState<DefaultTheme>('theme', dark);
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme.title === 'dark' ? light : dark);
+  }, [theme.title, setTheme]);
+
   return (
     <Container>
-      <h1 className="text-2xl">Truckeria</h1>
+      <Switch onChange={toggleTheme} checked={theme.title === 'light'} />
 
+      <Logo className="logo" />
       <nav>
         <List>
-          <Item title="overview" icon={AiOutlineCar} to="/" />
-          <Item title="schedule" icon={AiOutlineCalendar} to="/schedule" />
-          <Item title="menu" icon={AiOutlineOrderedList} to="/menu" />
-          <Item title="discounts" icon={AiOutlinePercentage} to="/discounts" />
+          <NavItem title="overview" icon={AiOutlineCar} to="/" />
+          <NavItem title="schedule" icon={AiOutlineCalendar} to="/schedule" />
+          <NavItem title="menu" icon={AiOutlineOrderedList} to="/menu" />
+          <NavItem
+            title="discounts"
+            icon={AiOutlinePercentage}
+            to="/discounts"
+          />
         </List>
       </nav>
-
       <Profile>
         <img src={ProfileImage} alt="foodtruck" />
         <div>

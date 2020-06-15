@@ -15,6 +15,7 @@ export default {
     accent: colors.orange100,
     text: colors.gray100,
     error: colors.red900,
+    formPanel: colors.white,
   },
 
   form: {
