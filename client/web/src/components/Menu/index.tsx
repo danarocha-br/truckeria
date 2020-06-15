@@ -1,10 +1,6 @@
 import React, { useCallback } from 'react';
-import {
-  AiOutlineCar,
-  AiOutlineCalendar,
-  AiOutlineOrderedList,
-  AiOutlinePercentage,
-} from 'react-icons/ai';
+
+import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { DefaultTheme } from 'styled-components';
 
@@ -34,14 +30,10 @@ const Menu: React.SFC<MenuProps> = () => {
       <Logo className="logo" />
       <nav>
         <List>
-          <NavItem title="overview" icon={AiOutlineCar} to="/" />
-          <NavItem title="schedule" icon={AiOutlineCalendar} to="/schedule" />
-          <NavItem title="menu" icon={AiOutlineOrderedList} to="/menu" />
-          <NavItem
-            title="discounts"
-            icon={AiOutlinePercentage}
-            to="/discounts"
-          />
+          <NavItem active title="overview" icon={FiTruck} to="/" />
+          <NavItem title="schedule" icon={FiCalendar} to="/schedule" />
+          <NavItem title="menu" icon={FiGrid} to="/menu" />
+          <NavItem title="discounts" icon={FiPercent} to="/discounts" />
         </List>
       </nav>
       <Profile>

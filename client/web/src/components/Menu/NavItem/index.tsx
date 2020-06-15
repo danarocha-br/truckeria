@@ -7,13 +7,19 @@ export interface MenuItemsProps {
   title: string;
   icon: React.ComponentType<{ size?: string; color?: string }>;
   to: string;
+  active?: boolean;
 }
 
-const MenuItems: React.SFC<MenuItemsProps> = ({ title, icon: Icon, to }) => {
+const MenuItems: React.SFC<MenuItemsProps> = ({
+  title,
+  icon: Icon,
+  to,
+  active,
+}) => {
   return (
     <Item>
       <Link to={to}>
-        <Icon size="22" />
+        <Icon size="19" />
 
         {title}
       </Link>
