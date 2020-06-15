@@ -2,13 +2,13 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import { auth, signInWithGoogle } from '../../services/utils.js';
 import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
+import Link from '../../components/Link';
 
 interface FormValues {
   email: string;
@@ -41,7 +41,7 @@ const SignIn: React.SFC = () => {
     <Container>
       <AnimatedContainer>
         <span>
-          <Link to="/register">Create an account</Link>
+          <Link to="/register" label="Create an account" />
         </span>
         <Content>
           <Logo className="logo" />
@@ -78,7 +78,7 @@ const SignIn: React.SFC = () => {
                   onClick={signInWithGoogle}
                 /> */}
 
-                <Link to="/forgot-password">Forgot my password</Link>
+                <Link to="/forgot-password" label="Forgot my password" />
               </Form>
             )}
           />

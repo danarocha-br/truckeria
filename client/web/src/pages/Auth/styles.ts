@@ -7,6 +7,7 @@ import SignInBck from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
   ${tw`h-screen flex items-stretch `}
+  background-color: ${(props) => props.theme.colors.base};
 
   .logo {
     ${tw`mb-12`}
@@ -46,6 +47,7 @@ export const AnimatedContainer = styled.div`
 
   h1 {
     ${tw`mb-4 text-2xl font-bold`}
+    color: ${(props) => props.theme.colors.text};
   }
 
   form {
@@ -64,5 +66,6 @@ export const AnimatedContainer = styled.div`
 
   span:first-child {
     ${tw`text-right mr-8 mt-8`}
+    color: ${(props) => props.theme.colors.text};
   }
 `;
