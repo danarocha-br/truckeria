@@ -8,7 +8,11 @@ export interface Props extends LinkProps {
 }
 
 const Link: React.SFC<Props> = ({ to, label }) => {
-  return <Container to={to}>{label}</Container>;
+  return (
+    <Container to={to}>
+      {label} <span />
+    </Container>
+  );
 };
 
 export default Link;

@@ -12,7 +12,7 @@ export default {
     greyMd: colors.gray500,
     greyLight: colors.gray100,
     white: colors.white,
-    accent: colors.orange100,
+    accent: colors.yellow900,
     text: colors.gray100,
     error: colors.red900,
     formPanel: colors.white,

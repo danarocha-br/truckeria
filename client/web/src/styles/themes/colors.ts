@@ -2,7 +2,7 @@ export default {
   orange900: '#FF8D4D',
   orange100: '#ECE7D2',
 
-  yellow900: '#EDAA00',
+  yellow900: '#CCAF81',
 
   red900: '#F36C62',
 
