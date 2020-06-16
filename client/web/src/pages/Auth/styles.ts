@@ -51,21 +51,16 @@ export const AnimatedContainer = styled.div`
   }
 
   form {
-    ${tw`my-10`}
+    ${tw`my-8`}
     width: 450px;
 
     a {
-      ${tw`text-white block no-underline mt-4`}
-      transition: color 0.3s;
-
-      &:hover {
-        color: ${(props) => shade(0.1, props.theme.colors.primary)};
-      }
+      ${tw`mt-8`}
     }
   }
 
   span:first-child {
-    ${tw`text-right mr-8 mt-8`}
+    ${tw`text-right mr-10 mt-8`}
     color: ${(props) => props.theme.colors.text};
   }
 `;

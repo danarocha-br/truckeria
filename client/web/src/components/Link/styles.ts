@@ -4,44 +4,12 @@ import tw from 'tailwind.macro';
 
 export type Props = LinkProps;
 
-// export const Container = styled(Link)<Props>`
-//   position: relative;
-//   text-decoration: none;
-//   display: inline-block;
-//   color: ${(props) => props.theme.colors.primary};
-//   padding: 3px 8px;
-
-//   transition: color ease 0.5s;
-//   z-index: 2;
-
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     border-radius: 2px;
-//     z-index: -1;
-//     width: 100%;
-//     height: 5%;
-//     left: 0;
-//     bottom: 0;
-//     background-color: ${(props) => props.theme.colors.primary};
-//     transition: all ease 0.5s;
-//   }
-
-//   &:hover {
-//     color: white;
-
-//     &::after {
-//       height: 100%;
-//     }
-//   }
-// `;
-
 export const Container = styled(Link)<Props>`
-  ${tw`no-underline relative inline-block pl-4 `}
+  ${tw`no-underline relative inline-block pl-4 pr-5 font-semibold`}
   color: ${(props) => props.theme.colors.accent};
 
   span {
-    ${tw`absolute left-0 `}
+    ${tw`absolute left-0`}
         top: -19px;
         right: -20px;
         height: 1px;
@@ -72,20 +40,19 @@ export const Container = styled(Link)<Props>`
       ${tw`absolute inline-block`}
         content: '';
         top: 13px;
-        display: inline-block;
         height: 1px;
         width: 5px;
         background-color: ${(props) => props.theme.colors.primary};
     }
     &:after{
-      right: -15px;
+      right: 5px;
     }
     &:before{
       left: 0;
     }
     &:hover, &:focus{
       span{
-        transform: scaleX(1.2);
+        transform: scaleX(1.15);
         transition: 0.3s ease-out;
         &:before{
             transform: rotate(40deg);
