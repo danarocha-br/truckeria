@@ -4,7 +4,8 @@ import tw from 'tailwind.macro';
 export const Item = styled.li`
   ${tw`pb-8`}
   a {
-    ${tw`flex items-center capitalize font-semibold relative w-full`}
+    ${tw`flex items-center capitalize font-semibold relative w-full`};
+    color: ${(props) => props.theme.colors.text};
     opacity: 0.6;
 
     &:after {
@@ -25,6 +26,7 @@ export const Item = styled.li`
 
     &:hover {
       opacity: 1;
+      color: ${(props) => props.theme.colors.text};
     }
 
     &:hover svg {
