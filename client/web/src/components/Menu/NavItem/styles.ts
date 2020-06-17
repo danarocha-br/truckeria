@@ -1,7 +1,11 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
 
-export const Item = styled.li`
+interface ItemProps {
+  isActive?: boolean;
+}
+
+export const Item = styled.li<ItemProps>`
   ${tw`pb-8`}
   a {
     ${tw`flex items-center capitalize font-semibold relative w-full`};
@@ -19,8 +23,25 @@ export const Item = styled.li`
       transition: all 400ms ease;
     }
 
+    ${(props) =>
+      props.isActive &&
+      css`
+        width: 430px;
+        opacity: 1;
+        color: ${props.theme.colors.text};
+
+        svg {
+          color: ${props.theme.colors.primary};
+        }
+
+        &::after {
+          width: 30px;
+          opacity: 1;
+        }
+      `}
+
     &:hover::after {
-      width: 40px;
+      width: 35px;
       opacity: 1;
     }
 
