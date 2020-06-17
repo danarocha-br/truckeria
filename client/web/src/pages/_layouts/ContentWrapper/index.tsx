@@ -1,17 +1,9 @@
 import React from 'react';
 
-import { Container, ColLeft, ColRight } from './styles';
+import { Container } from './styles';
 
-export interface ContentWrapperProps {}
-
-const ContentWrapper: React.SFC<ContentWrapperProps> = ({ children }) => {
-  return (
-    <Container>
-      {children}
-      <ColLeft />
-      <ColRight />
-    </Container>
-  );
+const ContentWrapper: React.SFC = ({ children }) => {
+  return <Container>{children}</Container>;
 };
 
 export default ContentWrapper;

@@ -4,13 +4,11 @@ import { Wrapper } from './styles';
 import Menu from '../../../components/Menu';
 import ContentWrapper from '../ContentWrapper';
 
-export interface ContainerLayoutProps {}
-
-const ContainerLayout: React.SFC<ContainerLayoutProps> = () => {
+const ContainerLayout: React.SFC = ({ children }) => {
   return (
     <Wrapper>
       <Menu />
-      <ContentWrapper />
+      <ContentWrapper>{children}</ContentWrapper>
     </Wrapper>
   );
 };

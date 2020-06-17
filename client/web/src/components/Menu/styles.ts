@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { darken } from 'polished';
 
-export const Container = styled.aside`
+export const Container = styled.nav`
   ${tw`h-screen flex flex-col w-1/4 justify-between p-6 relative`}
   background-color: ${(props) => props.theme.colors.base};
   max-width: 270px;

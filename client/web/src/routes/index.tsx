@@ -7,6 +7,7 @@ import SignIn from '../pages/Auth/SignIn';
 import Registration from '../pages/Auth/Registration';
 import PasswordRecover from '../pages/Auth/PasswordRecover';
 import Dashboard from '../pages/Dashboard';
+import Schedule from '../pages/Schedule';
 import { auth, createUserProfileDocument } from '../services/utils.js';
 import { setCurrentUser } from '../store/modules/auth/actions';
 
@@ -47,6 +48,7 @@ const Routes: React.FC = () => {
       <Route path="/register" component={Registration} />
       <Route path="/forgot-password" component={PasswordRecover} />
       <Route path="/" exact component={Dashboard} />
+      <Route path="/schedule" component={Schedule} />
     </Switch>
   );
 };

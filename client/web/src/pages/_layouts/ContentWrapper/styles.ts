@@ -11,7 +11,7 @@ export const Container = styled.main`
 `;
 
 export const ColLeft = styled.div`
-  ${tw`h-screen flex flex-col w-1/2`}
+  ${tw`h-screen flex flex-col w-1/2 py-6 px-10`}
   border-top-left-radius: 2.7rem;
   border-bottom-left-radius: 2.7rem;
   background-color: ${(props) => props.theme.colors.shade};
@@ -24,4 +24,12 @@ export const ColRight = styled.div`
   border-top-left-radius: 2.7rem;
   border-bottom-left-radius: 2.7rem;
   height: calc(100vh - 20px);
+`;
+
+export const Header = styled.header`
+  ${tw`flex w-full items-center mb-8`};
+
+  h1 {
+    ${tw`text-xl font-semibold capitalize  mr-auto `}
+  }
 `;

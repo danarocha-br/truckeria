@@ -28,14 +28,12 @@ const Menu: React.SFC<MenuProps> = () => {
       {/* <Switch onChange={toggleTheme} checked={theme.title === 'light'} /> */}
 
       <Logo className="logo" />
-      <nav>
-        <List>
-          <NavItem isActive title="overview" icon={FiTruck} to="/" />
-          <NavItem title="schedule" icon={FiCalendar} to="/schedule" />
-          <NavItem title="menu" icon={FiGrid} to="/menu" />
-          <NavItem title="discounts" icon={FiPercent} to="/discounts" />
-        </List>
-      </nav>
+      <List>
+        <NavItem isActive title="overview" icon={FiTruck} to="/" />
+        <NavItem title="schedule" icon={FiCalendar} to="/schedule" />
+        <NavItem title="menu" icon={FiGrid} to="/menu" />
+        <NavItem title="discounts" icon={FiPercent} to="/discounts" />
+      </List>
       <Profile>
         <img src={ProfileImage} alt="foodtruck" />
         <div>
