@@ -10,7 +10,7 @@ export default {
 
     base: colors.white,
     shade: colors.gray100,
-    tabbar: colors.white,
+    tabbar: colors.gray200,
     greyMd: colors.gray500,
     greyLight: colors.gray100,
     white: colors.white,

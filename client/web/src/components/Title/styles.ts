@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 
 export const Container = styled.div`
-  ${tw`flex w-full items-center`};
+  ${tw`flex w-full items-center mb-6`};
 
   h2 {
     ${tw`mr-auto w-32 font-medium`};

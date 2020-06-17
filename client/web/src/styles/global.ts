@@ -7,6 +7,7 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     color: ${(props) => props.theme.colors.text};
     background-color: ${(props) => props.theme.colors.base};
+    font-weight: 500;
 
   }
 
