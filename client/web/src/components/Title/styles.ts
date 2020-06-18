@@ -9,7 +9,7 @@ export const Container = styled.div`
   }
 
   hr {
-    ${tw`flex-1 ml-4 border-dashed opacity-25`};
-    border-color: ${(props) => props.theme.colors.accent};
+    ${tw`flex-1 ml-4 border-dashed`};
+    border-color: ${(props) => props.theme.colors.base};
   }
 `;

@@ -1,7 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import tw from 'tailwind.macro';
-import { shade } from 'polished';
 
 import SignInBck from '../../assets/sign-in-background.png';
 

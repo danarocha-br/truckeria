@@ -1,29 +1,48 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import breakpoint from 'styled-components-breakpoint';
 
 export const Container = styled.main`
-  ${tw`h-screen flex flex-1  `}
+  ${tw`flex`};
+  height: calc(100vh - 65px);
+
+  ${breakpoint('tablet')`
+    ${tw`flex-1 h-screen`};
+    border-top-left-radius: 2.7rem;
+    border-bottom-left-radius: 2.7rem;
+    border-top: 10px solid;
+    border-bottom: 10px solid;
+  `}
+
   background-color: ${(props) => props.theme.colors.shade};
-  border-top-left-radius: 2.7rem;
-  border-bottom-left-radius: 2.7rem;
-  border-top: 10px solid ${(props) => props.theme.colors.base};
-  border-bottom: 10px solid ${(props) => props.theme.colors.base};
+  border-top-color: ${(props) => props.theme.colors.base} !important;
+  border-bottom-color: ${(props) => props.theme.colors.base} !important;
+
+
 `;
 
 export const ColLeft = styled.div`
-  ${tw`h-screen flex flex-col w-1/2 py-6 px-10`}
-  border-top-left-radius: 2.7rem;
-  border-bottom-left-radius: 2.7rem;
+  ${tw`flex flex-col w-screen py-6 px-10 overflow-scroll`};
   background-color: ${(props) => props.theme.colors.shade};
-  height: calc(100vh - 20px);
+
+  ${breakpoint('tablet')`
+    ${tw`h-screen flex flex-col w-1/2`};
+    border-top-left-radius: 2.7rem;
+    border-bottom-left-radius: 2.7rem;
+    height: calc(100vh - 20px);
+  `}
 `;
 
 export const ColRight = styled.div`
-  ${tw`h-screen flex flex-col w-1/2`}
+  ${tw`hidden`};
   background-color: ${(props) => props.theme.colors.formPanel};
-  border-top-left-radius: 2.7rem;
-  border-bottom-left-radius: 2.7rem;
-  height: calc(100vh - 20px);
+
+  ${breakpoint('tablet')`
+    ${tw`h-screen flex flex-col w-1/2`};
+    border-top-left-radius: 2.7rem;
+    border-bottom-left-radius: 2.7rem;
+    height: calc(100vh - 20px);
+  `}
 `;
 
 export const Header = styled.header`

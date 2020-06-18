@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
-import { FiCalendar } from 'react-icons/fi';
+import { FiCalendar, FiTrash, FiEdit2, FiChevronRight } from 'react-icons/fi';
 import { ThemeContext } from 'styled-components';
+import { useMediaQuery } from 'react-responsive';
 
-import { Container, Wrapper, Date, Info } from './styles';
+import { Container, Wrapper, Date, Info, Actions } from './styles';
 
 export interface ScheduleItemProps {
   date: string;
@@ -16,13 +17,20 @@ const ScheduleItem: React.SFC<ScheduleItemProps> = ({
   isActive,
 }) => {
   const theme = useContext(ThemeContext);
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+
   return (
     <Container isActive={isActive}>
       <FiCalendar size="20" color={theme.colors.primary} />
       <Wrapper>
         <Date>
+          {isTabletOrMobile && (
+            <FiCalendar size="20" color={theme.colors.primary} />
+          )}
           <p>15</p>
           <p>WED</p>
+
+          {isTabletOrMobile && <small>in 3 days</small>}
         </Date>
 
         <Info>
@@ -31,7 +39,16 @@ const ScheduleItem: React.SFC<ScheduleItemProps> = ({
             <small>{date}</small>
             <small>in 3 days</small>
           </span>
+
+          {isTabletOrMobile && (
+            <FiChevronRight size="20" color={theme.colors.text} />
+          )}
         </Info>
+
+        <Actions>
+          <FiEdit2 size="20" color={theme.colors.text} />
+          <FiTrash size="20" color={theme.colors.text} />
+        </Actions>
       </Wrapper>
     </Container>
   );

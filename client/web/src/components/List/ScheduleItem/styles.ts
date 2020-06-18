@@ -1,17 +1,22 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import { transparentize } from 'polished';
+import breakpoint from 'styled-components-breakpoint';
 
 interface StateProps {
   isActive?: boolean;
 }
 
 export const Wrapper = styled.div`
-  ${tw`flex flex-1 w-full rounded-md ml-4 items-center`};
+  ${tw`flex flex-col w-full rounded-md items-center`};
   border: 1px solid ${(props) => props.theme.colors.shade};
   background-color: ${(props) =>
     transparentize(0.3, props.theme.colors.tabbar)};
   transition: all 0.3s;
+
+  ${breakpoint('desktop')`
+    ${tw`flex-row ml-4 `};
+  `}
 
   /* &:hover {
     border-color: ${(props) => transparentize(0.9, props.theme.colors.primary)};
@@ -19,16 +24,38 @@ export const Wrapper = styled.div`
 `;
 
 export const Date = styled.div`
-  ${tw`py-4 px-6 text-center rounded-l-md`}
+  ${tw`flex items-center py-1 px-2 w-full rounded-t-md relative`}
   background-color: ${(props) => props.theme.colors.base};
   transition: background-color 0.3s;
 
+  ${breakpoint('desktop')`
+    ${tw`flex-col py-4 px-6 h-full text-center justify-center rounded-l-md`};
+    border-top-right-radius: 0 !important;
+    max-width: 80px;
+  `}
+
+  svg {
+    ${tw`mx-2`};
+  }
+
   p:first-child {
-    ${tw`text-2xl font-bold mb--2`};
+    ${breakpoint('desktop')`
+      ${tw`font-bold text-2xl mb--2 ml-0`};
+    `}
   }
   p:last-child {
-    ${tw`text-sm `};
+    ${tw`text-sm ml-2 mr-auto`};
+
+    ${breakpoint('desktop')`
+      ${tw`ml-0`};
+    `}
   }
+
+  small {
+    ${tw`absolute`};
+    right: 14px;
+  }
+
 `;
 
 export const Info = styled.div`
@@ -47,8 +74,12 @@ export const Info = styled.div`
     }
 
     small:last-child {
-      ${tw`absolute`};
-      right: 20px;
+      ${tw`hidden`};
+    }
+
+    ${breakpoint('desktop')`
+     small:last-child {
+      ${tw`block `};
       transition: transform ease-out 0.3s;
 
       &::before {
@@ -56,16 +87,42 @@ export const Info = styled.div`
         padding-right: 8px;
       }
     }
+  `}
+  }
+
+  > svg {
+    ${tw`absolute opacity-25`};
+    bottom: 18px;
+    right: 8px;
   }
 `;
 
+export const Actions = styled.div`
+  ${tw`hidden`};
+  transition: all ease 0.31s;
+
+  ${breakpoint('desktop')`
+     ${tw`flex opacity-0 absolute`};
+     transition: all ease 0.31s;
+     right: 30%;
+
+     svg {
+       ${tw`mx-4`}
+     }
+  `}
+`;
+
 export const Container = styled.li<StateProps>`
-  ${tw`flex items-center w-full cursor-pointer`};
+  ${tw`flex items-center w-full cursor-pointer mb-4`};
   color: ${(props) => props.theme.colors.text};
 
-  svg {
-    ${tw`mr-auto`};
-    max-width: 25px;
+  > svg {
+    ${tw`hidden`};
+
+    ${breakpoint('desktop')`
+      ${tw`mr-auto block`};
+      max-width: 25px;
+    `}
   }
 
   &:hover ${Wrapper} {
@@ -82,5 +139,11 @@ export const Container = styled.li<StateProps>`
     small:last-child {
       transform: translateX(-60px);
     }
+  }
+
+  &:hover ${Actions} {
+    ${breakpoint('desktop')`
+       ${tw`opacity-100 mr-6`};
+    `}
   }
 `;

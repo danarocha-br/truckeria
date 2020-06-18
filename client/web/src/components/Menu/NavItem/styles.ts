@@ -1,32 +1,47 @@
 import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
+import breakpoint from 'styled-components-breakpoint';
 
 interface ItemProps {
   isActive?: boolean;
 }
 
 export const Item = styled.li<ItemProps>`
-  ${tw`pb-8`}
+  ${breakpoint('tablet')`
+    ${tw`pb-8`}
+  `}
+
+  ${breakpoint('desktop')`
+    ${tw`pb-8`}
+  `}
+
   a {
-    ${tw`flex items-center capitalize font-semibold relative w-full`};
+    ${tw`flex flex-col items-center capitalize relative text-sm`};
     color: ${(props) => props.theme.colors.text};
     opacity: 0.6;
 
+    ${breakpoint('tablet')`
+      ${tw`flex-row font-semibold w-full text-base`};
+    `}
+
     &:after {
-      ${tw`rounded absolute`}
+      ${tw`rounded mt-1 invisible`}
       content: '';
       border: ${(props) => `1px solid ${props.theme.colors.primary}`};
-      bottom: -5px;
-      left: 40px;
       width: 0px;
       opacity: 0;
       transition: all 400ms ease;
+
+      ${breakpoint('tablet')`
+        ${tw`absolute visible`};
+        left: 40px;
+        bottom: -5px;
+      `};
     }
 
     ${(props) =>
       props.isActive &&
       css`
-        width: 430px;
         opacity: 1;
         color: ${props.theme.colors.text};
 
@@ -55,7 +70,9 @@ export const Item = styled.li<ItemProps>`
     }
 
     svg {
-      ${tw`mr-4`}
+      ${breakpoint('tablet')`
+        ${tw`mr-4`};
+      `};
     }
   }
 `;
