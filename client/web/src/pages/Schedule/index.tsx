@@ -25,6 +25,7 @@ const Schedule: React.SFC<ScheduleProps> = () => {
           <ScheduleItem
             date="9:00-18:00, Monday, June 09 2020"
             address="767 5th Ave, New York"
+            isActive
           />
           <ScheduleItem
             date="9:00-18:00, Monday, June 09 2020"

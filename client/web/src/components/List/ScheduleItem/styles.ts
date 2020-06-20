@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
 import { transparentize } from 'polished';
 import breakpoint from 'styled-components-breakpoint';
@@ -7,20 +7,23 @@ interface StateProps {
   isActive?: boolean;
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<StateProps>`
   ${tw`flex flex-col w-full rounded-md items-center`};
   border: 1px solid ${(props) => props.theme.colors.shade};
   background-color: ${(props) =>
     transparentize(0.3, props.theme.colors.tabbar)};
   transition: all 0.3s;
 
+  ${(props) =>
+    props.isActive &&
+    css`
+      border-color: ${props.theme.colors.primary};
+      background-color: ${transparentize(0.1, props.theme.colors.tabbar)};
+    `}
+
   ${breakpoint('desktop')`
     ${tw`flex-row ml-4 `};
   `}
-
-  /* &:hover {
-    border-color: ${(props) => transparentize(0.9, props.theme.colors.primary)};
-  } */
 `;
 
 export const Date = styled.div`
@@ -59,7 +62,7 @@ export const Date = styled.div`
 `;
 
 export const Info = styled.div`
-  ${tw`py-4 px-6 w-full relative`}
+  ${tw`py-4 px-6 w-full relative`};
 
   address {
     ${tw`font-bold not-italic`};
@@ -78,9 +81,11 @@ export const Info = styled.div`
     }
 
     ${breakpoint('desktop')`
+
      small:last-child {
-      ${tw`block `};
+      ${tw`block absolute`};
       transition: transform ease-out 0.3s;
+      right: -40px;
 
       &::before {
         content: '•';
@@ -102,9 +107,9 @@ export const Actions = styled.div`
   transition: all ease 0.31s;
 
   ${breakpoint('desktop')`
-     ${tw`flex opacity-0 absolute`};
+     ${tw`flex opacity-0 relative`};
      transition: all ease 0.31s;
-     right: 30%;
+     right: 0;
 
      svg {
        ${tw`mx-4`}
@@ -135,15 +140,37 @@ export const Container = styled.li<StateProps>`
       transparentize(0.1, props.theme.colors.base)};
   }
 
+
+
   &:hover ${Info} {
     small:last-child {
-      transform: translateX(-60px);
+      transform: translateX(-50px);
     }
   }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      ${Info} {
+        small:last-child {
+          transform: translateX(-50px);
+        }
+      }
+    `}
 
   &:hover ${Actions} {
     ${breakpoint('desktop')`
        ${tw`opacity-100 mr-6`};
     `}
   }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      ${Actions} {
+        ${breakpoint('desktop')`
+        ${tw`opacity-100 mr-6`};
+      `}
+      }
+    `}
 `;

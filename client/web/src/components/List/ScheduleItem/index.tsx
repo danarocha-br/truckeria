@@ -22,7 +22,7 @@ const ScheduleItem: React.SFC<ScheduleItemProps> = ({
   return (
     <Container isActive={isActive}>
       <FiCalendar size="20" color={theme.colors.primary} />
-      <Wrapper>
+      <Wrapper isActive={isActive}>
         <Date>
           {isTabletOrMobile && (
             <FiCalendar size="20" color={theme.colors.primary} />
