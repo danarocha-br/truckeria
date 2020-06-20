@@ -15,6 +15,10 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 
+  button:focus, input:focus {
+    outline: none;
+  }
+
   a {
     color: ${(props) => props.theme.colors.accent};
     transition: color ease-in-out 300ms;

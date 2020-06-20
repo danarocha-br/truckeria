@@ -1,10 +1,12 @@
 import React from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import ContainerLayout from '../_layouts/Default';
 import { ColLeft, ColRight, Header } from '../_layouts/ContentWrapper/styles';
 import Title from '../../components/Title';
 import ScheduleItem from '../../components/List/ScheduleItem';
 import Calendar from '../../components/Calendar';
+import Button from '../../components/Button';
 
 export interface ScheduleProps {}
 
@@ -14,7 +16,7 @@ const Schedule: React.SFC<ScheduleProps> = () => {
       <ColLeft>
         <Header>
           <h1>schedule</h1>
-          <button type="button">+</button>
+          <Button type="button" icon={FiPlus} action />
         </Header>
         <Title title="April, 2020" />
 

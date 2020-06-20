@@ -1,16 +1,57 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 
-import { Container } from './styles';
+import { Container, IconContainer } from './styles';
+import { ReactComponent as Shape } from '../../assets/buttonShape.svg';
+import Spinner from '../Spinner';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  label?: string;
+  /**
+   * Transform button into primary action type.
+   */
+  action?: boolean;
+  /**
+   * To get an icon button type.
+   */
+  icon?: React.ComponentType<{ size?: string; color?: string }>;
+  isLoading?: boolean;
 }
 
-const Button: React.SFC<ButtonProps> = ({ label, type, ...rest }) => {
+const Button: React.SFC<ButtonProps> = ({
+  label,
+  type,
+  icon: Icon,
+  action,
+  isLoading,
+  disabled,
+  ...rest
+}) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <Container type={type} {...rest}>
-      {label}
-    </Container>
+    <>
+      {!action && (
+        <Container
+          type={type}
+          Icon={Icon}
+          disabled={disabled}
+          isLoading={isLoading}
+          {...rest}
+        >
+          {label}
+          {Icon && <Icon />}
+          {isLoading && <Spinner />}
+        </Container>
+      )}
+
+      {Icon && action && (
+        <IconContainer>
+          <Shape />
+          <Icon color={theme.colors.text} size="24" />
+        </IconContainer>
+      )}
+    </>
   );
 };
 

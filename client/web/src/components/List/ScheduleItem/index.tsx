@@ -4,6 +4,7 @@ import { ThemeContext } from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 
 import { Container, Wrapper, Date, Info, Actions } from './styles';
+import Button from '../../Button';
 
 export interface ScheduleItemProps {
   date: string;
@@ -46,8 +47,8 @@ const ScheduleItem: React.SFC<ScheduleItemProps> = ({
         </Info>
 
         <Actions>
-          <FiEdit2 size="20" color={theme.colors.text} />
-          <FiTrash size="20" color={theme.colors.text} />
+          <Button icon={FiEdit2} />
+          <Button icon={FiTrash} />
         </Actions>
       </Wrapper>
     </Container>

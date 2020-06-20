@@ -7,7 +7,7 @@ interface UiProps {
 }
 
 const sizeSmall = '13px';
-const sizeDefault = '32px';
+const sizeDefault = '25px';
 
 const dash = keyframes`
   0% {
@@ -32,7 +32,7 @@ const rotate = keyframes`
 
 const color = keyframes`
    0%, 100% {
-    stroke: ${colors.orange900};
+    stroke: ${colors.white};
   }
   35% {
     stroke: ${colors.yellow900};
