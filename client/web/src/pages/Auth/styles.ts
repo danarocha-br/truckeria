@@ -5,16 +5,25 @@ import tw from 'tailwind.macro';
 import SignInBck from '../../assets/sign-in-background.png';
 
 export const Container = styled.div`
-  ${tw`h-screen flex items-stretch `}
+  ${tw`h-full w-full flex items-stretch `}
   background-color: ${(props) => props.theme.colors.base};
 
+  ${breakpoint('tablet')`
+    ${tw`h-screen`};
+  `}
+
   .logo {
-    ${tw`mb-12`}
+    ${tw`mb-12`};
+    width: 150px;
+
+    ${breakpoint('tablet')`
+      width: 216px;
+  `}
   }
 `;
 
 export const Content = styled.div`
-  ${tw`flex flex-1 flex-col items-center text-center`}
+  ${tw`flex flex-1 flex-col items-center text-center w-full`}
   place-content: center;
 `;
 
@@ -40,7 +49,7 @@ const animateFromLeft = keyframes`
 `;
 
 export const AnimatedContainer = styled.div`
-  ${tw`flex flex-1 flex-col `}
+  ${tw`flex flex-1 flex-col w-full`}
   place-content: center;
   animation: ${animateFromLeft} 1s;
 
@@ -50,8 +59,12 @@ export const AnimatedContainer = styled.div`
   }
 
   form {
-    ${tw`my-8`}
-    width: 450px;
+    ${tw`my-8 px-4 w-full`}
+
+
+    ${breakpoint('tablet')`
+     width: 450px;
+  `}
 
     a {
       ${tw`mt-8`}

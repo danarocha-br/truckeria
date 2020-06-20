@@ -22,14 +22,17 @@ export const Container = styled.main`
 `;
 
 export const ColLeft = styled.div`
-  ${tw`flex flex-col w-screen py-8 px-10 overflow-scroll`};
+  ${tw`flex flex-col w-screen py-10 px-4 overflow-scroll`};
   background-color: ${(props) => props.theme.colors.shade};
 
   ${breakpoint('tablet')`
-    ${tw`h-screen flex flex-col w-2/3`};
+    ${tw`h-screen flex flex-col w-2/3 px-10`};
     border-top-left-radius: 2.7rem;
     border-bottom-left-radius: 2.7rem;
     height: calc(100vh - 20px);
+  `}
+  ${breakpoint('desktop')`
+    ${tw`py-6`};
   `}
 `;
 

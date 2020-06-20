@@ -71,7 +71,7 @@ const SignIn: React.SFC = () => {
                   label="Your password"
                 />
 
-                <Button label="Sign In" isLoading />
+                <Button label="Sign In" />
                 {/* <Button
                   label="Sign In With Google"
                   type="button"
