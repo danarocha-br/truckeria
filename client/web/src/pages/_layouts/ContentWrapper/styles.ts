@@ -22,11 +22,11 @@ export const Container = styled.main`
 `;
 
 export const ColLeft = styled.div`
-  ${tw`flex flex-col w-screen py-6 px-10 overflow-scroll`};
+  ${tw`flex flex-col w-screen py-8 px-10 overflow-scroll`};
   background-color: ${(props) => props.theme.colors.shade};
 
   ${breakpoint('tablet')`
-    ${tw`h-screen flex flex-col w-1/2`};
+    ${tw`h-screen flex flex-col w-2/3`};
     border-top-left-radius: 2.7rem;
     border-bottom-left-radius: 2.7rem;
     height: calc(100vh - 20px);
@@ -46,9 +46,13 @@ export const ColRight = styled.div`
 `;
 
 export const Header = styled.header`
-  ${tw`flex w-full items-center mb-8`};
+  ${tw`flex w-full items-center mb-12`};
 
   h1 {
-    ${tw`text-xl font-semibold capitalize  mr-auto `}
+    ${tw`text-lg font-semibold capitalize mr-auto`}
+
+    ${breakpoint('desktop')`
+     ${tw`text-xl mb-0`}
+  `}
   }
 `;

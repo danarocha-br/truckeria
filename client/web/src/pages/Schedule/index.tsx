@@ -1,9 +1,10 @@
 import React from 'react';
 
 import ContainerLayout from '../_layouts/Default';
+import { ColLeft, ColRight, Header } from '../_layouts/ContentWrapper/styles';
 import Title from '../../components/Title';
 import ScheduleItem from '../../components/List/ScheduleItem';
-import { ColLeft, ColRight, Header } from '../_layouts/ContentWrapper/styles';
+import Calendar from '../../components/Calendar';
 
 export interface ScheduleProps {}
 
@@ -55,7 +56,9 @@ const Schedule: React.SFC<ScheduleProps> = () => {
           />
         </ul>
       </ColLeft>
-      <ColRight />
+      <ColRight>
+        <Calendar />
+      </ColRight>
     </ContainerLayout>
   );
 };
