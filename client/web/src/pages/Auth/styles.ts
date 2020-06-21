@@ -23,7 +23,7 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  ${tw`flex flex-1 flex-col items-center text-center w-full`}
+  ${tw`flex flex-1 flex-col items-center text-center w-full h-full`}
   place-content: center;
 `;
 
@@ -49,7 +49,7 @@ const animateFromLeft = keyframes`
 `;
 
 export const AnimatedContainer = styled.div`
-  ${tw`flex flex-1 flex-col w-full`}
+  ${tw`flex flex-1 flex-col w-full h-screen`}
   place-content: center;
   animation: ${animateFromLeft} 1s;
 

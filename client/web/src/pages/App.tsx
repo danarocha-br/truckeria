@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, ReactNode } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
@@ -12,6 +12,7 @@ import dark from '../styles/themes/dark';
 import light from '../styles/themes/light';
 import usePersistedState from '../utils/usePersistedState';
 // import { setCurrentUser } from '../store/modules/auth/actions';
+import ModalManager from '../components/Modal/ModalManager.jsx';
 
 import Routes from '../routes';
 
@@ -29,7 +30,10 @@ const App: React.SFC = () => {
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
-          <Routes />
+          <>
+            <ModalManager />
+            <Routes />
+          </>
         </BrowserRouter>
         <GlobalStyle />
       </ThemeProvider>

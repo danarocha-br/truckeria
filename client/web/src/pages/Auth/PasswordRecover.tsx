@@ -7,7 +7,8 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth } from '../../services/utils';
+import { auth } from '../../services/utils.js';
+import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
 interface FormValues {
   email: string;
@@ -50,7 +51,7 @@ const PasswordRecover: React.SFC<PasswordRecoverProps> = ({ history }) => {
     <Container>
       <AnimatedContainer>
         <Content>
-          <h2 className="text-4xl">Logo</h2>
+          <Logo className="logo" />
           <h1>Recover your Password</h1>
 
           <Formik

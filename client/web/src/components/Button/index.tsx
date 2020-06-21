@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, useContext } from 'react';
 import { ThemeContext } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { Container, IconContainer } from './styles';
 import { ReactComponent as Shape } from '../../assets/buttonShape.svg';
@@ -25,6 +26,7 @@ const Button: React.SFC<ButtonProps> = ({
   action,
   isLoading,
   disabled,
+  onClick,
   ...rest
 }) => {
   const theme = useContext(ThemeContext);
@@ -46,10 +48,17 @@ const Button: React.SFC<ButtonProps> = ({
       )}
 
       {Icon && action && (
-        <IconContainer>
-          <Shape />
-          <Icon color={theme.colors.text} size="24" />
-        </IconContainer>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.9 }}
+          type={type}
+          onClick={onClick}
+        >
+          <IconContainer>
+            <Shape />
+            <Icon color={theme.colors.text} size="24" />
+          </IconContainer>
+        </motion.button>
       )}
     </>
   );

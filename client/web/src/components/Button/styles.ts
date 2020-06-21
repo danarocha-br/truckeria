@@ -52,7 +52,7 @@ export const Container = styled.button<ButtonProps>`
   }
 `;
 
-export const IconContainer = styled.button`
+export const IconContainer = styled.div`
   ${tw`relative`};
 
   svg:first-child {
@@ -63,7 +63,6 @@ export const IconContainer = styled.button`
   &:focus {
     svg:first-child {
       opacity: 0.9;
-      transform: scale(1.05);
     }
   }
 
@@ -71,6 +70,6 @@ export const IconContainer = styled.button`
     ${tw`absolute`};
     top: 13px;
     left: 13px;
-    transition: all 0.5s;
+    transition: opacity 0.5s;
   }
 `;

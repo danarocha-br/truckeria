@@ -3,7 +3,7 @@ import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
 
 export const Container = styled.main`
-  ${tw`flex`};
+  ${tw`flex overflow-hidden relative`};
   height: calc(100vh - 65px);
 
   ${breakpoint('tablet')`

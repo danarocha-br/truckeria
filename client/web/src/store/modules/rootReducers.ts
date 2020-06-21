@@ -3,8 +3,11 @@ import { combineReducers } from 'redux';
 import auth from './auth/reducer';
 import { UserData } from './auth/actions';
 
-export interface StoreState {
-  auth: UserData;
-}
+import modal from './modal/reducer.js';
 
-export default combineReducers<StoreState>({ auth });
+// export interface StoreState {
+//   auth: UserData;
+//   modal: any;
+// }
+
+export default combineReducers({ modal });

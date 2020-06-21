@@ -17,26 +17,26 @@ const Routes: React.FC = () => {
   // currentUser
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
+  // useEffect(() => {
+  //   const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+  //     if (userAuth) {
+  //       const userRef = await createUserProfileDocument(userAuth);
 
-        userRef?.onSnapshot((snapShot) => {
-          dispatch(
-            setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            }),
-          );
-        });
-      }
+  //       userRef?.onSnapshot((snapShot) => {
+  //         dispatch(
+  //           setCurrentUser({
+  //             id: snapShot.id,
+  //             ...snapShot.data(),
+  //           }),
+  //         );
+  //       });
+  //     }
 
-      dispatch(setCurrentUser(userAuth));
-    });
+  //     dispatch(setCurrentUser(userAuth));
+  //   });
 
-    return () => unsubscribeFromAuth();
-  }, [dispatch]);
+  //   return () => unsubscribeFromAuth();
+  // }, [dispatch]);
 
   return (
     <Switch>
