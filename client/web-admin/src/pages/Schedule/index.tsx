@@ -10,11 +10,11 @@ import ScheduleItem from '../../components/List/ScheduleItem';
 import Calendar from '../../components/Calendar';
 import Button from '../../components/Button';
 import ScheduleModal from './ScheduleModal';
-import { openModal } from '../../store/modules/modal/actions';
+import { showModal } from '../../store/modules/modal/actions';
 
 export interface ScheduleProps {
   isOpen: boolean;
-  handleOpenModal?(): (value: string) => void;
+  // handleOpenModal?(): (value: string) => void;
 }
 
 const Schedule: React.SFC<ScheduleProps> = () => {
@@ -25,7 +25,7 @@ const Schedule: React.SFC<ScheduleProps> = () => {
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
-    dispatch(openModal(ScheduleModal));
+    dispatch(showModal('ScheduleModal'));
   };
   return (
     <>
@@ -84,7 +84,6 @@ const Schedule: React.SFC<ScheduleProps> = () => {
           <Calendar />
         </ColRight>
       </ContainerLayout>
-      <ScheduleModal isOpen={isOpen} />
     </>
   );
 };

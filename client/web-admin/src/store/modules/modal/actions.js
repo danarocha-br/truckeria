@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 
 import { ActionTypes } from './types';
 
-export function openModal(modalType, modalProps) {
+export function showModal(modalType, modalProps) {
   return {
     type: ActionTypes.SHOW_MODAL,
     payload: {
@@ -12,7 +12,7 @@ export function openModal(modalType, modalProps) {
   };
 }
 
-export function closeModal() {
+export function hideModal() {
   return {
     type: ActionTypes.HIDE_MODAL,
   };

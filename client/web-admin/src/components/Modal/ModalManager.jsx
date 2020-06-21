@@ -3,23 +3,20 @@ import { useSelector } from 'react-redux';
 
 import ScheduleModal from '../../pages/Schedule/ScheduleModal';
 
-const ModalManager = () => {
-  const currentModal = useSelector((state) => state.modal.currentModal);
+export default function ModalManager() {
   const modalLookup = {
-    ScheduleModal,
+    ScheduleModal
   };
 
-  let renderedModal = null;
+  const currentModal = useSelector(state => state.modal.currentModal);
+
+  let renderedModal;
 
   if (currentModal) {
-    const { modalType } = currentModal;
+    const { modalType, modalProps } = currentModal;
     const ModalComponent = modalLookup[modalType];
 
-    renderedModal = <ModalComponent />;
-  } else {
-    return null;
+    renderedModal = <ModalComponent {...modalProps} />;
   }
   return <span>{renderedModal}</span>;
-};
-
-export default ModalManager;
+}

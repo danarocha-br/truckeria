@@ -31,7 +31,7 @@ const App: React.SFC = () => {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <>
-            {/* <ModalManager /> */}
+            <ModalManager />
             <Routes />
           </>
         </BrowserRouter>
