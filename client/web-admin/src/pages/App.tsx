@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 
 import '../config/ReactotronConfig.js';
 import store from '../store';
@@ -11,6 +11,7 @@ import GlobalStyle from '../styles/global';
 import dark from '../styles/themes/dark';
 import usePersistedState from '../utils/usePersistedState';
 import ModalManager from '../components/Modal/ModalManager.jsx';
+import history from "../services/history";
 
 import Routes from '../routes';
 
@@ -21,12 +22,12 @@ const App: React.SFC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
+        <Router history={history}>
           <>
             <ModalManager />
             <Routes />
           </>
-        </BrowserRouter>
+        </Router>
         <GlobalStyle />
       </ThemeProvider>
     </Provider>

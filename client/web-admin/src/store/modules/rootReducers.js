@@ -9,4 +9,4 @@ import modal from './modal/reducer.js';
 //   modal: any;
 // }
 
-export default combineReducers({ modal });
+export default combineReducers({ modal , auth});

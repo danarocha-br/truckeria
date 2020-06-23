@@ -39,6 +39,7 @@ const Button: React.SFC<ButtonProps> = ({
           Icon={Icon}
           disabled={disabled}
           isLoading={isLoading}
+          onClick={onClick}
           {...rest}
         >
           {label}

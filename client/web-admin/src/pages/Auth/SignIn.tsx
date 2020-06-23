@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
@@ -6,9 +7,9 @@ import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
-import { auth } from '../../services/utils.js';
 import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 import Link from '../../components/Link';
+import { googleSignInStart, emailSignInStart } from "../../store/modules/auth/actions";
 
 interface FormValues {
   email: string;
@@ -25,16 +26,17 @@ const SignInSchema = Yup.object().shape({
 });
 
 const SignIn: React.SFC = () => {
+  const dispatch = useDispatch();
+
   const initialValues: FormValues = { email: '', password: '' };
 
-  const handleSubmit = async (values: FormValues) => {
-    const { email, password } = values;
+  const handleGoogleSignIn = () => {
+   return dispatch(googleSignInStart());
+   console.log('clicked')
+  }
 
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = (values: FormValues) => {
+     dispatch(emailSignInStart(values));
   };
 
   return (
@@ -71,13 +73,13 @@ const SignIn: React.SFC = () => {
                   label="Your password"
                 />
 
-                <Button label="Sign In" />
-                {/* <Button
+                <Button type='submit' label="Sign In" />
+
+                <Button
                   label="Sign In With Google"
                   type="button"
-                  onClick={signInWithGoogle}
-                /> */}
-
+                  onClick={handleGoogleSignIn}
+                />
                 <Link to="/forgot-password" label="Forgot my password" />
               </Form>
             )}
