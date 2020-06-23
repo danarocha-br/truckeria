@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FiPlus } from 'react-icons/fi';
-import { motion, useCycle, useAnimation } from 'framer-motion';
 import { useDispatch } from 'react-redux';
 
 import ContainerLayout from '../_layouts/Default';
@@ -9,23 +8,18 @@ import Title from '../../components/Title';
 import ScheduleItem from '../../components/List/ScheduleItem';
 import Calendar from '../../components/Calendar';
 import Button from '../../components/Button';
-import ScheduleModal from './ScheduleModal';
 import { showModal } from '../../store/modules/modal/actions';
 
 export interface ScheduleProps {
-  isOpen: boolean;
-  // handleOpenModal?(): (value: string) => void;
 }
 
-const Schedule: React.SFC<ScheduleProps> = () => {
-  // const [isOpen, setToggleOpen] = useCycle(false, true);
-  const [isOpen, setToggleOpen] = useState<boolean>(true);
+const Schedule: React.FC<ScheduleProps> = () => {
 
   // currentModal
   const dispatch = useDispatch();
 
   const handleOpenModal = () => {
-    dispatch(showModal('ScheduleModal'));
+    dispatch(showModal('AddScheduleModal'));
   };
   return (
     <>

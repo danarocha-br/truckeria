@@ -71,7 +71,7 @@ export const AnimatedContainer = styled.div`
     }
   }
 
-  span:first-child {
+   .link {
     ${tw`text-right mr-10 mt-8`}
     color: ${(props) => props.theme.colors.text};
   }

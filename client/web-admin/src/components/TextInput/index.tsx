@@ -9,7 +9,7 @@ import { useField } from 'formik';
 import { ThemeContext } from 'styled-components';
 import { AiFillExclamationCircle } from 'react-icons/ai';
 
-import { Container, Error } from './styles';
+import { Container, Wrapper, Error } from './styles';
 import Spinner from '../Spinner';
 
 interface FormikActions<Values> {
@@ -35,7 +35,6 @@ const TextInput: React.SFC<TextInputProps> = ({
   icon: Icon,
   disabled,
   loading,
-  // setFieldValue,
   ...rest
 }) => {
   /**
@@ -62,7 +61,7 @@ const TextInput: React.SFC<TextInputProps> = ({
   }, [setFocus, setValue]);
 
   return (
-    <>
+    <Wrapper className='c-input'>
       <Container
         isFocused={isFocused}
         onBlur={handleInputBlur}
@@ -100,7 +99,7 @@ const TextInput: React.SFC<TextInputProps> = ({
           <span>{meta.error}</span>
         </Error>
       ) : null}
-    </>
+    </Wrapper>
   );
 };
 

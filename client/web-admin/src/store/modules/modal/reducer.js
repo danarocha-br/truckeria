@@ -15,11 +15,13 @@ export default function modal(
     switch (action.type) {
       case ActionTypes.SHOW_MODAL: {
         draft.currentModal = action.payload;
+        draft.isOpen = true;
         break;
       }
 
       case ActionTypes.HIDE_MODAL: {
         draft.currentModal = null;
+        draft.isOpen = false;
         break;
       }
 

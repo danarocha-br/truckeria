@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react';
 
 import { ActionTypes } from './types';
 

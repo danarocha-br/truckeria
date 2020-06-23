@@ -25,7 +25,7 @@ const Menu: React.SFC<MenuProps> = () => {
 
   return (
     <Container>
-      {/* <Switch onChange={toggleTheme} checked={theme.title === 'light'} /> */}
+      <Switch onChange={toggleTheme} checked={theme.title === 'light'} />
 
       <Logo className="logo" />
       <List>

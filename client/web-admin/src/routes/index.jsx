@@ -1,6 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { ThemeContext } from 'styled-components';
 import { useDispatch } from 'react-redux';
 
 import SignIn from '../pages/Auth/SignIn';
@@ -12,7 +11,7 @@ import { auth, createUserProfileDocument } from '../services/utils.js';
 import { setCurrentUser } from '../store/modules/auth/actions';
 
 const Routes = () => {
-  const { title } = useContext(ThemeContext);
+  // const { title } = useContext(ThemeContext);
 
   // currentUser
   const dispatch = useDispatch();

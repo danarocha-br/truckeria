@@ -25,6 +25,14 @@ const animateIcon = `
 /**
  * Styling
  */
+
+ export const Wrapper = styled.div`
+   ${tw`flex flex-col w-full`};
+   & + .c-input {
+    ${tw`mt-4`}
+   }
+ `;
+
 export const Container = styled.span.attrs({
   className:
     'relative flex items-center w-full align-top overflow-hidden border rounded ',
@@ -32,10 +40,11 @@ export const Container = styled.span.attrs({
   border-color: ${(props) => props.theme.form.background};
   z-index: 1;
   opacity: ${(props) => (props.disabled || props.loading ? '0.5' : '1')};
-
+  height: 76px;
+/*
   & + span {
    ${tw`mt-4`}
-  }
+  } */
 
   &:hover:not([disabled])
    {
@@ -189,6 +198,6 @@ export const Container = styled.span.attrs({
 `;
 
 export const Error = styled.div`
-  ${tw`text-xs text-left pt-1 mb-3`}
+  ${tw`text-xs text-left pt-1`}
   color: ${(props) => props.theme.colors.error};;
 `;

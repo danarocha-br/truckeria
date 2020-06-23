@@ -7,7 +7,7 @@ export const Container = styled.nav`
   ${tw`flex w-full justify-between pt-3 px-4 fixed bottom-0 rounded-t-lg`};
   background-color: ${(props) => props.theme.colors.base};
   height: 64px;
-  z-index: 100;
+  z-index: 30;
 
   .logo {
     ${tw`hidden mt-2`};

@@ -53,7 +53,7 @@ const Registration: React.SFC = () => {
       <Background />
 
       <AnimatedContainer>
-        <span>
+        <span className='link'>
           <Link to="/login" label="Login" />
         </span>
         <Content>

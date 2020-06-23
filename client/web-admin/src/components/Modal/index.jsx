@@ -1,10 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useAnimation } from 'framer-motion';
 
-import { Container } from './styles';
+import { Container, Title } from './styles';
 
-const Modal = ({ children, isOpen, width = 35.4 }) => {
+const Modal = ({ children, width = 35.4  }) => {
+
+  // const [theme, setTheme] = useState('theme', dark);
+
+  // useEffect(() => {
+  //   setTheme(theme.title === 'dark' ? dark : light);
+  // }, [])
+
+  // console.log('Current theme: ', theme);
+
   const controls = useAnimation();
+  const isOpen = useSelector(state => state.modal.isOpen);
 
   useEffect(() => {
     controls.start(isOpen ? 'open' : 'closed');
@@ -43,7 +54,14 @@ const Modal = ({ children, isOpen, width = 35.4 }) => {
         right: 0,
       }}
     >
+      <div className="relative h-full">
+
+      <Title>
+        <h1>Add Schedule</h1>
+        <a href="/">X</a>
+      </Title>
       {children}
+      </div>
     </Container>
   );
 };

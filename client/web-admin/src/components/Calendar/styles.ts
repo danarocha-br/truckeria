@@ -65,6 +65,6 @@ export const Container = styled.div`
   .DayPicker-Day--selected {
     ${tw`font-bold rounded-lg`}
     background: ${(props) => props.theme.colors.primary} !important;
-    color: ${(props) => props.theme.colors.text} !important;
+    color: ${(props) => props.theme.colors.white} !important;
   }
 `;

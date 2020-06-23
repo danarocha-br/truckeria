@@ -42,7 +42,7 @@ const Button: React.SFC<ButtonProps> = ({
           {...rest}
         >
           {label}
-          {Icon && <Icon />}
+          {Icon && <Icon color={theme.colors.text} />}
           {isLoading && <Spinner />}
         </Container>
       )}
@@ -56,7 +56,7 @@ const Button: React.SFC<ButtonProps> = ({
         >
           <IconContainer>
             <Shape />
-            <Icon color={theme.colors.text} size="24" />
+            <Icon color={theme.colors.white} size="24" />
           </IconContainer>
         </motion.button>
       )}

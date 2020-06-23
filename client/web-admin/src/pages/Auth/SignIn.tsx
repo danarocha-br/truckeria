@@ -40,7 +40,7 @@ const SignIn: React.SFC = () => {
   return (
     <Container>
       <AnimatedContainer>
-        <span>
+        <span className='link'>
           <Link to="/register" label="Create an account" />
         </span>
         <Content>
