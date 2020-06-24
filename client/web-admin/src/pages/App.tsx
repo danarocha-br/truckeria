@@ -1,10 +1,11 @@
 import React, {useCallback, useState} from 'react';
+import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from 'react-redux';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import { Router } from 'react-router-dom';
 
 import '../config/ReactotronConfig.js';
-import store from '../store';
+import { store, persistor } from '../store';
 
 import '../styles/main.css';
 import GlobalStyle from '../styles/global';
@@ -22,14 +23,16 @@ const App: React.SFC = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <Router history={history}>
-          <>
-            <ModalManager />
-            <Routes />
-          </>
-        </Router>
-        <GlobalStyle />
-      </ThemeProvider>
+      <PersistGate persistor={persistor}>
+          <Router history={history}>
+            <>
+              <ModalManager />
+              <Routes />
+            </>
+          </Router>
+          <GlobalStyle />
+      </PersistGate>
+  </ThemeProvider>
     </Provider>
   );
 };

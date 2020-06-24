@@ -3,7 +3,7 @@ import { takeLatest, all, call, put } from 'redux-saga/effects';
 import { auth, googleProvider, reduxSagaFirebase, createUserProfileDocument } from "../../../services/utils";
 import { ActionTypes } from "./types";
 import { googleSignInSuccess, signFailure, emailSignInSuccess } from "./actions";
-
+import history from "../../../services/history";
 
 function* signInWithGoogle() {
   try {
@@ -30,14 +30,21 @@ function* signInWithEmail({ payload }) {
   //  const userRef = yield call(createUserProfileDocument, user);
   //  const userSnapshot = yield userRef.get();
 
-  const userRef = yield call(reduxSagaFirebase.firestore.getDocument, `users/${user.uid}`);
-//     const snapShot = userRef.get();
+  // const userRef = yield call(reduxSagaFirebase.firestore.getDocument, `users/${user.uid}`);
+  //   const snapShot = userRef.get();
 
-  console.log(userRef);
 
 
   //  yield put(emailSignInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
-   yield put(emailSignInSuccess({id: user.uid, ...user}));
+   yield put(emailSignInSuccess({
+     id: user.uid,
+     name: user.displayName,
+     avatar: user.photoURL,
+     email: user.email,
+     phone: user.phoneNumber
+    }));
+
+   history.push('/schedule');
 
   } catch (error) {
     yield put(signFailure(error));

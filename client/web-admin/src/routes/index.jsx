@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
+import Route from "./Route";
 import SignIn from '../pages/Auth/SignIn';
 import Registration from '../pages/Auth/Registration';
 import PasswordRecover from '../pages/Auth/PasswordRecover';
@@ -46,8 +47,10 @@ const Routes = () => {
       />
       <Route path="/register" component={Registration} />
       <Route path="/forgot-password" component={PasswordRecover} />
-      <Route path="/" exact component={Dashboard} />
-      <Route path="/schedule" component={Schedule} />
+      <Route path="/" exact component={Dashboard} isPrivate />
+      <Route path="/schedule" component={Schedule} isPrivate/>
+
+      <Route path="/" component={() => <h1>404</h1>} isPrivate/>
     </Switch>
   );
 };

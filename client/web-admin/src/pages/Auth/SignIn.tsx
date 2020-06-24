@@ -74,12 +74,12 @@ const SignIn: React.SFC = () => {
                 />
 
                 <Button type='submit' label="Sign In" />
-
+{/*
                 <Button
                   label="Sign In With Google"
                   type="button"
                   onClick={handleGoogleSignIn}
-                />
+                /> */}
                 <Link to="/forgot-password" label="Forgot my password" />
               </Form>
             )}
