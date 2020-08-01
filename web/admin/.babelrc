@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "macros",
+    [
+    "tailwind-components",
+      {
+        "config": "./src/tailwind.js",
+        "format": "auto"
+      }
+    ]
+  ]
+}
