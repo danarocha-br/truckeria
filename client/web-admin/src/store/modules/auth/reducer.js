@@ -22,7 +22,19 @@ export default function auth(
         break;
       }
 
+      case ActionTypes.SIGN_UP_START: {
+        draft.loading = true;
+        break;
+      }
+
       case ActionTypes.SIGN_IN_SUCCESS: {
+        draft.loading = false;
+        draft.currentUser = action.payload;
+        draft.error = null;
+        break;
+      }
+
+      case ActionTypes.SIGN_UP_SUCCESS: {
         draft.loading = false;
         draft.currentUser = action.payload;
         draft.error = null;
@@ -43,7 +55,7 @@ export default function auth(
 
       case ActionTypes.SIGN_FAILURE: {
         draft.loading = false;
-        draft.error = [...state, action.payload];
+        draft.error = [action.payload];
         break;
       }
 

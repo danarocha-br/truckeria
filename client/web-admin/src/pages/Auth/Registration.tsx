@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { useDispatch } from "react-redux";
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import * as Yup from 'yup';
@@ -8,7 +8,7 @@ import { Container, Content, Background, AnimatedContainer } from './styles';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import Link from '../../components/Link';
-import { auth, createUserProfileDocument } from '../../services/utils.js';
+import { signUpStart } from '../../store/modules/auth/actions';
 import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
 interface RegistrationProps {}
@@ -32,20 +32,27 @@ const RegistrationSchema = Yup.object().shape({
 });
 
 const Registration: React.SFC = () => {
+  const dispatch = useDispatch();
+
   const initialValues: FormValues = { name: '', email: '', password: '' };
+
+  // const handleSubmit = async (values: FormValues) => {
+  //   const { email, password, name } = values;
+  //   try {
+  //     const { user } = await auth.createUserWithEmailAndPassword(
+  //       email,
+  //       password,
+  //     );
+
+  //     await createUserProfileDocument(user, { displayName: name });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleSubmit = async (values: FormValues) => {
     const { email, password, name } = values;
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password,
-      );
-
-      await createUserProfileDocument(user, { displayName: name });
-    } catch (error) {
-      console.log(error);
-    }
+    return dispatch(signUpStart({ email, password, name }));
   };
 
   return (

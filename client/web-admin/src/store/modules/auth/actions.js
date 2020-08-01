@@ -14,6 +14,16 @@ export const emailSignInStart = (emailAndPassword) => ({
   payload: emailAndPassword
 })
 
+export const signUpStart = (userCredentials) => ({
+  type: ActionTypes.SIGN_UP_START,
+  payload: userCredentials
+})
+
+export const signUpSuccess = ({ user, additionalData }) => ({
+  type: ActionTypes.SIGN_UP_SUCCESS,
+  payload: { user, additionalData }
+})
+
 export const signInSuccess = (user) => ({
   type: ActionTypes.SIGN_IN_SUCCESS,
   payload: user

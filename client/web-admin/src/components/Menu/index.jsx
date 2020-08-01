@@ -18,7 +18,7 @@ import { signOutStart } from "../../store/modules/auth/actions";
 const Menu = () => {
   const dispatch = useDispatch();
   const [theme, setTheme] = usePersistedState('theme', dark);
-  const user = useSelector(state => state.user.profile);
+  const user = useSelector(state => state.auth.currentUser);
 
   const toggleTheme = useCallback(() => {
     setTheme(theme.title === 'dark' ? light : dark);
@@ -40,9 +40,9 @@ const Menu = () => {
         <NavItem title="discounts" icon={FiPercent} to="/discounts" />
       </List>
       <Profile>
-        <img src={user.avatar} alt="foodtruck" />
+        <img src={user.avatar ? user.avatar : ProfileImage} alt="foodtruck" />
         <div>
-          <Link to="/profile">{user.name || ProfileImage}</Link>
+          <Link to="/profile">{user.name}</Link>
           <Link to="/login" onClick={handleSignOut}>Log out</Link>
         </div>
       </Profile>
