@@ -1,6 +1,6 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 
-import { googleProvider, reduxSagaFirebase } from "../../../services/utils";
+import { googleProvider, reduxSagaFirebase, createUserProfileDocument } from "../../../services/utils";
 import { ActionTypes } from "./types";
 import { signFailure, signInSuccess, signOutSuccess, signUpSuccess } from "./actions";
 import history from "../../../services/history";
@@ -21,36 +21,6 @@ function* getSnapshotFromUserAuth(userAuth, additionalData) {
   }
 }
 
-function* createUserProfileDocument(userAuth, additionalData) {
-    if(!userAuth) return;
-
-    const userRef = yield call(reduxSagaFirebase.firestore.getDocument, `users/${userAuth.uid}`);
-    const snapShot = userRef.get();
-
-    if (!snapShot.exists) {
-      const {displayName, email} = userAuth;
-      const createdAt = new Date();
-
-      // Create user in document
-      try {
-        yield call(
-          reduxSagaFirebase.firestore.setDocument,
-          `users/${userAuth.uid}`,
-          {
-            displayName,
-            email,
-            createdAt,
-            ...additionalData
-          }
-        );
-
-      } catch (error) {
-        console.log('Erro creating the user', error.message)
-      }
-    }
-    return userRef;
-}
-
 function* onSignInWithGoogle() {
   try {
     const { user } = yield call(reduxSagaFirebase.auth.signInWithPopup, googleProvider);
@@ -68,6 +38,7 @@ function* onSignInWithEmail({ payload }) {
 
   try {
    const { user } = yield call(reduxSagaFirebase.auth.signInWithEmailAndPassword, email, password);
+   yield getSnapshotFromUserAuth(user);
 
    yield put(signInSuccess({
      id: user.uid,
@@ -103,7 +74,7 @@ function* onSignUpStart({ payload: { email, password, name }}) {
       user, additionalData: {name}
     }));
 
-    yield getSnapshotFromUserAuth(user, {additionalData: name});
+    yield createUserProfileDocument(user, { displayName: name });
 
     history.push('/schedule');
 

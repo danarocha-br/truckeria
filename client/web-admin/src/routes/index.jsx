@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import Route from "./Route";
 import SignIn from '../pages/Auth/SignIn';
-import Registration from '../pages/Auth/Registration';
+import Registration from '../pages/Auth/Registration.jsx';
 import PasswordRecover from '../pages/Auth/PasswordRecover';
 import Dashboard from '../pages/Dashboard';
 import Schedule from '../pages/Schedule';

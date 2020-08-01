@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import * as Yup from 'yup';
@@ -11,13 +11,6 @@ import Link from '../../components/Link';
 import { signUpStart } from '../../store/modules/auth/actions';
 import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
-interface RegistrationProps {}
-
-interface FormValues {
-  name: string;
-  email: string;
-  password: string;
-}
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,26 +24,14 @@ const RegistrationSchema = Yup.object().shape({
     .required('You need to insert a password.'),
 });
 
-const Registration: React.SFC = () => {
+const Registration = () => {
   const dispatch = useDispatch();
 
-  const initialValues: FormValues = { name: '', email: '', password: '' };
+  const authErrors = useSelector(state => state.auth.error);
 
-  // const handleSubmit = async (values: FormValues) => {
-  //   const { email, password, name } = values;
-  //   try {
-  //     const { user } = await auth.createUserWithEmailAndPassword(
-  //       email,
-  //       password,
-  //     );
+  const initialValues= { name: '', email: '', password: '' };
 
-  //     await createUserProfileDocument(user, { displayName: name });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values) => {
     const { email, password, name } = values;
     return dispatch(signUpStart({ email, password, name }));
   };
@@ -93,6 +74,8 @@ const Registration: React.SFC = () => {
                   type="password"
                   label="Your password"
                 />
+
+                {authErrors && <p>{authErrors}</p>}
 
                 <Button label="Create my account" />
               </Form>
