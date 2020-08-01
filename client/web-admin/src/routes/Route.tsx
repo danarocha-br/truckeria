@@ -8,8 +8,6 @@ interface IRouteProps extends ReactRouterProps {
   component: React.ComponentType;
 }
 
-
-
 const Route: React.FC<IRouteProps> = ({isPrivate = false, component: Component, ...rest}) => {
 
   const { currentUser } = store.getState().auth;

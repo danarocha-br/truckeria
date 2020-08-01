@@ -68,16 +68,18 @@ export const Profile = styled.div`
     ${tw`flex flex-col py ml-4`}
 
     a:first-child {
-      ${tw`font-semibold text-sm`}
+      ${tw`font-semibold text-sm truncate`}
+      max-width: 7rem;
 
       ${breakpoint('desktop')`
         ${tw`text-base`};
+        max-width: 10rem;
       `};
 
     }
 
     a:last-child {
-      ${tw`text-xs`}
+      ${tw`text-sm`}
       color: ${(props) => props.theme.colors.text};
       transition: color ease-in-out 300ms;
 

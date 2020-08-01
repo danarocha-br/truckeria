@@ -32,7 +32,6 @@ const SignIn: React.SFC = () => {
 
   const handleGoogleSignIn = () => {
    return dispatch(googleSignInStart());
-   console.log('clicked')
   }
 
   const handleSubmit = (values: FormValues) => {
@@ -74,12 +73,13 @@ const SignIn: React.SFC = () => {
                 />
 
                 <Button type='submit' label="Sign In" />
-{/*
+
                 <Button
                   label="Sign In With Google"
                   type="button"
                   onClick={handleGoogleSignIn}
-                /> */}
+                />
+
                 <Link to="/forgot-password" label="Forgot my password" />
               </Form>
             )}

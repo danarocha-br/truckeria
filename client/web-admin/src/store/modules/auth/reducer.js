@@ -11,27 +11,32 @@ export default function auth(
   return produce(state, draft => {
 
     switch (action.type) {
-      case ActionTypes.SET_CURRENT_USER: {
-        draft.loading = true;
-        draft.currentUser = action.payload;
-        break;
-      }
 
       case ActionTypes.EMAIL_SIGN_IN_START: {
         draft.loading = true;
         break;
       }
 
-      case ActionTypes.EMAIL_SIGN_IN_SUCCESS: {
+      case ActionTypes.GOOGLE_SIGN_IN_START: {
+        draft.loading = true;
+        break;
+      }
+
+      case ActionTypes.SIGN_IN_SUCCESS: {
         draft.loading = false;
         draft.currentUser = action.payload;
         draft.error = null;
         break;
       }
 
-      case ActionTypes.GOOOGLE_SIGNIN_SUCCESS: {
+      case ActionTypes.SIGN_OUT_START: {
+        draft.loading = true;
+        break;
+      }
+
+      case ActionTypes.SIGN_OUT_SUCCESS: {
         draft.loading = false;
-        draft.currentUser = action.payload;
+        draft.currentUser = null;
         draft.error = null;
         break;
       }
@@ -39,6 +44,11 @@ export default function auth(
       case ActionTypes.SIGN_FAILURE: {
         draft.loading = false;
         draft.error = [...state, action.payload];
+        break;
+      }
+
+      case ActionTypes.SIGN_OUT: {
+        draft.loading = false;
         break;
       }
 

@@ -17,6 +17,13 @@ export default function user(
         break;
       }
 
+      case AuthActionTypes.SIGN_OUT_SUCCESS: {
+        draft.loading = false;
+        draft.profile = null;
+        draft.error = null;
+        break;
+      }
+
       default:
         return state;
     }

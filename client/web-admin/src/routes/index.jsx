@@ -50,7 +50,7 @@ const Routes = () => {
       <Route path="/" exact component={Dashboard} isPrivate />
       <Route path="/schedule" component={Schedule} isPrivate/>
 
-      <Route path="/" component={() => <h1>404</h1>} isPrivate/>
+      {/* <Route path="/" component={() => <h1>404</h1>} isPrivate/> */}
     </Switch>
   );
 };
