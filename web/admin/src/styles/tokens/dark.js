@@ -1,7 +1,7 @@
 import colors from './colors';
 
 export default {
-  title: 'dark',
+  name: 'Dark',
 
   colors: {
     primary: colors.orange900,

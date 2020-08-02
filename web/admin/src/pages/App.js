@@ -4,14 +4,17 @@ import { ThemeProvider } from 'styled-components';
 import dark from "../styles/tokens/dark";
 import GlobalStyle from "../styles/global";
 import Button from "../components/Button";
+import AuthLayout from "../pages/_layouts/auth";
 
 function App() {
   return (
-    <GlobalStyle>
-      <ThemeProvider theme={dark}>
-          <Button></Button>
+    <ThemeProvider theme={dark}>
+      <GlobalStyle />
+        <AuthLayout>
+            <h1>Test</h1>
+            <Button></Button>
+        </AuthLayout>
       </ThemeProvider>
-    </GlobalStyle>
   );
 }
 

@@ -3,7 +3,7 @@ import { lighten } from 'polished';
 import colors from './colors';
 
 export default {
-  title: 'light',
+  name: 'Light',
 
   colors: {
     primary: colors.red900,
