@@ -5,8 +5,8 @@ import { Wrapper } from './styles';
 
 function AuthLayout({ children }) {
   return(
-    <Wrapper >
-      { children }
+    <Wrapper>
+        { children }
     </Wrapper>
   );
 }

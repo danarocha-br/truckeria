@@ -4,6 +4,6 @@ import AuthLayout  from './index';
 
 export default {
   title: '_Layouts/Auth',
-  };
+};
 
-export const Layout = () => <AuthLayout><h1>Hello</h1><h2>test</h2></AuthLayout>;
+export const Layout = () => <AuthLayout><h1 style={{ textAlign: 'center', fontFamily: 'sans-serif' }}>Content goes here</h1></AuthLayout>;
