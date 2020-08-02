@@ -7,8 +7,12 @@ module.exports = {
     'plugin:react/recommended',
     'airbnb',
     'prettier',
-    'prettier/react'
+    'prettier/react',
+    'react-tools',
   ],
+  globals: {
+  	'tw': true,
+  },
   parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
@@ -25,7 +29,7 @@ module.exports = {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': [
       'warn',
-      { extensions: [.'jsx', '.js']}
+      { extensions: ['.jsx', '.js']}
     ],
     'import/prefer-default-export': 'off'
   },

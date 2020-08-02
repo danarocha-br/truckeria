@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+#root > div > div {
+  width: 100%;
+}
+
+@media only screen and (min-width: 992px) {
+  #root > div > div {
+    width: 50%;
+  }
+}
