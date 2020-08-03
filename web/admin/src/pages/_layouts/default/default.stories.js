@@ -1,5 +1,6 @@
 import React from 'react';
 import StoryRouter from 'storybook-react-router';
+import { FiPlus } from 'react-icons/fi';
 
 import DefaultLayout from './index';
 import {
@@ -8,6 +9,7 @@ import {
   Header,
 } from '../../../pages/_layouts/default/styles';
 import Menu from '../../../components/Menu';
+import Button from '../../../components/Button';
 
 export default {
   title: 'Pages/Layouts',
@@ -21,12 +23,12 @@ export const Default = () => (
     <PanelLeft>
       <Header>
         <h1>Panel Left goes here</h1>
-        {/* <Button
+        <Button
           type="button"
           icon={FiPlus}
           action
-          onClick={handleOpenModal}
-        /> */}
+          // onClick={handleOpenModal}
+        />
       </Header>
     </PanelLeft>
 

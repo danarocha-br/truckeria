@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '@sambego/storybook-styles';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { FiCalendar, FiTruck } from 'react-icons/fi';
 import StoryRouter from 'storybook-react-router';
 
