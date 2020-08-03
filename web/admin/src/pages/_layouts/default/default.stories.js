@@ -1,17 +1,10 @@
 import React from 'react';
-// import styles from "@sambego/storybook-styles";
 
 
 import DefaultLayout  from './index';
-import colors from "../../../styles/tokens/colors";
 import { PanelLeft, PanelRight, Header } from "../../../pages/_layouts/default/styles";
 export default {
   title: 'Pages/Layouts',
-  decorators: [
-    // styles({
-    //   backgroundColor: colors.gray900,
-    // })
-  ]
 };
 
 export const Default = () => (
