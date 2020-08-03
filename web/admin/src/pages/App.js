@@ -1,19 +1,20 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 
-import dark from "../styles/tokens/dark";
-import GlobalStyle from "../styles/global";
-import Button from "../components/Button";
-import SignIn from "../pages/Auth/SignIn";
+import Routes from '../routes';
+import history from '../services/history';
+import dark from '../styles/tokens/dark';
+import GlobalStyle from '../styles/global';
 
 function App() {
   return (
-    <ThemeProvider theme={dark}>
-      <GlobalStyle />
-        <SignIn>
-
-        </SignIn>
+    <BrowserRouter>
+      <ThemeProvider theme={dark}>
+        <GlobalStyle />
+        <Routes history={history} />
       </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
