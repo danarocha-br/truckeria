@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Container, IconContainer } from './styles';
 import { ReactComponent as ShapeDark } from '../../assets/buttonShape.svg';
 import { ReactComponent as ShapeLight } from '../../assets/buttonShapeLight.svg';
-// import Spinner from '../Spinner';
+import Spinner from '../Spinner';
 
 const Button = ({
   label,
@@ -34,8 +34,8 @@ const Button = ({
           whileTap={{ scale: 0.9 }}
         >
           {label}
-          {Icon && <Icon color={theme.colors.text} />}
-          {/* {isLoading && <Spinner />} */}
+          {Icon && !isLoading && <Icon color={theme.colors.text} />}
+          {isLoading && <Spinner />}
         </Container>
       )}
 
@@ -50,7 +50,8 @@ const Button = ({
           <IconContainer isLoading={isLoading} disabled={disabled}>
             {theme.name === 'Dark' ? <ShapeDark /> : <ShapeLight />}
 
-            <Icon color={theme.colors.white} size="24" />
+            {!isLoading && <Icon color={theme.colors.white} size="24" />}
+            {isLoading && <Spinner />}
           </IconContainer>
         </motion.button>
       )}

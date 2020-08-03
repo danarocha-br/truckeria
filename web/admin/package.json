@@ -11,6 +11,7 @@
     "polished": "^3.6.5",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-nested": "^4.2.3",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
