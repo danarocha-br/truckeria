@@ -2,17 +2,15 @@ import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
 
-
-
 export const Item = styled.li`
   ${breakpoint('tablet')`
-    ${tw`pb-8 list-none truncate`};
-    max-width: 215px;
+    ${tw`pb-8 list-none break-words`};
+    width: 215px;
   `}
 
   ${breakpoint('desktop')`
-    ${tw`pb-8 truncate`};
-    max-width: 215px;
+    ${tw`pb-8 break-words`};
+    width: 215px;
   `}
 
   a {
@@ -72,6 +70,7 @@ export const Item = styled.li`
     svg {
       ${breakpoint('tablet')`
         ${tw`mr-4`};
+        flex: none;
       `};
     }
   }

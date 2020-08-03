@@ -7,12 +7,10 @@ import NavItem from './NavItem';
 import ProfileImage from '../../assets/sign-in-background.png';
 import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
-
 const Menu = () => {
-
   const handleSignOut = () => {
     // return dispatch(signOutStart());
-   }
+  };
 
   return (
     <Container>
@@ -27,8 +25,10 @@ const Menu = () => {
       <Profile>
         <img src={ProfileImage} alt="foodtruck" />
         <div>
-          <a to="/profile">Dana Rocha</a>
-          <a to="/login" onClick={handleSignOut}>Log out</a>
+          <Link to="/profile">Dana Rocha</Link>
+          <Link to="/login" onClick={handleSignOut}>
+            Log out
+          </Link>
         </div>
       </Profile>
     </Container>

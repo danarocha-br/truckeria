@@ -1,14 +1,12 @@
 import React from 'react';
+import StoryRouter from 'storybook-react-router';
 
 import Menu from './index';
 
 export default {
   title: 'Navigation/Menu',
-  component: Menu
+  component: Menu,
+  decorators: [StoryRouter()],
 };
 
 export const MenuComponent = () => <Menu />;
-
-
-
-
