@@ -2,6 +2,7 @@ import colors from './colors';
 
 export default {
   name: 'Dark',
+  backgroundColor: '000',
 
   colors: {
     primary: colors.orange900,

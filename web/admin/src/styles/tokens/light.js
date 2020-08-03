@@ -4,6 +4,7 @@ import colors from './colors';
 
 export default {
   name: 'Light',
+  backgroundColor: 'fff',
 
   colors: {
     primary: colors.red900,
