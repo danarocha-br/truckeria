@@ -60,6 +60,7 @@ const Button = ({
 };
 
 Button.propTypes = {
+  /** My description here */
   label: PropTypes.string,
   action: PropTypes.bool,
   icon: PropTypes.func,

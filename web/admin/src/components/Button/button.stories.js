@@ -5,6 +5,7 @@ import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { FiPlus } from 'react-icons/fi';
 
 import Button from './index';
+import doc from './Button.docs.mdx';
 import colors from '../../styles/tokens/colors';
 
 const eventsFromObject = actions({
@@ -23,9 +24,11 @@ export default {
       alignItems: 'center',
       padding: '30px',
       maxWidth: '300px',
-      backgroundColor: colors.gray500,
     }),
   ],
+  parameters: {
+    docs: { page: doc },
+  },
 };
 
 export const Default = () => (
