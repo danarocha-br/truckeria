@@ -3,6 +3,7 @@ import StoryRouter from 'storybook-react-router';
 import { FiPlus } from 'react-icons/fi';
 
 import DefaultLayout from './index';
+import AuthLayout from '../auth';
 import {
   PanelLeft,
   PanelRight,
@@ -36,4 +37,12 @@ export const Default = () => (
       <h3 style={{ padding: '24px 30px' }}>Right Panel goes here.</h3>
     </PanelRight>
   </DefaultLayout>
+);
+
+export const Auth = () => (
+  <AuthLayout>
+    <h1 style={{ textAlign: 'center', fontFamily: 'sans-serif' }}>
+      Content goes here
+    </h1>
+  </AuthLayout>
 );
