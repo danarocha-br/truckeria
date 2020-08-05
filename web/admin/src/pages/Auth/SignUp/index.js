@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+import { Link as RouterLink } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 
 import { AnimatedContainer, Content, Background } from '../styles';
@@ -69,7 +70,6 @@ const SignUp = () => {
                 {/* {authErrors && <p>{authErrors}</p>} */}
 
                 <Button label="Create my account" />
-
                 <Button
                   label="Sign Up With Google"
                   type="button"
@@ -79,6 +79,13 @@ const SignUp = () => {
               </Form>
             )}
           />
+          <p className="disclaimer">
+            By signing up, I agree to Truckeria's{' '}
+            <RouterLink to="/terms-and-conditions">
+              Terms & Conditions
+            </RouterLink>{' '}
+            and <RouterLink to="/privacy-policy">Privacy Policy</RouterLink>.
+          </p>
         </Content>
       </AnimatedContainer>
     </AuthLayout>

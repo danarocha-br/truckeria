@@ -31,4 +31,5 @@ export default createGlobalStyle`
       color: ${(props) => darken(0.2, `${props.theme.colors.accent}`)};
     }
   }
+
 `;

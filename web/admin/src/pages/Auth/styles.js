@@ -50,6 +50,10 @@ export const AnimatedContainer = styled.div`
 export const Content = styled.div`
   ${tw`flex flex-1 flex-col items-center text-center w-full h-full`}
   place-content: center;
+
+  .disclaimer {
+    ${tw`mb-8`};
+  }
 `;
 
 export const Background = styled.div`

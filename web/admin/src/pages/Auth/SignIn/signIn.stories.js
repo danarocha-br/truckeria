@@ -3,7 +3,7 @@ import StoryRouter from 'storybook-react-router';
 
 import SignIn from './index';
 import SignUp from '../SignUp';
-import ForgotPassword from '../ForgotPassword';
+import Forgot from '../ForgotPassword';
 
 export default {
   title: 'Pages/Auth',
@@ -12,6 +12,6 @@ export default {
 
 export const Login = () => <SignIn />;
 
-// export const ForgotPassword = () => <ForgotPassword />;
+export const ForgotPassword = () => <Forgot />;
 
 export const Register = () => <SignUp />;
