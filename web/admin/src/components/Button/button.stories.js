@@ -5,11 +5,12 @@ import { FiPlus } from 'react-icons/fi';
 
 import Button from './index';
 import doc from './Button.docs.mdx';
+import colors from '../../styles/tokens/colors';
 
-const eventsFromObject = actions({
-  onClick: 'clicked',
-  onMouseOver: 'hovered',
-});
+// const eventsFromObject = actions({
+//   onClick: 'clicked',
+//   onMouseOver: 'hovered',
+// });
 
 export default {
   title: 'Button',
@@ -22,13 +23,17 @@ export default {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '400px',
+      backgroundColor: colors.gray700,
     }),
   ],
 };
 
 export const Default = (args) => {
-  return <Button label="hello" {...args} />;
+  return (
+    <div style={{ width: 400 }}>
+      <Button label="hello" {...args} />
+    </div>
+  );
 };
 
 Default.args = {

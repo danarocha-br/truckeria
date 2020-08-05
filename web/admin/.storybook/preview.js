@@ -6,6 +6,7 @@ import styles from '@sambego/storybook-styles';
 import { DocsPage, DocsContainer } from '@storybook/addon-docs/blocks';
 
 import './reset.css';
+import '../src/assets/css/tailwind.output.css';
 import theme from './theme';
 import light from '../src/styles/tokens/light';
 import dark from '../src/styles/tokens/dark';

@@ -6,18 +6,18 @@ export default create({
   colorPrimary: '#CCAF81',
   colorSecondary: '#FF8D4D',
 
-  appBg: '#1F2533',
-  appContentBg: '#D5DCEB',
+  appBg: '#20242A',
+  appContentBg: '#ECEFF4',
   appBorderColor: '#4C5E80',
   appBorderRadius: 15,
-  appTextColor: '#1F2533',
+  appTextColor: '#20242A',
 
   textColor: '#879AC0',
   fontBase: 'DM Sans, sans-serif',
   fontCode: 'monospace',
 
   // Toolbar default and active colors
-  barTextColor: '#1F2533',
+  barTextColor: '#20242A',
   barSelectedColor: '#FF8D4D',
   barBg: '#DBE1EA',
 

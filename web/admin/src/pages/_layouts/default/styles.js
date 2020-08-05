@@ -54,10 +54,11 @@ export const Header = styled.header`
   ${tw`flex w-full items-center mb-12`};
 
   h1 {
-    ${tw`text-lg font-semibold capitalize mr-auto`}
+    ${tw`text-lg font-semibold capitalize mr-auto`};
+    color: ${(props) => props.theme.colors.text};
 
     ${breakpoint('desktop')`
-     ${tw`text-xl mb-0`}
-  `}
+     ${tw`text-xl mb-0`};
+  `};
   }
 `;
