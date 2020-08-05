@@ -13,8 +13,12 @@ body.sb-show-main {
   padding: 0 !important;
 }
 
-/* @media only screen and (min-width: 992px) {
-  #root > div > div {
-    width: 50%;
+body form {
+  width: 500px;
+}
+
+@media only screen and (max-width: 992px) {
+  body form {
+    width: 100%;
   }
-} */
+}
