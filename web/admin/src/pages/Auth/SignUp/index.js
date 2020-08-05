@@ -69,6 +69,13 @@ const SignUp = () => {
                 {/* {authErrors && <p>{authErrors}</p>} */}
 
                 <Button label="Create my account" />
+
+                <Button
+                  label="Sign Up With Google"
+                  type="button"
+                  secondary
+                  onClick={() => 'clicked'}
+                />
               </Form>
             )}
           />

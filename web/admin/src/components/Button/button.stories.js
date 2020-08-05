@@ -65,3 +65,19 @@ IconOnly.args = {
   disabled: false,
   onClick: () => 'clicked',
 };
+
+export const Secondary = (args) => {
+  return (
+    <div style={{ width: 400 }}>
+      <Button label="Im a ghost button" {...args} />
+    </div>
+  );
+};
+
+Secondary.args = {
+  label: 'Im a ghost button',
+  secondary: true,
+  isLoading: false,
+  disabled: false,
+  onClick: () => 'clicked',
+};

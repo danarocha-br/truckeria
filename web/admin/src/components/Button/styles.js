@@ -3,14 +3,31 @@ import { motion } from 'framer-motion';
 import tw from 'tailwind.macro';
 import { shade, desaturate } from 'polished';
 
+function renderHover(props) {
+  if (props.Icon) {
+    return props.theme.colors.shade;
+  }
+
+  if (props.secondary) {
+    return props.theme.colors.accent;
+  }
+
+  return shade(0.15, props.theme.button.success);
+}
+
 export const Container = styled(motion.button)`
-  ${tw`flex items-center justify-center text-center text-white font-bold capitalize rounded-lg my-4 relative cursor-pointer`};
+  ${tw`flex items-center justify-center text-center font-bold capitalize rounded-lg my-4 relative cursor-pointer`};
+  color: ${(props) =>
+    props.secondary ? props.theme.colors.accent : props.theme.colors.white};
   background-color: ${(props) =>
-    props.Icon ? 'transparent' : props.theme.button.success};
+    props.Icon || props.secondary ? 'transparent' : props.theme.button.success};
   transition: background-color 0.3s;
   width: ${(props) => (props.Icon ? '40px' : '100%')};
   padding: ${(props) => (props.Icon ? '12px' : '20px')};
-  border: 1px solid transparent;
+  border: ${(props) =>
+    props.secondary
+      ? `1px solid ${props.theme.colors.accent}`
+      : '1px solid transparent'};
 
   ${(props) =>
     !props.Icon &&
@@ -22,10 +39,8 @@ export const Container = styled(motion.button)`
     `}
 
   &:hover {
-    background: ${(props) =>
-      props.Icon
-        ? props.theme.colors.shade
-        : shade(0.15, props.theme.button.success)};
+    color: white;
+    background: ${(props) => renderHover(props)};
     border: 1px solid transparent;
   }
 

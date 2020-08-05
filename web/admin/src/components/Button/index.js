@@ -16,6 +16,7 @@ const Button = ({
   isLoading,
   disabled,
   onClick,
+  secondary,
   ...rest
 }) => {
   const theme = useContext(ThemeContext);
@@ -32,6 +33,7 @@ const Button = ({
           {...rest}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.9 }}
+          secondary={secondary}
         >
           {label}
           {Icon && !isLoading && <Icon color={theme.colors.text} />}
@@ -64,12 +66,14 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  /** My description here */
   label: PropTypes.string,
+  /** Makes icon button larger and bolder */
   action: PropTypes.bool,
   icon: PropTypes.func,
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
+  /** Makes button as secondary type, ghost button */
+  secondary: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 

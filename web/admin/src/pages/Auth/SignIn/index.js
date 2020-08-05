@@ -61,6 +61,7 @@ const SignIn = () => {
                 <Button
                   label="Sign In With Google"
                   type="button"
+                  secondary
                   onClick={() => 'clicked'}
                 />
 
