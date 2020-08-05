@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from '@sambego/storybook-styles';
 import { actions } from '@storybook/addon-actions';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
 import { FiPlus } from 'react-icons/fi';
 
 import Button from './index';
 import doc from './Button.docs.mdx';
-import colors from '../../styles/tokens/colors';
 
 const eventsFromObject = actions({
   onClick: 'clicked',
@@ -16,42 +14,49 @@ const eventsFromObject = actions({
 export default {
   title: 'Button',
   component: Button,
-  decorators: [
-    withKnobs,
-    styles({
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '30px',
-      maxWidth: '300px',
-    }),
-  ],
   parameters: {
     docs: { page: doc },
   },
+  decorators: [
+    styles({
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '400px',
+    }),
+  ],
 };
 
-export const Default = () => (
-  <>
-    <Button
-      label={text('Label', 'Im a Label')}
-      isLoading={boolean('isLoading', false)}
-      disabled={boolean('Disabled', false)}
-      {...eventsFromObject}
-    />
+export const Default = (args) => {
+  return <Button label="hello" {...args} />;
+};
 
-    <Button
-      isLoading={boolean('isLoading', false)}
-      disabled={boolean('Disabled', false)}
-      icon={FiPlus}
-      action
-      {...eventsFromObject}
-    />
-    <Button
-      isLoading={boolean('isLoading', false)}
-      disabled={boolean('Disabled', false)}
-      icon={FiPlus}
-      {...eventsFromObject}
-    />
-  </>
-);
+Default.args = {
+  label: 'hello',
+  isLoading: false,
+  disabled: false,
+  onClick: () => 'clicked',
+};
+
+export const Action = (args) => {
+  return <Button {...args} icon={FiPlus} />;
+};
+
+Action.args = {
+  icon: () => FiPlus,
+  action: true,
+  isLoading: false,
+  disabled: false,
+  onClick: () => 'clicked',
+};
+
+export const IconOnly = (args) => {
+  return <Button {...args} icon={FiPlus} />;
+};
+
+IconOnly.args = {
+  icon: () => FiPlus,
+  isLoading: false,
+  disabled: false,
+  onClick: () => 'clicked',
+};

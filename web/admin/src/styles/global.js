@@ -25,6 +25,7 @@ export default createGlobalStyle`
   a {
     color: ${(props) => props.theme.colors.accent};
     transition: color ease-in-out 300ms;
+    text-decoration: none;
 
     &:hover {
       color: ${(props) => darken(0.2, `${props.theme.colors.accent}`)};

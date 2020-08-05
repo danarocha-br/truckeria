@@ -1,7 +1,13 @@
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable } from '@storybook/addon-docs/blocks';
 import Button from './index.js';
 
-Here's some _markdown_!
+# Button Types
+
+There are 3 types of buttons:
+
+- Default: main button with a label, used for Save, Continue, etc..
+- Action: it is an icon button for a main action such as Add new Item
+- IconOnly: which is used for secondary actions inside tables for example
 
 # Preview
 
@@ -9,4 +15,4 @@ Here's some _markdown_!
 
 # Props
 
-<Props of={Button} />
+<ArgsTable of={Button} />

@@ -59,6 +59,10 @@ const Button = ({
   );
 };
 
+Button.defaultProps = {
+  type: 'submit',
+};
+
 Button.propTypes = {
   /** My description here */
   label: PropTypes.string,
@@ -67,10 +71,6 @@ Button.propTypes = {
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
-};
-
-Button.defaultProps = {
-  type: 'submit',
 };
 
 export default Button;

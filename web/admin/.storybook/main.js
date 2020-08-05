@@ -7,10 +7,8 @@ module.exports = {
     '@storybook/addon-actions',
     '@storybook/addon-links',
     '@storybook/addon-a11y/register',
-    '@storybook/addon-knobs/register',
     'themeprovider-storybook/register',
     'storybook-formik/register',
-    '@storybook/addon-storysource',
     '@storybook/addon-viewport/register',
   ],
 };
