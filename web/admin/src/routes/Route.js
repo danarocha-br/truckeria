@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const RouteWrapper = ({ isPrivate = false, component: Component, ...rest }) => {
-  const authenticated = true;
+  const authenticated = false;
 
   if (!authenticated && isPrivate) {
     return <Redirect to="/login" />;

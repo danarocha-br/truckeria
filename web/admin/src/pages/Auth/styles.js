@@ -4,7 +4,6 @@ import tw from 'tailwind.macro';
 
 import SignInBck from '../../assets/sign-in-background.png';
 
-
 const animateFromLeft = keyframes`
   from {
     opacity: 0;
@@ -22,13 +21,12 @@ export const AnimatedContainer = styled.div`
   animation: ${animateFromLeft} 1s;
 
   h1 {
-    ${tw`mb-4 text-2xl font-bold`}
+    ${tw`mb-4 text-2xl font-bold`};
     color: ${(props) => props.theme.colors.text};
   }
 
   form {
     ${tw`my-8 px-4 w-full`}
-
 
     ${breakpoint('tablet')`
      width: 450px;
@@ -39,9 +37,13 @@ export const AnimatedContainer = styled.div`
     }
   }
 
-   .link {
-    ${tw`text-right mr-10 mt-8`}
+  .link {
+    ${tw`text-center mt-8`};
     color: ${(props) => props.theme.colors.text};
+
+    ${breakpoint('tablet')`
+    ${tw`text-right mr-10`};
+  `}
   }
 `;
 

@@ -9,7 +9,7 @@ export const Container = styled(Link)`
   span {
     ${tw`absolute left-0`}
         top: 13px;
-        right: 0px;
+        right: 10px;
         height: 1px;
         background-color: ${(props) => props.theme.colors.primary};
         transform: scaleX(0);
