@@ -2,7 +2,6 @@ import React from 'react';
 import styles from '@sambego/storybook-styles';
 
 import Tag from './index';
-import colors from '../../styles/tokens/colors';
 
 export default {
   title: 'Tag',
@@ -23,4 +22,5 @@ export const Default = (args) => {
 
 Default.args = {
   label: 'Vegan-friendly',
+  isLoading: false,
 };

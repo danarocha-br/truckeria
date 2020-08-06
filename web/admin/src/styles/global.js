@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import { darken } from 'polished';
 
+import colors from './tokens/colors';
+
 export default createGlobalStyle`
 
   body {
@@ -30,6 +32,12 @@ export default createGlobalStyle`
     &:hover {
       color: ${(props) => darken(0.2, `${props.theme.colors.accent}`)};
     }
+  }
+
+  hr {
+    border-bottom: 1px dashed ${colors.gray300};
+    width: 100%;
+    margin-top: 15px;
   }
 
 `;
