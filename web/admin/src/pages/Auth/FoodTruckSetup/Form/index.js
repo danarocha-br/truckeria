@@ -8,6 +8,7 @@ import TextInput from '../../../../components/TextInput';
 import Select from '../../../../components/Select';
 import Button from '../../../../components/Button';
 import Row from '../../../../components/Form/Row';
+import Upload from '../../../../components/Upload';
 
 const foodOptions = [
   { value: 'Mexican', label: 'Mexican' },
@@ -17,13 +18,44 @@ const foodOptions = [
 ];
 
 const SetupSchema = Yup.object().shape({
-  name: Yup.string()
+  truckName: Yup.string()
     .required('Please insert your food truck name.')
     .min(3, 'Name must have at least 3 characters.'),
   cuisine: Yup.array()
     .max(5, 'You can select up to 5 cuisines.')
     .required('Please select at least one cuisine type.'),
+  files: Yup.array(),
+  state: Yup.string().required('Please choose your state.'),
+  city: Yup.string().required('Please choose your city.'),
 });
+
+const initialValues = {
+  files: [],
+  truckName: '',
+  cuisine: '',
+  state: '',
+  city: '',
+  phone: '',
+  website: '',
+  instagram: '',
+  facebook: '',
+};
+
+const handleSubmit = (values) => {
+  alert(
+    JSON.stringify(
+      {
+        files: values.files.map((file) => ({
+          fileName: file.name,
+          type: file.type,
+          size: `${file.size} bytes`,
+        })),
+      },
+      null,
+      2
+    )
+  );
+};
 
 function FormSetup() {
   return (
@@ -31,17 +63,18 @@ function FormSetup() {
       // initialValues={initialValues}
       validationSchema={SetupSchema}
       onSubmit={(values, actions) => {
-        // handleSubmit(values);
-        // actions.setSubmitting(false);
+        handleSubmit(values);
       }}
-      render={() => (
-        <Form>
+      render={(values, setFieldValue) => (
+        <Form onSubmit={handleSubmit}>
           <>
             <h2>Basic Info</h2>
-            <div style={{ marginBottom: 20, textAlign: 'center' }}>
-              Upload Your FoodTruck Cover Image
-            </div>
-            <TextInput id="name" name="name" label="Your Food Truck Name" />
+            <Upload values={values} setFieldValue={setFieldValue}></Upload>
+            <TextInput
+              id="truckName"
+              name="truckName"
+              label="Your Food Truck Name"
+            />
             <Select
               id="cuisine"
               name="cuisine"

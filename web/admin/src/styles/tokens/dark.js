@@ -26,6 +26,7 @@ export default {
     text: colors.white,
     focus: colors.orange900,
     shade: colors.gray700,
+    success: colors.green900,
   },
 
   button: {

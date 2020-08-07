@@ -57,11 +57,10 @@ const SelectInput = ({
       '&:hover': {
         border: `1px solid ${theme.form.focus}`,
       },
-      zIndex: 999,
     }),
     menu: (base) => ({
       ...base,
-      zIndex: 100,
+      zIndex: 999,
     }),
     indicatorSeparator: (base) => ({
       ...base,
