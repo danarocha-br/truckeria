@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import tw from 'tailwind.macro';
 

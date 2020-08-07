@@ -5,8 +5,16 @@ import * as Yup from 'yup';
 import { FiFacebook, FiInstagram, FiGlobe, FiPhone } from 'react-icons/fi';
 
 import TextInput from '../../../../components/TextInput';
+import Select from '../../../../components/Select';
 import Button from '../../../../components/Button';
 import Row from '../../../../components/Form/Row';
+
+const foodOptions = [
+  { value: 'Mexican', label: 'Mexican' },
+  { value: 'Burger', label: 'Burger' },
+  { value: 'Salad', label: 'Salad' },
+  { value: 'Vegan-friendly', label: 'Vegan-friendly' },
+];
 
 const SetupSchema = Yup.object().shape({
   name: Yup.string()
@@ -34,14 +42,16 @@ function FormSetup() {
               Upload Your FoodTruck Cover Image
             </div>
             <TextInput id="name" name="name" label="Your Food Truck Name" />
-            <TextInput
+            <Select
               id="cuisine"
               name="cuisine"
-              label="Select Cuisine Type"
+              placeholder="Select Cuisine Type"
+              isMulti
+              options={foodOptions}
             />
             <Row>
-              <TextInput id="state" name="state" label="Select State" />
-              <TextInput id="city" name="city" label="Select City" />
+              <Select id="state" name="state" placeholder="Select State" />
+              <Select id="city" name="city" placeholder="Select City" />
             </Row>
 
             <h2>Contact Info</h2>

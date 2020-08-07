@@ -24,6 +24,10 @@ const SelectInput = ({
   const theme = useContext(ThemeContext);
 
   const customStyles = {
+    container: (base) => ({
+      ...base,
+      width: '100%',
+    }),
     placeholder: (defaultStyles) => ({
       ...defaultStyles,
       color: theme.form.text,
@@ -33,6 +37,7 @@ const SelectInput = ({
       borderBottom: '1px dashed #CBD4E1',
       color: state.isSelected ? 'red' : colors.gray800,
       backgroundColor: state.isFocused | state.isSelected ? '#ECE7D2' : 'white',
+      zIndex: 999,
     }),
     control: (provided, state, base) => ({
       ...provided,
@@ -52,6 +57,11 @@ const SelectInput = ({
       '&:hover': {
         border: `1px solid ${theme.form.focus}`,
       },
+      zIndex: 999,
+    }),
+    menu: (base) => ({
+      ...base,
+      zIndex: 100,
     }),
     indicatorSeparator: (base) => ({
       ...base,

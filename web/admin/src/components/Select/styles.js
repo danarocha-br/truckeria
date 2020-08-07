@@ -1,10 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import tw from 'tailwind.macro';
 
 export const Wrapper = styled.div`
   ${tw`flex flex-col w-full`};
   & + .c-input {
-    ${tw`mt-4`}
+    ${tw`mt-4 w-full`}
   }
 `;
 
