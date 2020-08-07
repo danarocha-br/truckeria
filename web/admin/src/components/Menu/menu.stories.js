@@ -9,4 +9,7 @@ export default {
   decorators: [StoryRouter()],
 };
 
-export const MenuComponent = () => <Menu />;
+export const MenuComponent = (args) => <Menu {...args} />;
+MenuComponent.args = {
+  isLoading: false,
+};

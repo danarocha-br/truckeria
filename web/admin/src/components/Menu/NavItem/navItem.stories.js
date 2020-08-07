@@ -30,6 +30,7 @@ export const MenuNavItem = (args) => {
 
 MenuNavItem.args = {
   isActive: true,
+  isLoading: false,
   title: 'Overview',
   icon: FiTruck,
   to: '/',
