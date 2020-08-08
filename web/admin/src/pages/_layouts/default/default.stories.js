@@ -1,6 +1,7 @@
 import React from 'react';
 import StoryRouter from 'storybook-react-router';
 import { FiPlus } from 'react-icons/fi';
+import styles from '@sambego/storybook-styles';
 
 import DefaultLayout from './index';
 import AuthLayout from '../auth';
@@ -9,18 +10,26 @@ import {
   PanelRight,
   Header,
 } from '../../../pages/_layouts/default/styles';
-import Menu from '../../../components/Menu';
 import Button from '../../../components/Button';
+import colors from '../../../styles/tokens/colors';
 
 export default {
   title: 'Pages/Layouts',
   component: DefaultLayout,
-  decorators: [StoryRouter()],
+  decorators: [
+    StoryRouter(),
+    styles({
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '30px',
+      backgroundColor: colors.gray900,
+    }),
+  ],
 };
 
 export const Default = () => (
   <DefaultLayout>
-    <Menu></Menu>
     <PanelLeft>
       <Header>
         <h1>Panel Left goes here</h1>
