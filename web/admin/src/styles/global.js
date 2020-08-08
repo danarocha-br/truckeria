@@ -40,4 +40,8 @@ export default createGlobalStyle`
     margin-top: 15px;
   }
 
+  li {
+    list-style: none;
+  }
+
 `;

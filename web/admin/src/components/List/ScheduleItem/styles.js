@@ -20,6 +20,10 @@ export const Wrapper = styled.div`
   ${breakpoint('desktop')`
     ${tw`flex-row ml-4 `};
   `}
+
+  &:hover {
+    border-color: ${(props) => props.theme.colors.primary};
+  }
 `;
 
 export const Date = styled.div`
@@ -31,6 +35,7 @@ export const Date = styled.div`
     ${tw`flex-col py-4 px-6 h-full text-center justify-center rounded-l-md`};
     border-top-right-radius: 0 !important;
     max-width: 80px;
+    height: 80px;
   `}
 
   svg {
@@ -135,8 +140,6 @@ export const Container = styled.li`
     background-color: ${(props) =>
       transparentize(0.1, props.theme.colors.base)};
   }
-
-
 
   &:hover ${Info} {
     small:last-child {

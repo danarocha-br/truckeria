@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from '@sambego/storybook-styles';
 
-import ScheduleItem from './index';
+import MenuItem from './index';
 
 export default {
-  title: 'Lists/ScheduleItem',
-  component: ScheduleItem,
+  title: 'Lists/MenuItem',
+  component: MenuItem,
   decorators: [
     styles({
       display: 'flex',
@@ -17,12 +17,14 @@ export default {
 };
 
 export const Default = (args) => {
-  return <ScheduleItem date="hello" key="1" {...args} />;
+  return <MenuItem key="1" {...args} />;
 };
 
 Default.args = {
-  date: '9:00-18:00, Monday, June 09 2020',
-  address: '767 5th Ave, New York',
+  thumb: ' ',
+  title: 'Salad Bowl',
+  description: 'Asian salad with cryspy chicken, lettuce. etc.',
+  price: '8.90',
   isActive: false,
   isLoading: false,
 };
