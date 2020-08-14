@@ -22,10 +22,9 @@ const Menu = ({ isLoading }) => {
       <Logo className="logo" />
       <List>
         <NavItem
-          isActive
           title="overview"
           icon={FiTruck}
-          to="/"
+          to="/dashboard"
           isLoading={isLoading}
         />
         <NavItem

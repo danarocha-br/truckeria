@@ -6,22 +6,22 @@ import { ThemeContext } from 'styled-components';
 import { Container } from './styles';
 import colors from '../../../styles/tokens/colors';
 
-const listItems = {
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-};
+// const listItems = {
+//   visible: {
+//     opacity: 1,
+//     y: 0,
+//   },
+//   hidden: {
+//     opacity: 0,
+//     y: 30,
+//   },
+// };
 
 const Overview = ({ icon: Icon, title, label, isLoading }) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <Container isLoading={isLoading} variants={listItems}>
+    <Container isLoading={isLoading}>
       <span className="c-overview__icon">
         <Icon color={theme.colors.text} />
       </span>

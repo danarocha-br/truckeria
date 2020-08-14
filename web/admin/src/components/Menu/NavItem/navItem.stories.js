@@ -23,13 +23,16 @@ export const MenuNavItem = (args) => {
   return (
     <ul>
       <NavItem {...args} />
-      <NavItem title="This is a really long title right here" icon={FiTruck} />
+      <NavItem
+        title="This is a really long title right here"
+        icon={FiTruck}
+        to="/"
+      />
     </ul>
   );
 };
 
 MenuNavItem.args = {
-  isActive: true,
   isLoading: false,
   title: 'Overview',
   icon: FiTruck,

@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 
 import { Item } from './styles';
 
-const NavItem = ({ title, icon: Icon, to, isActive, isLoading }) => {
+const NavItem = ({ title, icon: Icon, to, isLoading }) => {
   const theme = useContext(ThemeContext);
 
   return (
-    <Item isActive={isActive}>
+    <Item>
       {isLoading ? (
         <SkeletonTheme
           color={theme.colors.shade}
@@ -19,10 +19,10 @@ const NavItem = ({ title, icon: Icon, to, isActive, isLoading }) => {
           <Skeleton width={160} />
         </SkeletonTheme>
       ) : (
-        <Link to={to}>
+        <NavLink to={to} activeClassName="active">
           <Icon size="19" />
           {title}
-        </Link>
+        </NavLink>
       )}
     </Item>
   );

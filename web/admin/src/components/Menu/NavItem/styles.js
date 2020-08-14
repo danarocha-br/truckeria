@@ -13,6 +13,20 @@ export const Item = styled.li`
     width: 215px;
   `}
 
+  .active {
+    opacity: 1;
+    color: ${(props) => props.theme.colors.text};
+
+    svg {
+      color: ${(props) => props.theme.colors.primary};
+    }
+
+    &::after {
+      width: 30px;
+      opacity: 1;
+    }
+  }
+
   a {
     ${tw`flex flex-col items-center capitalize relative text-sm`};
     color: ${(props) => props.theme.colors.text};

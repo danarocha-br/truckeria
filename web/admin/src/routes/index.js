@@ -25,7 +25,7 @@ const Routes = () => {
         />
         <Route path="/schedule" component={Schedule} isPrivate />
         <Route path="/menu" component={Menu} isPrivate />
-        <Route path="/" component={() => <h1>404</h1>} />
+        <Route path="/" exact component={() => <h1>404</h1>} />
       </Switch>
     </AnimatePresence>
   );
