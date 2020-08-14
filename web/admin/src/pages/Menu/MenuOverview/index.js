@@ -11,10 +11,10 @@ const MenuOverview = () => {
       <Thumb />
       <hr />
       <List>
-        <Overview key="id1" icon={FiPieChart} title="25" label="Total Items" />
-        <Overview key="id1" icon={FiPieChart} title="25" label="Total Items" />
-        <Overview key="id1" icon={FiPieChart} title="25" label="Total Items" />
-        <Overview key="id1" icon={FiPieChart} title="25" label="Total Items" />
+        <Overview icon={FiPieChart} title="25" label="Total Items" />
+        <Overview icon={FiPieChart} title="25" label="Total Items" />
+        <Overview icon={FiPieChart} title="25" label="Total Items" />
+        <Overview icon={FiPieChart} title="25" label="Total Items" />
       </List>
     </Container>
   );

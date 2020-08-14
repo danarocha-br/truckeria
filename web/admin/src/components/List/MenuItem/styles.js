@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import Image from '../../../assets/sign-in-background.png';
 
-export const Actions = styled.li`
+export const Actions = styled.span`
   ${tw`hidden`};
   transition: all ease 0.31s;
 

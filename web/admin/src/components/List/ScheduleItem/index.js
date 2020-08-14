@@ -9,17 +9,12 @@ import { Container, Wrapper, Date, Info, Actions } from './styles';
 import Button from '../../Button';
 import { listItems } from '../animations';
 
-const ScheduleItem = ({ date, address, isActive, key, isLoading }) => {
+const ScheduleItem = ({ date, address, isActive, isLoading }) => {
   const theme = useContext(ThemeContext);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
   return (
-    <Container
-      key={key}
-      isActive={isActive}
-      isLoading={isLoading}
-      variants={listItems}
-    >
+    <Container isActive={isActive} isLoading={isLoading} variants={listItems}>
       <FiCalendar size="20" color={theme.colors.primary} />
       <Wrapper isActive={isActive}>
         <Date>
@@ -65,8 +60,8 @@ const ScheduleItem = ({ date, address, isActive, key, isLoading }) => {
         )}
         {!isLoading && (
           <Actions>
-            <Button icon={FiEdit2} />
-            <Button icon={FiTrash} />
+            <Button icon={FiEdit2} onClick={() => 'clicked'} />
+            <Button icon={FiTrash} onClick={() => 'clicked'} />
           </Actions>
         )}
       </Wrapper>
@@ -75,7 +70,6 @@ const ScheduleItem = ({ date, address, isActive, key, isLoading }) => {
 };
 
 ScheduleItem.propTypes = {
-  key: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   isActive: PropTypes.bool,

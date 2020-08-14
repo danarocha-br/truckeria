@@ -20,12 +20,7 @@ const MenuItem = ({
   const theme = useContext(ThemeContext);
 
   return (
-    <Container
-      isActive={isActive}
-      isLoading={isLoading}
-      key={key}
-      variants={listItems}
-    >
+    <Container isActive={isActive} isLoading={isLoading} variants={listItems}>
       {isLoading ? (
         <SkeletonTheme
           color={theme.colors.shade}
@@ -65,8 +60,8 @@ const MenuItem = ({
       )}
       {!isLoading && (
         <Actions>
-          <Button icon={FiEdit2} />
-          <Button icon={FiTrash} />
+          <Button icon={FiEdit2} onClick={() => 'clicked'} />
+          <Button icon={FiTrash} onClick={() => 'clicked'} />
         </Actions>
       )}
     </Container>
@@ -78,7 +73,6 @@ MenuItem.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
-  key: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
   isLoading: PropTypes.bool,
 };
