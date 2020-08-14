@@ -1,5 +1,6 @@
 import React from 'react';
-import { motion, AnimateSharedLayout } from 'framer-motion';
+import { AnimateSharedLayout } from 'framer-motion';
+import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
@@ -27,7 +28,7 @@ const modal = {
   },
 };
 
-const Modal = ({ isOpen = true, toggleOpen, title }) => {
+const Modal = ({ isOpen, toggleOpen, title }) => {
   return (
     <AnimateSharedLayout type="crossfade">
       <Container
@@ -49,6 +50,12 @@ const Modal = ({ isOpen = true, toggleOpen, title }) => {
       </Container>
     </AnimateSharedLayout>
   );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default Modal;
