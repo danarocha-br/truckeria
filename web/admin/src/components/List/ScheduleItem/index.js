@@ -7,13 +7,19 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import { Container, Wrapper, Date, Info, Actions } from './styles';
 import Button from '../../Button';
+import { listItems } from '../animations';
 
 const ScheduleItem = ({ date, address, isActive, key, isLoading }) => {
   const theme = useContext(ThemeContext);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
   return (
-    <Container key={key} isActive={isActive} isLoading={isLoading}>
+    <Container
+      key={key}
+      isActive={isActive}
+      isLoading={isLoading}
+      variants={listItems}
+    >
       <FiCalendar size="20" color={theme.colors.primary} />
       <Wrapper isActive={isActive}>
         <Date>

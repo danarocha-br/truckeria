@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
+import { motion } from 'framer-motion';
 
 import colors from '../../../styles/tokens/colors';
 
-export const Container = styled.li`
+export const Container = styled(motion.li)`
   ${tw`flex flex-col items-center w-full rounded-lg p-2`};
   background-color: ${colors.gray100};
   transition: background-color 0.5s;

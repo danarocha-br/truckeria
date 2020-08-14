@@ -6,6 +6,7 @@ import { ThemeContext } from 'styled-components';
 
 import { Container, Thumb, Actions } from './styles';
 import Button from '../../Button';
+import { listItems } from '../animations';
 
 const MenuItem = ({
   thumb,
@@ -19,7 +20,12 @@ const MenuItem = ({
   const theme = useContext(ThemeContext);
 
   return (
-    <Container isActive={isActive} isLoading={isLoading} key={key}>
+    <Container
+      isActive={isActive}
+      isLoading={isLoading}
+      key={key}
+      variants={listItems}
+    >
       {isLoading ? (
         <SkeletonTheme
           color={theme.colors.shade}

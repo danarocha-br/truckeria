@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
+import { motion } from 'framer-motion';
 
 import Image from '../../../assets/sign-in-background.png';
 
@@ -25,7 +26,7 @@ export const Thumb = styled.div`
   }
 `;
 
-export const List = styled.ul`
+export const List = styled(motion.ul)`
   ${tw`mt-8`};
   display: grid;
   grid-gap: 1rem !important;

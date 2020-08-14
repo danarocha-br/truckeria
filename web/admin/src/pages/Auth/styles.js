@@ -59,7 +59,7 @@ export const Content = styled.div`
 export const Background = styled.div`
   ${breakpoint('desktop')`
     flex: 1;
-    background-position: cover;
+    background-size: cover;
     background: url(${SignInBck}) no-repeat center right;
     height: 100%;
     overflow: hidden;

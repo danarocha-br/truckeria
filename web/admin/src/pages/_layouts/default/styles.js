@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.div`
   ${tw`h-screen flex`};
 `;
 
-export const Container = styled.main`
+export const Container = styled(motion.main)`
   ${tw`flex overflow-hidden relative`};
   height: calc(100vh - 65px);
 
@@ -50,7 +51,7 @@ export const PanelRight = styled.div`
   `}
 `;
 
-export const Header = styled.header`
+export const Header = styled(motion.header)`
   ${tw`flex w-full items-center mb-12`};
 
   h1 {

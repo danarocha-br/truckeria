@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
 import { transparentize } from 'polished';
 import breakpoint from 'styled-components-breakpoint';
+import { motion } from 'framer-motion';
 
 import Image from '../../../assets/sign-in-background.png';
 
@@ -20,7 +21,7 @@ export const Actions = styled.li`
   `}
 `;
 
-export const Container = styled.li`
+export const Container = styled(motion.li)`
   ${tw`flex w-full rounded-md items-center py-2 px-4 font-bold mb-4`};
   color: ${(props) => props.theme.colors.text};
   border: 1px solid ${(props) => props.theme.colors.shade};

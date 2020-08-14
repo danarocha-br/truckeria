@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import tw from 'tailwind.macro';
 import { transparentize } from 'polished';
 import breakpoint from 'styled-components-breakpoint';
+import { motion } from 'framer-motion';
 
 export const Wrapper = styled.div`
   ${tw`flex flex-col w-full rounded-md items-center`};
@@ -34,7 +35,9 @@ export const Date = styled.div`
   ${breakpoint('desktop')`
     ${tw`flex-col py-4 px-6 h-full text-center justify-center rounded-l-md`};
     border-top-right-radius: 0 !important;
-    max-width: 80px;
+    max-width: 80px;import { motion } from 'framer-motion';
+import Modal from '../../../../../../client/web-admin/src/components/Modal/index';
+
     height: 80px;
   `}
 
@@ -118,7 +121,7 @@ export const Actions = styled.div`
   `}
 `;
 
-export const Container = styled.li`
+export const Container = styled(motion.li)`
   ${tw`flex items-center w-full cursor-pointer mb-4`};
   color: ${(props) => props.theme.colors.text};
 

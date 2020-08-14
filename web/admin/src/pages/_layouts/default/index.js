@@ -8,7 +8,9 @@ const DefaultLayout = ({ children }) => {
   return (
     <Wrapper>
       <Menu />
-      <Container>{children}</Container>
+      <Container initial="hidden" animate="visible" exit="exit">
+        {children}
+      </Container>
     </Wrapper>
   );
 };
