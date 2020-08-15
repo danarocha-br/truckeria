@@ -53,7 +53,6 @@ WithIcon.args = {
   disabled: false,
   loading: false,
   readOnly: false,
-  isLight: false,
 };
 
 WithIcon.story = {

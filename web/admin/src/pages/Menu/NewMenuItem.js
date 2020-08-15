@@ -1,13 +1,13 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FiMapPin, FiClock, FiCalendar } from 'react-icons/fi';
+import { FaHamburger, FaDollarSign, FaRegListAlt } from 'react-icons/fa';
 
 import Form from '../../components/Form';
-import Row from '../../components/Form/Row';
 import TextInput from '../../components/TextInput';
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
+import Upload from '../../components/Upload';
 
 const MenuSchema = Yup.object().shape({
   image: Yup.string().required('Please insert a valid address.'),
@@ -44,9 +44,14 @@ const NewMenuItem = ({ isOpen, toggleOpen }) => {
         }}
         render={() => (
           <Form>
-            <TextInput icon={FiMapPin} name="title" label="Food name" />
-            <TextInput name="description" label="Food description" />
-            <TextInput name="price" label="Item Price" />
+            {/* <Upload values={values} setFieldValue={setFieldValue}></Upload> */}
+            <TextInput icon={FaHamburger} name="title" label="Food name" />
+            <TextInput
+              icon={FaRegListAlt}
+              name="description"
+              label="Food description"
+            />
+            <TextInput icon={FaDollarSign} name="price" label="Item Price" />
 
             <Button label="Add Menu Item" />
           </Form>
