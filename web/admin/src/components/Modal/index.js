@@ -1,8 +1,10 @@
 import React from 'react';
 import { AnimateSharedLayout } from 'framer-motion';
 import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
 
 import { Container } from './styles';
+import light from '../../styles/tokens/light';
 
 const modal = {
   open: {
@@ -31,26 +33,28 @@ const modal = {
 
 const Modal = ({ isOpen, toggleOpen, title, children }) => {
   return (
-    <AnimateSharedLayout type="crossfade">
-      <Container
-        layout
-        initial={{ display: 'none' }}
-        animate={isOpen ? 'open' : 'closed'}
-        exit={{ display: 'none' }}
-        variants={modal}
-      >
-        <header className="flex w-full justify-between text-gray-900 text-xl font-medium mb-8">
-          <h1>{title}</h1>
-          <span className="close-icon" onClick={() => toggleOpen()}>
-            <div className="bar" />
-            <div className="bar" />
-          </span>
+    <ThemeProvider theme={light}>
+      <AnimateSharedLayout type="crossfade">
+        <Container
+          layout
+          initial={{ display: 'none' }}
+          animate={isOpen ? 'open' : 'closed'}
+          exit={{ display: 'none' }}
+          variants={modal}
+        >
+          <header className="flex w-full justify-between text-gray-900 text-xl font-medium mb-8">
+            <h1>{title}</h1>
+            <span className="close-icon" onClick={() => toggleOpen()}>
+              <div className="bar" />
+              <div className="bar" />
+            </span>
 
-          <div className="close-label">close</div>
-        </header>
-        {children}
-      </Container>
-    </AnimateSharedLayout>
+            <div className="close-label">close</div>
+          </header>
+          {children}
+        </Container>
+      </AnimateSharedLayout>
+    </ThemeProvider>
   );
 };
 

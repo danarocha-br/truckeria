@@ -7,7 +7,15 @@ import { AiFillExclamationCircle } from 'react-icons/ai';
 import { Container, Wrapper, Error } from './styles';
 import Spinner from '../Spinner';
 
-const TextInput = ({ label, id, icon: Icon, disabled, isLoading, ...rest }) => {
+const TextInput = ({
+  label,
+  id,
+  icon: Icon,
+  disabled,
+  isLoading,
+  isLight,
+  ...rest
+}) => {
   /**
    * Formik
    */
@@ -40,6 +48,7 @@ const TextInput = ({ label, id, icon: Icon, disabled, isLoading, ...rest }) => {
         disabled={disabled}
         hasError={meta.touched && meta.error}
         isLoading={isLoading}
+        isLight={isLight}
       >
         <input
           onFocus={handleInputFocus}
@@ -84,6 +93,7 @@ TextInput.propTypes = {
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   readOnly: PropTypes.bool,
+  isLight: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -91,6 +101,7 @@ TextInput.defaultProps = {
   disabled: false,
   readOnly: false,
   isLoading: false,
+  isLight: false,
 };
 
 export default TextInput;

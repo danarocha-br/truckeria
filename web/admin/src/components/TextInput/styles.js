@@ -32,10 +32,7 @@ export const Container = styled.span.attrs({
   z-index: 1;
   opacity: ${(props) => (props.disabled || props.loading ? '0.5' : '1')};
   height: 76px;
-/*
-  & + span {
-   ${tw`mt-4`}
-  } */
+
 
   &:hover:not([disabled])
    {
