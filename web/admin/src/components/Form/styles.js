@@ -4,11 +4,12 @@ import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
 
 export const Container = styled(Form)`
-  ${tw`flex flex-col w-full`};
+  ${tw`flex flex-col w-full h-full relative`};
 
   button {
     ${breakpoint('tablet')`
-      ${tw`absolute bottom-0`}
+      ${tw`absolute w-full`};
+      bottom: 40px;
   `}
   }
 `;

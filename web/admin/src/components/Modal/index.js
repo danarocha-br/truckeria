@@ -8,7 +8,7 @@ const modal = {
   open: {
     opacity: 1,
     x: 0,
-    width: '35%',
+    zIndex: 99,
     transition: {
       type: 'spring',
       damping: 13,
@@ -17,8 +17,9 @@ const modal = {
   },
   closed: {
     opacity: 0,
-    x: 500,
     width: 0,
+    x: 500,
+    zIndex: -1,
     transition: {
       delay: 0.5,
       type: 'spring',
@@ -28,17 +29,17 @@ const modal = {
   },
 };
 
-const Modal = ({ isOpen, toggleOpen, title }) => {
+const Modal = ({ isOpen, toggleOpen, title, children }) => {
   return (
     <AnimateSharedLayout type="crossfade">
       <Container
         layout
-        initial="closed"
+        initial={{ display: 'none' }}
         animate={isOpen ? 'open' : 'closed'}
-        exit={{ opacity: 0 }}
+        exit={{ display: 'none' }}
         variants={modal}
       >
-        <header className="flex w-full justify-between text-gray-900 text-xl font-medium py-10 px-8">
+        <header className="flex w-full justify-between text-gray-900 text-xl font-medium mb-8">
           <h1>{title}</h1>
           <span className="close-icon" onClick={() => toggleOpen()}>
             <div className="bar" />
@@ -47,6 +48,7 @@ const Modal = ({ isOpen, toggleOpen, title }) => {
 
           <div className="close-label">close</div>
         </header>
+        {children}
       </Container>
     </AnimateSharedLayout>
   );
@@ -56,6 +58,10 @@ Modal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default Modal;

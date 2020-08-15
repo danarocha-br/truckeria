@@ -77,7 +77,7 @@ const TextInput = ({ label, id, icon: Icon, disabled, isLoading, ...rest }) => {
 TextInput.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   type: PropTypes.string,
   icon: PropTypes.func,
   placeholder: PropTypes.string,

@@ -9,14 +9,14 @@ import ScheduleItem from '../../components/List/ScheduleItem';
 import Calendar from '../../components/Calendar';
 import Button from '../../components/Button';
 import { listGroup } from '../../components/List/animations';
-import Modal from '../../components/Modal';
+import NewScheduleModal from './NewSchedule';
 
 const Schedule = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
 
   return (
     <>
-      <Modal isOpen={isOpen} toggleOpen={toggleOpen} title="Add new Schedule" />
+      <NewScheduleModal isOpen={isOpen} toggleOpen={toggleOpen} />
       <DefaultLayout>
         <PanelLeft>
           <Header>
