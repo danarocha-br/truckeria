@@ -16,30 +16,6 @@ import { auth, createUserProfileDocument } from '../config/Firebase/utils';
 const Routes = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  let authListener = null;
-
-  useEffect(() => {
-    authListener = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data(),
-            },
-          });
-        });
-      }
-      setCurrentUser({ currentUser: userAuth });
-    });
-
-    return () => {
-      authListener();
-    };
-  }, []);
-
   return (
     <AnimatePresence exitBeforeEnter>
       <Switch>

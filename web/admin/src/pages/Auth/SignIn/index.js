@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 
@@ -11,7 +12,10 @@ import Link from '../../../components/Link';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 
-import { signInWithGoogle } from '../../../config/Firebase/utils';
+import {
+  googleSignInRequest,
+  emailSignInRequest,
+} from '../../../store/modules/auth/actions';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -23,6 +27,16 @@ const SignInSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+
+  const handleGoogleSignIn = () => {
+    return dispatch(googleSignInRequest());
+  };
+
+  const handleEmailSignIn = (values) => {
+    return dispatch(emailSignInRequest(values));
+  };
+
   const initialValues = { email: '', password: '' };
 
   return (
@@ -39,7 +53,7 @@ const SignIn = () => {
             initialValues={initialValues}
             validationSchema={SignInSchema}
             onSubmit={(values, actions) => {
-              // handleSubmit(values);
+              handleEmailSignIn(values);
               // actions.setSubmitting(false);
             }}
           >
@@ -63,7 +77,7 @@ const SignIn = () => {
                 label="Sign In With Google"
                 type="button"
                 secondary
-                onClick={signInWithGoogle}
+                onClick={handleGoogleSignIn}
               />
 
               <Link to="/forgot-password" label="Forgot my password" />

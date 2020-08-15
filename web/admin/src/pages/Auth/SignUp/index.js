@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { AnimatedContainer, Content, Background } from '../styles';
 import AuthLayout from '../../_layouts/auth';
@@ -11,6 +12,8 @@ import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
 import Link from '../../../components/Link';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
+
+import { signUpRequest } from '../../../store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -25,6 +28,12 @@ const RegistrationSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
+  const handleSignUp = (values) => {
+    return dispatch(signUpRequest(values));
+  };
+
   const initialValues = { name: '', email: '', password: '' };
 
   return (
@@ -39,46 +48,44 @@ const SignUp = () => {
         <Content>
           <Logo className="logo" />
           <h1>Welcome back!</h1>
-
           <Formik
             initialValues={initialValues}
             validationSchema={RegistrationSchema}
             onSubmit={(values) => {
-              // handleSubmit(values);
+              handleSignUp(values);
             }}
-            render={() => (
-              <Form>
-                <TextInput
-                  icon={AiOutlineUser}
-                  name="name"
-                  type="text"
-                  label="Your full name"
-                />
-                <TextInput
-                  icon={AiOutlineMail}
-                  name="email"
-                  type="email"
-                  label="Your e-mail"
-                />
-                <TextInput
-                  icon={AiOutlineLock}
-                  name="password"
-                  type="password"
-                  label="Your password"
-                />
+          >
+            <Form>
+              <TextInput
+                icon={AiOutlineUser}
+                name="name"
+                type="text"
+                label="Your full name"
+              />
+              <TextInput
+                icon={AiOutlineMail}
+                name="email"
+                type="email"
+                label="Your e-mail"
+              />
+              <TextInput
+                icon={AiOutlineLock}
+                name="password"
+                type="password"
+                label="Your password"
+              />
 
-                {/* {authErrors && <p>{authErrors}</p>} */}
+              {/* {authErrors && <p>{authErrors}</p>} */}
 
-                <Button label="Create my account" />
-                <Button
-                  label="Sign Up With Google"
-                  type="button"
-                  secondary
-                  onClick={() => 'clicked'}
-                />
-              </Form>
-            )}
-          />
+              <Button label="Create my account" />
+              <Button
+                label="Sign Up With Google"
+                type="button"
+                secondary
+                onClick={() => 'clicked'}
+              />
+            </Form>
+          </Formik>
           <p className="disclaimer">
             By signing up, I agree to Truckeria's{' '}
             <RouterLink to="/terms-and-conditions">

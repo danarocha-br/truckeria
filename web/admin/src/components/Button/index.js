@@ -74,7 +74,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   /** Makes button as secondary type, ghost button */
   secondary: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
 
 export default Button;
