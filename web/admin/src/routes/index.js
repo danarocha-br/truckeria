@@ -11,21 +11,32 @@ import Menu from '../pages/Menu';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import FoodTruckSetup from '../pages/Auth/FoodTruckSetup';
 
-import { auth } from '../config/Firebase/utils';
+import { auth, createUserProfileDocument } from '../config/Firebase/utils';
 
 const Routes = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
-  let unsubscribeFromAuth = null;
+  let authListener = null;
 
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      setCurrentUser({ currentUser: user });
-      console.log(user);
+    authListener = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
+      }
+      setCurrentUser({ currentUser: userAuth });
     });
 
     return () => {
-      unsubscribeFromAuth();
+      authListener();
     };
   }, []);
 
