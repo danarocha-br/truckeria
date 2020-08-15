@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { ActionTypes } from './types.ts';
+import ActionTypes from './types';
 
 const INITIAL_STATE = { currentUser: null, error: null, loading: false };
 

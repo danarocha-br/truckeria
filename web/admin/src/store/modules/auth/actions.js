@@ -1,4 +1,4 @@
-import { ActionTypes } from './types.ts';
+import ActionTypes from './types';
 
 export function googleSignInRequest() {
   return {

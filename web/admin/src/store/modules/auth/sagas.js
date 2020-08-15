@@ -1,63 +1,103 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import history from '../../../services/history';
-import { ActionTypes } from './types.ts';
+import ActionTypes from './types';
+import { reduxSagaFirebase } from '../../../services/Firebase';
 import {
   auth,
   googleProvider,
-  createUserProfileDocument,
-} from '../../../config/Firebase/utils';
+  firestore,
+} from '../../../services/Firebase/utils';
 import { signInSuccess, signFailure, signUpSuccess } from './actions';
 
-export function* getSnapshotFromUserAuth(userAuth, additionalData) {
+function* createUserProfileDocument({ userAuth, additionalData = {} }) {
+  if (!userAuth) return;
+
+  const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  const snapShot = yield call(
+    reduxSagaFirebase.firestore.getDocument,
+    `users/${userAuth.uid}`
+  );
+
+  if (!snapShot.exists) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      yield call(
+        reduxSagaFirebase.firestore.setDocument,
+        `users/${userAuth.uid}`,
+        {
+          displayName,
+          email,
+          createdAt,
+          ...additionalData,
+        }
+      );
+    } catch (error) {
+      console.log('error creating user', error.message);
+    }
+  }
+
+  return userRef;
+}
+
+function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
-    const userRef = yield call(
-      createUserProfileDocument,
-      userAuth,
-      additionalData
+    yield call(createUserProfileDocument, {
+      userAuth: user,
+      additionalData,
+    });
+
+    const userSnapshot = yield call(
+      reduxSagaFirebase.firestore.getDocument,
+      `users/${user.uid}`
     );
-    const userSnapshot = yield userRef.get();
 
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
 
     history.push('/schedule');
   } catch (error) {
     yield put(signFailure(error));
+    console.log(error);
   }
 }
 
-export function* signInWithGoogle() {
+function* signInWithGoogle() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    yield getSnapshotFromUserAuth(user);
+    yield call(getSnapshotFromUserAuth, { user });
   } catch (error) {
     yield put(signFailure(error));
     console.log(error);
   }
 }
 
-export function* signInWithEmail({ payload }) {
+function* signInWithEmail({ payload }) {
   const { email, password } = payload;
 
   try {
-    const { user } = yield auth.signInWithEmailAndPassword(email, password);
-    yield getSnapshotFromUserAuth(user);
+    const { user } = yield call(
+      reduxSagaFirebase.auth.signInWithEmailAndPassword,
+      email,
+      password
+    );
+    // yield getSnapshotFromUserAuth(user);
   } catch (error) {
     yield put(signFailure(error));
     console.log(error);
   }
 }
 
-function* signUpWithEmail({ payload: { email, password, name } }) {
+function* signUpWithEmail({ payload: { email, password, displayName } }) {
   try {
-    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-
-    yield put(
-      signUpSuccess({
-        user,
-        additionalData: { displayName: name },
-      })
+    const { user } = yield call(
+      reduxSagaFirebase.auth.createUserWithEmailAndPassword,
+      email,
+      password
     );
+
+    yield put(signUpSuccess({ user, additionalData: { displayName } }));
 
     history.push('/schedule');
   } catch (error) {

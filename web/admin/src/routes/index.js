@@ -11,8 +11,6 @@ import Menu from '../pages/Menu';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import FoodTruckSetup from '../pages/Auth/FoodTruckSetup';
 
-import { auth, createUserProfileDocument } from '../config/Firebase/utils';
-
 const Routes = () => {
   const [currentUser, setCurrentUser] = useState(null);
 

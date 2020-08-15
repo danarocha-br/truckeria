@@ -16,7 +16,7 @@ import Button from '../../../components/Button';
 import { signUpRequest } from '../../../store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
-  name: Yup.string()
+  displayName: Yup.string()
     .required('Please insert your full name.')
     .min(3, 'Name must have at least 3 characters.'),
   email: Yup.string()
@@ -34,7 +34,7 @@ const SignUp = () => {
     return dispatch(signUpRequest(values));
   };
 
-  const initialValues = { name: '', email: '', password: '' };
+  const initialValues = { displayName: '', email: '', password: '' };
 
   return (
     <AuthLayout>
@@ -58,7 +58,7 @@ const SignUp = () => {
             <Form>
               <TextInput
                 icon={AiOutlineUser}
-                name="name"
+                name="displayName"
                 type="text"
                 label="Your full name"
               />
