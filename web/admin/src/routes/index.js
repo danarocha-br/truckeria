@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -11,7 +11,24 @@ import Menu from '../pages/Menu';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import FoodTruckSetup from '../pages/Auth/FoodTruckSetup';
 
+import { auth } from '../config/Firebase/utils';
+
 const Routes = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  let unsubscribeFromAuth = null;
+
+  useEffect(() => {
+    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+      setCurrentUser({ currentUser: user });
+      console.log(user);
+    });
+
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, []);
+
   return (
     <AnimatePresence exitBeforeEnter>
       <Switch>

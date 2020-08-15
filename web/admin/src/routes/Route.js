@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
 const RouteWrapper = ({ isPrivate = true, component: Component, ...rest }) => {
-  const authenticated = true;
+  const currentUser = false;
 
-  if (!authenticated && isPrivate) {
+  if (!currentUser && isPrivate) {
     return <Redirect to="/login" />;
   }
 
-  if (authenticated && !isPrivate) {
+  if (currentUser && !isPrivate) {
     return <Redirect to="/" />;
   }
 

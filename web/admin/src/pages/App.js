@@ -12,7 +12,7 @@ import GlobalStyle from '../styles/global';
 
 import store from '../store';
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -23,6 +23,6 @@ function App() {
       </BrowserRouter>
     </Provider>
   );
-}
+};
 
 export default App;

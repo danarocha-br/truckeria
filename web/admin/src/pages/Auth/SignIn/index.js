@@ -11,6 +11,8 @@ import Link from '../../../components/Link';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 
+import { signInWithGoogle } from '../../../config/Firebase/utils';
+
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
     .email('Please provide a valid e-mail.')
@@ -33,7 +35,6 @@ const SignIn = () => {
         <Content>
           <Logo className="logo" />
           <h1>Welcome back!</h1>
-
           <Formik
             initialValues={initialValues}
             validationSchema={SignInSchema}
@@ -41,34 +42,33 @@ const SignIn = () => {
               // handleSubmit(values);
               // actions.setSubmitting(false);
             }}
-            render={() => (
-              <Form>
-                <TextInput
-                  icon={AiOutlineMail}
-                  name="email"
-                  type="email"
-                  label="Your e-mail"
-                />
-                <TextInput
-                  icon={AiOutlineLock}
-                  name="password"
-                  type="password"
-                  label="Your password"
-                />
+          >
+            <Form>
+              <TextInput
+                icon={AiOutlineMail}
+                name="email"
+                type="email"
+                label="Your e-mail"
+              />
+              <TextInput
+                icon={AiOutlineLock}
+                name="password"
+                type="password"
+                label="Your password"
+              />
 
-                <Button type="submit" label="Sign In" />
+              <Button type="submit" label="Sign In" />
 
-                <Button
-                  label="Sign In With Google"
-                  type="button"
-                  secondary
-                  onClick={() => 'clicked'}
-                />
+              <Button
+                label="Sign In With Google"
+                type="button"
+                secondary
+                onClick={signInWithGoogle}
+              />
 
-                <Link to="/forgot-password" label="Forgot my password" />
-              </Form>
-            )}
-          />
+              <Link to="/forgot-password" label="Forgot my password" />
+            </Form>
+          </Formik>
         </Content>
       </AnimatedContainer>
 
