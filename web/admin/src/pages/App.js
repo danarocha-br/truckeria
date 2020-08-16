@@ -5,11 +5,10 @@ import { Provider } from 'react-redux';
 import 'firebase/auth';
 import 'firebase/firestore';
 import { PersistGate } from 'redux-persist/integration/react';
-import {
-  ReactReduxFirebaseProvider,
-  firebaseReducer,
-} from 'react-redux-firebase';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
+import { useSelector } from 'react-redux';
+import { isLoaded } from 'react-redux-firebase';
 
 import '../config/ReactotronConfig';
 import firebase from '../services/Firebase';
@@ -18,6 +17,7 @@ import Routes from '../routes';
 import history from '../services/history';
 import dark from '../styles/tokens/dark';
 import GlobalStyle from '../styles/global';
+import SplashScreen from '../components/SplashScreen';
 
 import { store, persistor } from '../store';
 
@@ -35,16 +35,24 @@ const rrfProps = {
   createFirestoreInstance,
 };
 
+function AuthIsLoaded({ children }) {
+  const auth = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(auth)) return <SplashScreen />;
+  return children;
+}
+
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ReactReduxFirebaseProvider {...rrfProps}>
           <BrowserRouter>
-            <ThemeProvider theme={dark}>
-              <GlobalStyle />
-              <Routes history={history} />
-            </ThemeProvider>
+            <AuthIsLoaded>
+              <ThemeProvider theme={dark}>
+                <GlobalStyle />
+                <Routes history={history} />
+              </ThemeProvider>
+            </AuthIsLoaded>
           </BrowserRouter>
         </ReactReduxFirebaseProvider>
       </PersistGate>
