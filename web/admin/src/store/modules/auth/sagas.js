@@ -1,6 +1,7 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 
 import history from '../../../services/history';
+import firebase from '../../../services/Firebase';
 import ActionTypes from './types';
 import {
   auth,
@@ -9,6 +10,45 @@ import {
   createUserProfileDocument,
 } from '../../../services/Firebase/utils';
 import { signInSuccess, signFailure, signUpSuccess } from './actions';
+
+export function* getSnapshotFromUserAuth(user, additionalData = {}) {
+  try {
+    const userRef = yield call(createUserProfileDocument, {
+      userAuth: user,
+      additionalData,
+    });
+    const snapshot = yield userRef.get();
+    yield put(
+      signInSuccess({
+        id: snapshot.id,
+        ...snapshot.data(),
+      })
+    );
+  } catch (err) {
+    // console.log(err);
+  }
+}
+
+export function* signUpWithEmail({
+  payload: { displayName, email, password },
+}) {
+  try {
+    firebase.createUser({ email, password });
+
+    const createdAt = new Date();
+    const role = 'admin';
+
+    firebase.updateProfile({
+      displayName: displayName,
+      createdAt,
+      role,
+    });
+    history.push('/schedule');
+    yield put(signUpSuccess({ user: { email, displayName, createdAt, role } }));
+  } catch (error) {
+    yield put(signFailure(error));
+  }
+}
 
 // function* createUserProfileDocument({ userAuth, additionalData = {} }) {
 //   if (!userAuth) return;
@@ -140,6 +180,6 @@ import { signInSuccess, signFailure, signUpSuccess } from './actions';
 export default all([
   //  takeLatest(ActionTypes.GOOGLE_SIGN_IN_REQUEST, signInWithGoogle),
   //  takeLatest(ActionTypes.EMAIL_SIGN_IN_REQUEST, signInWithEmail),
-  //  takeLatest(ActionTypes.SIGN_UP_REQUEST, signUpWithEmail),
+  takeLatest(ActionTypes.SIGN_UP_REQUEST, signUpWithEmail),
   //  takeLatest(ActionTypes.SIGN_UP_SUCCESS, signInAfterSignUp),
 ]);
