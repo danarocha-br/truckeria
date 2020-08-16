@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { AiOutlineMail } from 'react-icons/ai';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useFirebase } from 'react-redux-firebase';
 
 import { Content, AnimatedContainer } from '../styles';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 import Link from '../../../components/Link';
 import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
+import ErrorMessage from '../../../components/Errors/ErrorMessage';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -16,31 +19,25 @@ const SignInSchema = Yup.object().shape({
     .required('E-mail is required'),
 });
 
-const ForgotPassword = ({ history }) => {
+const ForgotPassword = () => {
+  const authError = useSelector((state) => state.firebase.authError);
+  const firebase = useFirebase();
+  let history = useHistory();
+
   const initialValues = { email: '' };
-  // const [errors, setErrors] = useState<string[]>([]);
 
-  // const handleSubmit = async (values: FormValues) => {
-  //   const { email } = values;
+  const handleSubmit = useCallback(async (values) => {
+    const { email } = values;
 
-  //   const config = {
-  //     url: 'http://localhost:3000/login',
-  //   };
+    const config = {
+      url: 'http://localhost:3000/login',
+    };
 
-  //   try {
-  //     await auth
-  //       .sendPasswordResetEmail(email, config)
-  //       .then(() => {
-  //         history.push('/login');
-  //       })
-  //       .catch(() => {
-  //         const err = ['E-mail not found. Please try again.'];
-  //         setErrors(err);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+    try {
+      await firebase.resetPassword(email, config);
+      history.push('/login');
+    } catch (error) {}
+  }, []);
 
   return (
     <AnimatedContainer>
@@ -52,7 +49,7 @@ const ForgotPassword = ({ history }) => {
           initialValues={initialValues}
           validationSchema={SignInSchema}
           onSubmit={(values, actions) => {
-            // handleSubmit(values);
+            handleSubmit(values);
             // actions.setSubmitting(false);
           }}
           render={() => (
@@ -63,6 +60,8 @@ const ForgotPassword = ({ history }) => {
                 type="email"
                 label="Your e-mail"
               />
+
+              {authError && <ErrorMessage message={authError.message} />}
 
               <Button label="recover password" />
 
