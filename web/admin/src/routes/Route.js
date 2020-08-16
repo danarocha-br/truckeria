@@ -7,7 +7,7 @@ import { isLoaded, isEmpty } from 'react-redux-firebase';
 const RouteWrapper = ({ isPrivate = true, component: Component, ...rest }) => {
   const auth = useSelector((state) => state.firebase.auth);
 
-  if (!isLoaded(auth) && !isEmpty(auth) && isPrivate) {
+  if (!isLoaded(auth) && isEmpty(auth) && isPrivate) {
     return <Redirect to="/login" />;
   }
 

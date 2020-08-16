@@ -6,6 +6,7 @@ import Route from './Route';
 
 import SignIn from '../pages/Auth/SignIn';
 import SignUp from '../pages/Auth/SignUp';
+import Dashboard from '../pages/Dashboard';
 import Schedule from '../pages/Schedule';
 import Menu from '../pages/Menu';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
@@ -17,7 +18,7 @@ const Routes = () => {
   return (
     <AnimatePresence exitBeforeEnter>
       <Switch>
-        <Route path="/login" component={SignIn} />
+        <Route path="/login" exact component={SignIn} />
         <Route path="/register" component={SignUp} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route
@@ -27,7 +28,8 @@ const Routes = () => {
         />
         <Route path="/schedule" component={Schedule} isPrivate />
         <Route path="/menu" component={Menu} isPrivate />
-        <Route path="/" exact component={() => <h1>404</h1>} />
+        <Route path="/" exact component={Dashboard} isPrivate />
+        {/* <Route path="/" exact component={() => <h1>404</h1>} /> */}
       </Switch>
     </AnimatePresence>
   );

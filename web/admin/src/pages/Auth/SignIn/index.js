@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as Yup from 'yup';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
+import { isLoaded } from 'react-redux-firebase';
 
 import { AnimatedContainer, Content, Background } from '../styles';
 import AuthLayout from '../../_layouts/auth';
@@ -11,6 +12,7 @@ import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
 import Link from '../../../components/Link';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
+import ErrorMessage from '../../../components/Errors/ErrorMessage';
 
 import {
   googleSignInRequest,
@@ -28,14 +30,23 @@ const SignInSchema = Yup.object().shape({
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.firebase.auth);
+  const authError = useSelector((state) => state.firebase.authError);
 
-  const handleGoogleSignIn = () => {
-    return dispatch(googleSignInRequest());
-  };
+  const handleGoogleSignIn = useCallback(async () => {
+    await dispatch(googleSignInRequest());
+  });
 
-  const handleEmailSignIn = (values) => {
-    return dispatch(emailSignInRequest(values));
-  };
+  const handleEmailSignIn = useCallback(
+    async (values) => {
+      try {
+        await dispatch(emailSignInRequest(values));
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, emailSignInRequest]
+  );
 
   const initialValues = { email: '', password: '' };
 
@@ -63,21 +74,30 @@ const SignIn = () => {
                 name="email"
                 type="email"
                 label="Your e-mail"
+                disabled={!isLoaded(auth)}
               />
               <TextInput
                 icon={AiOutlineLock}
                 name="password"
                 type="password"
                 label="Your password"
+                disabled={!isLoaded(auth)}
               />
 
-              <Button type="submit" label="Sign In" />
+              {authError && <ErrorMessage message={authError.message} />}
+
+              <Button
+                type="submit"
+                label="Sign In"
+                isLoading={!isLoaded(auth)}
+              />
 
               <Button
                 label="Sign In With Google"
                 type="button"
                 secondary
                 onClick={handleGoogleSignIn}
+                isLoading={!isLoaded(auth)}
               />
 
               <Link to="/forgot-password" label="Forgot my password" />

@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import { Link as RouterLink } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
 import { AnimatedContainer, Content, Background } from '../styles';
 import AuthLayout from '../../_layouts/auth';
+import { isLoaded } from 'react-redux-firebase';
 
 import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
 import Link from '../../../components/Link';
 import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
+import ErrorMessage from '../../../components/Errors/ErrorMessage';
 
-import { signUpRequest } from '../../../store/modules/auth/actions';
+import {
+  signUpRequest,
+  googleSignInRequest,
+} from '../../../store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
   displayName: Yup.string()
@@ -29,10 +33,23 @@ const RegistrationSchema = Yup.object().shape({
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.firebase.auth);
+  const authError = useSelector((state) => state.firebase.authError);
 
-  const handleSignUp = (values) => {
-    return dispatch(signUpRequest(values));
-  };
+  const handleSignUp = useCallback(
+    async (values) => {
+      try {
+        await dispatch(signUpRequest(values));
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, signUpRequest]
+  );
+
+  const handleGoogleSignUp = useCallback(async () => {
+    await dispatch(googleSignInRequest());
+  });
 
   const initialValues = { displayName: '', email: '', password: '' };
 
@@ -61,28 +78,31 @@ const SignUp = () => {
                 name="displayName"
                 type="text"
                 label="Your full name"
+                disabled={!isLoaded(auth)}
               />
               <TextInput
                 icon={AiOutlineMail}
                 name="email"
                 type="email"
                 label="Your e-mail"
+                disabled={!isLoaded(auth)}
               />
               <TextInput
                 icon={AiOutlineLock}
                 name="password"
                 type="password"
                 label="Your password"
+                disabled={!isLoaded(auth)}
               />
+              {authError && <ErrorMessage message={authError.message} />}
 
-              {/* {authErrors && <p>{authErrors}</p>} */}
-
-              <Button label="Create my account" />
+              <Button label="Create my account" isLoading={!isLoaded(auth)} />
               <Button
                 label="Sign Up With Google"
                 type="button"
                 secondary
-                onClick={() => 'clicked'}
+                onClick={handleGoogleSignUp}
+                isLoading={!isLoaded(auth)}
               />
             </Form>
           </Formik>

@@ -6,7 +6,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
+import { createFirestoreInstance } from 'redux-firestore';
 import { useSelector } from 'react-redux';
 import { isLoaded } from 'react-redux-firebase';
 
@@ -20,6 +20,8 @@ import GlobalStyle from '../styles/global';
 import SplashScreen from '../components/SplashScreen';
 
 import { store, persistor } from '../store';
+
+firebase.firestore();
 
 const rrfConfig = {
   userProfile: 'users',
@@ -47,12 +49,12 @@ const App = () => {
       <PersistGate persistor={persistor}>
         <ReactReduxFirebaseProvider {...rrfProps}>
           <BrowserRouter>
-            <AuthIsLoaded>
-              <ThemeProvider theme={dark}>
-                <GlobalStyle />
-                <Routes history={history} />
-              </ThemeProvider>
-            </AuthIsLoaded>
+            {/* <AuthIsLoaded> */}
+            <ThemeProvider theme={dark}>
+              <GlobalStyle />
+              <Routes history={history} />
+            </ThemeProvider>
+            {/* </AuthIsLoaded> */}
           </BrowserRouter>
         </ReactReduxFirebaseProvider>
       </PersistGate>
