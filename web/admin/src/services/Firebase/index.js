@@ -6,10 +6,11 @@ import ReduxSagaFirebase from 'redux-saga-firebase';
 
 import config from './firebaseConfig';
 
-const firebaseConfig = firebase.initializeApp({
+const firebaseConfig = {
   ...config,
-});
+};
 // Initialize Firebase
-export const reduxSagaFirebase = new ReduxSagaFirebase(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+firebase.firestore();
 
 export default firebase;

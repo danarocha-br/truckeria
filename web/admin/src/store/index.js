@@ -1,3 +1,4 @@
+import { promiseMiddleware } from '@adobe/redux-saga-promise';
 import createSagaMiddleware from 'redux-saga';
 import createStore from './createStore';
 import { persistStore } from 'redux-persist';
@@ -15,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware({
   sagaMonitor,
 });
 
-const middlewares = [sagaMiddleware];
+const middlewares = [promiseMiddleware, sagaMiddleware];
 
 const store = createStore(persistReducers(rootReducer), middlewares);
 const persistor = persistStore(store);
