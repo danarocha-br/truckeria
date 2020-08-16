@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { AnimatedContainer, Content, Background } from '../styles';
@@ -35,11 +35,13 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.firebase.auth);
   const authError = useSelector((state) => state.firebase.authError);
+  let history = useHistory();
 
   const handleSignUp = useCallback(
     async (values) => {
       try {
         await dispatch(signUpRequest(values));
+        history.push('/create-foodtruck-account');
       } catch (error) {
         console.log(error);
       }
@@ -48,7 +50,13 @@ const SignUp = () => {
   );
 
   const handleGoogleSignUp = useCallback(async () => {
-    await dispatch(googleSignInRequest());
+    try {
+      await dispatch(googleSignInRequest());
+
+      history.push('/create-foodtruck-account');
+    } catch (error) {
+      console.log(error);
+    }
   });
 
   const initialValues = { displayName: '', email: '', password: '' };

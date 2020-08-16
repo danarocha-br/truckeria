@@ -1,6 +1,5 @@
 import { takeLatest, put, all } from 'redux-saga/effects';
 
-import history from '../../../services/history';
 import firebase from '../../../services/Firebase';
 import ActionTypes from './types';
 import { signInSuccess, signFailure, signUpSuccess } from './actions';
@@ -12,7 +11,6 @@ export function* signInWithGoogle() {
       type: 'popup',
     });
 
-    history.push('/');
     yield put(signInSuccess({ user: firebase.auth() }));
   } catch (error) {
     yield put(signFailure(error));
@@ -23,7 +21,6 @@ export function* signInWithEmail({ payload: { email, password } }) {
   try {
     firebase.login({ email, password });
 
-    history.push('/');
     yield put(signInSuccess({ user: firebase.auth() }));
   } catch (error) {
     yield put(signFailure(error));
@@ -42,7 +39,6 @@ export function* signUpWithEmail({
       { displayName, email, createdAt, role }
     );
 
-    history.push('/schedule');
     yield put(signUpSuccess({ user: { email, displayName, createdAt, role } }));
   } catch (error) {
     yield put(signFailure(error));

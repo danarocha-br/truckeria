@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import { isLoaded } from 'react-redux-firebase';
+import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer, Content, Background } from '../styles';
 import AuthLayout from '../../_layouts/auth';
@@ -32,15 +33,18 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.firebase.auth);
   const authError = useSelector((state) => state.firebase.authError);
+  let history = useHistory();
 
   const handleGoogleSignIn = useCallback(async () => {
     await dispatch(googleSignInRequest());
+    history.push('/');
   });
 
   const handleEmailSignIn = useCallback(
     async (values) => {
       try {
         await dispatch(emailSignInRequest(values));
+        history.push('/');
       } catch (error) {
         console.log(error);
       }

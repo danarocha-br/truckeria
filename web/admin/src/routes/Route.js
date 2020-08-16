@@ -1,30 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, useHistory, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { isLoaded, isEmpty } from 'react-redux-firebase';
 
-const RouteWrapper = ({ isPrivate = true, component: Component, ...rest }) => {
+function PrivateRoute({ children, ...rest }) {
   const auth = useSelector((state) => state.firebase.auth);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        isLoaded(auth) && !isEmpty(auth) ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
-  if (!isLoaded(auth) && isEmpty(auth) && isPrivate) {
-    return <Redirect to="/login" />;
-  }
-
-  if (isLoaded(auth) && !isEmpty(auth) && !isPrivate) {
-    return <Redirect to="/" />;
-  }
-
-  return <Route {...rest} component={Component} />;
+PrivateRoute.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 };
 
-RouteWrapper.propTypes = {
-  isPrivate: PropTypes.bool,
-  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-};
-
-RouteWrapper.defaultProps = {
-  isPrivate: false,
-};
-
-export default RouteWrapper;
+export default PrivateRoute;
