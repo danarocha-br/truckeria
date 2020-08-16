@@ -7,8 +7,6 @@ import 'firebase/firestore';
 import { PersistGate } from 'redux-persist/integration/react';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
 import { createFirestoreInstance } from 'redux-firestore';
-import { useSelector } from 'react-redux';
-import { isLoaded } from 'react-redux-firebase';
 
 import '../config/ReactotronConfig';
 import firebase from '../services/Firebase';
@@ -35,24 +33,16 @@ const rrfProps = {
   createFirestoreInstance,
 };
 
-function AuthIsLoaded({ children }) {
-  const auth = useSelector((state) => state.firebase.auth);
-  if (!isLoaded(auth)) return <SplashScreen />;
-  return children;
-}
-
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <ReactReduxFirebaseProvider {...rrfProps}>
           <BrowserRouter>
-            {/* <AuthIsLoaded> */}
             <ThemeProvider theme={dark}>
               <GlobalStyle />
               <Routes history={history} />
             </ThemeProvider>
-            {/* </AuthIsLoaded> */}
           </BrowserRouter>
         </ReactReduxFirebaseProvider>
       </PersistGate>

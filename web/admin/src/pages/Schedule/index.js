@@ -2,6 +2,7 @@ import React from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { motion, useCycle } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import { isLoaded } from 'react-redux-firebase';
 
 import DefaultLayout from '../_layouts/default';
 import { PanelLeft, PanelRight, Header } from '../_layouts/default/styles';
@@ -14,6 +15,7 @@ import NewScheduleModal from './NewSchedule';
 
 const Schedule = () => {
   const [isOpen, toggleOpen] = useCycle(false, true);
+  const auth = useSelector((state) => state.firebase.auth);
 
   return (
     <>
@@ -36,6 +38,7 @@ const Schedule = () => {
               key="id1"
               date="9:00-18:00, Monday, June 09 2020"
               address="767 5th Ave, New York"
+              isLoading={!isLoaded(auth)}
             />
           </motion.ul>
         </PanelLeft>
