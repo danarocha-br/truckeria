@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
+import { useSelector } from 'react-redux';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 import { FiFacebook, FiInstagram, FiGlobe, FiPhone } from 'react-icons/fi';
 
@@ -9,13 +11,6 @@ import Select from '../../../../components/Select';
 import Button from '../../../../components/Button';
 import Row from '../../../../components/Form/Row';
 import Upload from '../../../../components/Upload';
-
-const foodOptions = [
-  { value: 'Mexican', label: 'Mexican' },
-  { value: 'Burger', label: 'Burger' },
-  { value: 'Salad', label: 'Salad' },
-  { value: 'Vegan-friendly', label: 'Vegan-friendly' },
-];
 
 const SetupSchema = Yup.object().shape({
   truckName: Yup.string()
@@ -57,7 +52,13 @@ const handleSubmit = (values) => {
   );
 };
 
-function FormSetup() {
+const FormSetup = () => {
+  useFirestoreConnect([{ collection: 'cuisines' }]);
+  // const cuisines = useSelector((state) => state.firestore.cuisines);
+
+  // console.log(cuisines);
+  const foodOptions = [{ value: 'Mexican', label: 'Mexican' }];
+
   return (
     <Formik
       // initialValues={initialValues}
@@ -127,6 +128,6 @@ function FormSetup() {
       )}
     />
   );
-}
+};
 
 export default FormSetup;

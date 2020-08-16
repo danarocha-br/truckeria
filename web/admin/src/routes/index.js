@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -13,8 +13,6 @@ import ForgotPassword from '../pages/Auth/ForgotPassword';
 import FoodTruckSetup from '../pages/Auth/FoodTruckSetup';
 
 const Routes = () => {
-  const [currentUser, setCurrentUser] = useState(null);
-
   return (
     <AnimatePresence exitBeforeEnter>
       <Switch>

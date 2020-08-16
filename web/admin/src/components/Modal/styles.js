@@ -6,7 +6,7 @@ import breakpoint from 'styled-components-breakpoint';
 import colors from '../../styles/tokens/colors';
 
 export const Container = styled(motion.div)`
-  ${tw`h-full fixed right-0 py-10 px-8 flex`};
+  ${tw`h-full fixed right-0 py-10 px-8 flex flex-col`};
   background: white;
   z-index: 100;
   width: 100% !important;

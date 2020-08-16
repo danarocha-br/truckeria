@@ -37,7 +37,7 @@ const Modal = ({ isOpen, toggleOpen, title, children }) => {
       <AnimateSharedLayout type="crossfade">
         <Container
           layout
-          initial={{ display: 'none' }}
+          initial="closed"
           animate={isOpen ? 'open' : 'closed'}
           exit={{ display: 'none' }}
           variants={modal}

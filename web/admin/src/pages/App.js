@@ -21,8 +21,6 @@ import SplashScreen from '../components/SplashScreen';
 
 import { store, persistor } from '../store';
 
-firebase.firestore();
-
 const rrfConfig = {
   userProfile: 'users',
   attachAuthIsReady: true,
