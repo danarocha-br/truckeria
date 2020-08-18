@@ -16,9 +16,9 @@ const animateFromLeft = keyframes`
 `;
 
 export const AnimatedContainer = styled.div`
-  ${tw`flex flex-1 flex-col w-full h-screen`}
-  place-content: center;
+  ${tw`flex flex-1 flex-col w-full h-screen pt-5`};
   animation: ${animateFromLeft} 1s;
+  overflow: scroll;
 
   h1 {
     ${tw`mb-4 text-2xl font-bold`};
@@ -38,7 +38,7 @@ export const AnimatedContainer = styled.div`
   }
 
   .link {
-    ${tw`text-center mt-8`};
+    ${tw`text-center mb-5`};
     color: ${(props) => props.theme.colors.text};
 
     ${breakpoint('tablet')`
@@ -48,11 +48,21 @@ export const AnimatedContainer = styled.div`
 `;
 
 export const Content = styled.div`
-  ${tw`flex flex-1 flex-col items-center text-center w-full h-full`}
+  ${tw`flex flex-1 flex-col items-center text-center w-full`};
   place-content: center;
+
+  h1 {
+    ${tw`mt-5`};
+  }
 
   .disclaimer {
     ${tw`mb-8`};
+  }
+
+  .logo {
+    width: 216px !important;
+    height: 104px !important;
+    margin-bottom: 0px !important;
   }
 `;
 
@@ -61,7 +71,7 @@ export const Background = styled.div`
     flex: 1;
     background-size: cover;
     background: url(${SignInBck}) no-repeat center right;
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
   `}
 `;
