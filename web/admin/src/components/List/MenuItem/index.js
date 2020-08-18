@@ -14,7 +14,6 @@ const MenuItem = ({
   description,
   price,
   isActive,
-  key,
   isLoading,
 }) => {
   const theme = useContext(ThemeContext);
@@ -72,7 +71,7 @@ MenuItem.propTypes = {
   thumb: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   isActive: PropTypes.bool,
   isLoading: PropTypes.bool,
 };
