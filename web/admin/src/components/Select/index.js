@@ -74,6 +74,10 @@ const SelectInput = ({
       ...base,
       color: theme.form.text,
     }),
+    singleValue: (base) => ({
+      ...base,
+      color: theme.form.text,
+    }),
     multiValue: (provided, state, base) => ({
       ...provided,
       ...base,

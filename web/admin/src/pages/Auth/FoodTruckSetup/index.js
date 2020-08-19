@@ -8,12 +8,11 @@ import AuthLayout from '../../_layouts/auth';
 import Tag from '../../../components/Tag';
 import colors from '../../../styles/tokens/colors';
 
-const Map = ReactMapboxGl({
-  accessToken:
-    'pk.eyJ1IjoiZGFuYXJvY2hhIiwiYSI6ImNrZGlzaTFweDA4MzIzMG1yM3UwdnYzZHMifQ.G13p8kElAiH22j9iWz_FGA',
-});
-
 const FoodTruckSetup = () => {
+  const Map = ReactMapboxGl({
+    accessToken:
+      'pk.eyJ1IjoiZGFuYXJvY2hhIiwiYSI6ImNrZGlzaTFweDA4MzIzMG1yM3UwdnYzZHMifQ.G13p8kElAiH22j9iWz_FGA',
+  });
   return (
     <AuthLayout>
       <AnimatedContainer>

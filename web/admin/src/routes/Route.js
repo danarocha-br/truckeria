@@ -10,7 +10,7 @@ function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        isLoaded(auth) && !isEmpty(auth) ? (
+        !isLoaded(auth) && !isEmpty(auth) ? (
           children
         ) : (
           <Redirect

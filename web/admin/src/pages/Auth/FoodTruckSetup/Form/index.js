@@ -11,6 +11,7 @@ import Select from '../../../../components/Select';
 import Button from '../../../../components/Button';
 import Row from '../../../../components/Form/Row';
 import Upload from '../../../../components/Upload';
+import { States } from '../../../../services/states';
 
 const SetupSchema = Yup.object().shape({
   truckName: Yup.string()
@@ -20,113 +21,116 @@ const SetupSchema = Yup.object().shape({
     .max(5, 'You can select up to 5 cuisines.')
     .required('Please select at least one cuisine type.'),
   files: Yup.array(),
-  state: Yup.string().required('Please choose your state.'),
+  state: Yup.array().required('Please choose your state.'),
   city: Yup.string().required('Please choose your city.'),
 });
 
-const initialValues = {
-  files: [],
-  truckName: '',
-  cuisine: '',
-  state: '',
-  city: '',
-  phone: '',
-  website: '',
-  instagram: '',
-  facebook: '',
-};
-
-const handleSubmit = (values) => {
-  alert(
-    JSON.stringify(
-      {
-        files: values.files.map((file) => ({
-          fileName: file.name,
-          type: file.type,
-          size: `${file.size} bytes`,
-        })),
-      },
-      null,
-      2
-    )
-  );
-};
-
 const FormSetup = () => {
-  useFirestoreConnect([{ collection: 'cuisines' }]);
-  // const cuisines = useSelector((state) => state.firestore.cuisines);
+  const initialValues = {
+    // files: [],
+    truckName: '',
+    cuisine: '',
+    state: '',
+    city: '',
+    phone: '',
+    website: '',
+    instagram: '',
+    facebook: '',
+  };
 
-  // console.log(cuisines);
-  const foodOptions = [{ value: 'Mexican', label: 'Mexican' }];
+  useFirestoreConnect([{ collection: 'cuisines' }]);
+  const cuisines = useSelector((state) => state.firestore.ordered.cuisines);
+
+  const foodOptions =
+    cuisines &&
+    cuisines.map((cuisine) => {
+      return { value: cuisine.title, label: cuisine.title };
+    });
+
+  const handleSubmit = (values) => {
+    // alert(
+    //   JSON.stringify(
+    //     {
+    //       files: values.files.map((file) => ({
+    //         fileName: file.name,
+    //         type: file.type,
+    //         size: `${file.size} bytes`,
+    //       })),
+    //     },
+    //     null,
+    //     2
+    //   )
+    // );
+  };
 
   return (
     <Formik
-      // initialValues={initialValues}
+      initialValues={initialValues}
       validationSchema={SetupSchema}
       onSubmit={(values, actions) => {
         handleSubmit(values);
       }}
-      render={(values, setFieldValue) => (
-        <Form onSubmit={handleSubmit}>
-          <>
-            <h2>Basic Info</h2>
-            <Upload values={values} setFieldValue={setFieldValue}></Upload>
-            <TextInput
-              id="truckName"
-              name="truckName"
-              label="Your Food Truck Name"
-            />
+    >
+      <Form onSubmit={handleSubmit}>
+        <>
+          <h2>Basic Info</h2>
+          {/* <Upload values={values} setFieldValue={setFieldValue}></Upload> */}
+          <TextInput
+            id="truckName"
+            name="truckName"
+            label="Your Food Truck Name"
+          />
+          <Select
+            id="cuisine"
+            name="cuisine"
+            placeholder="Select Cuisine Type"
+            isMulti
+            options={foodOptions ? foodOptions : []}
+          />
+          <Row>
             <Select
-              id="cuisine"
-              name="cuisine"
-              placeholder="Select Cuisine Type"
-              isMulti
-              options={foodOptions}
+              id="state"
+              name="state"
+              placeholder="Select State"
+              options={States}
             />
-            <Row>
-              <Select id="state" name="state" placeholder="Select State" />
-              <Select id="city" name="city" placeholder="Select City" />
-            </Row>
+            <TextInput id="city" name="city" label="City" />
+          </Row>
 
-            <h2>Contact Info</h2>
+          <h2>Contact Info</h2>
+          <TextInput
+            id="phone"
+            name="phone"
+            label="Your Phone Number"
+            icon={FiPhone}
+          />
+          <TextInput
+            id="website"
+            name="website"
+            label="Your Website"
+            icon={FiGlobe}
+          />
+          <Row>
             <TextInput
-              id="phone"
-              name="phone"
-              label="Your Phone Number"
-              icon={FiPhone}
+              id="instagram"
+              name="instagram"
+              label="Instagram ID"
+              icon={FiInstagram}
             />
             <TextInput
-              id="website"
-              name="website"
-              label="Your Website"
-              icon={FiGlobe}
+              id="facebook"
+              name="facebook"
+              label="Facebook ID"
+              icon={FiFacebook}
             />
-            <Row>
-              <TextInput
-                id="instagram"
-                name="instagram"
-                label="Instagram ID"
-                icon={FiInstagram}
-              />
-              <TextInput
-                id="facebook"
-                name="facebook"
-                label="Facebook ID"
-                icon={FiFacebook}
-              />
-            </Row>
+          </Row>
 
-            <div className="py-8">
-              <Button
-                type="submit"
-                label="Continue"
-                onClick={() => 'clicked'}
-              />
-            </div>
-          </>
-        </Form>
-      )}
-    />
+          <div className="py-8">
+            <Button type="submit" label="Continue" onClick={() => 'clicked'} />
+          </div>
+        </>
+      </Form>
+    </Formik>
   );
 };
 
