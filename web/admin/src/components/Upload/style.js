@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
-import { opacify } from 'polished';
-import Dropzone from 'react-dropzone';
+import { opacify, transparentize } from 'polished';
 
 const getColor = (props) => {
   if (props.isDragAccept) {
@@ -32,4 +31,15 @@ export const Container = styled.section`
       ${tw`mb-5`}
     }
   }
+`;
+
+export const Thumb = styled.img`
+  ${tw`rounded-lg`};
+  max-height: 100px;
+`;
+
+export const InfoRejected = styled.p`
+  ${tw`w-full py-3 rounded-lg mt-4`};
+  background-color: ${(props) =>
+    transparentize('.7', props.theme.colors.error)};
 `;

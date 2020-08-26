@@ -9,10 +9,10 @@ import Tag from '../../../components/Tag';
 import colors from '../../../styles/tokens/colors';
 
 const FoodTruckSetup = () => {
-  const Map = ReactMapboxGl({
-    accessToken:
-      'pk.eyJ1IjoiZGFuYXJvY2hhIiwiYSI6ImNrZGlzaTFweDA4MzIzMG1yM3UwdnYzZHMifQ.G13p8kElAiH22j9iWz_FGA',
-  });
+  // const Map = ReactMapboxGl({
+  //   accessToken:
+  //     'pk.eyJ1IjoiZGFuYXJvY2hhIiwiYSI6ImNrZGlzaTFweDA4MzIzMG1yM3UwdnYzZHMifQ.G13p8kElAiH22j9iWz_FGA',
+  // });
   return (
     <AuthLayout>
       <AnimatedContainer>
@@ -40,7 +40,7 @@ const FoodTruckSetup = () => {
             <span>City</span>
           </p>
         </div>
-        <Map
+        {/* <Map
           style="mapbox://styles/mapbox/streets-v9"
           containerStyle={{
             height: '250px',
@@ -54,7 +54,7 @@ const FoodTruckSetup = () => {
           >
             <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
           </Layer>
-        </Map>
+        </Map> */}
         ;
       </PreviewContainer>
     </AuthLayout>
