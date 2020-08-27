@@ -33,13 +33,21 @@ export const Container = styled.section`
   }
 `;
 
-export const Thumb = styled.img`
-  ${tw`rounded-lg`};
-  max-height: 100px;
-`;
-
 export const InfoRejected = styled.p`
   ${tw`w-full py-3 rounded-lg mt-4`};
   background-color: ${(props) =>
     transparentize('.7', props.theme.colors.error)};
+`;
+
+export const Thumb = styled.div`
+  ${tw`bg-cover bg-center w-full rounded-lg`};
+  height: 150px;
+  background: ${(props) => `url(${props.src}) no-repeat`};
+  background-position: center center;
+  background-size: 100%;
+  transition: all 0.8s;
+
+  &:hover {
+    background-size: 120%;
+  }
 `;

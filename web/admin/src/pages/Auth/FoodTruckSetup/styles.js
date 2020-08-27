@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import tw from 'tailwind.macro';
 import breakpoint from 'styled-components-breakpoint';
 
-import Image from '../../../assets/sign-in-background.png';
 import colors from '../../../styles/tokens/colors';
 
 export const AnimatedContainer = styled.div`
@@ -80,7 +79,7 @@ export const PreviewContainer = styled.div`
 export const ProfileImg = styled.div`
   ${tw`bg-cover bg-center w-full rounded-lg`};
   height: 200px;
-  background: url(${Image}) no-repeat;
+  background: ${(props) => `url(${props.src}) no-repeat`};
   background-position: center center;
   background-size: 100%;
   transition: all 0.8s;

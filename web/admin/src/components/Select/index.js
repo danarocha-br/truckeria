@@ -13,6 +13,7 @@ const animatedComponents = makeAnimated();
 const SelectInput = ({
   label,
   id,
+  setFieldValue,
   icon: Icon,
   disabled,
   isLoading,
@@ -103,12 +104,41 @@ const SelectInput = ({
   /**
    * Formik
    */
-  const [, meta] = useField(rest);
+  const [field, meta, helpers] = useField(rest);
+
+  const { setValue, setTouched, setError } = helpers;
+
+  const getValue = () => {
+    if (options) {
+      return isMulti
+        ? options.filter((option) => field.value.indexOf(option.value) >= 0)
+        : options.find((option) => option.value === field.value);
+    } else {
+      return isMulti ? [] : '';
+    }
+  };
+
+  const handleOnChange = (option) => {
+    setTimeout(() =>
+      isMulti
+        ? setFieldValue(
+            field.name,
+            option.map((item) => item.value)
+          )
+        : helpers.setValue(option.value)
+    );
+    setTouched(true);
+    setError(undefined);
+  };
 
   return (
     <Wrapper className="c-input">
       <Select
+        name={field.name}
         closeMenuOnSelect={false}
+        value={getValue()}
+        onChange={handleOnChange}
+        onBlur={field.onBlur}
         styles={customStyles}
         components={animatedComponents}
         isMulti={isMulti}

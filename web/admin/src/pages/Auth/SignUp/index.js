@@ -80,39 +80,47 @@ const SignUp = () => {
               handleSignUp(values);
             }}
           >
-            <Form>
-              <TextInput
-                icon={AiOutlineUser}
-                name="displayName"
-                type="text"
-                label="Your full name"
-                disabled={!isLoaded(auth)}
-              />
-              <TextInput
-                icon={AiOutlineMail}
-                name="email"
-                type="email"
-                label="Your e-mail"
-                disabled={!isLoaded(auth)}
-              />
-              <TextInput
-                icon={AiOutlineLock}
-                name="password"
-                type="password"
-                label="Your password"
-                disabled={!isLoaded(auth)}
-              />
-              {authError && <ErrorMessage message={authError.message} />}
+            {({ dirty, isSubmitting }) => {
+              return (
+                <Form>
+                  <TextInput
+                    icon={AiOutlineUser}
+                    name="displayName"
+                    type="text"
+                    label="Your full name"
+                    disabled={!isLoaded(auth)}
+                  />
+                  <TextInput
+                    icon={AiOutlineMail}
+                    name="email"
+                    type="email"
+                    label="Your e-mail"
+                    disabled={!isLoaded(auth)}
+                  />
+                  <TextInput
+                    icon={AiOutlineLock}
+                    name="password"
+                    type="password"
+                    label="Your password"
+                    disabled={!isLoaded(auth)}
+                  />
+                  {authError && <ErrorMessage message={authError.message} />}
 
-              <Button label="Create my account" isLoading={!isLoaded(auth)} />
-              <Button
-                label="Sign Up With Google"
-                type="button"
-                secondary
-                onClick={handleGoogleSignUp}
-                isLoading={!isLoaded(auth)}
-              />
-            </Form>
+                  <Button
+                    label="Create my account"
+                    isLoading={!isLoaded(auth)}
+                  />
+                  <Button
+                    label="Sign Up With Google"
+                    type="button"
+                    secondary
+                    onClick={handleGoogleSignUp}
+                    isLoading={!isLoaded(auth)}
+                    disabled={!dirty || isSubmitting}
+                  />
+                </Form>
+              );
+            }}
           </Formik>
           <p className="disclaimer">
             By signing up, I agree to Truckeria's{' '}

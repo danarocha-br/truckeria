@@ -1,62 +1,73 @@
-import React from 'react';
-import { FiMapPin } from 'react-icons/fi';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
+import React, { useState } from 'react';
+import * as Yup from 'yup';
+import { Formik } from 'formik';
 
-import { AnimatedContainer, PreviewContainer, ProfileImg } from './styles';
+import { AnimatedContainer } from './styles';
 import Form from './Form';
+import Preview from './Preview';
 import AuthLayout from '../../_layouts/auth';
-import Tag from '../../../components/Tag';
-import colors from '../../../styles/tokens/colors';
 
 const FoodTruckSetup = () => {
-  // const Map = ReactMapboxGl({
-  //   accessToken:
-  //     'pk.eyJ1IjoiZGFuYXJvY2hhIiwiYSI6ImNrZGlzaTFweDA4MzIzMG1yM3UwdnYzZHMifQ.G13p8kElAiH22j9iWz_FGA',
-  // });
+  const SetupSchema = Yup.object().shape({
+    truckName: Yup.string()
+      .required('Please insert your food truck name.')
+      .min(3, 'Name must have at least 3 characters.'),
+    cuisine: Yup.array()
+      .min(1, 'Select at least one cuisine type.')
+      .of(
+        Yup.object()
+          .shape({
+            label: Yup.string(),
+            value: Yup.string(),
+          })
+          .nullable()
+      )
+      .max(5, 'You can select up to 5 cuisines.')
+      .required('Please select at least one cuisine type.'),
+    files: Yup.array(),
+    state: Yup.string().required('Please choose your state.'),
+    city: Yup.string().required('Please choose your city.'),
+  });
+
+  const initialValues = {
+    files: [],
+    truckName: '',
+    cuisine: [],
+    state: '',
+    city: '',
+    phone: '',
+    website: '',
+    instagram: '',
+    facebook: '',
+  };
+
+  const [formValues, setformValues] = useState(initialValues);
+
+  const handleSubmit = (values) => {};
+
   return (
     <AuthLayout>
       <AnimatedContainer>
         <div>
-          <h1>Your food truck's info</h1>
+          <h1>Your FoodTruck Info</h1>
           <p>Tell your customers as much as possibile about your food truck!</p>
 
-          <Form />
+          <Formik
+            initialValues={initialValues}
+            validationSchema={SetupSchema}
+            onSubmit={(values, actions) => {
+              handleSubmit(values);
+            }}
+          >
+            {({ values }) => {
+              setTimeout(() => setformValues(values), 0);
+              return <Form />;
+            }}
+          </Formik>
         </div>
       </AnimatedContainer>
 
-      <PreviewContainer>
-        <ProfileImg />
-        <h3>Food Truck Name</h3>
-        <div className="flex">
-          <Tag label="Vegan-friendly" />
-          <Tag label="Salad" />
-          <Tag label="Burger" />
-        </div>
-        <hr />
-        <div className="address">
-          <FiMapPin size="18" color={colors.gray900} />
-          <p>
-            <span>State</span>
-            <span>City</span>
-          </p>
-        </div>
-        {/* <Map
-          style="mapbox://styles/mapbox/streets-v9"
-          containerStyle={{
-            height: '250px',
-            width: '100%',
-          }}
-        >
-          <Layer
-            type="symbol"
-            id="marker"
-            layout={{ 'icon-image': 'marker-15' }}
-          >
-            <Feature coordinates={[-0.481747846041145, 51.3233379650232]} />
-          </Layer>
-        </Map> */}
-        ;
-      </PreviewContainer>
+      <Preview values={formValues} />
     </AuthLayout>
   );
 };

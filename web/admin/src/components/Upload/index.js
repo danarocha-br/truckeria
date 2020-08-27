@@ -6,13 +6,16 @@ import { Container, Thumb, InfoRejected } from './style';
 import colors from '../../styles/tokens/colors';
 
 const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
-  const onDrop = useCallback((acceptedFiles) => {
-    // do nothing if no files
-    if (acceptedFiles.length === 0) {
-      return;
-    }
-    setFieldValue(valueField, acceptedFiles);
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      // do nothing if no files
+      if (acceptedFiles.length === 0) {
+        return;
+      }
+      setFieldValue(valueField, acceptedFiles);
+    },
+    [setFieldValue, valueField]
+  );
 
   const {
     getRootProps,

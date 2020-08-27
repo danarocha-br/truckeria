@@ -72,40 +72,46 @@ const SignIn = () => {
               // actions.setSubmitting(false);
             }}
           >
-            <Form>
-              <TextInput
-                icon={AiOutlineMail}
-                name="email"
-                type="email"
-                label="Your e-mail"
-                disabled={!isLoaded(auth)}
-              />
-              <TextInput
-                icon={AiOutlineLock}
-                name="password"
-                type="password"
-                label="Your password"
-                disabled={!isLoaded(auth)}
-              />
+            {({ dirty, isSubmitting }) => {
+              return (
+                <Form>
+                  <TextInput
+                    icon={AiOutlineMail}
+                    name="email"
+                    type="email"
+                    label="Your e-mail"
+                    disabled={!isLoaded(auth)}
+                  />
+                  <TextInput
+                    icon={AiOutlineLock}
+                    name="password"
+                    type="password"
+                    label="Your password"
+                    disabled={!isLoaded(auth)}
+                  />
 
-              {authError && <ErrorMessage message={authError.message} />}
+                  {authError && <ErrorMessage message={authError.message} />}
 
-              <Button
-                type="submit"
-                label="Sign In"
-                isLoading={!isLoaded(auth)}
-              />
+                  <Button
+                    type="submit"
+                    label="Sign In"
+                    isLoading={!isLoaded(auth)}
+                    disabled={!dirty || isSubmitting}
+                  />
 
-              <Button
-                label="Sign In With Google"
-                type="button"
-                secondary
-                onClick={handleGoogleSignIn}
-                isLoading={!isLoaded(auth)}
-              />
+                  <Button
+                    label="Sign In With Google"
+                    type="button"
+                    secondary
+                    onClick={handleGoogleSignIn}
+                    isLoading={!isLoaded(auth)}
+                    disabled={!dirty || isSubmitting}
+                  />
 
-              <Link to="/forgot-password" label="Forgot my password" />
-            </Form>
+                  <Link to="/forgot-password" label="Forgot my password" />
+                </Form>
+              );
+            }}
           </Formik>
         </Content>
       </AnimatedContainer>
