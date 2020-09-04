@@ -95,8 +95,8 @@ const SignIn = () => {
                   <Button
                     type="submit"
                     label="Sign In"
-                    isLoading={!isLoaded(auth)}
-                    disabled={!dirty || isSubmitting}
+                    isLoading={isSubmitting}
+                    disabled={!dirty}
                   />
 
                   <Button
@@ -104,8 +104,8 @@ const SignIn = () => {
                     type="button"
                     secondary
                     onClick={handleGoogleSignIn}
-                    isLoading={!isLoaded(auth)}
-                    disabled={!dirty || isSubmitting}
+                    isLoading={isSubmitting}
+                    disabled={!dirty}
                   />
 
                   <Link to="/forgot-password" label="Forgot my password" />

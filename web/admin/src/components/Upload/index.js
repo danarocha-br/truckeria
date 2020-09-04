@@ -1,11 +1,14 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlinePicture } from 'react-icons/ai';
+import { useFirebase } from 'react-redux-firebase';
 
 import { Container, Thumb, InfoRejected } from './style';
 import colors from '../../styles/tokens/colors';
 
 const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
+  // const firebase = useFirebase();
+
   const onDrop = useCallback(
     (acceptedFiles) => {
       // do nothing if no files
@@ -16,6 +19,10 @@ const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
     },
     [setFieldValue, valueField]
   );
+
+  // const onFileDelete = useCallback((file, key) => {
+  //   return firebase.deleteFile(file.fullPath, `${filesPath}/${key}`);
+  // });
 
   const {
     getRootProps,
@@ -59,6 +66,10 @@ const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
       {isDragReject && (
         <InfoRejected>This file is not authorized.</InfoRejected>
       )}
+
+      {/* <button onClick={() => onFileDelete(values.files, values.key)}>
+        Delete File
+      </button> */}
     </Container>
   );
 };

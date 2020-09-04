@@ -91,7 +91,8 @@ const FormSetup = () => {
             type="submit"
             label="Continue"
             onClick={() => 'clicked'}
-            disabled={!dirty || isSubmitting}
+            isLoading={isSubmitting}
+            disabled={!dirty}
           />
         </div>
       </>

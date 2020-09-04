@@ -7,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 import { Container, List, Profile } from './styles';
+import { useFirestoreConnect } from 'react-redux-firebase';
 
 import NavItem from './NavItem';
 import ProfileImage from '../../assets/sign-in-background.png';
@@ -19,6 +20,13 @@ const Menu = () => {
 
   const profile = useSelector((state) => state.firebase.profile);
   const auth = useSelector((state) => state.firebase.auth);
+  useFirestoreConnect([
+    { collection: 'truckprofile' },
+    { collection: 'truckprofile', where: [['userId', '==', auth.uid]] },
+  ]);
+  const truckprofile = useSelector(
+    (state) => state.firestore.ordered.truckprofile
+  );
 
   const handleSignOut = useCallback(async () => {
     try {
@@ -31,7 +39,10 @@ const Menu = () => {
 
   return (
     <Container>
-      <Logo className="logo" />
+      <div>
+        <Logo className="logo" />
+        <a href="">name</a>
+      </div>
       <List>
         <NavItem
           title="overview"

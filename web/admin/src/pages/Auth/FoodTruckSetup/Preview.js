@@ -23,7 +23,7 @@ const Preview = ({ values }) => {
       <h3>{values.truckName ? values.truckName : 'Your Food Truck'}</h3>
       <div className="flex">
         {values.cuisine.length > 0 ? (
-          values.cuisine.map((type) => <Tag label={type} />)
+          values.cuisine.map((type) => <Tag label={type} key={type} />)
         ) : (
           <>
             <Tag label="food type" isEmpty />

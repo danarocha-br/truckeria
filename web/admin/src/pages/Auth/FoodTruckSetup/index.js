@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { useFirebase, useFirestore } from 'react-redux-firebase';
+import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer } from './styles';
 import Form from './Form';
 import Preview from './Preview';
 import AuthLayout from '../../_layouts/auth';
+import { truckProfileRequest } from '../../../store/modules/truckProfile/actions';
 
 const FoodTruckSetup = () => {
   const SetupSchema = Yup.object().shape({
@@ -25,8 +29,10 @@ const FoodTruckSetup = () => {
       .max(5, 'You can select up to 5 cuisines.')
       .required('Please select at least one cuisine type.'),
     files: Yup.array(),
-    state: Yup.string().required('Please choose your state.'),
-    city: Yup.string().required('Please choose your city.'),
+    // state: Yup.string().required('Please choose your state.'),
+    // city: Yup.string().required('Please choose your city.'),
+    state: Yup.string(),
+    city: Yup.string(),
   });
 
   const initialValues = {
@@ -43,7 +49,22 @@ const FoodTruckSetup = () => {
 
   const [formValues, setformValues] = useState(initialValues);
 
-  const handleSubmit = (values) => {};
+  const dispatch = useDispatch();
+  const firebase = useFirebase();
+  const firestore = useFirestore();
+  let history = useHistory();
+
+  const handleSubmit = useCallback(
+    async (values) => {
+      try {
+        await dispatch(truckProfileRequest({ firebase, firestore, values }));
+        history.push('/');
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    [dispatch, truckProfileRequest]
+  );
 
   return (
     <AuthLayout>

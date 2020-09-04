@@ -108,15 +108,16 @@ const SignUp = () => {
 
                   <Button
                     label="Create my account"
-                    isLoading={!isLoaded(auth)}
+                    isLoading={isSubmitting}
+                    disabled={!dirty}
                   />
                   <Button
                     label="Sign Up With Google"
                     type="button"
                     secondary
                     onClick={handleGoogleSignUp}
-                    isLoading={!isLoaded(auth)}
-                    disabled={!dirty || isSubmitting}
+                    isLoading={isSubmitting}
+                    disabled={!dirty}
                   />
                 </Form>
               );

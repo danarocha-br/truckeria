@@ -31,7 +31,7 @@ export function* signUpWithEmail({
   payload: { displayName, email, password },
 }) {
   const createdAt = new Date();
-  const role = 'admin';
+  const role = ['admin'];
 
   try {
     firebase.createUser(
