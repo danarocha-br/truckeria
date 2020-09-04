@@ -6,11 +6,23 @@ import { isLoaded, isEmpty } from 'react-redux-firebase';
 
 function PrivateRoute({ children, ...rest }) {
   const auth = useSelector((state) => state.firebase.auth);
+  const isUserAdmin = (auth) => {
+    if (!auth || !Array.isArray(auth.profile.role)) {
+      return false;
+    }
+    const { role } = auth.profile;
+
+    if (role.includes('admin')) {
+      return true;
+    }
+
+    return false;
+  };
   return (
     <Route
       {...rest}
       render={({ location }) =>
-        !isLoaded(auth) && !isEmpty(auth) ? (
+        !isLoaded(auth) && !isEmpty(auth) && isUserAdmin ? (
           children
         ) : (
           <Redirect
