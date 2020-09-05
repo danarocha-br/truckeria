@@ -1,6 +1,6 @@
-import Schedule from '../models/Schedule';
+import Schedule from '../infra/typeorm/entities/Schedule';
 import SchedulesRepository from '../repositories/SchedulesRepository';
-import AppError from '../errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 interface Request {
   truckId: string;

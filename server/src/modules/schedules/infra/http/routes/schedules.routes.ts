@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { parseISO } from 'date-fns';
 
-import SchedulesRepository from '../repositories/SchedulesRepository';
-import CreateScheduleService from '../services/CreateScheduleService';
-import ensureAuthentication from '../middlewares/ensureAuthentication';
+import SchedulesRepository from '@modules/schedules/repositories/SchedulesRepository';
+import CreateScheduleService from '@modules/schedules//services/CreateScheduleService';
+import ensureAuthentication from '@modules/users/infra/http/middlewares/ensureAuthentication';
 
 const schedulesRouter = Router();
 schedulesRouter.use(ensureAuthentication);

@@ -1,4 +1,4 @@
-import Schedule from '../models/Schedule';
+import Schedule from '../infra/typeorm/entities/Schedule';
 import { isEqual } from 'date-fns';
 
 interface CreateScheduleDTO {
