@@ -1,13 +1,14 @@
-import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
+
+import IUsersRepository from '../repositories/IUsersRepository';
 
 import User from '@modules/users/infra/typeorm/entities/User';
 
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 
-interface Request {
+interface IRequest {
   user_id: string;
   avatarFilename: string;
   phone: number;
@@ -16,16 +17,16 @@ interface Request {
 }
 
 class UpdateUserProfileService {
+  constructor(private usersRepository: IUsersRepository) {}
+
   public async execute({
     user_id,
     avatarFilename,
     phone,
     city,
     state,
-  }: Request): Promise<User> {
-    const usersRepository = getRepository(User);
-
-    const user = await usersRepository.findOne(user_id);
+  }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
       throw new AppError(
@@ -52,7 +53,7 @@ class UpdateUserProfileService {
     user.city = city;
     user.state = state;
 
-    await usersRepository.save(user);
+    await this.usersRepository.update(user);
     return user;
   }
 }

@@ -20,6 +20,12 @@
   },
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      {
+        "prefixWithI": "always"
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -29,7 +35,8 @@
     ],
     "prettier/prettier": "error",
     "class-methods-use-this": "off",
-    "@typescript-eslint/camelcase": "off"
+    "@typescript-eslint/camelcase": "off",
+    "no-useless-constructor": "off"
   },
   "settings": {
     "import/resolver": {

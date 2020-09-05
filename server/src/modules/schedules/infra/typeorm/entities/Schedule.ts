@@ -2,7 +2,7 @@ import { uuid } from 'uuidv4';
 
 interface ScheduleConstructor {
   id: string;
-  truckId: string;
+  truck_id: string;
   city: string;
   state: string;
   lat: string;
@@ -14,7 +14,7 @@ interface ScheduleConstructor {
 class Schedule {
   id: string;
 
-  truckId: string;
+  truck_id: string;
 
   city: string;
 
@@ -29,7 +29,7 @@ class Schedule {
   date_end: Date;
 
   constructor({
-    truckId,
+    truck_id,
     city,
     state,
     lat,
@@ -38,7 +38,7 @@ class Schedule {
     date_end,
   }: Omit<ScheduleConstructor, 'id'>) {
     this.id = uuid();
-    this.truckId = truckId;
+    this.truck_id = truck_id;
     this.city = city;
     this.state = state;
     this.lat = lat;

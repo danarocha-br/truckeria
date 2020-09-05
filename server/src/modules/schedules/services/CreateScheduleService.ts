@@ -1,9 +1,10 @@
 import Schedule from '../infra/typeorm/entities/Schedule';
-import SchedulesRepository from '../repositories/SchedulesRepository';
+import ISchedulesRepository from '../repositories/ISchedulesRepository';
+
 import AppError from '@shared/errors/AppError';
 
-interface Request {
-  truckId: string;
+interface IRequest {
+  truck_id: string;
   city: string;
   state: string;
   lat: string;
@@ -13,22 +14,18 @@ interface Request {
 }
 
 class CreateScheduleService {
-  private schedulesRepository: SchedulesRepository;
+  constructor(private schedulesRepository: ISchedulesRepository) {}
 
-  constructor(schedulesRepository: SchedulesRepository) {
-    this.schedulesRepository = schedulesRepository;
-  }
-
-  public execute({
-    truckId,
+  public async execute({
+    truck_id,
     city,
     state,
     lat,
     lon,
     date_end,
     date_start,
-  }: Request): Schedule {
-    const isScheduleInSameDateAndTime = this.schedulesRepository.findByDate(
+  }: IRequest): Promise<Schedule> {
+    const isScheduleInSameDateAndTime = await this.schedulesRepository.findByDate(
       date_start,
     );
 
@@ -38,8 +35,8 @@ class CreateScheduleService {
       );
     }
 
-    const newSchedule = this.schedulesRepository.create({
-      truckId,
+    const schedule = await this.schedulesRepository.create({
+      truck_id,
       city,
       state,
       lat,
@@ -48,7 +45,7 @@ class CreateScheduleService {
       date_end,
     });
 
-    return newSchedule;
+    return schedule;
   }
 }
 
