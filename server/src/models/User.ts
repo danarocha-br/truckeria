@@ -20,6 +20,18 @@ class User {
   @Column()
   password: string;
 
+  @Column()
+  avatarURL: string;
+
+  @Column()
+  city: string;
+
+  @Column()
+  state: string;
+
+  @Column()
+  phone: number;
+
   @Column('text', { array: true })
   roles: string[];
 
