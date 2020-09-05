@@ -1,5 +1,6 @@
 import Schedule from '../models/Schedule';
 import SchedulesRepository from '../repositories/SchedulesRepository';
+import AppError from '../errors/AppError';
 
 interface Request {
   truckId: string;
@@ -32,7 +33,9 @@ class CreateScheduleService {
     );
 
     if (isScheduleInSameDateAndTime) {
-      throw Error('This start time is already booked for this same location.');
+      throw new AppError(
+        'This start time is already booked for this same location.',
+      );
     }
 
     const newSchedule = this.schedulesRepository.create({

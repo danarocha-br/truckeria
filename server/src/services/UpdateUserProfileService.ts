@@ -2,8 +2,9 @@ import { getRepository } from 'typeorm';
 import path from 'path';
 import fs from 'fs';
 
-import User from '../models/User';
 import uploadConfig from '../config/upload';
+import User from '../models/User';
+import AppError from '../errors/AppError';
 
 interface Request {
   user_id: string;
@@ -26,7 +27,10 @@ class UpdateUserProfileService {
     const user = await usersRepository.findOne(user_id);
 
     if (!user) {
-      throw new Error('Only authenticated users can update profile data.');
+      throw new AppError(
+        'Only authenticated users can update profile data.',
+        401,
+      );
     }
 
     if (user.avatarURL) {
