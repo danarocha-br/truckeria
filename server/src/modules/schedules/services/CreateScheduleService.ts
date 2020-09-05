@@ -1,3 +1,5 @@
+import { injectable, inject } from 'tsyringe';
+
 import Schedule from '../infra/typeorm/entities/Schedule';
 import ISchedulesRepository from '../repositories/ISchedulesRepository';
 
@@ -13,8 +15,12 @@ interface IRequest {
   date_end: Date;
 }
 
+@injectable()
 class CreateScheduleService {
-  constructor(private schedulesRepository: ISchedulesRepository) {}
+  constructor(
+    @inject('SchedulesRepository')
+    private schedulesRepository: ISchedulesRepository,
+  ) {}
 
   public async execute({
     truck_id,

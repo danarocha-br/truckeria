@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import multer from 'multer';
-
-import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepository';
+import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
 import UpdateUserProfileService from '@modules/users/services/UpdateUserProfileService';
@@ -16,9 +15,7 @@ usersRouter.post('/', async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const usersRepository = new UsersRepository();
-
-    const createUser = new CreateUserService(usersRepository);
+    const createUser = container.resolve(CreateUserService);
 
     const user = await createUser.execute({ name, email, password });
 
@@ -38,9 +35,7 @@ usersRouter.put(
     try {
       const { phone, city, state } = req.body;
 
-      const usersRepository = new UsersRepository();
-
-      const updateUserProfile = new UpdateUserProfileService(usersRepository);
+      const updateUserProfile = container.resolve(UpdateUserProfileService);
 
       const user = await updateUserProfile.execute({
         user_id: req.user.id,
