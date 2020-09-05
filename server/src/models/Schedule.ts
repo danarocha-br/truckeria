@@ -1,4 +1,4 @@
-import { uuid } from "uuidv4";
+import { uuid } from 'uuidv4';
 
 interface ScheduleConstructor {
   id: string;
@@ -28,15 +28,23 @@ class Schedule {
 
   date_end: Date;
 
-  constructor({truckId, city, state, lat, lon, date_start, date_end}: Omit<ScheduleConstructor, 'id'> ){
+  constructor({
+    truckId,
+    city,
+    state,
+    lat,
+    lon,
+    date_start,
+    date_end,
+  }: Omit<ScheduleConstructor, 'id'>) {
     this.id = uuid();
     this.truckId = truckId;
     this.city = city;
     this.state = state;
     this.lat = lat;
     this.lon = lon;
-    this.date_start: date_start;
-    this.date_end: date_end;
+    this.date_start = date_start;
+    this.date_end = date_end;
   }
 }
 

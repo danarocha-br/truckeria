@@ -3,8 +3,10 @@ import { parseISO } from 'date-fns';
 
 import SchedulesRepository from '../repositories/SchedulesRepository';
 import CreateScheduleService from '../services/CreateScheduleService';
+import ensureAuthentication from '../middlewares/ensureAuthentication';
 
 const schedulesRouter = Router();
+schedulesRouter.use(ensureAuthentication);
 const schedulesRepository = new SchedulesRepository();
 
 schedulesRouter.get('/', (req, res) => {
