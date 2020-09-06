@@ -5,16 +5,21 @@ import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 import AuthenticateUserService from './AuthenticateUserService';
 import CreateUserService from './CreateUserService';
 
-describe('AuthenticateUserService', () => {
-  it('should be able to authenticate an user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
+let fakeUsersRepository: FakeUsersRepository;
+let fakeHashProvider: FakeHashProvider;
+let authenticateUser: AuthenticateUserService;
 
-    const authenticateUser = new AuthenticateUserService(
+describe('AuthenticateUserService', () => {
+  beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
+    fakeHashProvider = new FakeHashProvider();
+    authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
+  });
 
+  it('should be able to authenticate an user', async () => {
     const createUser = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
@@ -36,15 +41,7 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate with a non existing user', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'joe@doe.com',
         password: '123456',
@@ -53,14 +50,6 @@ describe('AuthenticateUserService', () => {
   });
 
   it('should not be able to authenticate an user with wrong password', async () => {
-    const fakeUsersRepository = new FakeUsersRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const authenticateUser = new AuthenticateUserService(
-      fakeUsersRepository,
-      fakeHashProvider,
-    );
-
     const createUser = new CreateUserService(
       fakeUsersRepository,
       fakeHashProvider,
@@ -72,7 +61,7 @@ describe('AuthenticateUserService', () => {
       password: '123456',
     });
 
-    expect(
+    await expect(
       authenticateUser.execute({
         email: 'joe@doe.com',
         password: 'wrong-password',
