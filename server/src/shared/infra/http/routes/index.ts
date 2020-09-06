@@ -2,19 +2,19 @@ import { Router } from 'express';
 
 import usersRouter from '@modules/users/infra/http/routes/users.routes';
 import sessionsRouter from '@modules/users/infra/http/routes/sessions.routes';
-import passwordReset from '@modules/users/infra/http/routes/passwordReset.routes';
-import userProfile from '@modules/users/infra/http/routes/userProfile.routes';
+import passwordResetRouter from '@modules/users/infra/http/routes/passwordReset.routes';
+import userProfileRouter from '@modules/users/infra/http/routes/userProfile.routes';
+import foodTrucksProfileRouter from '@modules/foodtrucks/infra/http/routes/foodTrucksProfile.routes';
 // import schedulesRouter from '@modules/schedules/infra/http/routes/schedules.routes';
-import truckProfileRouter from './truckProfile.routes';
 
 const routes = Router();
 
 routes.use('/users', usersRouter);
 routes.use('/sessions', sessionsRouter);
-routes.use('/password', passwordReset);
-routes.use('/profile', userProfile);
+routes.use('/password', passwordResetRouter);
+routes.use('/profile', userProfileRouter);
 
 // routes.use('/schedules', schedulesRouter);
-routes.use('/foodtruck/profile', truckProfileRouter);
+routes.use('/foodtruck/profile', foodTrucksProfileRouter);
 
 export default routes;

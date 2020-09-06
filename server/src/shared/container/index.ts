@@ -12,6 +12,9 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokenRepository from '@modules/users/repositories/IUserTokenRepository';
 import UserTokenRepository from '@modules/users/infra/typeorm/repositories/UserTokenRepository';
 
+import ITruckProfilesRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
+import TruckProfilesRepository from '@modules/foodtrucks/infra/typeorm/repositories/TruckProfilesRepository';
+
 container.registerSingleton<ISchedulesRepository>(
   'SchedulesRepository',
   SchedulesRepository,
@@ -25,4 +28,9 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUserTokenRepository>(
   'UserTokenRepository',
   UserTokenRepository,
+);
+
+container.registerSingleton<ITruckProfilesRepository>(
+  'TruckProfilesRepository',
+  TruckProfilesRepository,
 );
