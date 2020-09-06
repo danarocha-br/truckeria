@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import path from 'path';
 
 import AppError from '@shared/errors/AppError';
 
@@ -33,9 +34,29 @@ class SendForgotPasswordEmailService {
       throw new AppError('This user does not exist.');
     }
 
-    await this.userTokenRepository.generate(user.id);
+    const { token } = await this.userTokenRepository.generate(user.id);
 
-    this.mailProvider.sendEmail(email, 'Recovery password request received.');
+    const forgotPasswordMailTemplate = path.resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgot_password.hbs',
+    );
+
+    await this.mailProvider.sendEmail({
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: 'Choose a new password for your Truckeria account',
+      templateData: {
+        file: forgotPasswordMailTemplate,
+        variables: {
+          name: user.name,
+          link: `http://localhost:3000/reset-password?token=${token}`,
+        },
+      },
+    });
   }
 }
 
