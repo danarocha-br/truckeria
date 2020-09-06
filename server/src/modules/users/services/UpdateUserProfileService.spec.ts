@@ -1,27 +1,27 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
-import FakeStorageProvider from '@shared/container/providers/StorageProviders/fakes/FakeStorageProvider';
+import FakeHashProvider from '../providers/HashProvider/fakes/FakeHashProvider';
 
 import UpdateUserProfileService from './UpdateUserProfileService';
 
 let fakeUsersRepository: FakeUsersRepository;
-let fakeStorageProvider: FakeStorageProvider;
+let fakeHashProvider: FakeHashProvider;
 
 let updateUserProfile: UpdateUserProfileService;
 
 describe('UpdateUserProfile', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
-    fakeStorageProvider = new FakeStorageProvider();
+    fakeHashProvider = new FakeHashProvider();
 
     updateUserProfile = new UpdateUserProfileService(
       fakeUsersRepository,
-      fakeStorageProvider,
+      fakeHashProvider,
     );
   });
 
-  it('should be able to update user avatar', async () => {
+  it('should be able to update user profile', async () => {
     const user = await fakeUsersRepository.create({
       name: 'Joe Doe',
       email: 'joe@doe.com',
@@ -29,37 +29,42 @@ describe('UpdateUserProfile', () => {
       roles: ['admin', 'user'],
     });
 
-    await updateUserProfile.execute({
+    const updatedUser = await updateUserProfile.execute({
       user_id: user.id,
-      avatarURL: 'avatar.jpg',
-      phone: 123456,
-      city: '',
-      state: '',
+      name: 'Mary Doe',
+      email: 'mary@doe.com',
     });
 
-    expect(user.avatarURL).toBe('avatar.jpg');
+    expect(user.name).toBe('Mary Doe');
+    expect(user.email).toBe('mary@doe.com');
   });
 
-  it('should be able to update additional profile data from non-existing user', async () => {
-    expect(
+  it('should be able to update user profile with another existing email', async () => {
+    await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    const user = await fakeUsersRepository.create({
+      name: 'Mary Doe',
+      email: 'mary@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    await expect(
       updateUserProfile.execute({
-        user_id: 'non-existing',
-        avatarURL: 'avatar.jpg',
-        phone: 123456,
-        city: '',
-        state: '',
+        user_id: user.id,
+        name: 'Mary Doe',
+        email: 'joe@doe.com',
+        password: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should delete old avatar when updating to a new one', async () => {
-    const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
-
-    const updateUserProfile = new UpdateUserProfileService(
-      fakeUsersRepository,
-      fakeStorageProvider,
-    );
-
+  it('should be able to update user password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'Joe Doe',
       email: 'joe@doe.com',
@@ -67,24 +72,61 @@ describe('UpdateUserProfile', () => {
       roles: ['admin', 'user'],
     });
 
-    await updateUserProfile.execute({
+    const updatedUser = await updateUserProfile.execute({
       user_id: user.id,
-      avatarURL: 'avatar.jpg',
-      phone: 123456,
-      city: '',
-      state: '',
+      name: 'Mary Doe',
+      email: 'mary@doe.com',
+      old_password: '123456',
+      password: '123123',
     });
 
-    await updateUserProfile.execute({
-      user_id: user.id,
-      avatarURL: 'avatar2.jpg',
-      phone: 123456,
-      city: '',
-      state: '',
+    expect(user.password).toBe('123123');
+  });
+
+  it('should not be able to update user password without old password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
     });
 
-    expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
+    await expect(
+      updateUserProfile.execute({
+        user_id: user.id,
+        name: 'Mary Doe',
+        email: 'mary@doe.com',
+        password: '123123',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 
-    expect(user.avatarURL).toBe('avatar2.jpg');
+  it('should not be able to update user password without wrong password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    await expect(
+      updateUserProfile.execute({
+        user_id: user.id,
+        name: 'Mary Doe',
+        email: 'mary@doe.com',
+        password: '123123',
+        old_password: '123457',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to update user profile from non-existing user', async () => {
+    await expect(
+      updateUserProfile.execute({
+        user_id: 'non-existing-user-id',
+        name: 'Joe Doe',
+        email: 'joe@doe.com',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

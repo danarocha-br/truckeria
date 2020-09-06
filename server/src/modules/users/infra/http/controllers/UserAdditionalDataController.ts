@@ -1,17 +1,22 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import UpdateUserProfileService from '@modules/users/services/UpdateUserProfileService';
+import UpdateExtraDataToUserProfileService from '@modules/users/services/UpdateExtraDataToUserProfileService';
 
 class UserAdditionalDataController {
+  /**
+   * update
+   */
   public async update(req: Request, res: Response): Promise<Response> {
     const { phone, city, state } = req.body;
 
-    const updateUserProfile = container.resolve(UpdateUserProfileService);
+    const updateExtraDataToUserProfile = container.resolve(
+      UpdateExtraDataToUserProfileService,
+    );
 
-    const user = await updateUserProfile.execute({
+    const user = await updateExtraDataToUserProfile.execute({
       user_id: req.user.id,
-      avatarFilename: req.file.filename,
+      avatarURL: req.file.filename,
       phone,
       city,
       state,

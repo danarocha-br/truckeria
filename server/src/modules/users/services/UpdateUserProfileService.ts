@@ -1,18 +1,16 @@
 import { injectable, inject } from 'tsyringe';
 
 import IUsersRepository from '../repositories/IUsersRepository';
-import IStorageProvider from '@shared/container/providers/StorageProviders/models/IStorageProvider';
-
+import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import User from '@modules/users/infra/typeorm/entities/User';
 
 import AppError from '@shared/errors/AppError';
-
 interface IRequest {
   user_id: string;
-  avatarURL: string;
-  phone: number;
-  city: string;
-  state: string;
+  name: string;
+  email: string;
+  old_password?: string;
+  password?: string;
 }
 
 @injectable()
@@ -21,39 +19,54 @@ class UpdateUserProfileService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
-    @inject('StorageProvider')
-    private storageProvider: IStorageProvider,
+    @inject('HashProvider')
+    private hashProvider: IHashProvider,
   ) {}
 
   public async execute({
     user_id,
-    avatarURL,
-    phone,
-    city,
-    state,
+    name,
+    email,
+    password,
+    old_password,
   }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
+      throw new AppError('User not found.');
+    }
+
+    const existingEmail = await this.usersRepository.findByEmail(email);
+
+    if (existingEmail && existingEmail.id !== user_id) {
+      throw new AppError('This e-mail is already register, try a new one.');
+    }
+
+    user.name = name;
+    user.email = email;
+
+    if (password && !old_password) {
       throw new AppError(
-        'Only authenticated users can update profile data.',
-        401,
+        'You need to inform your old password to update to a new password.',
       );
     }
 
-    if (user.avatarURL) {
-      await this.storageProvider.deleteFile(user.avatarURL);
+    if (password && old_password) {
+      const checkOldPassword = await this.hashProvider.compareHash(
+        old_password,
+        user.password,
+      );
+
+      if (!checkOldPassword) {
+        throw new AppError('Your old password is incorrect.');
+      }
     }
 
-    const fileName = await this.storageProvider.saveFile(avatarURL);
+    if (password) {
+      user.password = await this.hashProvider.generateHash(password);
+    }
 
-    user.avatarURL = fileName;
-    user.phone = phone;
-    user.city = city;
-    user.state = state;
-
-    await this.usersRepository.update(user);
-    return user;
+    return this.usersRepository.update(user);
   }
 }
 
