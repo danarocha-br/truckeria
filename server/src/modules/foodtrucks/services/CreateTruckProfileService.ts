@@ -4,6 +4,7 @@ import { injectable, inject } from 'tsyringe';
 import TruckProfile from '../infra/typeorm/entities/TruckProfile';
 import ITruckProfileRepository from '../repositories/ITruckProfilesRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import IStorageProvider from '@shared/container/providers/StorageProviders/models/IStorageProvider';
 
 import AppError from '@shared/errors/AppError';
 
@@ -14,7 +15,7 @@ interface IRequest {
   cuisines: string[];
   payment_methods: string[];
   catering: boolean;
-  photo_filename: string[];
+  photo_filename: string;
   email: string;
   phone: number;
   city: string;
@@ -33,6 +34,9 @@ class CreateTruckProfileService {
 
     @inject('TruckProfilesRepository')
     private truckProfilesRepository: ITruckProfileRepository,
+
+    @inject('StorageProvider')
+    private storageProvider: IStorageProvider,
   ) {}
 
   public async execute({
@@ -81,6 +85,8 @@ class CreateTruckProfileService {
       }
     }
 
+    const fileName = await this.storageProvider.saveFile(photo_filename);
+
     const truckProfile = await this.truckProfilesRepository.create({
       user_id: user.id,
       name,
@@ -88,7 +94,7 @@ class CreateTruckProfileService {
       cuisines,
       payment_methods,
       catering,
-      photo_filename,
+      photo_filename: fileName,
       email,
       phone,
       city,

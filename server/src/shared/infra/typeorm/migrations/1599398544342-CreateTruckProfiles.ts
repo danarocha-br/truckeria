@@ -38,7 +38,7 @@ export class CreateTruckProfiles1599398544342 implements MigrationInterface {
           },
           {
             name: 'photo_filename',
-            type: 'varchar[]',
+            type: 'varchar',
           },
           {
             name: 'email',

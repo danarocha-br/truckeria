@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import ITruckProfileRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
-import ICreateTruckProfile from '@modules/foodtrucks/dtos/ICreateTruckProfile';
+import ICreateTruckProfile from '@modules/foodtrucks/dtos/ICreateTruckProfileDTO';
 
 import TruckProfile from '@modules/foodtrucks/infra/typeorm/entities/TruckProfile';
 

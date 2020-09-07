@@ -51,7 +51,7 @@ class TrucksProfilesController {
       cuisines,
       payment_methods,
       catering,
-      photo_filename,
+      photo_filename: req.file.filename,
       email,
       phone,
       city,

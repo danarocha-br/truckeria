@@ -3,7 +3,7 @@ import { uuid } from 'uuidv4';
 import TruckProfile from '../../infra/typeorm/entities/TruckProfile';
 
 import ITruckProfileRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
-import ICreateTruckProfile from '@modules/foodtrucks/dtos/ICreateTruckProfile';
+import ICreateTruckProfile from '@modules/foodtrucks/dtos/ICreateTruckProfileDTO';
 
 class FakeTruckProfilesRepository implements ITruckProfileRepository {
   private truckProfiles: TruckProfile[] = [];

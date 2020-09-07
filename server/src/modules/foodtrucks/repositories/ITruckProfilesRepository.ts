@@ -1,5 +1,5 @@
 import TruckProfile from '../infra/typeorm/entities/TruckProfile';
-import ICreateTruckProfile from '../dtos/ICreateTruckProfile';
+import ICreateTruckProfile from '../dtos/ICreateTruckProfileDTO';
 
 export default interface ITruckProfilesRepository {
   create(data: ICreateTruckProfile): Promise<TruckProfile>;

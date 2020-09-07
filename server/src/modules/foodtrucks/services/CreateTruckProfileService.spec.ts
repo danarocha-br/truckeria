@@ -4,19 +4,23 @@ import CreateTruckProfileService from './CreateTruckProfileService';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeTruckProfilesRepository from '../repositories/fakes/FakeTruckProfilesRepository';
+import FakeStorageProvider from '@shared/container/providers/StorageProviders/fakes/FakeStorageProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
+let fakeStorageProvider: FakeStorageProvider;
 let createTruckProfile: CreateTruckProfileService;
 
 describe('CreateTruckProfileService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
+    fakeStorageProvider = new FakeStorageProvider();
 
     createTruckProfile = new CreateTruckProfileService(
       fakeUsersRepository,
       fakeTruckProfilesRepository,
+      fakeStorageProvider,
     );
   });
 
@@ -35,7 +39,7 @@ describe('CreateTruckProfileService', () => {
       cuisines: ['brazilian', 'latin'],
       payment_methods: ['credit card'],
       catering: true,
-      photo_filename: [''],
+      photo_filename: '',
       email: 'barbecue@email.com',
       phone: 41985145400,
       city: 'Curitiba',
@@ -59,7 +63,7 @@ describe('CreateTruckProfileService', () => {
         cuisines: ['brazilian', 'latin'],
         payment_methods: ['credit card'],
         catering: true,
-        photo_filename: [''],
+        photo_filename: '',
         email: 'barbecue@email.com',
         phone: 41985145400,
         city: 'Curitiba',
@@ -88,7 +92,7 @@ describe('CreateTruckProfileService', () => {
         cuisines: ['brazilian', 'latin'],
         payment_methods: ['credit card'],
         catering: true,
-        photo_filename: [''],
+        photo_filename: '',
         email: 'barbecue@email.com',
         phone: 41985145400,
         city: 'Curitiba',
@@ -116,7 +120,7 @@ describe('CreateTruckProfileService', () => {
       cuisines: ['brazilian', 'latin'],
       payment_methods: ['credit card'],
       catering: true,
-      photo_filename: [''],
+      photo_filename: '',
       email: 'barbecue@email.com',
       phone: 41985145400,
       city: 'Curitiba',
@@ -135,7 +139,7 @@ describe('CreateTruckProfileService', () => {
         cuisines: ['brazilian', 'latin'],
         payment_methods: ['credit card'],
         catering: true,
-        photo_filename: [''],
+        photo_filename: '',
         email: 'barbecue@email.com',
         phone: 41985145400,
         city: 'Curitiba',

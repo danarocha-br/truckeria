@@ -29,8 +29,8 @@ class TruckProfile {
   @Column()
   catering: boolean;
 
-  @Column('text', { array: true })
-  photo_filename: string[];
+  @Column()
+  photo_filename: string;
 
   @Column()
   email: string;
