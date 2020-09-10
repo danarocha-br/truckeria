@@ -13,7 +13,7 @@ class FakeTruckProfilesRepository implements ITruckProfileRepository {
    */
   public async findAllMyTrucksProfile(
     user_id: string,
-  ): Promise<TruckProfile[]> {
+  ): Promise<TruckProfile[] | undefined> {
     let { truckProfiles } = this;
 
     if (!user_id) {
@@ -22,6 +22,19 @@ class FakeTruckProfilesRepository implements ITruckProfileRepository {
 
     truckProfiles = this.truckProfiles.filter(user => user.user_id === user_id);
     return truckProfiles;
+  }
+
+  /**
+   * findById
+   */
+  public async findById(truck_id: string): Promise<TruckProfile | undefined> {
+    if (!truck_id) {
+      throw new Error('No id provided.');
+    }
+
+    const findTruck = this.truckProfiles.find(truck => truck.id === truck_id);
+
+    return findTruck;
   }
 
   /**
@@ -68,6 +81,19 @@ class FakeTruckProfilesRepository implements ITruckProfileRepository {
     this.truckProfiles.push(truckProfile);
 
     return truckProfile;
+  }
+
+  /**
+   * update
+   */
+  public async update(profile: TruckProfile): Promise<TruckProfile> {
+    const profileIndex = this.truckProfiles.findIndex(
+      findTruck => findTruck.id === profile.id,
+    );
+
+    this.truckProfiles[profileIndex] = profile;
+
+    return profile;
   }
 }
 

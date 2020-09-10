@@ -18,5 +18,10 @@ trucksProfilesRouter.post(
   upload.single('photo_filename'),
   trucksProfilesController.create,
 );
+trucksProfilesRouter.put(
+  '/',
+  upload.single('photo_filename'),
+  trucksProfilesController.update,
+);
 
 export default trucksProfilesRouter;

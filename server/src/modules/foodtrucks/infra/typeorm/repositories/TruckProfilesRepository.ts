@@ -26,6 +26,17 @@ class TruckProfilesRepository implements ITruckProfileRepository {
   }
 
   /**
+   * findById
+   */
+  public async findById(truck_id: string): Promise<TruckProfile | undefined> {
+    const findTruck = this.ormRepository.findOne({
+      where: { id: truck_id },
+    });
+
+    return findTruck;
+  }
+
+  /**
    * create
    */
   public async create(truckData: ICreateTruckProfile): Promise<TruckProfile> {
@@ -34,6 +45,13 @@ class TruckProfilesRepository implements ITruckProfileRepository {
     await this.ormRepository.save(truckProfile);
 
     return truckProfile;
+  }
+
+  /**
+   * update
+   */
+  public async update(profile: TruckProfile): Promise<TruckProfile> {
+    return this.ormRepository.save(profile);
   }
 }
 
