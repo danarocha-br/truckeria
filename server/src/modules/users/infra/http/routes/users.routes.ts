@@ -12,8 +12,8 @@ const usersController = new UsersController();
 const userAdditionalDataController = new UserAdditionalDataController();
 const upload = multer(uploadConfig);
 
+usersRouter.get('/', ensureAuthentication, usersController.index);
 usersRouter.post('/', usersController.create);
-
 usersRouter.put(
   '/profile',
   ensureAuthentication,
