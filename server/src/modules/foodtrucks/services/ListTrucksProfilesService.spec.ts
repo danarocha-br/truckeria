@@ -69,4 +69,12 @@ describe('ListTrucksProfilesService', () => {
 
     expect(truckProfileList).toEqual([truckProfile1, truckProfile2]);
   });
+
+  it('should not be able to list food trucks profile with non-existing id', async () => {
+    await expect(
+      listTrucksProfilesService.execute({
+        user_id: 'wrong-id',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });
