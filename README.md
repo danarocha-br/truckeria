@@ -1,39 +1,78 @@
-<h1>
-  Truckeria
-</h1>
+<h2 align="center">
+<img alt="Truckeria logo" src="https://res.cloudinary.com/danarocha/image/upload/v1600760677/github/truckeria-logo_xxafxi.png"  width="200px"/>
+<br />
 
-<h4>
-  A simple project to manage food trucks, representing my journey in learning Node js while implementing React Js and React Native. Still under development:
-</h4>
+</h2>
+<br />
+<p align="center" >
+   A simple project to manage food trucks, representing my journey in learning Node.js while implementing ReactJs and Swift UI.
+   <br />
+   <br />
+   If you want to know a bit more about the App, you can take a look at <a href="http://www.danarocha.com/portfolio/truckeria">here</a>.
 
-- [ ] REST API (with Node js)
-- [ ] iOS & Android Apps (based on react-native)
-- [ ] Website App in any browser (based on react)
+</p>
 
-## Screenshots
+<br />
+<h5 align="center">
+  <img alt="Truckeria App" src="https://res.cloudinary.com/danarocha/image/upload/v1600760857/github/truckeria-app_pp8vne.png" width="500px" />
+</h5>
 
-<h3>
-  Mobible
-</h3>
+---
 
-<img alt="Truckeria" title="Truckeria" width="800" src="example/screenshots/mobile.jpg">
+## :green_heart: Why?
 
-## Browser Support
+I am developing this project for my personal portfolio, so, don't hesitate in providing me any feedback you might have.
 
-| ![Chrome](https://cloud.githubusercontent.com/assets/398893/3528328/23bc7bc4-078e-11e4-8752-ba2809bf5cce.png) | ![Firefox](https://cloud.githubusercontent.com/assets/398893/3528329/26283ab0-078e-11e4-84d4-db2cf1009953.png) | ![Opera](https://cloud.githubusercontent.com/assets/398893/3528330/27ec9fa8-078e-11e4-95cb-709fd11dac16.png) | ![Safari](https://cloud.githubusercontent.com/assets/398893/3528331/29df8618-078e-11e4-8e3e-ed8ac738693f.png) | ![IE](https://cloud.githubusercontent.com/assets/398893/3528325/20373e76-078e-11e4-8e3a-1cb86cf506f0.png) |
-| ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| 39+ ✔                                                                                                         | 42+ ✔                                                                                                          | 29+ ✔                                                                                                        | 10.1+ ✔                                                                                                       | Nope ✘                                                                                                    |
+@: dana@danarocha.com.br
 
-## Getting Started
+Connect with me at [LinkedIn](https://www.linkedin.com/in/danarocha/).
+
+## :bookmark: About this App
+
+Currently under development.
+
+Still on my to-do list:
+
+- [ ] Finish the REST API (with Node js)
+- [ ] iOS App (with Swift UI)
+- [ ] Connect front-end with the api
+
+## :rocket: Built With
+
+- [Node.js](https://nodejs.org/en/)
+- [Docker](https://www.docker.com/)
+- [Redis](https://redis.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Typescript](http://typescriptlang.org/)
+- [ReactJS](https://reactjs.org/)
+- [react-router-dom](https://github.com/ReactTraining/react-router)
+- [Redux](https://redux.js.org/) - React State Manager
+- [Redux-Sagas](https://redux-saga.js.org/) - Side-Effect model for Redux
+- [Tailwind](https://tailwindcss.com/)
+- [styled-components](https://styled-components.com/)
+- [framer-motion](https://www.framer.com/motion/)
+- [nivo](https://nivo.rocks)
+- [date-fns](https://date-fns.org/)
+
+## :wrench: Tools
+
+<ul>
+  <li>es6 syntax and babel</li>
+  <li>ESLint + Prettier + EditorConfig;</li>
+  <li>TypeORM (PostgreSQL)</li>
+  <li>Flux to organize the data flow management</li>
+</ul>
+
+## :tada: Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
-<h3>Prerequisites</h3>
+<h3>Pre-requisites</h3>
 
 You will need:
 
 - NodeJS
-- Yarn
+- Yarn or Npm
 - Docker
 - PostgreSQL
 
@@ -71,42 +110,16 @@ Finally, you will need a rest client to test "**Truckeria**". Here are some:
 After repository clone:
 
 - Run **`yarn`** to install dependencies;
-- Run **`yarn sequelize db:migrate`** to create the migrations;
+- Run **`yarn typeorm migration:run`** to create the migrations;
 - Run **`yarn dev`** to start de aplication.
 
-Now you can use your REST Client to test "**Truckeria**".
+Now you can use your REST Client to test **Truckeria**.
 
-## Built With
+---
 
-<ul>
-  <li>NodeJS</li>
-  <li>Docker</li>
-  <li>PostgreSQL</li>
-  <li>Mongodb</li>
-  <li>Redis</li>
-  <li>React JS</li>
-  <li>React Native</li>
-</ul>
+Made with ♥ by **Dana Rocha** :wave: [Get in touch!](https://www.linkedin.com/in/danarocha/)
 
-## Tools
-
-<ul>
-  <li>es6 syntax and babel</li>
-  <li>Sucrase + Nodemon;</li>
-  <li>ESLint + Prettier + EditorConfig;</li>
-  <li>Sequelize (PostgreSQL)</li>
-  <li>Flux to organize the data flow management</li>
-</ul>
-
-## What's next
-
-- [ ] finish up rest api with tests.
-
-## Authors
-
-<ul>
-  <li>Dana Rocha</li>
-</ul>
+---
 
 ## License
 
