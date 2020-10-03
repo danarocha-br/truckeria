@@ -26,5 +26,6 @@ trucksProfilesRouter.put(
   upload.single('photo_filename'),
   truckProfileController.update,
 );
+trucksProfilesRouter.delete('/', truckProfileController.delete);
 
 export default trucksProfilesRouter;

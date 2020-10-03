@@ -1,24 +1,35 @@
 import AppError from '@shared/errors/AppError';
 
-import ListOneTruckProfileService from './ListOneTruckProfileService';
+import DeleteOneTruckProfileService from './DeleteOneTruckProfileService';
 
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeTruckProfilesRepository from '../repositories/fakes/FakeTruckProfilesRepository';
 
+let fakeUsersRepository: FakeUsersRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
-let listOneTruckProfileService: ListOneTruckProfileService;
+let deleteOneTruckProfileService: DeleteOneTruckProfileService;
 
-describe('ListOneTruckProfileService', () => {
+describe('DeleteOneTruckProfileService', () => {
   beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
 
-    listOneTruckProfileService = new ListOneTruckProfileService(
+    deleteOneTruckProfileService = new DeleteOneTruckProfileService(
+      fakeUsersRepository,
       fakeTruckProfilesRepository,
     );
   });
 
-  it('should be able to list one food truck profile', async () => {
+  it('should be able to delete a food truck profile when given a valid ID', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
     const truckProfile = await fakeTruckProfilesRepository.create({
-      user_id: 'some_user_id',
+      user_id: user.id,
       name: 'Brazilian Barbecue',
       description: 'Our awesome Brazilian style barbecue.',
       cuisines: ['brazilian', 'latin'],
@@ -35,18 +46,11 @@ describe('ListOneTruckProfileService', () => {
       twitter: 'br-bbq',
     });
 
-    const truckProfileList = await listOneTruckProfileService.execute({
+    const deleteProfile = await deleteOneTruckProfileService.execute({
+      user_id: user.id,
       truck_id: truckProfile.id,
     });
 
-    expect(truckProfileList).toEqual(truckProfile);
-  });
-
-  it('should not be able to list food truck profile with non-existing id', async () => {
-    await expect(
-      listOneTruckProfileService.execute({
-        truck_id: 'truckProfile.id',
-      }),
-    ).rejects.toBeInstanceOf(AppError);
+    // expect(deleteProfile).
   });
 });

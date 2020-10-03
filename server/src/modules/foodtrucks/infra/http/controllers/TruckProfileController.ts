@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateTruckProfileService from '@modules/foodtrucks/services/CreateTruckProfileService';
 import ListOneTruckProfileService from '@modules/foodtrucks/services/ListOneTruckProfileService';
 import UpdateTruckProfileService from '@modules/foodtrucks/services/UpdateTruckProfileService';
+import DeleteOneTruckProfileService from '@modules/foodtrucks/services/DeleteOneTruckProfileService';
 
 class TrucksProfilesController {
   /**
@@ -112,6 +113,25 @@ class TrucksProfilesController {
     });
 
     return res.json(truckProfile);
+  }
+
+  /**
+   * delete
+   */
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const truck_id = req.body.id;
+    const user_id = req.user.id;
+
+    const deleteOneTruckProfileService = container.resolve(
+      DeleteOneTruckProfileService,
+    );
+
+    const deletedProfile = await deleteOneTruckProfileService.execute({
+      truck_id,
+      user_id,
+    });
+
+    return res.json(deletedProfile);
   }
 }
 

@@ -1,9 +1,10 @@
-import { getRepository, Repository } from 'typeorm';
+import { DeleteResult, getRepository, Repository } from 'typeorm';
 
 import ITruckProfileRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
 import ICreateTruckProfile from '@modules/foodtrucks/dtos/ICreateTruckProfileDTO';
 
 import TruckProfile from '@modules/foodtrucks/infra/typeorm/entities/TruckProfile';
+import User from '@modules/users/infra/typeorm/entities/User';
 
 class TruckProfilesRepository implements ITruckProfileRepository {
   private ormRepository: Repository<TruckProfile>;
@@ -52,6 +53,18 @@ class TruckProfilesRepository implements ITruckProfileRepository {
    */
   public async update(profile: TruckProfile): Promise<TruckProfile> {
     return this.ormRepository.save(profile);
+  }
+
+  /**
+   * delete
+   */
+  public async delete(truck_id: string): Promise<DeleteResult> {
+    return this.ormRepository
+      .createQueryBuilder()
+      .delete()
+      .from(User)
+      .where('id = :id', { id: truck_id })
+      .execute();
   }
 }
 
