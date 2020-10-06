@@ -13,7 +13,7 @@ interface IRequest {
 }
 
 @injectable()
-class ListTrucksProfilesService {
+class ListSchedulesService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -29,7 +29,7 @@ class ListTrucksProfilesService {
       user_id,
     );
 
-    if (!truckProfiles?.length) {
+    if (!truckProfiles) {
       throw new AppError(`You don't have any food truck profile yet.`);
     }
 
@@ -37,4 +37,4 @@ class ListTrucksProfilesService {
   }
 }
 
-export default ListTrucksProfilesService;
+export default ListSchedulesService;

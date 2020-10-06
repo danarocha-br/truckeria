@@ -1,48 +1,35 @@
-import { getRepository, Repository } from 'typeorm';
-import { isEqual } from 'date-fns';
+import { EntityRepository, Repository } from 'typeorm';
 
 import Schedule from '../entities/Schedule';
 
 import ISchedulesRepository from '@modules/schedules/repositories/ISchedulesRepository';
 import ICreateScheduleDTO from '@modules/schedules/dtos/ICreateScheduleDTO';
 
-class SchedulesRepository implements ISchedulesRepository {
-  private ormRepository: Repository<Schedule>;
-
-  constructor() {
-    this.ormRepository = getRepository(Schedule);
-  }
-
+@EntityRepository(Schedule)
+class SchedulesRepository extends Repository<Schedule> {
+  /**
+   * findByDate
+   */
   public async findByDate(date_start: Date): Promise<Schedule | undefined> {
-    const findSchedule = await this.ormRepository.findOne({
+    const findSchedule = await this.findOne({
       where: { date_start },
     });
-
     return findSchedule || undefined;
   }
 
-  public async create({
-    truck_id,
-    city,
-    state,
-    lat,
-    lon,
-    date_start,
-    date_end,
-  }: ICreateScheduleDTO): Promise<Schedule> {
-    const schedule = await this.ormRepository.create({
-      truck_id,
-      city,
-      state,
-      lat,
-      lon,
-      date_start,
-      date_end,
+  /**
+   * listAllSchedules
+   */
+  public async listAllSchedules(
+    truck_id: string,
+  ): Promise<Schedule[] | undefined> {
+    const findSchedules = await this.find({
+      where: {
+        id: truck_id,
+      },
     });
 
-    await this.ormRepository.save(schedule);
-
-    return schedule;
+    return findSchedules;
   }
 }
 

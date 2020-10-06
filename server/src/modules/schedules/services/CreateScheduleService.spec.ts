@@ -1,20 +1,56 @@
 import AppError from '@shared/errors/AppError';
 
 import FakeSchedulesRepository from '../repositories/fakes/FakeSchedulesRepository';
+import FakeTruckProfilesRepository from '@modules/foodtrucks/repositories/fakes/FakeTruckProfilesRepository';
 import CreateScheduleService from './CreateScheduleService';
+import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 
+let fakeUsersRepository: FakeUsersRepository;
 let fakeSchedulesRepository: FakeSchedulesRepository;
+let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
 let createSchedule: CreateScheduleService;
 
 describe('CreateSchedule', () => {
   beforeEach(() => {
+    fakeUsersRepository = new FakeUsersRepository();
     fakeSchedulesRepository = new FakeSchedulesRepository();
-    createSchedule = new CreateScheduleService(fakeSchedulesRepository);
+    fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
+
+    createSchedule = new CreateScheduleService(
+      fakeSchedulesRepository,
+      fakeTruckProfilesRepository,
+    );
   });
 
   it('should be able to create a new schedule item', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    const truckProfile = await fakeTruckProfilesRepository.create({
+      user_id: user.id,
+      name: 'Mexican Barbecue',
+      description: 'Our awesome Mexican style barbecue.',
+      cuisines: ['mexican', 'latin'],
+      payment_methods: ['credit card'],
+      catering: true,
+      photo_filename: '',
+      email: 'barbecue@email.com',
+      phone: 41985145400,
+      city: 'Curitiba',
+      state: 'PR',
+      web: 'http://www.mexicanbbq.com',
+      instagram: 'br-bbq',
+      facebook: 'br-bbq',
+      twitter: 'br-bbq',
+    });
+
     const schedule = await createSchedule.execute({
-      truck_id: '123456',
+      user_id: user.id,
+      truck_id: truckProfile.id,
       city: 'Los Angeles',
       state: 'CA',
       lat: '123456',
@@ -24,14 +60,99 @@ describe('CreateSchedule', () => {
     });
 
     expect(schedule).toHaveProperty('id');
-    expect(schedule.truck_id).toBe('123456');
+    expect(schedule.truck_id).toBe(truckProfile.id);
   });
 
-  it('should not be able to create two schedule items at same time and location for one food truck profile', async () => {
+  it('should not be able to create a schedule for a non-existing truck profile', async () => {
     const scheduleStartDate = new Date(2020, 10, 10, 11);
 
+    await expect(
+      createSchedule.execute({
+        user_id: 'sm',
+        truck_id: '123456',
+        city: 'Los Angeles',
+        state: 'CA',
+        lat: '123456',
+        lon: '123456',
+        date_start: scheduleStartDate,
+        date_end: new Date(),
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create a schedule for a truck profile that doesnt belong to the logged user', async () => {
+    const scheduleStartDate = new Date(2020, 10, 10, 11);
+
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    const truckProfile = await fakeTruckProfilesRepository.create({
+      user_id: user.id,
+      name: 'Mexican Barbecue',
+      description: 'Our awesome Mexican style barbecue.',
+      cuisines: ['mexican', 'latin'],
+      payment_methods: ['credit card'],
+      catering: true,
+      photo_filename: '',
+      email: 'barbecue@email.com',
+      phone: 41985145400,
+      city: 'Curitiba',
+      state: 'PR',
+      web: 'http://www.mexicanbbq.com',
+      instagram: 'br-bbq',
+      facebook: 'br-bbq',
+      twitter: 'br-bbq',
+    });
+
+    await expect(
+      createSchedule.execute({
+        user_id: 'some_id',
+        truck_id: truckProfile.id,
+        city: 'Los Angeles',
+        state: 'CA',
+        lat: '123456',
+        lon: '123456',
+        date_start: scheduleStartDate,
+        date_end: new Date(),
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to create a schedule for same starting date and lat/lon', async () => {
+    const scheduleStartDate = new Date(2020, 10, 10, 11);
+
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    const truckProfile = await fakeTruckProfilesRepository.create({
+      user_id: user.id,
+      name: 'Mexican Barbecue',
+      description: 'Our awesome Mexican style barbecue.',
+      cuisines: ['mexican', 'latin'],
+      payment_methods: ['credit card'],
+      catering: true,
+      photo_filename: '',
+      email: 'barbecue@email.com',
+      phone: 41985145400,
+      city: 'Curitiba',
+      state: 'PR',
+      web: 'http://www.mexicanbbq.com',
+      instagram: 'br-bbq',
+      facebook: 'br-bbq',
+      twitter: 'br-bbq',
+    });
+
     await createSchedule.execute({
-      truck_id: '123456',
+      user_id: user.id,
+      truck_id: truckProfile.id,
       city: 'Los Angeles',
       state: 'CA',
       lat: '123456',
@@ -40,9 +161,10 @@ describe('CreateSchedule', () => {
       date_end: new Date(),
     });
 
-    expect(
+    await expect(
       createSchedule.execute({
-        truck_id: '123456',
+        user_id: user.id,
+        truck_id: truckProfile.id,
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',

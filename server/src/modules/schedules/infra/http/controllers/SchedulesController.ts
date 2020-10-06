@@ -13,7 +13,8 @@ class SchedulesController {
 
     const createSchedule = container.resolve(CreateScheduleService);
 
-    const schedule = createSchedule.execute({
+    const schedule = await createSchedule.execute({
+      user_id: req.user.id,
       truck_id,
       city,
       state,

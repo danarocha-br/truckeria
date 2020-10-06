@@ -1,4 +1,5 @@
 import { uuid } from 'uuidv4';
+import { DeleteResult } from 'typeorm';
 
 import TruckProfile from '../../infra/typeorm/entities/TruckProfile';
 
@@ -20,7 +21,9 @@ class FakeTruckProfilesRepository implements ITruckProfileRepository {
       throw new Error('No id provided.');
     }
 
-    truckProfiles = this.truckProfiles.filter(user => user.user_id === user_id);
+    truckProfiles = this.truckProfiles.filter(
+      truckProfile => truckProfile.user_id === user_id,
+    );
     return truckProfiles;
   }
 
@@ -94,6 +97,19 @@ class FakeTruckProfilesRepository implements ITruckProfileRepository {
     this.truckProfiles[profileIndex] = profile;
 
     return profile;
+  }
+
+  /**
+   * delete
+   */
+  public async delete(
+    truck_id: string,
+  ): Promise<TruckProfile[] | DeleteResult> {
+    const findProfile = this.truckProfiles.filter(
+      truck => truck.id === truck_id,
+    );
+
+    return findProfile;
   }
 }
 

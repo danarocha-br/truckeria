@@ -1,9 +1,12 @@
+import User from '@modules/users/infra/typeorm/entities/User';
 import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity('truck_profiles')
@@ -13,6 +16,10 @@ class TruckProfile {
 
   @Column()
   user_id: string;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
   @Column()
   name: string;

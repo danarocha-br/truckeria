@@ -45,6 +45,7 @@ describe('ListTrucksProfilesService', () => {
       facebook: 'br-bbq',
       twitter: 'br-bbq',
     });
+
     const truckProfile2 = await fakeTruckProfilesRepository.create({
       user_id: user.id,
       name: 'Mexican Barbecue',
