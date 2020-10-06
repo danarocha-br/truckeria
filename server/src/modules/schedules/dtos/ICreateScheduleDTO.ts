@@ -1,4 +1,5 @@
 export default interface ICreateScheduleDTO {
+  user_id: string;
   truck_id: string;
   city: string;
   state: string;

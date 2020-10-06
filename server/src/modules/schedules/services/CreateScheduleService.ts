@@ -1,4 +1,5 @@
 import { injectable, inject } from 'tsyringe';
+import { isBefore } from 'date-fns';
 
 import Schedule from '../infra/typeorm/entities/Schedule';
 import ISchedulesRepository from '../repositories/ISchedulesRepository';
@@ -54,7 +55,7 @@ class CreateScheduleService {
       truck_id,
     );
 
-    if (listAllSchedules) {
+    if (listAllSchedules?.length) {
       const scheduleExists = listAllSchedules.some(
         schedule =>
           schedule.lat === lat &&
@@ -69,7 +70,27 @@ class CreateScheduleService {
       }
     }
 
+    // check if schedule is not in past date
+    const currentDate = new Date(Date.now());
+
+    const isPastDate = isBefore(date_start, currentDate);
+
+    if (isPastDate) {
+      throw new AppError(
+        `Cannot create schedules in past date, please choose a current or future date.`,
+      );
+    }
+
+    // check if end date is not before the start date
+
+    const isEndDateBefore = isBefore(date_end, currentDate);
+
+    if (isEndDateBefore) {
+      throw new AppError(`End date must be after the start date.`);
+    }
+
     const schedule = await this.schedulesRepository.create({
+      user_id,
       truck_id,
       city,
       state,

@@ -8,7 +8,7 @@ const schedulesRouter = Router();
 const schedulesController = new SchedulesController();
 schedulesRouter.use(ensureAuthentication);
 
-schedulesRouter.get('/');
+schedulesRouter.get('/', schedulesController.index);
 
 schedulesRouter.post('/', schedulesController.create);
 
