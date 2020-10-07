@@ -10,7 +10,6 @@ import Schedule from '@modules/schedules/infra/typeorm/entities/Schedule';
 import AppError from '@shared/errors/AppError';
 
 interface IRequest {
-  // user_id: string;
   truck_id: string;
   month: number;
   year: number;

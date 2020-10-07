@@ -51,7 +51,7 @@ class CreateScheduleService {
     }
 
     //check if same start date and end date matches the location and this combination is already existent
-    const listAllSchedules = await this.schedulesRepository.listAllSchedules(
+    const listAllSchedules = await this.schedulesRepository.findAllSchedules(
       truck_id,
     );
 

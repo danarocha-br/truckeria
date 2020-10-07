@@ -3,21 +3,19 @@ import { parseISO } from 'date-fns';
 import { container } from 'tsyringe';
 
 import CreateScheduleService from '@modules/schedules/services/CreateScheduleService';
-import ListMonthScheduleService from '@modules/schedules/services/ListMonthScheduleService';
+import ListSchedulesService from '@modules/schedules/services/ListSchedulesService';
 
 class SchedulesController {
   /**
-   * list schedules for a food truck within a given month
+   * list all schedules for a food truck
    */
   public async index(req: Request, res: Response): Promise<Response> {
-    const { truck_id, month, year } = req.body;
+    const { truck_id } = req.params;
 
-    const listSchedules = container.resolve(ListMonthScheduleService);
+    const listSchedules = container.resolve(ListSchedulesService);
 
     const schedules = await listSchedules.execute({
       truck_id,
-      month,
-      year,
     });
 
     return res.json(schedules);

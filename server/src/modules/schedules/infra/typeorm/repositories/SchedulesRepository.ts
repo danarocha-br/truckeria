@@ -24,9 +24,9 @@ class SchedulesRepository implements ISchedulesRepository {
   }
 
   /**
-   * listAllSchedules
+   * findAllSchedules
    */
-  public async listAllSchedules(
+  public async findAllSchedules(
     truck_id: string,
   ): Promise<Schedule[] | undefined> {
     const findSchedules = await this.ormRepository.find({
@@ -49,7 +49,7 @@ class SchedulesRepository implements ISchedulesRepository {
     const schedules = await this.ormRepository.find({
       where: {
         truck_id,
-        date: Raw(
+        date_start: Raw(
           dateFieldName =>
             `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`,
         ),

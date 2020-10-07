@@ -2,38 +2,41 @@ import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 
 import ITruckProfilesRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
+import ISchedulesRepository from '../repositories/ISchedulesRepository';
 
 import TruckProfile from '@modules/foodtrucks/infra/typeorm/entities/TruckProfile';
 
 import AppError from '@shared/errors/AppError';
+import Schedule from '../infra/typeorm/entities/Schedule';
 
 interface IRequest {
-  user_id: string;
+  truck_id: string;
 }
 
 @injectable()
 class ListSchedulesService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-
     @inject('TruckProfilesRepository')
     private truckProfilesRepository: ITruckProfilesRepository,
+
+    @inject('SchedulesRepository')
+    private schedulesRepository: ISchedulesRepository,
   ) {}
   /**
    * execute
    */
-  public async execute({ user_id }: IRequest): Promise<TruckProfile[]> {
-    const truckProfiles = await this.truckProfilesRepository.findAllMyTrucksProfile(
-      user_id,
-    );
+  public async execute({
+    truck_id,
+  }: IRequest): Promise<Schedule[] | undefined> {
+    const truckProfile = await this.truckProfilesRepository.findById(truck_id);
 
-    if (!truckProfiles) {
-      throw new AppError(`You don't have any food truck profile yet.`);
+    if (!truckProfile) {
+      throw new AppError(`No truck profile was found with this given id.`);
     }
 
-    return truckProfiles;
+    const schedules = await this.schedulesRepository.findAllSchedules(truck_id);
+
+    return schedules;
   }
 }
 

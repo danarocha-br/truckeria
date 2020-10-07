@@ -19,9 +19,9 @@ class SchedulesRepository implements ISchedulesRepository {
   }
 
   /**
-   * listAllSchedules
+   * findAllSchedules
    */
-  public async listAllSchedules(
+  public async findAllSchedules(
     truck_id: string,
   ): Promise<Schedule[] | undefined> {
     const findSchedules = this.schedules.filter(
