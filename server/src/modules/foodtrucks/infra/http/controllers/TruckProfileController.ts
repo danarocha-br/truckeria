@@ -27,7 +27,6 @@ class TrucksProfilesController {
    */
   public async create(req: Request, res: Response): Promise<Response> {
     const {
-      user_id,
       name,
       description,
       cuisines,
@@ -43,6 +42,8 @@ class TrucksProfilesController {
       facebook,
       twitter,
     } = req.body;
+
+    const user_id = req.user.id;
 
     const createTruckProfile = container.resolve(CreateTruckProfileService);
 

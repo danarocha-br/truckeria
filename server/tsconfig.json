@@ -7,6 +7,7 @@
     "rootDir": "./src",
 
     "strict": true,
+    "allowJs": true,
 
     "strictPropertyInitialization": false,
 

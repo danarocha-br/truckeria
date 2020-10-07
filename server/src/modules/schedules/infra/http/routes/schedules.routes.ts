@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { celebrate, Segments, Joi } from 'celebrate';
 
 import SchedulesController from '@modules/schedules/infra/http/controllers/SchedulesController';
 import MonthlyScheduleController from '@modules/schedules/infra/http/controllers/MonthlyScheduleController';
@@ -12,9 +13,43 @@ const monthlyScheduleController = new MonthlyScheduleController();
 schedulesRouter.use(ensureAuthentication);
 schedulesRouter.use(ensureAuthentication);
 
-schedulesRouter.get('/:truck_id/all', schedulesController.index);
-schedulesRouter.get('/:truck_id/month', monthlyScheduleController.index);
+schedulesRouter.get(
+  '/:truck_id/all',
+  celebrate({
+    [Segments.PARAMS]: {
+      truck_id: Joi.string().uuid().required(),
+    },
+  }),
+  schedulesController.index,
+);
+schedulesRouter.get(
+  '/:truck_id/month',
+  celebrate({
+    [Segments.BODY]: {
+      month: Joi.number().required(),
+      year: Joi.number().required(),
+    },
+    [Segments.PARAMS]: {
+      truck_id: Joi.string().uuid().required(),
+    },
+  }),
+  monthlyScheduleController.index,
+);
 
-schedulesRouter.post('/', schedulesController.create);
+schedulesRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      truck_id: Joi.string().uuid().required(),
+      city: Joi.string().required(),
+      state: Joi.string().required(),
+      lat: Joi.string().required(),
+      lon: Joi.string().required(),
+      date_start: Joi.date().required(),
+      date_end: Joi.date().required(),
+    },
+  }),
+  schedulesController.create,
+);
 
 export default schedulesRouter;
