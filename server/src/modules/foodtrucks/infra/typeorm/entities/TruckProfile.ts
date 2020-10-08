@@ -8,6 +8,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
+import { Expose } from 'class-transformer';
 
 @Entity('truck_profiles')
 class TruckProfile {
@@ -68,6 +69,13 @@ class TruckProfile {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'photoURL' })
+  getPhotoURL(): string | null {
+    return this.photo_filename
+      ? `${process.env.APP_API_URL}/files/${this.photo_filename}`
+      : null;
+  }
 }
 
 export default TruckProfile;

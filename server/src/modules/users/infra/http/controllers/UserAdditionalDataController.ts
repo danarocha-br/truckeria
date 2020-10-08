@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import UpdateExtraDataToUserProfileService from '@modules/users/services/UpdateExtraDataToUserProfileService';
 
@@ -22,9 +23,7 @@ class UserAdditionalDataController {
       state,
     });
 
-    delete user.password;
-
-    return res.json(user);
+    return res.json(classToClass(user));
   }
 }
 
