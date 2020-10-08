@@ -5,6 +5,7 @@ import TruckProfile from '../infra/typeorm/entities/TruckProfile';
 import ITruckProfileRepository from '../repositories/ITruckProfilesRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import IStorageProvider from '@shared/container/providers/StorageProviders/models/IStorageProvider';
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import AppError from '@shared/errors/AppError';
 
@@ -37,6 +38,9 @@ class CreateTruckProfileService {
 
     @inject('StorageProvider')
     private storageProvider: IStorageProvider,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -104,6 +108,8 @@ class CreateTruckProfileService {
       facebook,
       twitter,
     });
+
+    await this.cacheProvider.invalidatePrefix('truckprofiles-list');
 
     return truckProfile;
   }

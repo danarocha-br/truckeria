@@ -4,21 +4,25 @@ import FakeSchedulesRepository from '../repositories/fakes/FakeSchedulesReposito
 import FakeTruckProfilesRepository from '@modules/foodtrucks/repositories/fakes/FakeTruckProfilesRepository';
 import CreateScheduleService from './CreateScheduleService';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeSchedulesRepository: FakeSchedulesRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
 let createSchedule: CreateScheduleService;
+let fakeCacheProvider: FakeCacheProvider;
 
 describe('CreateSchedule', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeSchedulesRepository = new FakeSchedulesRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
     createSchedule = new CreateScheduleService(
       fakeSchedulesRepository,
       fakeTruckProfilesRepository,
+      fakeCacheProvider,
     );
   });
 
@@ -120,7 +124,7 @@ describe('CreateSchedule', () => {
 
     await expect(
       createSchedule.execute({
-        user_id: user.id,
+        user_id: 'user.id',
         truck_id: truckProfile.id,
         city: 'Los Angeles',
         state: 'CA',
@@ -134,6 +138,10 @@ describe('CreateSchedule', () => {
 
   it('should not be able to create a schedule for same starting date and lat/lon', async () => {
     const scheduleStartDate = new Date(2020, 10, 10, 11);
+
+    jest.spyOn(Date, 'now').mockImplementation(() => {
+      return new Date(2020, 10, 1, 11).getTime();
+    });
 
     const user = await fakeUsersRepository.create({
       name: 'Joe Doe',
@@ -168,7 +176,7 @@ describe('CreateSchedule', () => {
       lat: '123456',
       lon: '123456',
       date_start: scheduleStartDate,
-      date_end: new Date(),
+      date_end: scheduleStartDate,
     });
 
     await expect(

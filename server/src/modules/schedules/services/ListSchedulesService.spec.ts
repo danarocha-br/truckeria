@@ -3,19 +3,23 @@ import AppError from '@shared/errors/AppError';
 import FakeSchedulesRepository from '../repositories/fakes/FakeSchedulesRepository';
 import FakeTruckProfilesRepository from '@modules/foodtrucks/repositories/fakes/FakeTruckProfilesRepository';
 import ListSchedulesService from './ListSchedulesService';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 let fakeSchedulesRepository: FakeSchedulesRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
 let listSchedulesService: ListSchedulesService;
+let fakeCacheProvider: FakeCacheProvider;
 
 describe('ListSchedulesService', () => {
   beforeEach(() => {
     fakeSchedulesRepository = new FakeSchedulesRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
     listSchedulesService = new ListSchedulesService(
       fakeTruckProfilesRepository,
       fakeSchedulesRepository,
+      fakeCacheProvider,
     );
   });
 
