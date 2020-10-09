@@ -2,24 +2,27 @@ import produce from 'immer';
 
 import ActionTypes from './types';
 
-const INITIAL_STATE = { currentUser: null, error: null, loading: false };
+const INITIAL_STATE = {
+  token: null,
+  signed: false,
+  currentUser: null,
+  error: null,
+  loading: false,
+};
 
 export default function auth(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
     switch (action.type) {
       case ActionTypes.EMAIL_SIGN_IN_REQUEST: {
-        draft.loading = true;
-        break;
-      }
-
-      case ActionTypes.GOOGLE_SIGN_IN_REQUEST: {
+        draft.token = action.payload.token;
         draft.loading = true;
         break;
       }
 
       case ActionTypes.SIGN_IN_SUCCESS: {
         draft.loading = false;
-        draft.currentUser = action.payload;
+        draft.signed = true;
+        draft.currentUser = action.payload.user;
         draft.error = null;
         break;
       }

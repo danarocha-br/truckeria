@@ -19,8 +19,8 @@ const Menu = () => {
   // Modal
   const [isOpen, toggleOpen] = useCycle(false, true);
 
-  // Firebase
-  const auth = useSelector((state) => state.firebase.auth);
+  // Auth
+  const auth = useSelector((state) => state.auth);
 
   useFirestoreConnect([{ collection: 'menus' }]);
   const menus = useSelector((state) => state.firestore.ordered.menus);

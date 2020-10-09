@@ -1,13 +1,11 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useFirebase, isLoaded } from 'react-redux-firebase';
 import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 import { Container, List, Profile } from './styles';
-import { useFirestoreConnect } from 'react-redux-firebase';
 
 import NavItem from './NavItem';
 import ProfileImage from '../../assets/sign-in-background.png';
@@ -15,22 +13,14 @@ import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
 
 const Menu = () => {
   const theme = useContext(ThemeContext);
-  const firebase = useFirebase();
   let history = useHistory();
 
-  const profile = useSelector((state) => state.firebase.profile);
-  const auth = useSelector((state) => state.firebase.auth);
-  useFirestoreConnect([
-    { collection: 'truckprofile' },
-    { collection: 'truckprofile', where: [['userId', '==', auth.uid]] },
-  ]);
-  const truckprofile = useSelector(
-    (state) => state.firestore.ordered.truckprofile
-  );
+  const user = useSelector((state) => state.auth.currentUser);
+  const auth = useSelector((state) => state.auth);
+  const isLoading = useSelector((state) => state.auth.loading);
 
   const handleSignOut = useCallback(async () => {
     try {
-      await firebase.logout();
       history.push('/login');
     } catch (error) {
       console.log(error);
@@ -41,37 +31,31 @@ const Menu = () => {
     <Container>
       <div>
         <Logo className="logo" />
-        <a href="">name</a>
       </div>
       <List>
         <NavItem
           title="overview"
           icon={FiTruck}
           to="/dashboard"
-          isLoading={!isLoaded(auth)}
+          isLoading={isLoading}
         />
         <NavItem
           title="schedule"
           icon={FiCalendar}
           to="/schedule"
-          isLoading={!isLoaded(auth)}
+          isLoading={isLoading}
         />
-        <NavItem
-          title="menu"
-          icon={FiGrid}
-          to="/menu"
-          isLoading={!isLoaded(auth)}
-        />
+        <NavItem title="menu" icon={FiGrid} to="/menu" isLoading={isLoading} />
         <NavItem
           title="discounts"
           icon={FiPercent}
           to="/discounts"
-          isLoading={!isLoaded(auth)}
+          isLoading={isLoading}
         />
       </List>
 
       <Profile>
-        {!isLoaded(auth) ? (
+        {isLoading ? (
           <SkeletonTheme
             color={theme.colors.shade}
             highlightColor={theme.colors.tabbar}
@@ -80,18 +64,14 @@ const Menu = () => {
           </SkeletonTheme>
         ) : (
           <img
-            src={profile.photoURL ? profile.photoURL : ProfileImage}
+            src={user.avatar_url ? user.avatar_url : ProfileImage}
             alt="foodtruck"
           />
         )}
         <div>
-          {!isLoaded(auth) ? (
-            ''
-          ) : (
-            <Link to="/profile">{profile.displayName}</Link>
-          )}
+          {isLoading ? '' : <Link to="/profile">{user.name}</Link>}
           <Link to="/login" onClick={handleSignOut}>
-            {!isLoaded(auth) ? '' : 'Log out'}
+            {isLoading ? '' : 'Log out'}
           </Link>
         </div>
       </Profile>

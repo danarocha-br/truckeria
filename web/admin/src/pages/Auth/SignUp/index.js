@@ -14,10 +14,7 @@ import TextInput from '../../../components/TextInput';
 import Button from '../../../components/Button';
 import ErrorMessage from '../../../components/Errors/ErrorMessage';
 
-import {
-  signUpRequest,
-  googleSignInRequest,
-} from '../../../store/modules/auth/actions';
+import { signUpRequest } from '../../../store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
   displayName: Yup.string()
@@ -48,16 +45,6 @@ const SignUp = () => {
     },
     [dispatch, signUpRequest]
   );
-
-  const handleGoogleSignUp = useCallback(async () => {
-    try {
-      await dispatch(googleSignInRequest());
-
-      history.push('/create-foodtruck-account');
-    } catch (error) {
-      console.log(error);
-    }
-  });
 
   const initialValues = { displayName: '', email: '', password: '' };
 
@@ -108,14 +95,6 @@ const SignUp = () => {
 
                   <Button
                     label="Create my account"
-                    isLoading={isSubmitting}
-                    disabled={!dirty}
-                  />
-                  <Button
-                    label="Sign Up With Google"
-                    type="button"
-                    secondary
-                    onClick={handleGoogleSignUp}
                     isLoading={isSubmitting}
                     disabled={!dirty}
                   />

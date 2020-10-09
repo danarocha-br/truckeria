@@ -1,22 +1,22 @@
 import ActionTypes from './types';
 
-export function googleSignInRequest() {
-  return {
-    type: ActionTypes.GOOGLE_SIGN_IN_REQUEST,
-  };
-}
+// export function googleSignInRequest() {
+//   return {
+//     type: ActionTypes.GOOGLE_SIGN_IN_REQUEST,
+//   };
+// }
 
-export function emailSignInRequest(emailAndPassword) {
+export function emailSignInRequest(email, password) {
   return {
     type: ActionTypes.EMAIL_SIGN_IN_REQUEST,
-    payload: emailAndPassword,
+    payload: { email, password },
   };
 }
 
-export function signInSuccess(user) {
+export function signInSuccess(token, user) {
   return {
     type: ActionTypes.SIGN_IN_SUCCESS,
-    payload: user,
+    payload: { token, user },
   };
 }
 
