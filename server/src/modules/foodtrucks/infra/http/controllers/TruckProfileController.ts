@@ -32,7 +32,6 @@ class TrucksProfilesController {
       cuisines,
       payment_methods,
       catering,
-      photo_filename,
       email,
       phone,
       city,
