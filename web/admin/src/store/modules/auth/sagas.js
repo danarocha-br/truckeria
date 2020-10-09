@@ -2,8 +2,8 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import ActionTypes from './types';
 import { signSuccess, signFailure } from './actions';
-import api from '../../../services/api';
-import history from '../../../services/history';
+import api from '~/services/api';
+import history from '~/services/history';
 
 export function* signInWithEmail({ payload: { email, password } }) {
   try {

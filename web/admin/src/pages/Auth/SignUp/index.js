@@ -4,16 +4,16 @@ import { Formik, Form } from 'formik';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
-import AuthLayout from '../../_layouts/auth';
+import AuthLayout from '~/pages/_layouts/auth';
 
 import { AnimatedContainer, Content, Background } from '../styles';
-import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
-import Link from '../../../components/Link';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-import ErrorMessage from '../../../components/Errors/ErrorMessage';
+import { ReactComponent as Logo } from '~/assets/truckeria-logo.svg';
+import Link from '~/components/Link';
+import TextInput from '~/components/TextInput';
+import Button from '~/components/Button';
+import ErrorMessage from '~/components/Errors/ErrorMessage';
 
-import { signUpRequest } from '../../../store/modules/auth/actions';
+import { signUpRequest } from '~/store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()

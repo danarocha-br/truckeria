@@ -1,11 +1,5 @@
 import ActionTypes from './types';
 
-// export function googleSignInRequest() {
-//   return {
-//     type: ActionTypes.GOOGLE_SIGN_IN_REQUEST,
-//   };
-// }
-
 export function emailSignInRequest(email, password) {
   return {
     type: ActionTypes.EMAIL_SIGN_IN_REQUEST,

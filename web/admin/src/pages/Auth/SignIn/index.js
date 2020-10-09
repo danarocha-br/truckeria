@@ -6,15 +6,15 @@ import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
 import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer, Content, Background } from '../styles';
-import AuthLayout from '../../_layouts/auth';
+import AuthLayout from '~/pages/_layouts/auth';
 
-import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
-import Link from '../../../components/Link';
-import TextInput from '../../../components/TextInput';
-import Button from '../../../components/Button';
-import ErrorMessage from '../../../components/Errors/ErrorMessage';
+import { ReactComponent as Logo } from '~/assets/truckeria-logo.svg';
+import Link from '~/components/Link';
+import TextInput from '~/components/TextInput';
+import Button from '~/components/Button';
+import ErrorMessage from '~/components/Errors/ErrorMessage';
 
-import { emailSignInRequest } from '../../../store/modules/auth/actions';
+import { emailSignInRequest } from '~/store/modules/auth/actions';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
