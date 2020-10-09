@@ -1,5 +1,4 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-
 import ActionTypes from './types';
 import { signSuccess, signFailure } from './actions';
 import api from '~/services/api';
@@ -27,19 +26,16 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
-export function* signUpWithEmail({ payload: { email, name, password } }) {
+export function* signUpWithEmail({ payload: { name, email, password } }) {
   try {
-    const response = yield call(api.post, 'users', {
+    yield call(api.post, 'users', {
       name,
       email,
       password,
+      roles: 'admin',
     });
 
-    const { token, user } = response.data;
-
-    history.push('/');
-
-    yield put(signSuccess(token, user));
+    yield put(signSuccess());
   } catch (error) {
     yield put(signFailure(error));
   }
@@ -57,8 +53,13 @@ export function setToken({ payload }) {
   }
 }
 
+export function signOut() {
+  history.push('/login');
+}
+
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest(ActionTypes.EMAIL_SIGN_IN_REQUEST, signInWithEmail),
   takeLatest(ActionTypes.SIGN_UP_REQUEST, signUpWithEmail),
+  takeLatest(ActionTypes.SIGN_OUT_REQUEST, signOut),
 ]);

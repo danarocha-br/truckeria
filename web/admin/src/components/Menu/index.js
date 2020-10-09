@@ -1,27 +1,27 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 import { Container, List, Profile } from './styles';
 
 import NavItem from './NavItem';
-import ProfileImage from '../../assets/sign-in-background.png';
-import { ReactComponent as Logo } from '../../assets/truckeria-logo.svg';
+import ProfileImage from '~/assets/sign-in-background.png';
+import { ReactComponent as Logo } from '~/assets/truckeria-logo.svg';
+import { signOutRequest } from '~/store/modules/auth/actions';
 
 const Menu = () => {
   const theme = useContext(ThemeContext);
-  let history = useHistory();
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.currentUser);
-  const auth = useSelector((state) => state.auth);
   const isLoading = useSelector((state) => state.auth.loading);
 
   const handleSignOut = useCallback(async () => {
     try {
-      history.push('/login');
+      dispatch(signOutRequest());
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +64,7 @@ const Menu = () => {
           </SkeletonTheme>
         ) : (
           <img
-            src={user.avatar_url ? user.avatar_url : ProfileImage}
+            src={!user.avatar_url ? ProfileImage : user.avatar_url}
             alt="foodtruck"
           />
         )}

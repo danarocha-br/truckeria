@@ -1,28 +1,24 @@
 import React from 'react';
 import { Form, useFormikContext } from 'formik';
 import { useSelector } from 'react-redux';
-import { useFirestoreConnect, isLoaded } from 'react-redux-firebase';
 
 import { FiFacebook, FiInstagram, FiGlobe, FiPhone } from 'react-icons/fi';
 
-import TextInput from '../../../../components/TextInput';
-import Select from '../../../../components/Select';
-import Button from '../../../../components/Button';
-import Row from '../../../../components/Form/Row';
-import Upload from '../../../../components/Upload';
-import { States } from '../../../../services/states';
+import TextInput from '~/components/TextInput';
+import Select from '~/components/Select';
+import Button from '~/components/Button';
+import Row from '~/components/Form/Row';
+import Upload from '~/components/Upload';
+import { States } from '~/services/states';
 
 const FormSetup = () => {
   const { values, setFieldValue, dirty, isSubmitting } = useFormikContext();
 
-  useFirestoreConnect([{ collection: 'cuisines' }]);
-  const cuisines = useSelector((state) => state.firestore.ordered.cuisines);
-
-  const foodOptions =
-    cuisines &&
-    cuisines.map((cuisine) => {
-      return { value: cuisine.title, label: cuisine.title };
-    });
+  // const foodOptions =
+  //   cuisines &&
+  //   cuisines.map((cuisine) => {
+  //     return { value: cuisine.title, label: cuisine.title };
+  //   });
 
   return (
     <Form>
@@ -38,7 +34,7 @@ const FormSetup = () => {
           name="truckName"
           label="Your Food Truck Name"
         />
-        <Select
+        {/* <Select
           id="cuisine"
           name="cuisine"
           placeholder="Select Cuisine Type"
@@ -46,7 +42,7 @@ const FormSetup = () => {
           isMulti
           options={foodOptions ? foodOptions : []}
           isLoading={!isLoaded(cuisines)}
-        />
+        /> */}
         <Row>
           <Select
             id="state"

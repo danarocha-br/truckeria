@@ -2,14 +2,13 @@ import React, { useState, useCallback } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useFirebase, useFirestore } from 'react-redux-firebase';
 import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer } from './styles';
 import Form from './Form';
 import Preview from './Preview';
-import AuthLayout from '../../_layouts/auth';
-import { truckProfileRequest } from '../../../store/modules/truckProfile/actions';
+import AuthLayout from '~/pages/_layouts/auth';
+import { truckProfileRequest } from '~/store/modules/truckProfile/actions';
 
 const FoodTruckSetup = () => {
   const SetupSchema = Yup.object().shape({
@@ -50,15 +49,12 @@ const FoodTruckSetup = () => {
   const [formValues, setformValues] = useState(initialValues);
 
   const dispatch = useDispatch();
-  const firebase = useFirebase();
-  const firestore = useFirestore();
   let history = useHistory();
 
   const handleSubmit = useCallback(
     async (values) => {
       try {
-        await dispatch(truckProfileRequest({ firebase, firestore, values }));
-        history.push('/');
+        await dispatch(truckProfileRequest({ values }));
       } catch (error) {
         console.log(error);
       }

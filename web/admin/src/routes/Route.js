@@ -3,42 +3,40 @@ import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { store } from '../store';
 
-function PrivateRoute({ children, ...rest }) {
-  const { signed, currentUser } = store.getState().auth;
+function PrivateRoute({ isPrivate, component: Component, ...rest }) {
+  const { isAuthenticated, currentUser } = store.getState().auth;
 
-  const isUserAdmin = () => {
-    if (!currentUser || !Array.isArray(currentUser.role)) {
-      return false;
-    }
-    const { role } = currentUser;
+  if (!isAuthenticated && isPrivate) {
+    return <Redirect to="/login" />;
+  }
 
-    if (role.includes('admin')) {
-      return true;
-    }
+  if (isAuthenticated && !isPrivate) {
+    return <Redirect to="/" />;
+  }
 
-    return false;
-  };
-  return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        signed && isUserAdmin ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
-  );
+  return <Route {...rest} component={Component} />;
+
+  // const isUserAdmin = () => {
+  //   if (!currentUser || !Array.isArray(currentUser.role)) {
+  //     return false;
+  //   }
+  //   const { role } = currentUser;
+
+  //   if (role.includes('admin')) {
+  //     return true;
+  //   }
+
+  //   return false;
+  // };
 }
 
 PrivateRoute.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  isPrivate: PropTypes.bool,
+};
+
+PrivateRoute.defaultProps = {
+  isPrivate: false,
 };
 
 export default PrivateRoute;

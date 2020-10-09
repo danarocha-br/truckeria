@@ -13,7 +13,10 @@ import TextInput from '~/components/TextInput';
 import Button from '~/components/Button';
 import ErrorMessage from '~/components/Errors/ErrorMessage';
 
-import { signUpRequest } from '~/store/modules/auth/actions';
+import {
+  signUpRequest,
+  emailSignInRequest,
+} from '~/store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
   name: Yup.string()
@@ -33,10 +36,13 @@ const SignUp = () => {
   let history = useHistory();
 
   const handleSignUp = useCallback(
-    async (values) => {
+    async ({ name, email, password }) => {
       try {
-        await dispatch(signUpRequest(values));
-        history.push('/create-foodtruck-account');
+        await dispatch(signUpRequest(name, email, password));
+        setTimeout(async () => {
+          await dispatch(emailSignInRequest(email, password));
+          history.push('/create-foodtruck-account');
+        }, 500);
       } catch (error) {
         console.log(error);
       }
@@ -89,7 +95,7 @@ const SignUp = () => {
                     label="Your password"
                     disabled={isSubmitting}
                   />
-                  {authError && <ErrorMessage message={authError} />}
+                  {authError && <ErrorMessage message={authError[0].message} />}
 
                   <Button
                     label="Create my account"

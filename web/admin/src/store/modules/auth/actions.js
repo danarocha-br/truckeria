@@ -27,3 +27,9 @@ export function signUpRequest(name, email, password) {
     payload: { name, email, password },
   };
 }
+
+export function signOutRequest() {
+  return {
+    type: ActionTypes.SIGN_OUT_REQUEST,
+  };
+}

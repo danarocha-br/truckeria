@@ -3,7 +3,6 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form } from 'formik';
 import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai';
-import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer, Content, Background } from '../styles';
 import AuthLayout from '~/pages/_layouts/auth';
@@ -28,18 +27,11 @@ const SignInSchema = Yup.object().shape({
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  let history = useHistory();
-
   const authError = useSelector((state) => state.auth.error);
 
   const handleEmailSignIn = useCallback(
     async ({ email, password }) => {
-      try {
-        await dispatch(emailSignInRequest(email, password));
-        // history.push('/');
-      } catch (error) {
-        console.log(error);
-      }
+      await dispatch(emailSignInRequest(email, password));
     },
     [dispatch, emailSignInRequest]
   );
@@ -82,7 +74,7 @@ const SignIn = () => {
                     disabled={isSubmitting}
                   />
 
-                  {authError && <ErrorMessage message={authError} />}
+                  {authError && <ErrorMessage message={authError[0].message} />}
 
                   <Button
                     type="submit"
@@ -90,7 +82,6 @@ const SignIn = () => {
                     isLoading={isSubmitting}
                     disabled={!dirty}
                   />
-
                   <Link to="/forgot-password" label="Forgot my password" />
                 </Form>
               );

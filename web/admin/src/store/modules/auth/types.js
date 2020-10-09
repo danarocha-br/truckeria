@@ -7,7 +7,6 @@ const ActionTypes = {
   SIGN_UP_REQUEST: '@auth/SIGN_UP_REQUEST',
   CREATE_USER: '@auth/CREATE_USER',
   SIGN_OUT_REQUEST: '@auth/SIGN_OUT_REQUEST',
-  SIGN_OUT_SUCCESS: '@auth/SIGN_OUT_SUCCESS',
 };
 
 export default ActionTypes;
