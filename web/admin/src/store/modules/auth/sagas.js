@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import ActionTypes from './types';
-import { signInSuccess, signFailure, signUpSuccess } from './actions';
+import { signSuccess, signFailure } from './actions';
 import api from '../../../services/api';
 import history from '../../../services/history';
 
@@ -18,26 +18,47 @@ export function* signInWithEmail({ payload: { email, password } }) {
       console.tron.error('User is not an admin.');
     }
 
-    yield put(signInSuccess(token, user));
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+
+    yield put(signSuccess(token, user));
     history.push('/');
   } catch (error) {
     yield put(signFailure(error));
   }
 }
 
-// export function* signUpWithEmail({
-//   payload: { displayName, email, password },
-// }) {
-//   const role = ['admin'];
+export function* signUpWithEmail({ payload: { email, name, password } }) {
+  try {
+    const response = yield call(api.post, 'users', {
+      name,
+      email,
+      password,
+    });
 
-//   try {
-//     yield put(signUpSuccess({ user: { email, displayName, role } }));
-//   } catch (error) {
-//     yield put(signFailure(error));
-//   }
-// }
+    const { token, user } = response.data;
+
+    history.push('/');
+
+    yield put(signSuccess(token, user));
+  } catch (error) {
+    yield put(signFailure(error));
+  }
+}
+
+export function setToken({ payload }) {
+  if (!payload) {
+    return;
+  }
+
+  const { token } = payload.auth;
+
+  if (token) {
+    api.defaults.headers['Authorization'] = `Bearer ${token}`;
+  }
+}
 
 export default all([
+  takeLatest('persist/REHYDRATE', setToken),
   takeLatest(ActionTypes.EMAIL_SIGN_IN_REQUEST, signInWithEmail),
-  // takeLatest(ActionTypes.SIGN_UP_REQUEST, signUpWithEmail),
+  takeLatest(ActionTypes.SIGN_UP_REQUEST, signUpWithEmail),
 ]);

@@ -30,7 +30,6 @@ const SignIn = () => {
 
   let history = useHistory();
 
-  const isLoading = useSelector((state) => state.auth.loading);
   const authError = useSelector((state) => state.auth.error);
 
   const handleEmailSignIn = useCallback(
@@ -73,14 +72,14 @@ const SignIn = () => {
                     name="email"
                     type="email"
                     label="Your e-mail"
-                    disabled={isLoading}
+                    disabled={isSubmitting}
                   />
                   <TextInput
                     icon={AiOutlineLock}
                     name="password"
                     type="password"
                     label="Your password"
-                    disabled={isLoading}
+                    disabled={isSubmitting}
                   />
 
                   {authError && <ErrorMessage message={authError} />}

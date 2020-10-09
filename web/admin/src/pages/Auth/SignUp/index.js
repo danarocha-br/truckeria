@@ -5,7 +5,6 @@ import { Link as RouterLink, useHistory } from 'react-router-dom';
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthLayout from '../../_layouts/auth';
-import { isLoaded } from 'react-redux-firebase';
 
 import { AnimatedContainer, Content, Background } from '../styles';
 import { ReactComponent as Logo } from '../../../assets/truckeria-logo.svg';
@@ -17,7 +16,7 @@ import ErrorMessage from '../../../components/Errors/ErrorMessage';
 import { signUpRequest } from '../../../store/modules/auth/actions';
 
 const RegistrationSchema = Yup.object().shape({
-  displayName: Yup.string()
+  name: Yup.string()
     .required('Please insert your full name.')
     .min(3, 'Name must have at least 3 characters.'),
   email: Yup.string()
@@ -30,8 +29,7 @@ const RegistrationSchema = Yup.object().shape({
 
 const SignUp = () => {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.firebase.auth);
-  const authError = useSelector((state) => state.firebase.authError);
+  const authError = useSelector((state) => state.auth.error);
   let history = useHistory();
 
   const handleSignUp = useCallback(
@@ -46,7 +44,7 @@ const SignUp = () => {
     [dispatch, signUpRequest]
   );
 
-  const initialValues = { displayName: '', email: '', password: '' };
+  const initialValues = { name: '', email: '', password: '' };
 
   return (
     <AuthLayout>
@@ -72,26 +70,26 @@ const SignUp = () => {
                 <Form>
                   <TextInput
                     icon={AiOutlineUser}
-                    name="displayName"
+                    name="name"
                     type="text"
                     label="Your full name"
-                    disabled={!isLoaded(auth)}
+                    disabled={isSubmitting}
                   />
                   <TextInput
                     icon={AiOutlineMail}
                     name="email"
                     type="email"
                     label="Your e-mail"
-                    disabled={!isLoaded(auth)}
+                    disabled={isSubmitting}
                   />
                   <TextInput
                     icon={AiOutlineLock}
                     name="password"
                     type="password"
                     label="Your password"
-                    disabled={!isLoaded(auth)}
+                    disabled={isSubmitting}
                   />
-                  {authError && <ErrorMessage message={authError.message} />}
+                  {authError && <ErrorMessage message={authError} />}
 
                   <Button
                     label="Create my account"

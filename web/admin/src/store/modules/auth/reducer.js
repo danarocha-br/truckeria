@@ -19,7 +19,7 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
 
-      case ActionTypes.SIGN_IN_SUCCESS: {
+      case ActionTypes.SIGN_SUCCESS: {
         draft.loading = false;
         draft.signed = true;
         draft.currentUser = action.payload.user;

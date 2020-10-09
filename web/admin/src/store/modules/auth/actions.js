@@ -13,9 +13,9 @@ export function emailSignInRequest(email, password) {
   };
 }
 
-export function signInSuccess(token, user) {
+export function signSuccess(token, user) {
   return {
-    type: ActionTypes.SIGN_IN_SUCCESS,
+    type: ActionTypes.SIGN_SUCCESS,
     payload: { token, user },
   };
 }
@@ -27,16 +27,9 @@ export function signFailure(error) {
   };
 }
 
-export function signUpRequest(userCredentials) {
+export function signUpRequest(name, email, password) {
   return {
     type: ActionTypes.SIGN_UP_REQUEST,
-    payload: userCredentials,
-  };
-}
-
-export function signUpSuccess({ user, additionalData }) {
-  return {
-    type: ActionTypes.SIGN_UP_SUCCESS,
-    payload: { user, additionalData },
+    payload: { name, email, password },
   };
 }
