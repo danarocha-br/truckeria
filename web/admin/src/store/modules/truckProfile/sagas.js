@@ -14,13 +14,6 @@ export function* createFoodTruckProfile({
   const files = values.files;
 
   try {
-    const createdProfile = yield firestore.collection(dbPath).add({
-      ...values,
-      files: values.files[0].name || [],
-      userId: user.uid,
-      createdAt: new Date(),
-    });
-
     yield put(
       truckProfileSuccess({
         ...values,
@@ -33,12 +26,6 @@ export function* createFoodTruckProfile({
     if (files.length === 0) {
       return;
     }
-    yield firebase.uploadFile(storagePath, files, dbPath, {
-      metadataFactory: (downloadURL) => {
-        return { fileURL: downloadURL };
-      },
-      documentId: createdProfile.id,
-    });
   } catch (error) {
     console.log(error);
     yield put(truckProfileError(error));

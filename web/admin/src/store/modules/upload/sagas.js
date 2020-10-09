@@ -6,19 +6,10 @@ import { signInSuccess, signFailure, signUpSuccess } from './actions';
 export function* uploadTruckImage({ payload: { firebase, firestore }, file }) {
   const user = firebase.auth().currentUser;
   const imageName = cuid();
-  const dbPath = 'truckprofile'
+  const dbPath = 'truckprofile';
   const storagePath = `${user.uid}/user_images/foodtruck_profile`;
 
   try {
-    await firebase.uploadFile(storagePath, file, dbPath, {
-      metadataFactory: ( downloadURL) => {
-        return { fileUrl: downloadURL, name: imageName }
-      },
-      documentId: '12345'
-    });
-
-
-
     yield put(signUpSuccess({ user: { email, displayName, createdAt, role } }));
   } catch (error) {
     yield put(signFailure(error));
