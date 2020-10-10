@@ -24,9 +24,9 @@ const Routes = () => {
           component={FoodTruckSetup}
           isPrivate
         />
-        <Route path="/schedule" component={Schedule} isPrivate />
+        <Route path="/schedule/:truck_id" component={Schedule} isPrivate />
         <Route path="/menu" component={Menu} isPrivate />
-        <Route path="/" exact component={Dashboard} isPrivate />
+        <Route path="/dashboard" component={Dashboard} isPrivate />
         {/* <Route path="/" exact component={() => <h1>404</h1>} /> */}
       </Switch>
     </AnimatePresence>

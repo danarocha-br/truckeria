@@ -20,10 +20,10 @@ const Preview = ({ values }) => {
       ) : (
         <ProfileImg src={EmptyImage} />
       )}
-      <h3>{values.truckName ? values.truckName : 'Your Food Truck'}</h3>
+      <h3>{values.name ? values.name : 'Your Food Truck'}</h3>
       <div className="flex">
-        {values.cuisine.length > 0 ? (
-          values.cuisine.map((type) => <Tag label={type} key={type} />)
+        {values.cuisines.length > 0 ? (
+          values.cuisines.map((type) => <Tag label={type} key={type} />)
         ) : (
           <>
             <Tag label="food type" isEmpty />

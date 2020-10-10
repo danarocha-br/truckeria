@@ -2,12 +2,15 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FiMapPin, FiClock, FiCalendar } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
 
-import Form from '../../components/Form';
-import Row from '../../components/Form/Row';
-import TextInput from '../../components/TextInput';
-import Modal from '../../components/Modal';
-import Button from '../../components/Button';
+import Form from '~/components/Form';
+import Row from '~/components/Form/Row';
+import TextInput from '~/components/TextInput';
+import Modal from '~/components/Modal';
+import Button from '~/components/Button';
+
+import { createScheduleRequest } from "~/store/modules/schedules/actions";
 
 const ScheduleSchema = Yup.object().shape({
   address: Yup.string().required('Please insert a valid address.'),
@@ -17,7 +20,7 @@ const ScheduleSchema = Yup.object().shape({
   time: Yup.string().required('Please pick a time.'),
 });
 
-const NewSchedule = ({ isOpen, toggleOpen }) => {
+const NewSchedule = ({ isOpen, toggleOpen, id }) => {
   const initialValues = {
     address: '',
     city: '',
@@ -26,13 +29,10 @@ const NewSchedule = ({ isOpen, toggleOpen }) => {
     date: '',
   };
 
-  const handleSubmit = async (values) => {
-    const { address, city, state, date, time } = values;
+  const dispatch = useDispatch()
 
-    try {
-    } catch (error) {
-      console.log(error);
-    }
+  const handleSubmit = async (values) => {
+      await dispatch(createScheduleRequest({truck_id: id, ...values }))
   };
 
   return (

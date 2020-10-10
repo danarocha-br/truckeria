@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 import { Container, List, Profile } from './styles';
@@ -12,12 +12,15 @@ import ProfileImage from '~/assets/sign-in-background.png';
 import { ReactComponent as Logo } from '~/assets/truckeria-logo.svg';
 import { signOutRequest } from '~/store/modules/auth/actions';
 
-const Menu = () => {
+const AsideMenu = () => {
   const theme = useContext(ThemeContext);
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.currentUser);
+  const truckProfiles = useSelector((state) => state.truckProfile.list);
   const isLoading = useSelector((state) => state.auth.loading);
+
+  const truck_id = truckProfiles && truckProfiles[0].id
 
   const handleSignOut = useCallback(async () => {
     try {
@@ -42,7 +45,7 @@ const Menu = () => {
         <NavItem
           title="schedule"
           icon={FiCalendar}
-          to="/schedule"
+          to={`/schedule/${truck_id}`}
           isLoading={isLoading}
         />
         <NavItem title="menu" icon={FiGrid} to="/menu" isLoading={isLoading} />
@@ -79,8 +82,8 @@ const Menu = () => {
   );
 };
 
-Menu.propTypes = {
+AsideMenu.propTypes = {
   isLoading: PropTypes.bool,
 };
 
-export default Menu;
+export default AsideMenu;

@@ -1,20 +1,22 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { AiOutlinePicture } from 'react-icons/ai';
-import { useFirebase } from 'react-redux-firebase';
 
 import { Container, Thumb, InfoRejected } from './style';
 import colors from '../../styles/tokens/colors';
 
 const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
-  // const firebase = useFirebase();
-
   const onDrop = useCallback(
     (acceptedFiles) => {
       // do nothing if no files
       if (acceptedFiles.length === 0) {
         return;
       }
+
+
+      // const files = new FormData();
+      // files.append('files', acceptedFiles[0]);
+
       setFieldValue(valueField, acceptedFiles);
     },
     [setFieldValue, valueField]

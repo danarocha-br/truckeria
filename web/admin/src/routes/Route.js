@@ -6,16 +6,6 @@ import { store } from '../store';
 function PrivateRoute({ isPrivate, component: Component, ...rest }) {
   const { isAuthenticated, currentUser } = store.getState().auth;
 
-  if (!isAuthenticated && isPrivate) {
-    return <Redirect to="/login" />;
-  }
-
-  if (isAuthenticated && !isPrivate) {
-    return <Redirect to="/" />;
-  }
-
-  return <Route {...rest} component={Component} />;
-
   // const isUserAdmin = () => {
   //   if (!currentUser || !Array.isArray(currentUser.role)) {
   //     return false;
@@ -28,6 +18,16 @@ function PrivateRoute({ isPrivate, component: Component, ...rest }) {
 
   //   return false;
   // };
+
+  if (!isAuthenticated && isPrivate) {
+    return <Redirect to="/login" />;
+  }
+
+  if (isAuthenticated && !isPrivate) {
+    return <Redirect to="/" />;
+  }
+
+  return <Route {...rest} component={Component} />;
 }
 
 PrivateRoute.propTypes = {

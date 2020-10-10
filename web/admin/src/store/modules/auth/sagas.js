@@ -13,8 +13,10 @@ export function* signInWithEmail({ payload: { email, password } }) {
 
     const { token, user } = response.data;
 
-    if (user.roles !== 'admin') {
+    const isAdmin = user.roles.includes('admin');
+    if (!isAdmin) {
       console.tron.error('User is not an admin.');
+      return;
     }
 
     api.defaults.headers['Authorization'] = `Bearer ${token}`;

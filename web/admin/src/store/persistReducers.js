@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'truckeria',
       storage,
-      whitelist: ['auth', 'user'],
+      whitelist: ['auth'],
     },
     reducers
   );

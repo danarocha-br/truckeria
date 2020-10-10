@@ -9,7 +9,7 @@ import { Container, Wrapper, Date, Info, Actions } from './styles';
 import Button from '../../Button';
 import { listItems } from '../animations';
 
-const ScheduleItem = ({ date, address, isActive, isLoading }) => {
+const ScheduleItem = ({ date, day, address, startsIn, isActive, isLoading }) => {
   const theme = useContext(ThemeContext);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
@@ -30,12 +30,11 @@ const ScheduleItem = ({ date, address, isActive, isLoading }) => {
             </SkeletonTheme>
           ) : (
             <>
-              <p>15</p>
-              <p>WED</p>
+              {day}
             </>
           )}
 
-          {isTabletOrMobile && !isLoading && <small>in 3 days</small>}
+          {isTabletOrMobile && !isLoading && <small>{startsIn}</small>}
         </Date>
 
         {isLoading ? (
@@ -50,7 +49,7 @@ const ScheduleItem = ({ date, address, isActive, isLoading }) => {
             <address>{address}</address>
             <span>
               <small>{date}</small>
-              <small>in 3 days</small>
+              <small>{startsIn}</small>
             </span>
 
             {isTabletOrMobile && (
@@ -71,7 +70,9 @@ const ScheduleItem = ({ date, address, isActive, isLoading }) => {
 
 ScheduleItem.propTypes = {
   date: PropTypes.string.isRequired,
+  day: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
+  startsIn: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
   isLoading: PropTypes.bool,
 };

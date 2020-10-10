@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Wrapper, Container } from './styles';
-import Menu from '../../../components/Menu';
+import AisdeMenu from '~/components/AsideMenu';
 
 const DefaultLayout = ({ children }) => {
   return (
     <Wrapper>
-      <Menu />
+      <AisdeMenu />
       <Container initial="hidden" animate="visible" exit="exit">
         {children}
       </Container>

@@ -24,6 +24,7 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.isAuthenticated = true;
         draft.currentUser = action.payload.user;
         draft.error = null;
+        draft.token = action.payload.token;
         break;
       }
 

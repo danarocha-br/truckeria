@@ -1,22 +1,34 @@
 import ActionTypes from './types';
 
-export function truckProfileRequest(values) {
+export function truckProfileRequest(data) {
   return {
-    type: ActionTypes.TRUCK_PROFILE_REQUEST,
-    payload: values,
+    type: ActionTypes.CREATE_TRUCK_PROFILE_REQUEST,
+    payload: { data },
   };
 }
 
-export function truckProfileSuccess(values) {
+export function truckProfileSuccess(truckProfile) {
   return {
     type: ActionTypes.CREATE_TRUCK_PROFILE_SUCCESS,
-    payload: values,
+    payload: { truckProfile },
   };
 }
 
-export function truckProfileError(error) {
+export function truckProfileError() {
   return {
     type: ActionTypes.TRUCK_PROFILE_FAILTURE,
-    payload: error,
+  };
+}
+
+export function loadTruckProfileRequest() {
+  return {
+    type: ActionTypes.LOAD_TRUCK_PROFILE_REQUEST
+  };
+}
+
+export function loadTruckProfileSuccess(truckProfiles) {
+  return {
+    type: ActionTypes.LOAD_TRUCK_PROFILE_SUCCESS,
+    payload: { truckProfiles },
   };
 }

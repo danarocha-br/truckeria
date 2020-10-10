@@ -12,10 +12,10 @@ import { truckProfileRequest } from '~/store/modules/truckProfile/actions';
 
 const FoodTruckSetup = () => {
   const SetupSchema = Yup.object().shape({
-    truckName: Yup.string()
+    name: Yup.string()
       .required('Please insert your food truck name.')
       .min(3, 'Name must have at least 3 characters.'),
-    cuisine: Yup.array()
+    cuisines: Yup.array()
       .min(1, 'Select at least one cuisine type.')
       .of(
         Yup.object()
@@ -36,12 +36,12 @@ const FoodTruckSetup = () => {
 
   const initialValues = {
     files: [],
-    truckName: '',
-    cuisine: [],
+    name: '',
+    cuisines: [],
     state: '',
     city: '',
     phone: '',
-    website: '',
+    web: '',
     instagram: '',
     facebook: '',
   };
@@ -53,11 +53,13 @@ const FoodTruckSetup = () => {
 
   const handleSubmit = useCallback(
     async (values) => {
-      try {
-        await dispatch(truckProfileRequest({ values }));
-      } catch (error) {
-        console.log(error);
-      }
+      const files = values.files[0]
+      let data = new FormData();
+      data = {...values}
+      data.append('photo_filename', files);
+
+      await dispatch(truckProfileRequest( data ));
+
     },
     [dispatch, truckProfileRequest]
   );
@@ -74,6 +76,7 @@ const FoodTruckSetup = () => {
             validationSchema={SetupSchema}
             onSubmit={(values, actions) => {
               handleSubmit(values);
+              console.log('clicked')
             }}
           >
             {({ values }) => {

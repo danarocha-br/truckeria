@@ -17,12 +17,14 @@ export default {
 };
 
 export const Default = (args) => {
-  return <ScheduleItem date="hello" key="1" {...args} />;
+  return <ScheduleItem date="9:00-18:00, Monday, June 09 2020" key="1" {...args} />;
 };
 
 Default.args = {
   date: '9:00-18:00, Monday, June 09 2020',
+  day: '05 Nov',
   address: '767 5th Ave, New York',
+  startsIn: '5 days',
   isActive: false,
   isLoading: false,
 };

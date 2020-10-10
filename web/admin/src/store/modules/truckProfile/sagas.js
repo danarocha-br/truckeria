@@ -1,37 +1,37 @@
-import { takeLatest, put, all } from 'redux-saga/effects';
-import cuid from 'cuid';
+import { takeLatest, put, all, call } from 'redux-saga/effects';
 
 import ActionTypes from './types';
-import { truckProfileError, truckProfileSuccess } from './actions';
+import { truckProfileError, truckProfileSuccess, loadTruckProfileSuccess } from './actions';
+import api from '~/services/api';
 
-export function* createFoodTruckProfile({
-  payload: { firebase, firestore, values },
-}) {
-  const user = firebase.auth().currentUser;
-  const imageName = cuid();
-  const dbPath = 'truckprofile';
-  const storagePath = `${user.uid}/images/foodtruck_profile`;
-  const files = values.files;
+export function* createFoodTruckProfile({ payload: { data } }) {
+
 
   try {
-    yield put(
-      truckProfileSuccess({
-        ...values,
-        userId: user.uid,
-        ownedBy: user.displayName,
-        createdAt: new Date(),
-      })
-    );
-
-    if (files.length === 0) {
-      return;
-    }
+    const response = yield call(api.post, 'foodtruck/profile', {
+      ...data,
+    });
+    yield put(truckProfileSuccess(response.data));
   } catch (error) {
     console.log(error);
     yield put(truckProfileError(error));
   }
 }
 
+export function* loadTruckProfiles() {
+  try {
+    const response = yield call(api.get, 'foodtruck/profile');
+    const truckProfiles = response.data.map(truckProfile => ({
+      ...truckProfile,
+    }));
+
+    yield put(loadTruckProfileSuccess(truckProfiles));
+  } catch (error) {
+    yield put(truckProfileError(error));
+  }
+}
+
 export default all([
-  takeLatest(ActionTypes.TRUCK_PROFILE_REQUEST, createFoodTruckProfile),
+  takeLatest(ActionTypes.CREATE_TRUCK_PROFILE_REQUEST, createFoodTruckProfile),
+  takeLatest(ActionTypes.LOAD_TRUCK_PROFILE_REQUEST, loadTruckProfiles),
 ]);
