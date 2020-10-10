@@ -21,6 +21,9 @@ class TruckProfilesRepository implements ITruckProfileRepository {
   ): Promise<TruckProfile[]> {
     const truckProfiles = await this.ormRepository.find({
       where: { user_id: user_id },
+      order: {
+        name: "ASC"
+      }
     });
 
     return truckProfiles;

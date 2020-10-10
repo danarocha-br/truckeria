@@ -41,6 +41,9 @@ class UsersRepository implements IUsersRepository {
       where: {
         id: Not(superadmin_id),
       },
+      order: {
+        name: "ASC"
+      }
     });
     return users;
   }

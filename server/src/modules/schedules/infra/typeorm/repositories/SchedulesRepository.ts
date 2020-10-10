@@ -28,9 +28,12 @@ class SchedulesRepository implements ISchedulesRepository {
    */
   public async findAllSchedules(
     truck_id: string,
-  ): Promise<Schedule[] | undefined> {
+  ): Promise<Schedule[] | null> {
     const findSchedules = await this.ormRepository.find({
       where: { truck_id: truck_id },
+      order: {
+        date_start: "ASC"
+      }
     });
 
     return findSchedules;
@@ -54,6 +57,9 @@ class SchedulesRepository implements ISchedulesRepository {
             `to_char(${dateFieldName}, 'MM-YYYY') = '${parsedMonth}-${year}'`,
         ),
       },
+      order: {
+        date_start: "ASC"
+      }
     });
 
     return schedules;
