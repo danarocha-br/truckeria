@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ITruckProfilesRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
@@ -40,7 +41,7 @@ class ListTrucksProfilesService {
 
       await this.cacheProvider.save(
         `truckprofiles-list:${user_id}`,
-        truckProfiles,
+        classToClass(truckProfiles),
       );
 
       if (!truckProfiles?.length) {
