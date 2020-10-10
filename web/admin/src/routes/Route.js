@@ -4,20 +4,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { store } from '../store';
 
 function PrivateRoute({ isPrivate, component: Component, ...rest }) {
-  const { isAuthenticated, currentUser } = store.getState().auth;
+  const { isAuthenticated } = store.getState().auth;
 
-  // const isUserAdmin = () => {
-  //   if (!currentUser || !Array.isArray(currentUser.role)) {
-  //     return false;
-  //   }
-  //   const { role } = currentUser;
-
-  //   if (role.includes('admin')) {
-  //     return true;
-  //   }
-
-  //   return false;
-  // };
 
   if (!isAuthenticated && isPrivate) {
     return <Redirect to="/login" />;

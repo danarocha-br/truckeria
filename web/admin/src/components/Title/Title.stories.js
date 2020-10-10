@@ -24,4 +24,5 @@ export const Default = (args) => {
 
 Default.args = {
   title: 'Hello',
+  total: 20
 };

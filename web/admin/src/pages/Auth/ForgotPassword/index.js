@@ -22,8 +22,7 @@ const ForgotPassword = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(null);
 
-  let history = useHistory();
-
+  const history = useHistory();
 
   const initialValues = { email: '' };
 
@@ -42,7 +41,7 @@ const ForgotPassword = () => {
     } finally {
       setLoading(false)
     }
-  }, []);
+  }, [history,]);
 
   return (
     <AnimatedContainer>
@@ -55,7 +54,7 @@ const ForgotPassword = () => {
           validationSchema={SignInSchema}
           onSubmit={(values, actions) => {
             handleSubmit(values);
-            // actions.setSubmitting(false);
+            actions.setSubmitting(false);
           }}
           render={({isValid, dirty}) => (
             <Form>

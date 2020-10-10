@@ -33,7 +33,7 @@ const SignIn = () => {
     async ({ email, password }) => {
       await dispatch(emailSignInRequest(email, password));
     },
-    [dispatch, emailSignInRequest]
+    [dispatch]
   );
 
   const initialValues = { email: '', password: '' };

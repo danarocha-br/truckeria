@@ -1,11 +1,11 @@
 import React from 'react';
-import Tag from '../../../components/Tag';
-import colors from '../../../styles/tokens/colors';
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import { FiMapPin } from 'react-icons/fi';
+// import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 
+import Tag from '~/components/Tag';
+import colors from '~/styles/tokens/colors';
 import { PreviewContainer, ProfileImg } from './styles';
-import EmptyImage from '../../../assets/empty_photo.png';
+import EmptyImage from '~/assets/empty_photo.png';
 
 // const Map = ReactMapboxGl({
 //   accessToken:

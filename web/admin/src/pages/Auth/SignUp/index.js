@@ -47,7 +47,7 @@ const SignUp = () => {
         console.log(error);
       }
     },
-    [dispatch, signUpRequest]
+    [dispatch, history]
   );
 
   const initialValues = { name: '', email: '', password: '' };

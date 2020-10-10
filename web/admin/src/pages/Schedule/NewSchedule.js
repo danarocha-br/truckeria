@@ -1,14 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FiMapPin, FiClock, FiCalendar } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 
-import Form from '~/components/Form';
-import Row from '~/components/Form/Row';
-import TextInput from '~/components/TextInput';
 import Modal from '~/components/Modal';
-import Button from '~/components/Button';
+import Form from './NewScheduleForm';
 
 import { createScheduleRequest } from "~/store/modules/schedules/actions";
 
@@ -21,6 +17,7 @@ const ScheduleSchema = Yup.object().shape({
 });
 
 const NewSchedule = ({ isOpen, toggleOpen, id }) => {
+
   const initialValues = {
     address: '',
     city: '',
@@ -29,7 +26,8 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
     date: '',
   };
 
-  const dispatch = useDispatch()
+  const [formValues, setformValues] = useState(initialValues);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
       await dispatch(createScheduleRequest({truck_id: id, ...values }))
@@ -44,23 +42,14 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
           handleSubmit(values);
           actions.setSubmitting(false);
         }}
-        render={() => (
-          <Form>
-            <TextInput icon={FiMapPin} name="address" label="Address" />
-            <Row>
-              <TextInput name="city" label="City" />
-              <TextInput name="state" label="State" />
-            </Row>
+        >
+          {({ values }) => {
+            setTimeout(() => setformValues(values), 0);
+            return <Form />;
+          }}
+        </Formik>
 
-            <Row>
-              <TextInput icon={FiCalendar} name="date" label="Date" />
-              <TextInput icon={FiClock} name="time" label="Time" />
-            </Row>
 
-            <Button label="Save" />
-          </Form>
-        )}
-      />
     </Modal>
   );
 };

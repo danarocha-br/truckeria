@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import tw from 'tailwind.macro';
-import { lighten } from 'polished';
 
 export const Container = styled.div`
   ${tw`w-full flex items-center text-left p-4 rounded-lg mt-4 text-sm`};

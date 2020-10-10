@@ -4,10 +4,23 @@ import tw from 'tailwind.macro';
 
 export const Container = styled.div`
 
-
   .DayPicker {
     background: ${(props) => props.theme.colors.tabbar};
     border-top-left-radius: 2.5rem;
+
+    &-wrapper {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    &-NavButton {
+      &:focus {
+        ${tw`rounded-md`}
+        border: ${(props) => `1px dashed ${props.theme.colors.tabbar}`};
+        outline: none;
+      }
+    }
   }
 
   .DayPicker,
@@ -40,12 +53,24 @@ export const Container = styled.div`
   .DayPicker-Day {
     width: 20px;
     height: 20px;
+    border: 1px solid transparent;
+
+    &:hover {
+      ${tw`rounded-lg`}
+    }
+
+    &:focus {
+      ${tw`font-bold rounded-lg`}
+      outline: 0;
+      border: ${(props) => `1px dashed ${props.theme.colors.primary}`};
+    }
   }
 
-  .DayPicker-Day--available:not(.DayPicker-Day--outside) {
-    background: ${(props) => props.theme.colors.shade};
+  .DayPicker-Day--today {
+    ${tw`font-bold rounded-lg`}
+    background: ${(props) => props.theme.colors.primary} !important;
     border-radius: 10px;
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text} !important;
   }
 
   .DayPicker:not(.DayPicker--interactionDisabled)
@@ -53,9 +78,6 @@ export const Container = styled.div`
     background: ${(props) => shade(0.2, props.theme.colors.shade)};
   }
 
-  .DayPicker-Day--today {
-    font-weight: normal;
-  }
 
   .DayPicker-Day--disabled {
     color: #666360 !important;
@@ -64,7 +86,7 @@ export const Container = styled.div`
 
   .DayPicker-Day--selected {
     ${tw`font-bold rounded-lg`}
-    background: ${(props) => props.theme.colors.primary} !important;
+    background: ${(props) => props.theme.colors.shade} !important;
     color: ${(props) => props.theme.colors.white} !important;
   }
 `;

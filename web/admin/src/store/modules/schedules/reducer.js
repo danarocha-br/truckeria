@@ -19,6 +19,17 @@ export default function truckProfile(state = INITIAL_STATE, action) {
         break;
       }
 
+      case ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+
+      case ActionTypes.LOAD_MONTH_SCHEDULES_SUCCESS: {
+        draft.loading = false;
+        draft.list = action.payload.list
+        break;
+      }
+
       case ActionTypes.CREATE_SCHEDULE_REQUEST: {
         draft.loading = true;
         break;

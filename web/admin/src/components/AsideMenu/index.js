@@ -2,7 +2,7 @@ import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 import { Container, List, Profile } from './styles';
@@ -28,7 +28,7 @@ const AsideMenu = () => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

@@ -10,6 +10,7 @@ import Dashboard from '../pages/Dashboard';
 import Schedule from '../pages/Schedule';
 import Menu from '../pages/Menu';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
+import ResetPassword from '../pages/Auth/ResetPassword';
 import FoodTruckSetup from '../pages/Auth/FoodTruckSetup';
 
 const Routes = () => {
@@ -19,6 +20,7 @@ const Routes = () => {
         <Route path="/login" exact component={SignIn} />
         <Route path="/register" component={SignUp} />
         <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={ResetPassword} />
         <Route
           path="/create-foodtruck-account"
           component={FoodTruckSetup}

@@ -106,7 +106,7 @@ const SelectInput = ({
    */
   const [field, meta, helpers] = useField(rest);
 
-  const { setValue, setTouched, setError } = helpers;
+  const {  setTouched, setError } = helpers;
 
   const getValue = () => {
     if (options) {

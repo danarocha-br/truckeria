@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+// import { useHistory } from 'react-router-dom';
 
 import { AnimatedContainer } from './styles';
 import Form from './Form';
@@ -49,7 +49,6 @@ const FoodTruckSetup = () => {
   const [formValues, setformValues] = useState(initialValues);
 
   const dispatch = useDispatch();
-  let history = useHistory();
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -61,7 +60,7 @@ const FoodTruckSetup = () => {
       await dispatch(truckProfileRequest( data ));
 
     },
-    [dispatch, truckProfileRequest]
+    [dispatch]
   );
 
   return (

@@ -7,7 +7,7 @@ import Form from '../../components/Form';
 import TextInput from '../../components/TextInput';
 import Modal from '../../components/Modal';
 import Button from '../../components/Button';
-import Upload from '../../components/Upload';
+// import Upload from '../../components/Upload';
 
 const MenuSchema = Yup.object().shape({
   image: Yup.string().required('Please insert a valid address.'),
@@ -25,7 +25,7 @@ const NewMenuItem = ({ isOpen, toggleOpen }) => {
   };
 
   const handleSubmit = async (values) => {
-    const { image, title, description, price } = values;
+    // const { image, title, description, price } = values;
 
     try {
     } catch (error) {
