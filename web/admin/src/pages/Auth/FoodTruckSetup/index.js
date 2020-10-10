@@ -76,7 +76,6 @@ const FoodTruckSetup = () => {
             validationSchema={SetupSchema}
             onSubmit={(values, actions) => {
               handleSubmit(values);
-              console.log('clicked')
             }}
           >
             {({ values }) => {
