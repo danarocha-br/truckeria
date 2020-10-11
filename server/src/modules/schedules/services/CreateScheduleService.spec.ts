@@ -61,6 +61,7 @@ describe('CreateSchedule', () => {
     const schedule = await createSchedule.execute({
       user_id: user.id,
       truck_id: truckProfile.id,
+      address: 'Avenue 104',
       city: 'Los Angeles',
       state: 'CA',
       lat: '123456',
@@ -80,6 +81,7 @@ describe('CreateSchedule', () => {
       createSchedule.execute({
         user_id: 'sm',
         truck_id: '123456',
+        address: 'Avenue 104',
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',
@@ -126,6 +128,7 @@ describe('CreateSchedule', () => {
       createSchedule.execute({
         user_id: 'user.id',
         truck_id: truckProfile.id,
+        address: 'Avenue 104',
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',
@@ -173,6 +176,7 @@ describe('CreateSchedule', () => {
       truck_id: truckProfile.id,
       city: 'Los Angeles',
       state: 'CA',
+      address: 'Avenue 104',
       lat: '123456',
       lon: '123456',
       date_start: scheduleStartDate,
@@ -183,6 +187,7 @@ describe('CreateSchedule', () => {
       createSchedule.execute({
         user_id: user.id,
         truck_id: truckProfile.id,
+        address: 'Avenue 104',
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',
@@ -229,6 +234,7 @@ describe('CreateSchedule', () => {
       createSchedule.execute({
         user_id: user.id,
         truck_id: truckProfile.id,
+        address: 'Avenue 104',
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',
@@ -276,6 +282,7 @@ describe('CreateSchedule', () => {
       createSchedule.execute({
         user_id: user.id,
         truck_id: truckProfile.id,
+        address: 'Avenue 104',
         city: 'Los Angeles',
         state: 'CA',
         lat: '123456',

@@ -41,6 +41,7 @@ schedulesRouter.post(
   celebrate({
     [Segments.BODY]: {
       truck_id: Joi.string().uuid().required(),
+      address: Joi.string().required(),
       city: Joi.string().required(),
       state: Joi.string().required(),
       lat: Joi.string().required(),

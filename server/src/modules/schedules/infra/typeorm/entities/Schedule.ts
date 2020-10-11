@@ -23,6 +23,9 @@ class Schedule {
   truck: TruckProfile;
 
   @Column()
+  address: string;
+
+  @Column()
   city: string;
 
   @Column()

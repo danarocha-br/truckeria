@@ -11,6 +11,7 @@ import AppError from '@shared/errors/AppError';
 interface IRequest {
   truck_id: string;
   user_id: string;
+  address: string;
   city: string;
   state: string;
   lat: string;
@@ -35,6 +36,7 @@ class CreateScheduleService {
   public async execute({
     truck_id,
     user_id,
+    address,
     city,
     state,
     lat,
@@ -60,10 +62,15 @@ class CreateScheduleService {
     );
 
     if (listAllSchedules?.length) {
+      // const scheduleExists = listAllSchedules.some(
+      //   schedule =>
+      //     schedule.lat === lat &&
+      //     schedule.lon === lon &&
+      //     schedule.date_start === date_start,
+      // );
       const scheduleExists = listAllSchedules.some(
         schedule =>
-          schedule.lat === lat &&
-          schedule.lon === lon &&
+          schedule.address === address &&
           schedule.date_start === date_start,
       );
 
@@ -96,6 +103,7 @@ class CreateScheduleService {
     const schedule = await this.schedulesRepository.create({
       user_id,
       truck_id,
+      address,
       city,
       state,
       lat,

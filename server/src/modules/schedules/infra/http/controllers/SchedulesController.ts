@@ -21,13 +21,14 @@ class SchedulesController {
   }
 
   public async create(req: Request, res: Response): Promise<Response> {
-    const { truck_id, city, state, lat, lon, date_start, date_end } = req.body;
+    const { truck_id, address, city, state, lat, lon, date_start, date_end } = req.body;
 
     const createSchedule = container.resolve(CreateScheduleService);
 
     const schedule = await createSchedule.execute({
       user_id: req.user.id,
       truck_id,
+      address,
       city,
       state,
       lat,
