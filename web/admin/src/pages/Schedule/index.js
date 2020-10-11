@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
 import { FiPlus } from 'react-icons/fi';
-import { motion, useCycle } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useSelector, useDispatch } from 'react-redux';
 import {useParams} from "react-router-dom";
 import { format, toDate, parseISO, getDate } from 'date-fns';
@@ -18,7 +18,7 @@ import { listGroup } from '../../components/List/animations';
 import NewScheduleModal from './NewSchedule';
 import { loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
 import { loadTruckProfileRequest } from '~/store/modules/truckProfile/actions';
-
+import { showModal } from '~/store/modules/modals/actions';
 // import { customSelectStyles } from "./styles";
 
 const Schedule = () => {
@@ -30,7 +30,7 @@ const Schedule = () => {
   let { truck_id } = useParams();
 
   // Modal
-  const [isOpen, toggleOpen] = useCycle(false, true);
+  // const [isOpen, toggleOpen] = useCycle(false, true);
 
   // Month
   const [currenthMonth, setCurrentMonth] = useState(new Date());
@@ -99,7 +99,7 @@ const Schedule = () => {
 
   return (
     <>
-      <NewScheduleModal isOpen={isOpen} toggleOpen={toggleOpen} id={truck_id} />
+      <NewScheduleModal id={truck_id} />
       <DefaultLayout>
         <PanelLeft>
           <Header>
@@ -115,7 +115,7 @@ const Schedule = () => {
               type="button"
               icon={FiPlus}
               action
-              onClick={() => toggleOpen()}
+              onClick={() => dispatch(showModal('NewSchedule'))}
             />
           </Header>
           <Title title={monthFormatted} total={totalSchedules} />

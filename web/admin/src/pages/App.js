@@ -6,6 +6,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import '../config/ReactotronConfig';
 
+import ModalManager from '~/components/Modal/ModalManager';
 import Routes from '../routes';
 import history from '../services/history';
 import dark from '../styles/tokens/dark';
@@ -20,6 +21,7 @@ const App = () => {
         <BrowserRouter>
           <ThemeProvider theme={dark}>
             <GlobalStyle />
+            <ModalManager />
             <Routes history={history} />
           </ThemeProvider>
         </BrowserRouter>
