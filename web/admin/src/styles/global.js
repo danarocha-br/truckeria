@@ -35,7 +35,7 @@ export default createGlobalStyle`
   }
 
   hr {
-    border-bottom: 1px dashed ${colors.gray300};
+    border-top: 1px dashed ${colors.gray300};
     width: 100%;
     margin-top: 15px;
   }

@@ -28,7 +28,7 @@ export const Item = styled.li`
   }
 
   a {
-    ${tw`flex flex-col items-center capitalize relative text-sm`};
+    ${tw`flex flex-col items-center relative text-sm`};
     color: ${(props) => props.theme.colors.text};
     opacity: 0.6;
 

@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Container, Overlay } from './styles';
+import { Container } from './styles';
 
 import light from '~/styles/tokens/light';
 import { hideModal } from '~/store/modules/modals/actions';
-import { modal, overlay } from './animations'
+import { modal  } from './animations'
 
 const Modal = ({ title, children }) => {
 
@@ -53,8 +53,6 @@ const Modal = ({ title, children }) => {
 };
 
 Modal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  toggleOpen: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

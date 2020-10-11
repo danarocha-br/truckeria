@@ -6,7 +6,6 @@ import api from '~/services/api';
 
 export function* createFoodTruckProfile({ payload: { data } }) {
 
-
   try {
     const response = yield call(api.post, 'foodtruck/profile', {
       ...data,

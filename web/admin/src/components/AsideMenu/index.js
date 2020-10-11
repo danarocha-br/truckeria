@@ -43,12 +43,12 @@ const AsideMenu = () => {
           isLoading={isLoading}
         />
         <NavItem
-          title="schedule"
+          title="Schedules"
           icon={FiCalendar}
           to={`/schedule/${truck_id}`}
           isLoading={isLoading}
         />
-        <NavItem title="menu" icon={FiGrid} to="/menu" isLoading={isLoading} />
+        <NavItem title="Menus" icon={FiGrid} to="/menu" isLoading={isLoading} />
         <NavItem
           title="Truck Profile"
           icon={FiTablet}
