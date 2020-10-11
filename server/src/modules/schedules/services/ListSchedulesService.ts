@@ -41,7 +41,7 @@ class ListSchedulesService {
     if (!schedules) {
       schedules = await this.schedulesRepository.findAllSchedules(truck_id);
 
-      await this.cacheProvider.save(`schedules-list:${truck_id}`, schedules);
+      // await this.cacheProvider.save(`schedules-list:${truck_id}`, schedules);
     }
 
     return schedules;

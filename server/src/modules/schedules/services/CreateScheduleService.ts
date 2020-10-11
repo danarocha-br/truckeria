@@ -112,7 +112,7 @@ class CreateScheduleService {
       date_end,
     });
 
-    await this.cacheProvider.invalidatePrefix('schedule-list');
+    // await this.cacheProvider.invalidatePrefix('schedule-list');
 
     return schedule;
   }
