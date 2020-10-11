@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Row from '~/components/Form/Row';
 import TextInput from '~/components/TextInput';
+import DateInput from '~/components/DateInput';
 import Select from '~/components/Select';
 import Button from '~/components/Button';
 
@@ -76,16 +77,16 @@ const NewScheduleForm = ( ) => {
 
         <h3 className='text-gray-900 font-bold pt-4'>When does it start?</h3>
         <Row>
-          <TextInput  name="date_start" label="Date" type="date" />
+          <DateInput  name="date_start" label="Date" type="date" />
 
-          <TextInput  name="time_start" label="Time" type='time' />
+          <DateInput  name="time_start" label="Time" type='time' />
         </Row>
 
         <h3 className='text-gray-900 font-bold pt-4'>When does it end?</h3>
         <Row>
-          <TextInput  name="date_end" label="Date" type="date" />
+          <DateInput  name="date_end" label="Date" type="date" />
 
-          <TextInput  name="time_end" label="Time" type='time' />
+          <DateInput  name="time_end" label="Time" type='time' />
         </Row>
 
         <Button

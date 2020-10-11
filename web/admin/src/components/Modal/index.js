@@ -2,38 +2,13 @@ import React, {useCallback} from 'react';
 import { AnimateSharedLayout } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
-
 import { useDispatch, useSelector } from 'react-redux';
-import { Container } from './styles';
+
+import { Container, Overlay } from './styles';
+
 import light from '~/styles/tokens/light';
 import { hideModal } from '~/store/modules/modals/actions';
-
-const modal = {
-  open: {
-    opacity: 1,
-    x: 0,
-    zIndex: 99,
-    transition: {
-      type: 'spring',
-      damping: 13,
-      stiffness: 100,
-    },
-  },
-  closed: {
-    opacity: 0,
-    width: 0,
-    x: 500,
-    zIndex: -1,
-    transition: {
-      delay: 0.5,
-      type: 'spring',
-      damping: 10,
-      stiffness: 100,
-    },
-  },
-};
-
-
+import { modal, overlay } from './animations'
 
 const Modal = ({ title, children }) => {
 
@@ -47,7 +22,7 @@ const Modal = ({ title, children }) => {
   return (
     <ThemeProvider theme={light}>
       <AnimateSharedLayout type="crossfade">
-        <Container
+      <Container
           layout
           initial="closed"
           animate={isModalOpen ? 'open' : 'closed'}
@@ -65,6 +40,13 @@ const Modal = ({ title, children }) => {
           </header>
           {children}
         </Container>
+        {/* <Overlay
+          initial="closed"
+          animate={isModalOpen ? 'open' : 'closed'}
+          // exit={{ display: 'none' }}
+          variants={overlay}
+          /> */}
+
       </AnimateSharedLayout>
     </ThemeProvider>
   );

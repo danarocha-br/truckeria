@@ -63,7 +63,6 @@ export const Container = styled.span.attrs({
         opacity: ${(props) => (props.disabled || props.loading ? '0.5' : '1')};
 
     ${(props) =>
-      props.isFocused &&
       css`
         + label:before {
           ${inputBorder}

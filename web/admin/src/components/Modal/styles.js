@@ -12,6 +12,12 @@ export const Container = styled(motion.div)`
   width: 100% !important;
 
   ${breakpoint('tablet')`
+    width: 65% !important;
+    border-top-left-radius: 2.7rem;
+    border-bottom-left-radius: 2.7rem;
+  `}
+
+  ${breakpoint('desktop')`
     width: 35% !important;
     border-top-left-radius: 2.7rem;
     border-bottom-left-radius: 2.7rem;
@@ -79,3 +85,9 @@ export const Container = styled(motion.div)`
     }
   }
 `;
+
+export const Overlay = styled(motion.div)`
+  ${tw`h-full w-full bg-gray-900 absolute top-0`};
+  z-index: 99;
+  opacity: 1;
+`
