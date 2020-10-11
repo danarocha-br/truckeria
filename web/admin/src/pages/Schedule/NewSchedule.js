@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
-
 import Modal from '~/components/Modal';
 import Form from './NewScheduleForm';
 
@@ -12,8 +11,10 @@ const ScheduleSchema = Yup.object().shape({
   address: Yup.string().required('Please insert a valid address.'),
   city: Yup.string().required('City is required.'),
   state: Yup.string().required('State is required.'),
-  date: Yup.date().required('Please choose a date.'),
-  time: Yup.string().required('Please pick a time.'),
+  date_start: Yup.date().required('Please choose a date.'),
+  time_start: Yup.string().required('Please pick a time.'),
+  date_end: Yup.date().required('Please choose a date.'),
+  time_end: Yup.string().required('Please pick a time.'),
 });
 
 const NewSchedule = ({ isOpen, toggleOpen, id }) => {
@@ -22,25 +23,28 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
     address: '',
     city: '',
     state: '',
-    time: '',
-    date: '',
+    date_start: '',
+    date_end: '',
+    time_start: '',
+    time_end: '',
   };
 
   const [formValues, setformValues] = useState(initialValues);
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values) => {
-      await dispatch(createScheduleRequest({truck_id: id, ...values }))
-  };
+  const handleSubmit = useCallback((values) => {
+     dispatch(createScheduleRequest({values, truck_id: id}))
+  }, [dispatch, id]);
+
 
   return (
     <Modal isOpen={isOpen} toggleOpen={toggleOpen} title="Add new Schedule">
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues}
         validationSchema={ScheduleSchema}
         onSubmit={(values, actions) => {
           handleSubmit(values);
-          actions.setSubmitting(false);
+          // actions.setSubmitting(false);
         }}
         >
           {({ values }) => {
@@ -48,7 +52,6 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
             return <Form />;
           }}
         </Formik>
-
 
     </Modal>
   );

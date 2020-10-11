@@ -1,34 +1,27 @@
 import React from 'react';
-import { FiPlus } from 'react-icons/fi';
+// import { FiPlus } from 'react-icons/fi';
 import { motion, useCycle } from 'framer-motion';
-import { useSelector } from 'react-redux';
-import { isLoaded } from 'react-redux-firebase';
-import { useFirestoreConnect } from 'react-redux-firebase';
+// import { useSelector } from 'react-redux';
 
-import DefaultLayout from '../_layouts/default';
-import { PanelLeft, PanelRight, Header } from '../_layouts/default/styles';
-import Title from '../../components/Title';
-import MenuItem from '../../components/List/MenuItem';
-import Button from '../../components/Button';
-import SkeletonGroup from '../../components/SkeletonGroup';
-import MenuOverview from './MenuOverview';
+// import DefaultLayout from '../_layouts/default';
+// import { PanelLeft, PanelRight, Header } from '../_layouts/default/styles';
+// import Title from '../../components/Title';
+// import MenuItem from '../../components/List/MenuItem';
+// import Button from '../../components/Button';
+// import SkeletonGroup from '../../components/SkeletonGroup';
+// import MenuOverview from './MenuOverview';
 import NewMenuItemModal from './NewMenuItem';
-import { listGroup } from '../../components/List/animations';
+// import { listGroup } from '../../components/List/animations';
 
 const Menu = () => {
   // Modal
   const [isOpen, toggleOpen] = useCycle(false, true);
 
-  // Auth
-  const auth = useSelector((state) => state.auth);
-
-  useFirestoreConnect([{ collection: 'menus' }]);
-  const menus = useSelector((state) => state.firestore.ordered.menus);
 
   return (
     <>
       <NewMenuItemModal isOpen={isOpen} toggleOpen={toggleOpen} />
-      <DefaultLayout>
+      {/* <DefaultLayout>
         <PanelLeft>
           <Header>
             <h1>TruckName menu items</h1>
@@ -59,7 +52,7 @@ const Menu = () => {
         <PanelRight>
           <MenuOverview isLoading={!isLoaded(auth)} />
         </PanelRight>
-      </DefaultLayout>
+      </DefaultLayout> */}
     </>
   );
 };

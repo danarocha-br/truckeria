@@ -16,7 +16,7 @@ import Button from '../../components/Button';
 import SkeletonGroup from '../../components/SkeletonGroup';
 import { listGroup } from '../../components/List/animations';
 import NewScheduleModal from './NewSchedule';
-import { loadSchedulesRequest, loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
+import { loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
 import { loadTruckProfileRequest } from '~/store/modules/truckProfile/actions';
 
 // import { customSelectStyles } from "./styles";
@@ -76,7 +76,6 @@ const Schedule = () => {
     return schedules && schedules.filter(schedule => new Date(year, month, getDate(parseISO(schedule.date_start)), 12,0,0,0).valueOf() === selectDate.valueOf())
 
   }, [selectDate, schedules, currenthMonth])
-  // console.log(isMatchingDates && isMatchingDates.find(date => ))
 
 
   // load truck Profile

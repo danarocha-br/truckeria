@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import { Form, useFormikContext } from 'formik';
-import {  FiClock, FiCalendar } from 'react-icons/fi';
+import { FiMapPin  } from 'react-icons/fi';
 import axios from 'axios';
-// import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId, getLatLng } from 'react-places-autocomplete'
 
 import Row from '~/components/Form/Row';
 import TextInput from '~/components/TextInput';
 import Select from '~/components/Select';
 import Button from '~/components/Button';
 
+// const Map = ReactMapboxGl({
+//   accessToken: process.env.REACT_APP_MAPBOX_KEY,
+// });
+
 const NewScheduleForm = ( ) => {
 
-  const { values } = useFormikContext();
+  const { values, isSubmitting, dirty, isValid } = useFormikContext();
   const [stateInitials, setStateInitials] = useState([])
   const [cities, setCities] = useState([])
   // const [address, setAddress] = useState('')
@@ -35,41 +38,20 @@ const NewScheduleForm = ( ) => {
     })
   }, [values.state])
 
-  // const handleAddressSelect = (value) => {}
+    // const searchPlaces = useCallback((searchText) => {
+    //   const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places'
+    //   axios.get(`${url}/${searchText}/.json?types=address&access_token=/${process.env.REACT_APP_MAPBOX_KEY}`)
+    //   .then(response => {
+    //     const address = response.data.map(address => address)
+    //     setAddress(address)
+    //   })
+    // }, [searchText])
+
 
   return (
     <Form>
-        {/* <PlacesAutocomplete value={address} onChange={setAddress} onSelect={handleAddressSelect}>
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <TextInput
-            id='address'
-              name='address'
-              label='Search Address'
-              isLoading={loading}
-              {...getInputProps({
-                className: 'location-search-input'
-              })}
-            />
-            <div className="autocomplete-dropdown-container">
-              {suggestions.map(suggestion => {
-                const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                            ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                            : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                return (
-                  <div {...getSuggestionItemProps(suggestion, { className, style })}>
-                    <span>{suggestion.description}</span>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        )}
-        </PlacesAutocomplete> */}
 
-        <TextInput name='address' label='address' />
+        <TextInput icon={FiMapPin} name='address' label='Address' />
 
         <Row>
           <Select
@@ -79,7 +61,7 @@ const NewScheduleForm = ( ) => {
             options={stateInitials &&
               stateInitials.map((state) => {
                 return { key: state, value: state, label: state };
-              })}
+            })}
           />
           <Select
             id="city"
@@ -92,13 +74,29 @@ const NewScheduleForm = ( ) => {
           />
         </Row>
 
+        <h3 className='text-gray-900 font-bold pt-4'>When does it start?</h3>
         <Row>
-          <TextInput icon={FiCalendar} name="date" label="Date" />
-          <TextInput icon={FiClock} name="time" label="Time" />
+          <TextInput  name="date_start" label="Date" type="date" />
+
+          <TextInput  name="time_start" label="Time" type='time' />
         </Row>
 
-        <Button label="Save" />
+        <h3 className='text-gray-900 font-bold pt-4'>When does it end?</h3>
+        <Row>
+          <TextInput  name="date_end" label="Date" type="date" />
+
+          <TextInput  name="time_end" label="Time" type='time' />
+        </Row>
+
+        <Button
+          type='submit'
+          label="Add New Schedule"
+          onClick={() => 'clicked'}
+          isLoading={isSubmitting}
+          disabled={!(isValid && dirty)}
+          />
       </Form>
+
     );
 }
 
