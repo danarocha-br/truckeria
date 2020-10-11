@@ -51,53 +51,51 @@ const NewScheduleForm = ( ) => {
 
   return (
     <Form>
+      <TextInput icon={FiMapPin} name='address' label='Address' />
 
-        <TextInput icon={FiMapPin} name='address' label='Address' />
-
-        <Row>
-          <Select
-            id="state"
-            name="state"
-            placeholder="Select State"
-            options={stateInitials &&
-              stateInitials.map((state) => {
-                return { key: state, value: state, label: state };
+      <Row>
+        <Select
+          id="state"
+          name="state"
+          placeholder="Select State"
+          options={stateInitials &&
+            stateInitials.map((state) => {
+              return { key: state, value: state, label: state };
+          })}
+        />
+        <Select
+          id="city"
+          name="city"
+          placeholder="Select City"
+          options={cities &&
+            cities.map((city) => {
+              return { key: city, value: city, label: city };
             })}
-          />
-          <Select
-            id="city"
-            name="city"
-            placeholder="Select City"
-            options={cities &&
-              cities.map((city) => {
-                return { key: city, value: city, label: city };
-              })}
-          />
-        </Row>
+        />
+      </Row>
 
-        <h3 className='text-gray-900 font-bold pt-4'>When does it start?</h3>
-        <Row>
-          <DateInput  name="date_start" label="Date" type="date" />
+      <h3 className='text-gray-900 font-bold pt-4'>When does it start?</h3>
+      <Row>
+        <DateInput  name="date_start" label="Date" type="date" />
 
-          <DateInput  name="time_start" label="Time" type='time' />
-        </Row>
+        <DateInput  name="time_start" label="Time" type='time' />
+      </Row>
 
-        <h3 className='text-gray-900 font-bold pt-4'>When does it end?</h3>
-        <Row>
-          <DateInput  name="date_end" label="Date" type="date" />
+      <h3 className='text-gray-900 font-bold pt-4'>When does it end?</h3>
+      <Row>
+        <DateInput  name="date_end" label="Date" type="date" />
 
-          <DateInput  name="time_end" label="Time" type='time' />
-        </Row>
+        <DateInput  name="time_end" label="Time" type='time' />
+      </Row>
 
-        <Button
-          type='submit'
-          label="Add New Schedule"
-          onClick={() => 'clicked'}
-          isLoading={isSubmitting}
-          disabled={!(isValid && dirty)}
-          />
+      <Button
+        type='submit'
+        label="Add New Schedule"
+        onClick={() => 'clicked'}
+        isLoading={isSubmitting}
+        disabled={!(isValid && dirty)}
+        />
       </Form>
-
     );
 }
 

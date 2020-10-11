@@ -1,7 +1,7 @@
 import React, { useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { FiCalendar, FiPercent, FiTruck, FiGrid } from 'react-icons/fi';
+import { FiCalendar, FiTablet, FiTruck, FiGrid } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
@@ -32,12 +32,12 @@ const AsideMenu = () => {
 
   return (
     <Container>
-      <div>
+      <Link to='/dashboard'>
         <Logo className="logo" />
-      </div>
+      </Link>
       <List>
         <NavItem
-          title="overview"
+          title="All my Trucks"
           icon={FiTruck}
           to="/dashboard"
           isLoading={isLoading}
@@ -50,9 +50,9 @@ const AsideMenu = () => {
         />
         <NavItem title="menu" icon={FiGrid} to="/menu" isLoading={isLoading} />
         <NavItem
-          title="discounts"
-          icon={FiPercent}
-          to="/discounts"
+          title="Truck Profile"
+          icon={FiTablet}
+          to={`/profile/${truck_id}`}
           isLoading={isLoading}
         />
       </List>

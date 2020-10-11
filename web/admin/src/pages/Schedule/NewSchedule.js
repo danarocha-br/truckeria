@@ -44,7 +44,7 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
         validationSchema={ScheduleSchema}
         onSubmit={(values, actions) => {
           handleSubmit(values);
-          // actions.setSubmitting(false);
+          actions.setSubmitting(false);
         }}
         >
           {({ values }) => {
