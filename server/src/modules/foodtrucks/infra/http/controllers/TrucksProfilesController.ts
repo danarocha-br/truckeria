@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import ListTrucksProfilesService from '@modules/foodtrucks/services/ListTrucksProfilesService';
 
@@ -16,7 +17,7 @@ class TrucksProfilesController {
       user_id,
     });
 
-    return res.json(trucksProfiles);
+    return res.json(classToClass(trucksProfiles));
   }
 }
 

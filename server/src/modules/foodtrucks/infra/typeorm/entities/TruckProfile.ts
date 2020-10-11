@@ -70,11 +70,13 @@ class TruckProfile {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Expose({ name: 'photoURL' })
-  getPhotoURL(): string | null {
-    return this.photo_filename
-      ? `${process.env.APP_API_URL}/files/${this.photo_filename}`
-      : null;
+  @Expose({ name: 'photo_url' })
+  getPhotoUrl(): string | null {
+    if (!this.photo_filename) {
+      return null;
+    }
+    return `${process.env.APP_API_URL}/files/${this.photo_filename}`
+
   }
 }
 

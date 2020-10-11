@@ -41,7 +41,7 @@ class ListTrucksProfilesService {
 
       await this.cacheProvider.save(
         `truckprofiles-list:${user_id}`,
-        truckProfiles,
+        classToClass(truckProfiles),
       );
 
       if (!truckProfiles?.length) {

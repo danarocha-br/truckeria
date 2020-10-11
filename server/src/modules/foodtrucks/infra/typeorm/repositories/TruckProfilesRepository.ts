@@ -23,7 +23,8 @@ class TruckProfilesRepository implements ITruckProfileRepository {
       where: { user_id: user_id },
       order: {
         name: "ASC"
-      }
+      },
+      // relations: ['menus']
     });
 
     return truckProfiles;
