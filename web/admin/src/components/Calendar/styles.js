@@ -78,7 +78,6 @@ export const Container = styled.div`
     background: ${(props) => shade(0.2, props.theme.colors.shade)};
   }
 
-
   .DayPicker-Day--disabled {
     color: #666360 !important;
     background: transparent !important;
@@ -89,4 +88,5 @@ export const Container = styled.div`
     background: ${(props) => props.theme.colors.shade} !important;
     color: ${(props) => props.theme.colors.white} !important;
   }
+
 `;

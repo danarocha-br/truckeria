@@ -70,17 +70,13 @@ const Schedule = () => {
   }, []);
 
 
-  const isScheduleActive = useMemo(() => {
+  const isMatchingDates = useMemo(() => {
     const year = currenthMonth.getFullYear()
     const month = currenthMonth.getMonth()
-    const matchingDates = schedules && schedules.filter(schedule => new Date(year, month, getDate(parseISO(schedule.date_start)), 12,0,0,0).valueOf() === selectDate.valueOf())
-    // console.log(matchingDates)
-    if (matchingDates && matchingDates.length === 0) {
-      return false
-    } else return true
+    return schedules && schedules.filter(schedule => new Date(year, month, getDate(parseISO(schedule.date_start)), 12,0,0,0).valueOf() === selectDate.valueOf())
 
   }, [selectDate, schedules, currenthMonth])
-  // console.log(isScheduleActive)
+  // console.log(isMatchingDates && isMatchingDates.find(date => ))
 
 
   // load truck Profile
@@ -137,7 +133,7 @@ const Schedule = () => {
                   startsIn={schedule.starts_in}
                   address={schedule.address}
                   isLoading={isLoading}
-                  isActive={isScheduleActive}
+                  isActive={isMatchingDates && isMatchingDates.some(date => date.id === schedule.id) ? true : false}
                 />
               ))}
           </motion.ul>
