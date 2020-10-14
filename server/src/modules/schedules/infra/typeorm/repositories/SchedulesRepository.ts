@@ -1,4 +1,4 @@
-import { getRepository, Repository, Raw } from 'typeorm';
+import { getRepository, Repository, Raw, DeleteResult } from 'typeorm';
 
 import Schedule from '../entities/Schedule';
 
@@ -91,6 +91,13 @@ class SchedulesRepository implements ISchedulesRepository {
    */
   public async update(schedule: Schedule): Promise<Schedule> {
     return this.ormRepository.save(schedule);
+  }
+
+  /**
+   * delete
+   */
+  public async delete(schedule_id: string): Promise<DeleteResult | undefined> {
+    return this.ormRepository.delete(schedule_id);
   }
 }
 

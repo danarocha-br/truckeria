@@ -25,7 +25,7 @@ class DeleteOneTruckProfileService {
   /**
    * execute
    */
-  public async execute({ truck_id, user_id }: IRequest): Promise<DeleteResult> {
+  public async execute({ truck_id, user_id }: IRequest): Promise<DeleteResult | void> {
     const truckOwner = await this.usersRepository.findById(user_id);
 
     if (!truckOwner) {

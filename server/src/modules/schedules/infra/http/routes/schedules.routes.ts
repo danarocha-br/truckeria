@@ -70,5 +70,15 @@ schedulesRouter.put(
   schedulesController.update,
 );
 
+schedulesRouter.delete(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      schedule_id: Joi.string().uuid().required(),
+    },
+  }),
+  schedulesController.delete,
+);
+
 
 export default schedulesRouter;

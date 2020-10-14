@@ -6,6 +6,7 @@ import Schedule from '../../infra/typeorm/entities/Schedule';
 import ISchedulesRepository from '@modules/schedules/repositories/ISchedulesRepository';
 import ICreateScheduleDTO from '@modules/schedules/dtos/ICreateScheduleDTO';
 import IFindAllSchedulesWithinIntervalDTO from '@modules/schedules/dtos/IFindAllSchedulesWithinIntervalDTO';
+import { DeleteResult } from 'typeorm';
 
 class SchedulesRepository implements ISchedulesRepository {
   private schedules: Schedule[] = [];
@@ -103,6 +104,19 @@ class SchedulesRepository implements ISchedulesRepository {
     this.schedules[scheduleIndex] = schedule;
 
     return schedule;
+  }
+
+   /**
+   * delete
+   */
+  public async delete(
+    schedule_id: string,
+  ): Promise<undefined | DeleteResult> {
+    const findProfile = this.schedules.filter(
+      schedule => schedule.id === schedule_id,
+    );
+
+    return raw;
   }
 }
 

@@ -6,7 +6,6 @@ import ISchedulesRepository from '../repositories/ISchedulesRepository';
 import ITruckProfileRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
 
 import AppError from '@shared/errors/AppError';
-import { id } from 'date-fns/locale';
 
 interface IRequest {
   schedule_id: string;

@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreateScheduleService from '@modules/schedules/services/CreateScheduleService';
 import UpdateScheduleService from '@modules/schedules/services/UpdateScheduleService';
+import DeleteScheduleService from '@modules/schedules/services/DeleteScheduleService';
 import ListSchedulesService from '@modules/schedules/services/ListSchedulesService';
 
 class SchedulesController {
@@ -64,6 +65,25 @@ class SchedulesController {
     });
 
     return res.json(schedule);
+  }
+
+  /**
+   * delete
+   */
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const schedule_id = req.body.id;
+    const user_id = req.user.id;
+
+    const deleteOneScheduleService = container.resolve(
+      DeleteScheduleService,
+    );
+
+    const deletedSchedule = await deleteOneScheduleService.execute({
+      schedule_id,
+      user_id,
+    });
+
+    return res.json(deletedSchedule);
   }
 }
 

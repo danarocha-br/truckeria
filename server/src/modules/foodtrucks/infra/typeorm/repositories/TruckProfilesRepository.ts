@@ -62,13 +62,8 @@ class TruckProfilesRepository implements ITruckProfileRepository {
   /**
    * delete
    */
-  public async delete(truck_id: string): Promise<DeleteResult> {
-    return this.ormRepository
-      .createQueryBuilder()
-      .delete()
-      .from(User)
-      .where('id = :id', { id: truck_id })
-      .execute();
+  public async delete(truck_id: string): Promise<DeleteResult | undefined> {
+    return this.ormRepository.delete(truck_id);
   }
 }
 

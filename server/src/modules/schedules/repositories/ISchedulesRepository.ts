@@ -1,3 +1,5 @@
+import { DeleteResult } from 'typeorm';
+
 import Schedule from '../infra/typeorm/entities/Schedule';
 import ICreateScheduleDTO from '../dtos/ICreateScheduleDTO';
 import IFindAllSchedulesWithinIntervalDTO from '../dtos/IFindAllSchedulesWithinIntervalDTO';
@@ -11,4 +13,5 @@ export default interface ISchedulesRepository {
   findAllSchedulesWithinInterval(
     data: IFindAllSchedulesWithinIntervalDTO,
   ): Promise<Schedule[] | undefined>;
+  delete(schedule_id: string): Promise<DeleteResult | undefined>;
 }
