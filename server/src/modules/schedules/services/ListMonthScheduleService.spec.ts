@@ -45,6 +45,7 @@ describe('ListMonthSchedule', () => {
     const schedule1 = await fakeSchedulesRepository.create({
       user_id: 'user.id',
       truck_id: truckProfile.id,
+      address: 'Avenue 104',
       city: 'Los Angeles',
       state: 'CA',
       lat: '123456',
@@ -55,6 +56,7 @@ describe('ListMonthSchedule', () => {
     const schedule2 = await fakeSchedulesRepository.create({
       user_id: 'user.id',
       truck_id: truckProfile.id,
+      address: 'Avenue 104',
       city: 'Los Angeles',
       state: 'CA',
       lat: '54567',
@@ -65,6 +67,7 @@ describe('ListMonthSchedule', () => {
     const schedule3 = await fakeSchedulesRepository.create({
       user_id: 'user.id',
       truck_id: truckProfile.id,
+      address: 'Avenue 104',
       city: 'Los Angeles',
       state: 'CA',
       lat: '54567',

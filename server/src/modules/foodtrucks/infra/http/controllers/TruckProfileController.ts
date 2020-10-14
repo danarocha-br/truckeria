@@ -11,7 +11,7 @@ class TrucksProfilesController {
   /**
    * index to one truck profile
    */
-  public async index(req: Request, res: Response): Promise<Response> {
+  public async show(req: Request, res: Response): Promise<Response> {
     const truck_id = req.body.id;
 
     const listOneTruckProfile = container.resolve(ListOneTruckProfileService);

@@ -53,4 +53,22 @@ schedulesRouter.post(
   schedulesController.create,
 );
 
+schedulesRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      schedule_id: Joi.string().uuid().required(),
+      address: Joi.string().required(),
+      city: Joi.string().required(),
+      state: Joi.string().required(),
+      lat: Joi.string().required(),
+      lon: Joi.string().required(),
+      date_start: Joi.date().required(),
+      date_end: Joi.date().required(),
+    },
+  }),
+  schedulesController.update,
+);
+
+
 export default schedulesRouter;

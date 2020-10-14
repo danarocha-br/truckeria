@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateScheduleService from '@modules/schedules/services/CreateScheduleService';
+import UpdateScheduleService from '@modules/schedules/services/UpdateScheduleService';
 import ListSchedulesService from '@modules/schedules/services/ListSchedulesService';
 
 class SchedulesController {
@@ -28,6 +29,31 @@ class SchedulesController {
     const schedule = await createSchedule.execute({
       user_id: req.user.id,
       truck_id,
+      address,
+      city,
+      state,
+      lat,
+      lon,
+      date_start,
+      date_end,
+    });
+
+    return res.json(schedule);
+  }
+
+  /**
+   * update
+   */
+  public async update(req: Request, res: Response): Promise<Response> {
+    const { schedule_id, address, city, state, lat, lon, date_start, date_end } = req.body;
+
+    const user_id = req.user.id;
+
+    const updateSchedule = container.resolve(UpdateScheduleService);
+
+    const schedule = await updateSchedule.execute({
+      user_id,
+      schedule_id,
       address,
       city,
       state,

@@ -24,6 +24,16 @@ class SchedulesRepository implements ISchedulesRepository {
   }
 
   /**
+   * findById
+   */
+  public async findById(schedule_id: string): Promise<Schedule | undefined> {
+    const findSchedule = await this.ormRepository.findOne({
+      where: { id: schedule_id },
+    });
+    return findSchedule || undefined;
+  }
+
+  /**
    * findAllSchedules
    */
   public async findAllSchedules(
@@ -74,6 +84,13 @@ class SchedulesRepository implements ISchedulesRepository {
     await this.ormRepository.save(schedule);
 
     return schedule;
+  }
+
+  /**
+   * update
+   */
+  public async update(schedule: Schedule): Promise<Schedule> {
+    return this.ormRepository.save(schedule);
   }
 }
 

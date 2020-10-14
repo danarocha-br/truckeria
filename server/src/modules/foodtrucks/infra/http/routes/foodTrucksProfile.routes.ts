@@ -16,7 +16,7 @@ const truckProfileController = new TruckProfileController();
 trucksProfilesRouter.use(ensureAuthentication);
 
 trucksProfilesRouter.get('/', trucksProfilesController.index);
-trucksProfilesRouter.get('/single', truckProfileController.index);
+trucksProfilesRouter.get('/single', truckProfileController.show);
 trucksProfilesRouter.post(
   '/',
   // celebrate({

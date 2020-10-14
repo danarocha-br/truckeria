@@ -10,6 +10,9 @@ import IFindAllSchedulesWithinIntervalDTO from '@modules/schedules/dtos/IFindAll
 class SchedulesRepository implements ISchedulesRepository {
   private schedules: Schedule[] = [];
 
+  /**
+   * findByDate
+   */
   public async findByDate(date_start: Date): Promise<Schedule | undefined> {
     const schedule = this.schedules.find(schedule =>
       isEqual(schedule.date_start, date_start),
@@ -17,6 +20,19 @@ class SchedulesRepository implements ISchedulesRepository {
 
     return schedule;
   }
+
+  /**
+   * findById
+   */
+  public async findById(schedule_id: string): Promise<Schedule | undefined> {
+      if (!schedule_id) {
+        throw new Error('No id provided.');
+      }
+
+      const findSchedule = this.schedules.find(schedule => schedule.id === schedule_id);
+
+      return findSchedule;
+    }
 
   /**
    * findAllSchedules
@@ -72,6 +88,19 @@ class SchedulesRepository implements ISchedulesRepository {
     });
 
     this.schedules.push(schedule);
+
+    return schedule;
+  }
+
+  /**
+   * update
+   */
+  public async update(schedule: Schedule): Promise<Schedule> {
+    const scheduleIndex = this.schedules.findIndex(
+      index => index.id === schedule.id,
+    );
+
+    this.schedules[scheduleIndex] = schedule;
 
     return schedule;
   }
