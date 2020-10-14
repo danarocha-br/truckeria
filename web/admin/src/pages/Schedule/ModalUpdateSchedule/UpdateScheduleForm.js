@@ -2,23 +2,21 @@ import React, {useEffect, useState} from 'react';
 import { Form, useFormikContext } from 'formik';
 import { FiMapPin  } from 'react-icons/fi';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 import Row from '~/components/Form/Row';
-import TextInput from '~/components/TextInput';
 import DateInput from '~/components/DateInput';
 import Select from '~/components/Select';
 import Button from '~/components/Button';
 
-// const Map = ReactMapboxGl({
-//   accessToken: process.env.REACT_APP_MAPBOX_KEY,
-// });
 
-const NewScheduleForm = ( ) => {
+const UpdateScheduleForm = () => {
 
   const { values, isSubmitting, dirty, isValid } = useFormikContext();
   const [stateInitials, setStateInitials] = useState([])
   const [cities, setCities] = useState([])
-  // const [address, setAddress] = useState('')
+
+  const isLoading = useSelector(state => state.schedules.loading);
 
    // get state list
    useEffect(() => {
@@ -39,19 +37,10 @@ const NewScheduleForm = ( ) => {
     })
   }, [values.state])
 
-    // const searchPlaces = useCallback((searchText) => {
-    //   const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places'
-    //   axios.get(`${url}/${searchText}/.json?types=address&access_token=/${process.env.REACT_APP_MAPBOX_KEY}`)
-    //   .then(response => {
-    //     const address = response.data.map(address => address)
-    //     setAddress(address)
-    //   })
-    // }, [searchText])
-
 
   return (
     <Form>
-      <TextInput icon={FiMapPin} name='address' label='Address' />
+      <DateInput icon={FiMapPin} name='address' label='Address' />
 
       <Row>
         <Select
@@ -62,6 +51,7 @@ const NewScheduleForm = ( ) => {
             stateInitials.map((state) => {
               return { key: state, value: state, label: state };
           })}
+          isLoading={isLoading}
         />
         <Select
           id="city"
@@ -71,32 +61,33 @@ const NewScheduleForm = ( ) => {
             cities.map((city) => {
               return { key: city, value: city, label: city };
             })}
+            isLoading={isLoading}
         />
       </Row>
 
       <h3 className='text-gray-900 font-bold pt-4'>When does it start?</h3>
       <Row>
-        <DateInput  name="date_start" label="Date" type="date" />
+        <DateInput  name="date_start" label="Date" type="date" isLoading={isLoading}/>
 
-        <DateInput  name="time_start" label="Time" type='time' />
+        <DateInput  name="time_start" label="Time" type='time' isLoading={isLoading}/>
       </Row>
 
       <h3 className='text-gray-900 font-bold pt-4'>When does it end?</h3>
       <Row>
-        <DateInput  name="date_end" label="Date" type="date" />
+        <DateInput  name="date_end" label="Date" type="date" isLoading={isLoading}/>
 
-        <DateInput  name="time_end" label="Time" type='time' />
+        <DateInput  name="time_end" label="Time" type='time' isLoading={isLoading}/>
       </Row>
 
       <Button
         type='submit'
-        label="Add New Schedule"
+        label="Save Schedule"
         onClick={() => 'clicked'}
         isLoading={isSubmitting}
-        disabled={!(isValid && dirty)}
+        // disabled={!(isValid && dirty)}
         />
       </Form>
     );
 }
 
-export default NewScheduleForm;
+export default UpdateScheduleForm;

@@ -9,12 +9,12 @@ import { Container, Wrapper, Date, Info, Actions } from './styles';
 import Button from '../../Button';
 import { listItems } from '../animations';
 
-const ScheduleItem = ({ date, day, address, startsIn, isActive, isLoading }) => {
+const ScheduleItem = ({ date, day, address, startsIn, isActive, isLoading, onUpdate, onDelete }) => {
   const theme = useContext(ThemeContext);
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
   return (
-    <Container isActive={isActive} isLoading={isLoading} variants={listItems}>
+    <Container isActive={isActive} isLoading={isLoading} variants={listItems} onClick={onUpdate}>
       <FiCalendar size="20" color={theme.colors.primary} />
       <Wrapper isActive={isActive}>
         <Date>
@@ -59,8 +59,8 @@ const ScheduleItem = ({ date, day, address, startsIn, isActive, isLoading }) => 
         )}
         {!isLoading && (
           <Actions>
-            <Button icon={FiEdit2} onClick={() => 'clicked'} />
-            <Button icon={FiTrash} onClick={() => 'clicked'} />
+            <Button icon={FiEdit2} onClick={onUpdate} />
+            <Button icon={FiTrash} onClick={onDelete} />
           </Actions>
         )}
       </Wrapper>
@@ -75,6 +75,8 @@ ScheduleItem.propTypes = {
   startsIn: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
   isLoading: PropTypes.bool,
+  onUpdate: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ScheduleItem;

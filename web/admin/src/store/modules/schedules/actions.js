@@ -7,6 +7,7 @@ export function schedulesFailure() {
   };
 }
 
+// List
 export function loadMonthSchedulesRequest(truck_id, month, year) {
   return {
     type: ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST,
@@ -35,6 +36,7 @@ export function loadSchedulesSuccess(list) {
   };
 }
 
+// CREATE
 export function createScheduleRequest(data) {
   return {
     type: ActionTypes.CREATE_SCHEDULE_REQUEST,
@@ -45,6 +47,21 @@ export function createScheduleRequest(data) {
 export function createScheduleSuccess(schedule) {
   return {
     type: ActionTypes.CREATE_SCHEDULE_SUCCESS,
+    payload: { schedule },
+  };
+}
+
+// UPDATE
+export function updateScheduleRequest(data) {
+  return {
+    type: ActionTypes.UPDATE_SCHEDULE_REQUEST,
+    payload:{ data },
+  };
+}
+
+export function updateScheduleSuccess(schedule) {
+  return {
+    type: ActionTypes.UPDATE_SCHEDULE_SUCCESS,
     payload: { schedule },
   };
 }

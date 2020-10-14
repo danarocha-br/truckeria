@@ -15,7 +15,6 @@ import Calendar from '../../components/Calendar';
 import Button from '../../components/Button';
 import SkeletonGroup from '../../components/SkeletonGroup';
 import { listGroup } from '../../components/List/animations';
-import NewScheduleModal from './NewSchedule';
 import { loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
 import { loadTruckProfileRequest } from '~/store/modules/truckProfile/actions';
 import { showModal } from '~/store/modules/modals/actions';
@@ -97,9 +96,18 @@ const Schedule = () => {
 
 //   console.log(defaultValue)
 
+ //handle update schedule
+ const handleUpdateSchedule = useCallback((schedule) => {
+    dispatch(showModal('UpdateSchedule', { schedule }))
+}, [dispatch]);
+
+ //handle delete schedule
+ const handleDeleteSchedule = useCallback((schedule_id) => {
+    // dispatch(updateScheduleRequest(schedule_id))
+}, [dispatch]);
+
   return (
     <>
-      <NewScheduleModal id={truck_id} />
       <DefaultLayout>
         <PanelLeft>
           <Header>
@@ -115,7 +123,7 @@ const Schedule = () => {
               type="button"
               icon={FiPlus}
               action
-              onClick={() => dispatch(showModal('NewSchedule'))}
+              onClick={() => dispatch(showModal('NewSchedule', { truck_id }))}
             />
           </Header>
           <Title title={monthFormatted} total={totalSchedules} />
@@ -133,6 +141,8 @@ const Schedule = () => {
                   address={schedule.address}
                   isLoading={isLoading}
                   isActive={isMatchingDates && isMatchingDates.some(date => date.id === schedule.id) ? true : false}
+                  onUpdate={() => handleUpdateSchedule(schedule)}
+                  onDelete={handleDeleteSchedule}
                 />
               ))}
           </motion.ul>

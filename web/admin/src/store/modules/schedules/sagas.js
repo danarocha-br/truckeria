@@ -4,7 +4,8 @@ import { parseISO, differenceInDays, format } from 'date-fns';
 import ActionTypes from './types';
 import api from '~/services/api';
 import history from '~/services/history';
-import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess} from './actions';
+import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess, updateScheduleSuccess, loadSchedulesRequest, updateScheduleRequest } from './actions';
+import { hideModal } from "../modals/actions";
 
 
 // export function* loadSchedules({ payload: { truck_id } }) {
@@ -64,8 +65,8 @@ export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
 
 export function* createSchedule({ payload: { data } }) {
 
-  const {address, city, state, date_start, date_end, time_start, time_end} = data.values;
-  const {truck_id} = data;
+  const { address, city, state, date_start, date_end, time_start, time_end } = data.values;
+  const { truck_id } = data;
 
   const fakeLat = '-25.48087';
   const fakeLon = '-49.304424';
@@ -100,8 +101,46 @@ export function* createSchedule({ payload: { data } }) {
   }
 }
 
+export function* updateSchedule({ payload: { data }}) {
+  const { address, city, state, date_start, date_end, time_start, time_end, id } = data;
+
+  const fakeLat = '-25.48087';
+  const fakeLon = '-49.304424';
+
+  const parsedDateStart = parseISO(date_start);
+  const parsedDateEnd = parseISO(date_end);
+
+  const [, minutesStart] = time_start.split(':');
+  const [hoursStart, ] = time_start.split(':');
+
+  const [, minutesEnd] = time_end.split(':');
+  const [hoursEnd, ] = time_end.split(':');
+
+  const dateStart = new Date(parsedDateStart.getFullYear(), parsedDateStart.getMonth(), parsedDateStart.getDate(), hoursStart, minutesStart)
+  const dateEnd = new Date(parsedDateEnd.getFullYear(), parsedDateEnd.getMonth(), parsedDateEnd.getDate(), hoursEnd, minutesEnd)
+
+  try {
+    const response = yield call(api.put, 'schedules', {
+      schedule_id: id,
+      address,
+      city,
+      state,
+      lat: fakeLat,
+      lon: fakeLon,
+      date_start: dateStart,
+      date_end: dateEnd,
+    });
+    yield put(updateScheduleSuccess(response.data));
+    console.log(response.data)
+    // yield put(hideModal());
+    // yield put(loadSchedulesRequest());
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export default all([
   takeLatest(ActionTypes.CREATE_SCHEDULE_REQUEST, createSchedule),
-  // takeLatest(ActionTypes.LOAD_SCHEDULES_REQUEST, loadSchedules),
   takeLatest(ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST, loadMonthSchedules),
+  takeLatest(ActionTypes.UPDATE_SCHEDULE_REQUEST, updateScheduleRequest),
 ]);

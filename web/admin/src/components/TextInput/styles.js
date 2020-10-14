@@ -67,8 +67,8 @@ export const Container = styled.span.attrs({
       css`
         + label:before {
           ${inputBorder}
-          border-top-width: 1.8em;
-          border-color: ${props.theme.form.shade};
+          border-top-width: 1.8em !important;
+          border-color: ${props.theme.form.shade} !important;
         }
 
         + label > span {
@@ -99,6 +99,7 @@ export const Container = styled.span.attrs({
           transform: translate3d(-0.3em, -1.5em, 0) scale3d(0.85, 0.85, 1);
           color: ${props.theme.colors.primary};
         }
+
       `}
 
       ${(props) =>
@@ -136,7 +137,6 @@ export const Container = styled.span.attrs({
       cursor: not-allowed;
     }
   }
-
 
   }
 

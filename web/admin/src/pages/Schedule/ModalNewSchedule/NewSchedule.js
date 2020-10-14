@@ -2,6 +2,7 @@ import React, {useState, useCallback} from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+
 import Modal from '~/components/Modal';
 import Form from './NewScheduleForm';
 
@@ -17,7 +18,7 @@ const ScheduleSchema = Yup.object().shape({
   time_end: Yup.string().required('Please pick a time.'),
 });
 
-const NewSchedule = ({ isOpen, toggleOpen, id }) => {
+const NewSchedule = ({ truck_id }) => {
 
   const initialValues = {
     address: '',
@@ -33,12 +34,12 @@ const NewSchedule = ({ isOpen, toggleOpen, id }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = useCallback((values) => {
-     dispatch(createScheduleRequest({values, truck_id: id}))
-  }, [dispatch, id]);
+     dispatch(createScheduleRequest({values, truck_id}))
+  }, [dispatch, truck_id]);
 
 
   return (
-    <Modal isOpen={isOpen} toggleOpen={toggleOpen} title="Add new Schedule">
+    <Modal title="Add new Schedule">
       <Formik
         initialValues={formValues}
         validationSchema={ScheduleSchema}

@@ -2,7 +2,7 @@ import produce from 'immer';
 
 import ActionTypes from './types';
 
-const INITIAL_STATE = { schedule: null,list: null, error: null, loading: false };
+const INITIAL_STATE = { schedule: null, list: null, error: null, loading: false };
 
 export default function truckProfile(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
@@ -38,6 +38,21 @@ export default function truckProfile(state = INITIAL_STATE, action) {
       case ActionTypes.CREATE_SCHEDULE_SUCCESS: {
         draft.loading = false;
         draft.schedule = [action.payload.schedule];
+        draft.error = null;
+        break;
+      }
+
+      case ActionTypes.UPDATE_SCHEDULE_REQUEST: {
+        draft.loading = true;
+        break;
+      }
+
+      case ActionTypes.UPDATE_SCHEDULE_SUCCESS: {
+        draft.loading = false;
+        draft.schedule = [action.payload.schedule];
+        // draft.list = draft.list.filter(schedule => {
+        //   return [schedule.id !== action.payload.schedule.id, draft.schedule]
+        // })
         draft.error = null;
         break;
       }

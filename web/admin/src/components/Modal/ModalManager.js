@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import NewSchedule from '~/pages/Schedule/NewSchedule';
+import NewSchedule from '~/pages/Schedule/ModalNewSchedule/NewSchedule';
+import UpdateSchedule from '~/pages/Schedule/ModalUpdateSchedule/UpdateSchedule';
 
 export default function ModalManager() {
   const modalLookup = {
-    NewSchedule
+    NewSchedule,
+    UpdateSchedule
   };
 
   const currentModal = useSelector(state => state.modals.currentModal);

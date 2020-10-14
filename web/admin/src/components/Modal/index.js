@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, { useCallback, useState } from 'react';
 import { AnimateSharedLayout } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
@@ -12,11 +12,12 @@ import { modal  } from './animations'
 
 const Modal = ({ title, children }) => {
 
-  const isModalOpen = useSelector(state => state.modals.currentModal);
+  const [isModalVisible, setModalVisibility] = useState(useSelector(state => state.modals.currentModal));
   const dispatch = useDispatch();
 
   const handleHideModal = useCallback(() => {
     dispatch(hideModal());
+    setModalVisibility(false);
   }, [dispatch])
 
   return (
@@ -25,7 +26,7 @@ const Modal = ({ title, children }) => {
       <Container
           layout
           initial="closed"
-          animate={isModalOpen ? 'open' : 'closed'}
+          animate={isModalVisible ? 'open' : 'closed'}
           exit={{ display: 'none' }}
           variants={modal}
         >
