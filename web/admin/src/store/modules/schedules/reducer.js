@@ -50,9 +50,9 @@ export default function truckProfile(state = INITIAL_STATE, action) {
       case ActionTypes.UPDATE_SCHEDULE_SUCCESS: {
         draft.loading = false;
         draft.schedule = [action.payload.schedule];
-        // draft.list = draft.list.filter(schedule => {
-        //   return [schedule.id !== action.payload.schedule.id, draft.schedule]
-        // })
+        draft.list = [...draft.list.filter(schedule => (
+         schedule.id !== action.payload.schedule.id
+        )), action.payload.schedule ]
         draft.error = null;
         break;
       }

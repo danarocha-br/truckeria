@@ -20,8 +20,9 @@ const ScheduleSchema = Yup.object().shape({
 
 const UpdateSchedule = ({ schedule }) => {
 
+  const parsedDate = parseISO(schedule.date_start);
+
   const formatedStartDate = useMemo(() => {
-    const parsedDate = parseISO(schedule.date_start)
     return formatISO9075(parsedDate, { representation: 'date' })
   }, [schedule.date_start])
 
@@ -31,8 +32,7 @@ const UpdateSchedule = ({ schedule }) => {
   }, [schedule.date_end])
 
   const formatedStartTime = useMemo(() => {
-    const parsedTime = parseISO(schedule.date_start)
-    return formatISO9075(parsedTime, { representation: 'time' })
+    return formatISO9075(parsedDate, { representation: 'time' })
   }, [schedule.date_start])
 
   const formatedEndTime = useMemo(() => {
@@ -48,12 +48,11 @@ const UpdateSchedule = ({ schedule }) => {
    time_end: formatedEndTime,
   };
 
-
   const [formValues, setformValues] = useState(initialValues);
   const dispatch = useDispatch();
 
-  const handleSubmit = useCallback((values) => {
-     dispatch(updateScheduleRequest(values))
+  const handleSubmit =  useCallback((values) => {
+    dispatch(updateScheduleRequest(values))
   }, [dispatch]);
 
 
@@ -64,7 +63,7 @@ const UpdateSchedule = ({ schedule }) => {
         validationSchema={ScheduleSchema}
         onSubmit={(values, actions) => {
           handleSubmit(values);
-          // actions.setSubmitting(false);
+          actions.setSubmitting(false);
         }}
         >
           {({ values }) => {

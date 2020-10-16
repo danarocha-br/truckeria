@@ -9,10 +9,9 @@ import DateInput from '~/components/DateInput';
 import Select from '~/components/Select';
 import Button from '~/components/Button';
 
-
 const UpdateScheduleForm = () => {
 
-  const { values, isSubmitting, dirty, isValid } = useFormikContext();
+  const { values, isValid } = useFormikContext();
   const [stateInitials, setStateInitials] = useState([])
   const [cities, setCities] = useState([])
 
@@ -83,8 +82,8 @@ const UpdateScheduleForm = () => {
         type='submit'
         label="Save Schedule"
         onClick={() => 'clicked'}
-        isLoading={isSubmitting}
-        // disabled={!(isValid && dirty)}
+        isLoading={isLoading}
+        disabled={!(isValid)}
         />
       </Form>
     );

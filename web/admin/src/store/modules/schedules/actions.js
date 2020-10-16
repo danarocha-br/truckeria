@@ -55,7 +55,7 @@ export function createScheduleSuccess(schedule) {
 export function updateScheduleRequest(data) {
   return {
     type: ActionTypes.UPDATE_SCHEDULE_REQUEST,
-    payload:{ data },
+    payload: { data },
   };
 }
 
