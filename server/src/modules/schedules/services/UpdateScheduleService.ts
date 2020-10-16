@@ -80,18 +80,18 @@ class UpdateScheduleService {
     const currentDate = new Date(Date.now());
 
     const isPastDate = isBefore(date_start, currentDate);
+    const isEndDateBefore = isBefore(date_end, currentDate);
 
-    if (isPastDate) {
+    if (isPastDate || isEndDateBefore) {
       throw new AppError(
         `Cannot create schedules in past date, please choose a current or future date.`,
       );
     }
 
-    // check if end date is not before the start date
+    // check if end date is earlier than start date
+    const isEndDateBeforeStartDate = isBefore(date_end, date_start);
 
-    const isEndDateBefore = isBefore(date_end, currentDate);
-
-    if (isEndDateBefore) {
+    if (isEndDateBeforeStartDate) {
       throw new AppError(`End date must be after the start date.`);
     }
 

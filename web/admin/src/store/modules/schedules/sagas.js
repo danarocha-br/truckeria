@@ -1,12 +1,12 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { parseISO, differenceInDays, format } from 'date-fns';
+import { toast } from "react-toastify";
 
 import ActionTypes from './types';
 import api from '~/services/api';
 import history from '~/services/history';
-import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess, updateScheduleSuccess, loadSchedulesRequest, updateScheduleRequest } from './actions';
+import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess, updateScheduleSuccess, loadMonthSchedulesRequest } from './actions';
 import { hideModal } from "../modals/actions";
-
 
 // export function* loadSchedules({ payload: { truck_id } }) {
 
@@ -34,7 +34,6 @@ import { hideModal } from "../modals/actions";
 // }
 
 export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
-
   try {
     const response = yield call(api.get, `schedules/${truck_id}/month`, {
       params: {
@@ -48,11 +47,19 @@ export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
       const parsedDateEnd = parseISO(schedule.date_end);
       const startsIn = differenceInDays(parsedDateStart, new Date());
 
+      const startsInLabel = () => {
+        if (startsIn && Math.sign(startsIn === -1 )) {
+          return `Past event`
+        }
+
+        return `in ${startsIn} days`
+    }
+
       return {
         ...schedule,
-        date: `${format(parsedDateStart, "eee ',' dd MMMM yyyy ',' hh':'mm")} - ${format(parsedDateEnd, "H':'mm")}`,
+        date: `${format(parsedDateStart, "eee ',' dd MMMM yyyy ',' HH':'mm")} - ${format(parsedDateEnd, "H':'mm")}`,
         day: `${format(parsedDateStart, "dd MMM")}`,
-        starts_in: `in ${startsIn} days`,
+        starts_in: startsInLabel(),
         booked: true,
       }});
 
@@ -60,6 +67,7 @@ export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
     history.push(`/schedule/${truck_id}`);
   } catch (error) {
     yield put(schedulesFailure(error));
+    toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
 
@@ -83,6 +91,8 @@ export function* createSchedule({ payload: { data } }) {
   const dateStart = new Date(parsedDateStart.getFullYear(), parsedDateStart.getMonth(), parsedDateStart.getDate(), hoursStart, minutesStart)
   const dateEnd = new Date(parsedDateEnd.getFullYear(), parsedDateEnd.getMonth(), parsedDateEnd.getDate(), hoursEnd, minutesEnd)
 
+  const year = parsedDateStart.getFullYear();
+  const month = parsedDateStart.getMonth() ;
 
   try {
     const response = yield call(api.post, 'schedules', {
@@ -96,14 +106,17 @@ export function* createSchedule({ payload: { data } }) {
       date_end: dateEnd,
     });
     yield put(createScheduleSuccess(response.data));
+    yield put(hideModal());
+    yield put(loadMonthSchedulesRequest(truck_id, month + 1, year));
   } catch (error) {
     yield put(schedulesFailure(error));
+    toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
 
 export function* updateSchedule({ payload: { data }}) {
-  const { address, city, state, date_start, date_end, time_start, time_end, id } = data;
 
+  const { address, city, state, date_start, date_end, time_start, time_end, id, truck_id } = data;
   const fakeLat = '-25.48087';
   const fakeLon = '-49.304424';
 
@@ -115,6 +128,10 @@ export function* updateSchedule({ payload: { data }}) {
 
   const [, minutesEnd] = time_end.split(':');
   const [hoursEnd, ] = time_end.split(':');
+
+  const year = parsedDateStart.getFullYear();
+  const month = parsedDateStart.getMonth() ;
+
 
   const dateStart = new Date(parsedDateStart.getFullYear(), parsedDateStart.getMonth(), parsedDateStart.getDate(), hoursStart, minutesStart)
   const dateEnd = new Date(parsedDateEnd.getFullYear(), parsedDateEnd.getMonth(), parsedDateEnd.getDate(), hoursEnd, minutesEnd)
@@ -130,17 +147,19 @@ export function* updateSchedule({ payload: { data }}) {
       date_start: dateStart,
       date_end: dateEnd,
     });
+
     yield put(updateScheduleSuccess(response.data));
-    console.log(response.data)
-    // yield put(hideModal());
-    // yield put(loadSchedulesRequest());
+    yield put(hideModal());
+    yield put(loadMonthSchedulesRequest(truck_id, month + 1, year));
+
   } catch (error) {
-    console.log(error)
+    toast.error(`An error occurred: ${error.response.data.message}`);
+    yield put(schedulesFailure({message: error.response.data.message, error}));
   }
 }
 
 export default all([
   takeLatest(ActionTypes.CREATE_SCHEDULE_REQUEST, createSchedule),
   takeLatest(ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST, loadMonthSchedules),
-  takeLatest(ActionTypes.UPDATE_SCHEDULE_REQUEST, updateScheduleRequest),
+  takeLatest(ActionTypes.UPDATE_SCHEDULE_REQUEST, updateSchedule),
 ]);

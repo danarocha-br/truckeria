@@ -9,5 +9,5 @@ export default combineReducers({
   auth,
   truckProfile,
   schedules,
-  modals
+  modals,
 });

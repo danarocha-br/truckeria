@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import { darken } from 'polished';
 
 import colors from './tokens/colors';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
 

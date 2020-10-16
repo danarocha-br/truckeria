@@ -1,4 +1,6 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+
 import ActionTypes from './types';
 import { signSuccess, signFailure } from './actions';
 import api from '~/services/api';
@@ -15,7 +17,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
 
     const isAdmin = user.roles.includes('admin');
     if (!isAdmin) {
-      console.tron.error('User is not an admin.');
+      toast.error(`This user is not an admin.`);
       return;
     }
 
@@ -24,6 +26,7 @@ export function* signInWithEmail({ payload: { email, password } }) {
     yield put(signSuccess(token, user));
     history.push('/');
   } catch (error) {
+    toast.error(`An error occurred: ${error.response.data.message}`);
     yield put(signFailure(error));
   }
 }
@@ -39,6 +42,7 @@ export function* signUpWithEmail({ payload: { name, email, password } }) {
 
     yield put(signSuccess());
   } catch (error) {
+    toast.error(`An error occurred: ${error.response.data.message}`);
     yield put(signFailure(error));
   }
 }

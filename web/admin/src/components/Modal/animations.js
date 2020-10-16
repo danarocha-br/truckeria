@@ -1,8 +1,8 @@
 export const modal = {
   open: {
     opacity: 1,
-    x: 0,
     zIndex: 99,
+    right: 0,
     transition: {
       type: 'spring',
       damping: 13,
@@ -11,11 +11,10 @@ export const modal = {
   },
   closed: {
     opacity: 0,
-    width: 0,
-    x: 500,
     zIndex: -1,
+    right: -500,
     transition: {
-      delay: 0.5,
+      // delay: 0.5,
       type: 'spring',
       damping: 10,
       stiffness: 100,

@@ -18,7 +18,6 @@ import { listGroup } from '../../components/List/animations';
 import { loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
 import { loadTruckProfileRequest } from '~/store/modules/truckProfile/actions';
 import { showModal } from '~/store/modules/modals/actions';
-// import { customSelectStyles } from "./styles";
 
 const Schedule = () => {
 
@@ -27,9 +26,6 @@ const Schedule = () => {
   const schedules = useSelector((state) => state.schedules.list);
   const isLoading = useSelector((state) => state.schedules.loading);
   let { truck_id } = useParams();
-
-  // Modal
-  // const [isOpen, toggleOpen] = useCycle(false, true);
 
   // Month
   const [currenthMonth, setCurrentMonth] = useState(new Date());
@@ -68,7 +64,6 @@ const Schedule = () => {
     setSelectDate(day);
   }, []);
 
-
   const isMatchingDates = useMemo(() => {
     const year = currenthMonth.getFullYear()
     const month = currenthMonth.getMonth()
@@ -94,7 +89,6 @@ const Schedule = () => {
 //       return { value: profile.id, label: profile.name };
 //   });
 
-//   console.log(defaultValue)
 
  //handle update schedule
  const handleUpdateSchedule = useCallback((schedule) => {

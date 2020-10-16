@@ -1,9 +1,10 @@
 import ActionTypes from './types';
 
 
-export function schedulesFailure() {
+export function schedulesFailure(error) {
   return {
     type: ActionTypes.SCHEDULES_FAILURE,
+    payload: error,
   };
 }
 
@@ -55,7 +56,7 @@ export function createScheduleSuccess(schedule) {
 export function updateScheduleRequest(data) {
   return {
     type: ActionTypes.UPDATE_SCHEDULE_REQUEST,
-    payload:{ data },
+    payload: { data },
   };
 }
 

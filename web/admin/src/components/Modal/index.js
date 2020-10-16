@@ -27,7 +27,7 @@ const Modal = ({ title, children }) => {
           layout
           initial="closed"
           animate={isModalVisible ? 'open' : 'closed'}
-          exit={{ display: 'none' }}
+          exit="closed"
           variants={modal}
         >
           <header className="flex w-full justify-between text-gray-900 text-xl font-medium mb-8">
