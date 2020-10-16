@@ -96,7 +96,7 @@ class SchedulesRepository implements ISchedulesRepository {
   /**
    * delete
    */
-  public async delete(schedule_id: string): Promise<DeleteResult | undefined> {
+  public async delete(schedule_id: string): Promise<DeleteResult | Schedule[]> {
     return this.ormRepository.delete(schedule_id);
   }
 }

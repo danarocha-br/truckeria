@@ -4,23 +4,19 @@ import ListTrucksProfilesService from './ListTrucksProfilesService';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeTruckProfilesRepository from '../repositories/fakes/FakeTruckProfilesRepository';
-import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
 let listTrucksProfilesService: ListTrucksProfilesService;
-let fakeCacheProvider: FakeCacheProvider;
 
 describe('ListTrucksProfilesService', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
-    fakeCacheProvider = new FakeCacheProvider();
 
     listTrucksProfilesService = new ListTrucksProfilesService(
       fakeUsersRepository,
       fakeTruckProfilesRepository,
-      fakeCacheProvider,
     );
   });
 

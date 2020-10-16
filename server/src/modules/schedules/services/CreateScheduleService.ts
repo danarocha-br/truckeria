@@ -4,7 +4,6 @@ import { isBefore } from 'date-fns';
 import Schedule from '../infra/typeorm/entities/Schedule';
 import ISchedulesRepository from '../repositories/ISchedulesRepository';
 import ITruckProfileRepository from '@modules/foodtrucks/repositories/ITruckProfilesRepository';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
 
 import AppError from '@shared/errors/AppError';
 
@@ -29,8 +28,6 @@ class CreateScheduleService {
     @inject('TruckProfilesRepository')
     private truckProfilesRepository: ITruckProfileRepository,
 
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -111,8 +108,6 @@ class CreateScheduleService {
       date_start,
       date_end,
     });
-
-    // await this.cacheProvider.invalidatePrefix('schedule-list');
 
     return schedule;
   }

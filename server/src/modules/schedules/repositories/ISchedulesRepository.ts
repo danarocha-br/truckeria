@@ -13,5 +13,5 @@ export default interface ISchedulesRepository {
   findAllSchedulesWithinInterval(
     data: IFindAllSchedulesWithinIntervalDTO,
   ): Promise<Schedule[] | undefined>;
-  delete(schedule_id: string): Promise<DeleteResult | undefined>;
+  delete(schedule_id: string): Promise<DeleteResult | Schedule[]>;
 }

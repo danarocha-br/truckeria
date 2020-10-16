@@ -38,9 +38,6 @@ class CreateTruckProfileService {
 
     @inject('StorageProvider')
     private storageProvider: IStorageProvider,
-
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -108,8 +105,6 @@ class CreateTruckProfileService {
       facebook,
       twitter,
     });
-
-    await this.cacheProvider.invalidatePrefix('truckprofiles-list');
 
     return truckProfile;
   }

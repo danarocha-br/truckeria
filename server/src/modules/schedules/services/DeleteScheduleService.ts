@@ -1,5 +1,5 @@
 import { injectable, inject } from 'tsyringe';
-import { isBefore } from 'date-fns';
+import { DeleteResult } from 'typeorm';
 
 import Schedule from '../infra/typeorm/entities/Schedule';
 import ISchedulesRepository from '../repositories/ISchedulesRepository';
@@ -26,7 +26,7 @@ class UpdateScheduleService {
   public async execute({
     schedule_id,
     user_id,
-  }: IRequest): Promise<Schedule> {
+  }: IRequest): Promise<Schedule[] | DeleteResult> {
     //check if schedule exist
     const schedule = await this.schedulesRepository.findById(schedule_id);
 
@@ -34,7 +34,7 @@ class UpdateScheduleService {
       throw new AppError('This schedule does not exist.');
     }
 
-    const truckProfile = await this.truckProfilesRepository.findById(schedule.truck_id)
+    const truckProfile = await this.truckProfilesRepository.findById(schedule.truck_id);
 
     //check if the user is truckprofile owner
     if (truckProfile?.user_id !== user_id) {

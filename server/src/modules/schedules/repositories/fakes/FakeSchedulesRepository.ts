@@ -111,12 +111,12 @@ class SchedulesRepository implements ISchedulesRepository {
    */
   public async delete(
     schedule_id: string,
-  ): Promise<undefined | DeleteResult> {
+  ): Promise<Schedule[] | DeleteResult> {
     const findProfile = this.schedules.filter(
       schedule => schedule.id === schedule_id,
     );
 
-    return raw;
+    return findProfile;
   }
 }
 
