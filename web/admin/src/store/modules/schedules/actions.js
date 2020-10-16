@@ -1,9 +1,10 @@
 import ActionTypes from './types';
 
 
-export function schedulesFailure() {
+export function schedulesFailure(error) {
   return {
     type: ActionTypes.SCHEDULES_FAILURE,
+    payload: error,
   };
 }
 

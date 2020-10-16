@@ -8,14 +8,13 @@ import TextInput from '~/components/TextInput';
 import DateInput from '~/components/DateInput';
 import Select from '~/components/Select';
 import Button from '~/components/Button';
-
 // const Map = ReactMapboxGl({
 //   accessToken: process.env.REACT_APP_MAPBOX_KEY,
 // });
 
 const NewScheduleForm = ( ) => {
 
-  const { values, isSubmitting, dirty, isValid } = useFormikContext();
+  const { values, isSubmitting, touched, isValid } = useFormikContext();
   const [stateInitials, setStateInitials] = useState([])
   const [cities, setCities] = useState([])
   // const [address, setAddress] = useState('')
@@ -92,8 +91,8 @@ const NewScheduleForm = ( ) => {
         type='submit'
         label="Add New Schedule"
         onClick={() => 'clicked'}
-        // isLoading={isSubmitting}
-        // disabled={!(isValid && dirty)}
+        isLoading={isSubmitting}
+        disabled={!isValid || (Object.keys(touched).length === 0 && touched.constructor === Object)}
         />
       </Form>
     );

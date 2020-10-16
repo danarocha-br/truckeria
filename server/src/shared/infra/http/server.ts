@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 import 'dotenv/config';
+import 'express-async-errors';
 
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import * as Sentry from "@sentry/node";
 import { errors } from 'celebrate';
-import 'express-async-errors';
 
 import uploadConfig from '@config/upload';
 import rateLimiter from './middlewares/rateLimiter';

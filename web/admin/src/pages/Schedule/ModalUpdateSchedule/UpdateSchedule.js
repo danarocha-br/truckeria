@@ -2,9 +2,10 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
+import { formatISO9075, parseISO } from 'date-fns';
+
 import Modal from '~/components/Modal';
 import Form from './UpdateScheduleForm';
-import { formatISO9075, parseISO } from 'date-fns';
 
 import { updateScheduleRequest } from "~/store/modules/schedules/actions";
 
@@ -52,7 +53,7 @@ const UpdateSchedule = ({ schedule }) => {
   const dispatch = useDispatch();
 
   const handleSubmit =  useCallback((values) => {
-    dispatch(updateScheduleRequest(values))
+      dispatch(updateScheduleRequest(values))
   }, [dispatch]);
 
 

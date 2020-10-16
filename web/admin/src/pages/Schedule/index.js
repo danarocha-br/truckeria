@@ -89,7 +89,6 @@ const Schedule = () => {
 //       return { value: profile.id, label: profile.name };
 //   });
 
-//   console.log(defaultValue)
 
  //handle update schedule
  const handleUpdateSchedule = useCallback((schedule) => {

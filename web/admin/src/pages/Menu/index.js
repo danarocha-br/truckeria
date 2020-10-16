@@ -1,6 +1,5 @@
 import React from 'react';
 // import { FiPlus } from 'react-icons/fi';
-import { motion, useCycle } from 'framer-motion';
 // import { useSelector } from 'react-redux';
 
 // import DefaultLayout from '../_layouts/default';
@@ -14,13 +13,9 @@ import NewMenuItemModal from './NewMenuItem';
 // import { listGroup } from '../../components/List/animations';
 
 const Menu = () => {
-  // Modal
-  const [isOpen, toggleOpen] = useCycle(false, true);
-
 
   return (
     <>
-      <NewMenuItemModal isOpen={isOpen} toggleOpen={toggleOpen} />
       {/* <DefaultLayout>
         <PanelLeft>
           <Header>

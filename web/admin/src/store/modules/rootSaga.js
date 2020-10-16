@@ -5,5 +5,5 @@ import truckProfile from './truckProfile/sagas';
 import schedules from './schedules/sagas';
 
 export default function* rootSaga() {
-  return yield all([auth, truckProfile, schedules]);
+  return yield all([auth, truckProfile, schedules ]);
 }

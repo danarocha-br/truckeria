@@ -1,4 +1,5 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import ActionTypes from './types';
 import { truckProfileError, truckProfileSuccess, loadTruckProfileSuccess } from './actions';
@@ -12,7 +13,7 @@ export function* createFoodTruckProfile({ payload: { data } }) {
     });
     yield put(truckProfileSuccess(response.data));
   } catch (error) {
-    console.log(error);
+    toast.error(`An error occurred: ${error.response.data.message}`);
     yield put(truckProfileError(error));
   }
 }
@@ -26,6 +27,7 @@ export function* loadTruckProfiles() {
 
     yield put(loadTruckProfileSuccess(truckProfiles));
   } catch (error) {
+    toast.error(`An error occurred: ${error.response.data.message}`);
     yield put(truckProfileError(error));
   }
 }

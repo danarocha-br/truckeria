@@ -10,6 +10,7 @@ export const Container = styled(motion.div)`
   background: white;
   z-index: 100;
   width: 100% !important;
+  overflow: scroll;
 
   ${breakpoint('tablet')`
     width: 65% !important;
@@ -85,10 +86,23 @@ export const Container = styled(motion.div)`
     }
   }
 
+  form {
+    margin-bottom: 100px;
+  }
+
   button {
-    ${tw`absolute`};
-    width: calc(100% - 64px);
-    bottom: 20px;
+    ${tw`fixed`};
+    width: min(100%, 91vw);
+    bottom: 10px;
+    z-index: 10;
+
+    ${breakpoint('tablet')`
+      width: 57.666% !important;
+   `}
+
+    ${breakpoint('desktop')`
+      width: 30.666% !important;
+   `}
   }
 `;
 

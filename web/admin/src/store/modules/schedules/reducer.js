@@ -38,6 +38,9 @@ export default function truckProfile(state = INITIAL_STATE, action) {
       case ActionTypes.CREATE_SCHEDULE_SUCCESS: {
         draft.loading = false;
         draft.schedule = [action.payload.schedule];
+        draft.list = [...draft.list.filter(schedule => (
+          schedule.id !== action.payload.schedule.id
+         )), action.payload.schedule ]
         draft.error = null;
         break;
       }
@@ -59,7 +62,7 @@ export default function truckProfile(state = INITIAL_STATE, action) {
 
       case ActionTypes.SCHEDULES_FAILURE: {
         draft.loading = false;
-        draft.error = [action.payload];
+        draft.error = [ action.payload ];
         break;
       }
 

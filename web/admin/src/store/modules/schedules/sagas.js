@@ -1,12 +1,12 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
-import { parseISO, differenceInDays, format, getMonth } from 'date-fns';
+import { parseISO, differenceInDays, format } from 'date-fns';
+import { toast } from "react-toastify";
 
 import ActionTypes from './types';
 import api from '~/services/api';
 import history from '~/services/history';
 import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess, updateScheduleSuccess, loadMonthSchedulesRequest } from './actions';
 import { hideModal } from "../modals/actions";
-
 
 // export function* loadSchedules({ payload: { truck_id } }) {
 
@@ -34,7 +34,6 @@ import { hideModal } from "../modals/actions";
 // }
 
 export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
-
   try {
     const response = yield call(api.get, `schedules/${truck_id}/month`, {
       params: {
@@ -65,10 +64,10 @@ export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
       }});
 
     yield put(loadMonthSchedulesSuccess(list));
-    console.log(list)
     history.push(`/schedule/${truck_id}`);
   } catch (error) {
     yield put(schedulesFailure(error));
+    toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
 
@@ -92,6 +91,8 @@ export function* createSchedule({ payload: { data } }) {
   const dateStart = new Date(parsedDateStart.getFullYear(), parsedDateStart.getMonth(), parsedDateStart.getDate(), hoursStart, minutesStart)
   const dateEnd = new Date(parsedDateEnd.getFullYear(), parsedDateEnd.getMonth(), parsedDateEnd.getDate(), hoursEnd, minutesEnd)
 
+  const year = parsedDateStart.getFullYear();
+  const month = parsedDateStart.getMonth() ;
 
   try {
     const response = yield call(api.post, 'schedules', {
@@ -105,12 +106,16 @@ export function* createSchedule({ payload: { data } }) {
       date_end: dateEnd,
     });
     yield put(createScheduleSuccess(response.data));
+    yield put(hideModal());
+    yield put(loadMonthSchedulesRequest(truck_id, month + 1, year));
   } catch (error) {
     yield put(schedulesFailure(error));
+    toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
 
 export function* updateSchedule({ payload: { data }}) {
+
   const { address, city, state, date_start, date_end, time_start, time_end, id, truck_id } = data;
   const fakeLat = '-25.48087';
   const fakeLon = '-49.304424';
@@ -146,8 +151,10 @@ export function* updateSchedule({ payload: { data }}) {
     yield put(updateScheduleSuccess(response.data));
     yield put(hideModal());
     yield put(loadMonthSchedulesRequest(truck_id, month + 1, year));
+
   } catch (error) {
-    console.log(error)
+    toast.error(`An error occurred: ${error.response.data.message}`);
+    yield put(schedulesFailure({message: error.response.data.message, error}));
   }
 }
 
