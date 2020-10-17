@@ -5,7 +5,17 @@ import { toast } from "react-toastify";
 import ActionTypes from './types';
 import api from '~/services/api';
 import history from '~/services/history';
-import { schedulesFailure, createScheduleSuccess, loadMonthSchedulesSuccess, updateScheduleSuccess, loadMonthSchedulesRequest } from './actions';
+import {
+  loadSchedulesFailure,
+  loadMonthSchedulesSuccess,
+  createScheduleSuccess,
+  createSchedulesFailure,
+  updateScheduleSuccess,
+  updateSchedulesFailure,
+  loadMonthSchedulesRequest,
+  deleteScheduleSuccess,
+  deleteScheduleFailure
+} from './actions';
 import { hideModal } from "../modals/actions";
 
 // export function* loadSchedules({ payload: { truck_id } }) {
@@ -66,7 +76,7 @@ export function* loadMonthSchedules({ payload: { truck_id, month, year } }) {
     yield put(loadMonthSchedulesSuccess(list));
     history.push(`/schedule/${truck_id}`);
   } catch (error) {
-    yield put(schedulesFailure(error));
+    yield put(loadSchedulesFailure(error));
     toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
@@ -109,7 +119,7 @@ export function* createSchedule({ payload: { data } }) {
     yield put(hideModal());
     yield put(loadMonthSchedulesRequest(truck_id, month + 1, year));
   } catch (error) {
-    yield put(schedulesFailure(error));
+    yield put(createSchedulesFailure(error));
     toast.error(`An error occurred: ${error.response.data.message}`);
   }
 }
@@ -154,7 +164,21 @@ export function* updateSchedule({ payload: { data }}) {
 
   } catch (error) {
     toast.error(`An error occurred: ${error.response.data.message}`);
-    yield put(schedulesFailure({message: error.response.data.message, error}));
+    yield put(updateSchedulesFailure({message: error.response.data.message, error}));
+  }
+}
+
+export function* deleteSchedule({ payload: { schedule_id }}) {
+  try {
+    yield call(api.delete, `schedules/${schedule_id}`);
+
+    yield put(deleteScheduleSuccess(schedule_id));
+    toast.success('Your schedule was deleted successfully.');
+    yield put(hideModal());
+
+  } catch (error) {
+    toast.error(`An error occurred: ${error.response.data.message}`);
+    yield put(deleteScheduleFailure({message: error.response.data.message, error}));
   }
 }
 
@@ -162,4 +186,5 @@ export default all([
   takeLatest(ActionTypes.CREATE_SCHEDULE_REQUEST, createSchedule),
   takeLatest(ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST, loadMonthSchedules),
   takeLatest(ActionTypes.UPDATE_SCHEDULE_REQUEST, updateSchedule),
+  takeLatest(ActionTypes.DELETE_SCHEDULE_REQUEST, deleteSchedule),
 ]);

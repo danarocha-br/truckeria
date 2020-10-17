@@ -47,7 +47,6 @@ const Dashboard = () => {
 
         <Grid>
         {truckProfiles && truckProfiles.map(truckProfile => {
-          {console.log(truckProfile.id)}
           return (
             <TruckProfileItem
               key={truckProfile.id}

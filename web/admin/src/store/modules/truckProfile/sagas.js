@@ -2,7 +2,14 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import ActionTypes from './types';
-import { truckProfileError, truckProfileSuccess, loadTruckProfileSuccess } from './actions';
+import {
+  createTruckProfileFailure,
+  createTruckProfileSuccess,
+  loadTruckProfileSuccess,
+  loadTruckProfileFailure,
+  deleteTruckProfileFailure,
+  deleteTruckProfileSuccess
+ } from './actions';
 import api from '~/services/api';
 
 export function* createFoodTruckProfile({ payload: { data } }) {
@@ -11,10 +18,10 @@ export function* createFoodTruckProfile({ payload: { data } }) {
     const response = yield call(api.post, 'foodtruck/profile', {
       ...data,
     });
-    yield put(truckProfileSuccess(response.data));
+    yield put(createTruckProfileSuccess(response.data));
   } catch (error) {
     toast.error(`An error occurred: ${error.response.data.message}`);
-    yield put(truckProfileError(error));
+    yield put(createTruckProfileFailure(error));
   }
 }
 
@@ -28,11 +35,25 @@ export function* loadTruckProfiles() {
     yield put(loadTruckProfileSuccess(truckProfiles));
   } catch (error) {
     toast.error(`An error occurred: ${error.response.data.message}`);
-    yield put(truckProfileError(error));
+    yield put(loadTruckProfileFailure(error));
+  }
+}
+
+export function* deleteTruckProfile({ payload: { truck_id }}) {
+  try {
+    yield call(api.delete, `schedules/${truck_id}`);
+
+    yield put(deleteTruckProfileSuccess(truck_id));
+    toast.success('Your food truck profile was deleted successfully.');
+
+  } catch (error) {
+    toast.error(`An error occurred: ${error.response.data.message}`);
+    yield put(deleteTruckProfileFailure({message: error.response.data.message, error}));
   }
 }
 
 export default all([
   takeLatest(ActionTypes.CREATE_TRUCK_PROFILE_REQUEST, createFoodTruckProfile),
   takeLatest(ActionTypes.LOAD_TRUCK_PROFILE_REQUEST, loadTruckProfiles),
+  takeLatest(ActionTypes.DELETE_TRUCK_PROFILE_REQUEST, deleteTruckProfile),
 ]);

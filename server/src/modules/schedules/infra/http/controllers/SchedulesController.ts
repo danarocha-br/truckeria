@@ -71,7 +71,7 @@ class SchedulesController {
    * delete
    */
   public async delete(req: Request, res: Response): Promise<Response> {
-    const { schedule_id }= req.body;
+    const { schedule_id } = req.params;
     const user_id = req.user.id;
 
     const deleteOneScheduleService = container.resolve(

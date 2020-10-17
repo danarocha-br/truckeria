@@ -5,6 +5,8 @@ import { FiCalendar, FiTablet, FiTruck, FiGrid } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
+import { toast } from 'react-toastify';
+
 import { Container, List, Profile } from './styles';
 
 import NavItem from './NavItem';
@@ -20,13 +22,13 @@ const AsideMenu = () => {
   const truckProfiles = useSelector((state) => state.truckProfile.list);
   const isLoading = useSelector((state) => state.auth.loading);
 
-  const truck_id = truckProfiles && truckProfiles[0].id
+  const truck_id = truckProfiles && truckProfiles[0].id;
 
   const handleSignOut = useCallback(async () => {
     try {
       dispatch(signOutRequest());
     } catch (error) {
-      console.log(error);
+      toast.error('An error occurred, please try again.')
     }
   }, [dispatch]);
 

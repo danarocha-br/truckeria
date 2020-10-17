@@ -1,14 +1,7 @@
 import ActionTypes from './types';
 
 
-export function schedulesFailure(error) {
-  return {
-    type: ActionTypes.SCHEDULES_FAILURE,
-    payload: error,
-  };
-}
-
-// List
+// LIST
 export function loadMonthSchedulesRequest(truck_id, month, year) {
   return {
     type: ActionTypes.LOAD_MONTH_SCHEDULES_REQUEST,
@@ -37,6 +30,13 @@ export function loadSchedulesSuccess(list) {
   };
 }
 
+export function loadSchedulesFailure(error) {
+  return {
+    type: ActionTypes.LOAD_MONTH_SCHEDULES_FAILURE,
+    payload: error,
+  };
+}
+
 // CREATE
 export function createScheduleRequest(data) {
   return {
@@ -52,6 +52,14 @@ export function createScheduleSuccess(schedule) {
   };
 }
 
+
+export function createSchedulesFailure(error) {
+  return {
+    type: ActionTypes.CREATE_SCHEDULE_FAILTURE,
+    payload: error,
+  };
+}
+
 // UPDATE
 export function updateScheduleRequest(data) {
   return {
@@ -64,5 +72,34 @@ export function updateScheduleSuccess(schedule) {
   return {
     type: ActionTypes.UPDATE_SCHEDULE_SUCCESS,
     payload: { schedule },
+  };
+}
+
+export function updateSchedulesFailure(error) {
+  return {
+    type: ActionTypes.UPDATE_SCHEDULE_FAILURE,
+    payload: error,
+  };
+}
+
+// DELETE
+export function deleteScheduleRequest(schedule_id) {
+  return {
+    type: ActionTypes.DELETE_SCHEDULE_REQUEST,
+    payload: { schedule_id },
+  };
+}
+
+export function deleteScheduleSuccess(schedule_id) {
+  return {
+    type: ActionTypes.DELETE_SCHEDULE_SUCCESS,
+    payload: { schedule_id },
+  };
+}
+
+export function deleteScheduleFailure(error) {
+  return {
+    type: ActionTypes.DELETE_SCHEDULE_FAILTURE,
+    payload: error,
   };
 }

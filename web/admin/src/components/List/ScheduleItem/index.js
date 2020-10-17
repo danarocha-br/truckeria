@@ -14,7 +14,7 @@ const ScheduleItem = ({ date, day, address, startsIn, isActive, isLoading, onUpd
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
   return (
-    <Container isActive={isActive} isLoading={isLoading} variants={listItems} onClick={onUpdate}>
+    <Container isActive={isActive} isLoading={isLoading} variants={listItems} >
       <FiCalendar size="20" color={theme.colors.primary} />
       <Wrapper isActive={isActive}>
         <Date>
