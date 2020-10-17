@@ -22,10 +22,9 @@ const Dashboard = () => {
     dispatch(loadTruckProfileRequest());
   }, [dispatch]);
 
-  const handleLoadSchedules = useCallback((truck_id) => {
-      dispatch(loadSchedulesRequest(truck_id));
-      history.push(`/schedule/${truck_id}`);
-  }, [dispatch, history])
+  const handleRedirect = useCallback((truck_id) => {
+      history.push(`/truck-profile/${truck_id}`);
+  }, [history])
 
   const toggleCreateFoodTruck = useCallback(() => {
     history.push('/create-foodtruck-account');
@@ -53,7 +52,7 @@ const Dashboard = () => {
               title={truckProfile.name}
               cuisines={truckProfile.cuisines}
               city={truckProfile.city} state={truckProfile.state}
-              onClick={() => handleLoadSchedules((truckProfile.id))}>
+              onClick={() => handleRedirect((truckProfile.id))}>
               </TruckProfileItem>
             )
           })}
