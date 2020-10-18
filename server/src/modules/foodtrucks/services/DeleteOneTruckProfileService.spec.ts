@@ -51,6 +51,56 @@ describe('DeleteOneTruckProfileService', () => {
       truck_id: truckProfile.id,
     });
 
-    // expect(deleteProfile).
+    // expect(deleteProfile).toHaveProperty('id');
+  });
+
+  it('should not be able to delete truck profile with non-existing id', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    await expect(
+      deleteOneTruckProfileService.execute({
+        user_id: user.id,
+        truck_id: 'wrong-id'
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should not be able to delete truck profile if user is not the owner', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Joe Doe',
+      email: 'joe@doe.com',
+      password: '123456',
+      roles: ['admin', 'user'],
+    });
+
+    const truckProfile = await fakeTruckProfilesRepository.create({
+      user_id: user.id,
+      name: 'Brazilian Barbecue',
+      description: 'Our awesome Brazilian style barbecue.',
+      cuisines: ['brazilian', 'latin'],
+      payment_methods: ['credit card'],
+      catering: true,
+      photo_filename: '',
+      email: 'barbecue@email.com',
+      phone: 41985145400,
+      city: 'Curitiba',
+      state: 'PR',
+      web: 'http://www.brazilianbbq.com',
+      instagram: 'br-bbq',
+      facebook: 'br-bbq',
+      twitter: 'br-bbq',
+    });
+
+    await expect(
+      deleteOneTruckProfileService.execute({
+        user_id: 'wrong-id',
+        truck_id: truckProfile.id
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

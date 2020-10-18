@@ -4,25 +4,21 @@ import FakeSchedulesRepository from '../repositories/fakes/FakeSchedulesReposito
 import FakeTruckProfilesRepository from '@modules/foodtrucks/repositories/fakes/FakeTruckProfilesRepository';
 import CreateScheduleService from './CreateScheduleService';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
-import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 
 let fakeUsersRepository: FakeUsersRepository;
 let fakeSchedulesRepository: FakeSchedulesRepository;
 let fakeTruckProfilesRepository: FakeTruckProfilesRepository;
 let createSchedule: CreateScheduleService;
-let fakeCacheProvider: FakeCacheProvider;
 
 describe('CreateSchedule', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeSchedulesRepository = new FakeSchedulesRepository();
     fakeTruckProfilesRepository = new FakeTruckProfilesRepository();
-    fakeCacheProvider = new FakeCacheProvider();
 
     createSchedule = new CreateScheduleService(
       fakeSchedulesRepository,
       fakeTruckProfilesRepository,
-      fakeCacheProvider,
     );
   });
 

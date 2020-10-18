@@ -23,34 +23,22 @@ class ListTrucksProfilesService {
     @inject('TruckProfilesRepository')
     private truckProfilesRepository: ITruckProfilesRepository,
 
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
   ) {}
   /**
    * execute
    */
   public async execute({ user_id }: IRequest): Promise<TruckProfile[]> {
-    let truckProfiles = await this.cacheProvider.recover<
-      TruckProfile[] | undefined
-    >(`truckprofiles-list:${user_id}`);
 
-    if (!truckProfiles) {
-      truckProfiles = await this.truckProfilesRepository.findAllMyTrucksProfile(
-        user_id,
-      );
+    const truckProfiles = await this.truckProfilesRepository.findAllMyTrucksProfile(
+      user_id,
+    );
 
-      await this.cacheProvider.save(
-        `truckprofiles-list:${user_id}`,
-        classToClass(truckProfiles),
-      );
-
-      if (!truckProfiles?.length) {
-        throw new AppError(`You don't have any food truck profile yet.`);
-      }
+    if (!truckProfiles?.length) {
+      throw new AppError(`You don't have any food truck profile yet.`);
     }
-
     return truckProfiles;
   }
+
 }
 
 export default ListTrucksProfilesService;

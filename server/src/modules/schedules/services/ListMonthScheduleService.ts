@@ -38,19 +38,6 @@ class ListMonthScheduleService {
       throw new AppError(`No truck profile was found with this given id.`);
     }
 
-    // don't return schedules in past date
-
-    // const currentDate = new Date(Date.now());
-    // const filteredDate = new Date(year, month, 1);
-
-    // const isPastDate = isBefore(filteredDate, currentDate);
-
-    // if (isPastDate) {
-    //   throw new AppError(
-    //     `Cannot display schedules in past date, please choose a current date.`,
-    //   );
-    // }
-
     const schedules = await this.schedulesRepository.findAllSchedulesWithinInterval(
       {
         truck_id,

@@ -8,7 +8,7 @@ import { AnimatedContainer } from './styles';
 import Form from './Form';
 import Preview from './Preview';
 import AuthLayout from '~/pages/_layouts/auth';
-import { truckProfileRequest } from '~/store/modules/truckProfile/actions';
+import { createTruckProfileRequest } from '~/store/modules/truckProfile/actions';
 
 const FoodTruckSetup = () => {
   const SetupSchema = Yup.object().shape({
@@ -57,7 +57,7 @@ const FoodTruckSetup = () => {
       data = {...values}
       data.append('photo_filename', files);
 
-      await dispatch(truckProfileRequest( data ));
+      await dispatch(createTruckProfileRequest( data ));
 
     },
     [dispatch]

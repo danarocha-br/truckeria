@@ -62,7 +62,7 @@ class TruckProfilesRepository implements ITruckProfileRepository {
   /**
    * delete
    */
-  public async delete(truck_id: string): Promise<DeleteResult | undefined> {
+  public async delete(truck_id: string): Promise<DeleteResult | TruckProfile[]> {
     return this.ormRepository.delete(truck_id);
   }
 }

@@ -71,9 +71,9 @@ schedulesRouter.put(
 );
 
 schedulesRouter.delete(
-  '/',
+  '/:schedule_id',
   celebrate({
-    [Segments.BODY]: {
+    [Segments.PARAMS]: {
       schedule_id: Joi.string().uuid().required(),
     },
   }),

@@ -30,6 +30,10 @@ export const Container = styled.div`
       }
     }
   }
+
+  address {
+    ${tw`not-italic`};
+  }
 `;
 
 export const ProfileImg = styled.div`

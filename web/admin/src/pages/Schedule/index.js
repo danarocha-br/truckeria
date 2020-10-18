@@ -9,13 +9,13 @@ import { format, toDate, parseISO, getDate } from 'date-fns';
 
 import DefaultLayout from '../_layouts/default';
 import { PanelLeft, PanelRight, Header } from '../_layouts/default/styles';
-import Title from '../../components/Title';
-import ScheduleItem from '../../components/List/ScheduleItem';
-import Calendar from '../../components/Calendar';
-import Button from '../../components/Button';
-import SkeletonGroup from '../../components/SkeletonGroup';
-import { listGroup } from '../../components/List/animations';
-import { loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
+import Title from '~/components/Title';
+import ScheduleItem from '~/components/List/ScheduleItem';
+import Calendar from '~/components/Calendar';
+import Button from '~/components/Button';
+import SkeletonGroup from '~/components/SkeletonGroup';
+import { listGroup } from '~/components/List/animations';
+import { deleteScheduleRequest, loadMonthSchedulesRequest } from '~/store/modules/schedules/actions';
 import { loadTruckProfileRequest } from '~/store/modules/truckProfile/actions';
 import { showModal } from '~/store/modules/modals/actions';
 
@@ -39,7 +39,7 @@ const Schedule = () => {
     const year = currenthMonth.getFullYear()
     const month = currenthMonth.getMonth() + 1
 
-    dispatch(loadMonthSchedulesRequest(truck_id, month, year))
+    dispatch(loadMonthSchedulesRequest(truck_id, month, year));
 
   }, [dispatch, currenthMonth, truck_id])
 
@@ -77,6 +77,8 @@ const Schedule = () => {
     dispatch(loadTruckProfileRequest());
   }, [dispatch])
 
+
+
 //   const defaultValue = truckProfiles &&
 //     truckProfiles.filter((profile) => {
 //       profile.id === truck_id
@@ -95,10 +97,10 @@ const Schedule = () => {
     dispatch(showModal('UpdateSchedule', { schedule }))
 }, [dispatch]);
 
- //handle delete schedule
- const handleDeleteSchedule = useCallback((schedule_id) => {
-    // dispatch(updateScheduleRequest(schedule_id))
-}, [dispatch]);
+  // handle delete schedule item
+  const handleDeleteSchedule = useCallback((schedule_id) => {
+    dispatch(deleteScheduleRequest(schedule_id));
+  }, [dispatch])
 
   return (
     <>
@@ -136,7 +138,7 @@ const Schedule = () => {
                   isLoading={isLoading}
                   isActive={isMatchingDates && isMatchingDates.some(date => date.id === schedule.id) ? true : false}
                   onUpdate={() => handleUpdateSchedule(schedule)}
-                  onDelete={handleDeleteSchedule}
+                  onDelete={() => handleDeleteSchedule(schedule.id)}
                 />
               ))}
           </motion.ul>

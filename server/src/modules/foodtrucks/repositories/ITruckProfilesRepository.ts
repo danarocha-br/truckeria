@@ -8,5 +8,5 @@ export default interface ITruckProfilesRepository {
   findAllMyTrucksProfile(user_id: string): Promise<TruckProfile[] | undefined>;
   findById(truck_id: string): Promise<TruckProfile | undefined>;
   update(profile: TruckProfile): Promise<TruckProfile>;
-  delete(truck_id: string): Promise<DeleteResult | undefined>;
+  delete(truck_id: string): Promise<DeleteResult | TruckProfile[]>;
 }
