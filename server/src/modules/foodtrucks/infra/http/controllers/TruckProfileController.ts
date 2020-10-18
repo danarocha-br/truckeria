@@ -120,7 +120,7 @@ class TrucksProfilesController {
    * delete
    */
   public async delete(req: Request, res: Response): Promise<Response> {
-    const truck_id = req.body.id;
+    const { truck_id } = req.params;
     const user_id = req.user.id;
 
     const deleteOneTruckProfileService = container.resolve(

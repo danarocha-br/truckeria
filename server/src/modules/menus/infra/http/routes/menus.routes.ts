@@ -5,19 +5,27 @@ import { celebrate, Segments, Joi } from 'celebrate';
 import ensureAuthentication from '@modules/users/infra/http/middlewares/ensureAuthentication';
 import uploadConfig from '@config/upload';
 
-import TrucksProfilesController from '../controllers/TrucksProfilesController';
-import TruckProfileController from '../controllers/TruckProfileController';
+import MenusController from '../controllers/MenusController';
+import MenusTypesController from '../controllers/MenusTypesController';
 
 const upload = multer(uploadConfig);
-const trucksProfilesRouter = Router();
-const trucksProfilesController = new TrucksProfilesController();
-const truckProfileController = new TruckProfileController();
+const menusRouter = Router();
+const menusController = new MenusController();
+const menusTypesController = new MenusTypesController();
 
-trucksProfilesRouter.use(ensureAuthentication);
+menusRouter.use(ensureAuthentication);
 
-trucksProfilesRouter.get('/', trucksProfilesController.index);
-trucksProfilesRouter.get('/single', truckProfileController.show);
-trucksProfilesRouter.post(
+menusRouter.get(
+  '/:truck_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      truck_id: Joi.string().uuid().required(),
+    },
+  }),
+  menusController.index,
+);
+
+menusRouter.post(
   '/',
   // celebrate({
   //   [Segments.BODY]: {
@@ -38,22 +46,37 @@ trucksProfilesRouter.post(
   //   },
   // }),
   upload.single('photo_filename'),
-  truckProfileController.create,
-);
-trucksProfilesRouter.put(
-  '/',
-  upload.single('photo_filename'),
-  truckProfileController.update,
+  menusController.create,
 );
 
-trucksProfilesRouter.delete(
-  '/:truck_id',
+menusRouter.put(
+  '/',
+  upload.single('photo_filename'),
+  menusController.update,
+);
+
+
+menusRouter.delete(
+  '/:menu_id',
+  celebrate({
+    [Segments.PARAMS]: {
+      menu_id: Joi.string().uuid().required(),
+    },
+  }),
+  menusController.delete,
+);
+
+menusRouter.get(
+  '/:truck_id/type',
   celebrate({
     [Segments.PARAMS]: {
       truck_id: Joi.string().uuid().required(),
     },
+    [Segments.QUERY]: {
+      type: Joi.string().required(),
+    }
   }),
-  truckProfileController.delete,
+  menusTypesController.index,
 );
 
-export default trucksProfilesRouter;
+export default menusRouter;
