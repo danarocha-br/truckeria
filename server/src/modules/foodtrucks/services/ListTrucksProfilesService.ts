@@ -27,14 +27,14 @@ class ListTrucksProfilesService {
   /**
    * execute
    */
-  public async execute({ user_id }: IRequest): Promise<TruckProfile[]> {
+  public async execute({ user_id }: IRequest): Promise<TruckProfile[] | undefined> {
 
     const truckProfiles = await this.truckProfilesRepository.findAllMyTrucksProfile(
       user_id,
     );
 
     if (!truckProfiles?.length) {
-      throw new AppError(`You don't have any food truck profile yet.`);
+      return
     }
     return truckProfiles;
   }

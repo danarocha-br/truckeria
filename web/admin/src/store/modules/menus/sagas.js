@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import ActionTypes from './types';
 import api from '~/services/api';
+import formatCurrency from '~/utils/formatCurrency';
 
 import {
   loadMenusSuccess,
@@ -27,6 +28,7 @@ export function* loadAllMenus({ payload: { truck_id } }) {
     const list = response.data.map(menu => {
       return {
         ...menu,
+        price: formatCurrency(menu.price)
       }});
 
     yield put(loadMenusSuccess(list));

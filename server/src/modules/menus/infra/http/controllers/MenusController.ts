@@ -1,6 +1,7 @@
 
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import { classToClass } from 'class-transformer';
 
 import CreateMenuService from '@modules/menus/services/CreateMenuService';
 import ListAllMenusService from '@modules/menus/services/ListAllMenusService';
@@ -20,7 +21,7 @@ class MenusController {
       truck_id,
     });
 
-    return res.json(menus);
+    return res.json(classToClass(menus));
   }
 
   /**

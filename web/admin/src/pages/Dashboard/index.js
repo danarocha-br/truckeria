@@ -7,7 +7,7 @@ import DefaultLayout from '../_layouts/default';
 import { Header } from '../_layouts/default/styles';
 import TruckProfileItem from "~/components/List/TruckProfileItem";
 import {loadTruckProfileRequest} from '~/store/modules/truckProfile/actions';
-import {loadSchedulesRequest} from '~/store/modules/schedules/actions';
+// import {loadSchedulesRequest} from '~/store/modules/schedules/actions';
 import { Grid, Container } from './styles';
 import Button from '~/components/Button';
 

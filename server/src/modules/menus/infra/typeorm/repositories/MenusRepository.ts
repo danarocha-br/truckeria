@@ -1,4 +1,5 @@
 import { DeleteResult, getRepository, Repository } from 'typeorm';
+import _ from 'lodash';
 
 import IMenusRepository from '@modules/menus/repositories/IMenusRepository';
 import ICreateMenuDTO from '@modules/menus/dtos/ICreateMenuDTO';
@@ -15,6 +16,19 @@ class MenusRepository implements IMenusRepository {
   /**
    * findAllMenus
    */
+  // public async findAll(
+  //   truck_id: string,
+  // ): Promise<Menu[]> {
+  //   const menus = await this.ormRepository.find({
+  //     where: { truck_id },
+  //     order: {
+  //       title: "ASC"
+  //     },
+  //   });
+
+  //   return _.orderBy(menus, ['type', 'title'], ['asc', 'asc']);
+  // }
+
   public async findAll(
     truck_id: string,
   ): Promise<Menu[]> {
@@ -25,8 +39,24 @@ class MenusRepository implements IMenusRepository {
       },
     });
 
-    return menus;
+    return _.orderBy(menus, ['type', 'title'], ['asc', 'asc']);
   }
+
+    /**
+   * findAllMenus
+   */
+  // public async findAll(
+  //   truck_id: string,
+  // ): Promise<Menu[]> {
+  //   const menus = await this.ormRepository
+  //     .createQueryBuilder('menu')
+  //     .where("menu.truck_id = :truck_id", { truck_id })
+  //     .groupBy("menu.type")
+  //     .addGroupBy('menu.id')
+  //     .getMany();
+
+  //     return menus;
+  // }
 
   /**
    * findById
@@ -35,7 +65,6 @@ class MenusRepository implements IMenusRepository {
     const findTruck = this.ormRepository.findOne({
       where: { id: menu_id },
     });
-
     return findTruck;
   }
 

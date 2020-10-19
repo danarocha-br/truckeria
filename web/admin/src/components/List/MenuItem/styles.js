@@ -4,7 +4,7 @@ import { transparentize } from 'polished';
 import breakpoint from 'styled-components-breakpoint';
 import { motion } from 'framer-motion';
 
-import Image from '../../../assets/sign-in-background.png';
+import Image from '~/assets/sign-in-background.png';
 
 export const Actions = styled.span`
   ${tw`hidden`};
@@ -22,7 +22,7 @@ export const Actions = styled.span`
 `;
 
 export const Container = styled(motion.li)`
-  ${tw`flex w-full rounded-md items-center py-2 px-4 font-bold mb-4`};
+  ${tw`flex flex-col w-full rounded-md  py-2 px-4 font-bold mb-4`};
   color: ${(props) => props.theme.colors.text};
   border: 1px solid ${(props) => props.theme.colors.shade};
   background-color: ${(props) =>
@@ -65,18 +65,47 @@ export const Container = styled(motion.li)`
       transform: translateX(100px);
     `}
   }
+
+  .c-menu__description {
+    ${tw`text-sm mt-2`};
+    max-height: 57px;
+    line-height: 1.35;
+    overflow: hidden;
+
+    p {
+      font-weight: 400;
+    }
+  }
 `;
 
 export const Thumb = styled.div`
-${tw`rounded-full bg-cover bg-center border-solid border-2 `}
+  ${tw`rounded-full bg-cover border-solid border-2 `}
     border-color: ${(props) => props.theme.colors.accent};
     width: 50px;
     height: 50px;
-    background: url(${Image}) no-repeat;
-    background-size: 100%;
+    background: url(${props => props.thumb ? props.thumb : Image}) no-repeat center center;
 
     ${breakpoint('desktop')`
-      min-width: 65px;
-      min-height: 65px;
+      width: 65px;
+      height: 65px;
     `};
+`;
+
+export const Categories = styled.div`
+  ${tw`w-full text-xs mt-3 mb-2`};
+  font-weight: 400;
+  margin-left: 80px;
+
+  ${breakpoint('desktop')`
+    margin-left: 97px;
+  `};
+
+  span {
+    ${tw`mr-2  px-3 rounded-md`};
+    border: 1px solid;
+    border-color: ${props => transparentize(0.5, props.theme.form.success)};
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
 `;

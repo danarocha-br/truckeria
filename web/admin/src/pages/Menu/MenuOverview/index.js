@@ -3,11 +3,12 @@ import { FiPieChart } from 'react-icons/fi';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
 import { Container, Thumb, List } from './styles';
-import Overview from '../../../components/List/Overview';
+import Overview from '~/components/List/Overview';
 import { PropTypes } from 'prop-types';
-import colors from '../../../styles/tokens/colors';
+import colors from '~/styles/tokens/colors';
 
-const MenuOverview = ({ isLoading }) => {
+const MenuOverview = ({ isLoading, totalCount, totalCategories }) => {
+
   return (
     <Container>
       <h1>Menu Overview</h1>
@@ -22,14 +23,14 @@ const MenuOverview = ({ isLoading }) => {
       <List>
         <Overview
           icon={FiPieChart}
-          title="25"
+          title={totalCount}
           label="Total Items"
           isLoading={isLoading}
         />
         <Overview
           icon={FiPieChart}
-          title="25"
-          label="Total Items"
+          title={totalCategories}
+          label="Total Categories"
           isLoading={isLoading}
         />
         <Overview
