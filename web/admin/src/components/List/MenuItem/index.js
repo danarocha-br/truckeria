@@ -4,7 +4,7 @@ import { FiEdit2, FiTrash } from 'react-icons/fi';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import { ThemeContext } from 'styled-components';
 
-import { Container, Thumb, Actions } from './styles';
+import { Container, Thumb, Actions, Categories } from './styles';
 import Button from '../../Button';
 import { listItems } from '../animations';
 
@@ -15,54 +15,64 @@ const MenuItem = ({
   price,
   isActive,
   isLoading,
+  categories,
+  onUpdate,
+  onDelete
 }) => {
   const theme = useContext(ThemeContext);
 
   return (
     <Container isActive={isActive} isLoading={isLoading} variants={listItems}>
-      {isLoading ? (
-        <SkeletonTheme
-          color={theme.colors.shade}
-          highlightColor={theme.colors.tabbar}
-        >
-          <Skeleton circle={true} height={50} width={50} />
-        </SkeletonTheme>
-      ) : (
-        <Thumb thumb={thumb} />
-      )}
-      <div className="mr-auto ml-8">
+      <div className='flex w-full items-center'>
         {isLoading ? (
-          <h2>
-            <SkeletonTheme
-              color={theme.colors.shade}
-              highlightColor={theme.colors.tabbar}
-            >
-              <Skeleton width={100} />
-            </SkeletonTheme>
-          </h2>
+          <SkeletonTheme
+            color={theme.colors.shade}
+            highlightColor={theme.colors.tabbar}
+          >
+            <Skeleton circle={true} height={50} width={50} />
+          </SkeletonTheme>
         ) : (
-          <>
-            <h2>{title}</h2>
-            <small>{description}</small>
-          </>
+          <Thumb thumb={thumb} />
+        )}
+        <div className="mr-auto ml-8 flex-1 pr-4">
+          {isLoading ? (
+            <h2>
+              <SkeletonTheme
+                color={theme.colors.shade}
+                highlightColor={theme.colors.tabbar}
+              >
+                <Skeleton width={100} />
+              </SkeletonTheme>
+            </h2>
+          ) : (
+            <>
+              <h2>{title}</h2>
+              <div className='c-menu__description flex-1'>
+                <p>{description}</p>
+              </div>
+            </>
+          )}
+        </div>
+        {isLoading ? (
+          <SkeletonTheme
+            color={theme.colors.shade}
+            highlightColor={theme.colors.tabbar}
+          >
+            <Skeleton width={100} />
+          </SkeletonTheme>
+        ) : (
+          <span className="c-menu__price">{price}</span>
+        )}
+        {!isLoading && (
+          <Actions>
+            <Button icon={FiEdit2} onClick={onUpdate} />
+            <Button icon={FiTrash} onClick={onDelete} />
+          </Actions>
         )}
       </div>
-      {isLoading ? (
-        <SkeletonTheme
-          color={theme.colors.shade}
-          highlightColor={theme.colors.tabbar}
-        >
-          <Skeleton width={100} />
-        </SkeletonTheme>
-      ) : (
-        <span className="c-menu__price">{price}</span>
-      )}
-      {!isLoading && (
-        <Actions>
-          <Button icon={FiEdit2} onClick={() => 'clicked'} />
-          <Button icon={FiTrash} onClick={() => 'clicked'} />
-        </Actions>
-      )}
+
+      <Categories>{categories && categories.map(category => <span key={category}>{category}</span>)}</Categories>
+
     </Container>
   );
 };
@@ -71,9 +81,10 @@ MenuItem.propTypes = {
   thumb: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
   isLoading: PropTypes.bool,
+  category: PropTypes.array,
 };
 
 export default MenuItem;

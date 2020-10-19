@@ -40,7 +40,6 @@ const Overview = ({ icon: Icon, title, label, isLoading }) => {
 };
 
 Overview.propTypes = {
-  title: PropTypes.string,
   label: PropTypes.string,
   icon: PropTypes.func,
   isLoading: PropTypes.bool,

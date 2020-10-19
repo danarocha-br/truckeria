@@ -18,6 +18,9 @@ import TruckProfilesRepository from '@modules/foodtrucks/infra/typeorm/repositor
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
 import NotificationsRepository from '@modules/notifications/infra/typeorm/repositories/NotificationsRepository';
 
+import IMenusRepository from '@modules/menus/repositories/IMenusRepository';
+import MenusRepository from '@modules/menus/infra/typeorm/repositories/MenusRepository';
+
 container.registerSingleton<ISchedulesRepository>(
   'SchedulesRepository',
   SchedulesRepository,
@@ -41,4 +44,9 @@ container.registerSingleton<ITruckProfilesRepository>(
 container.registerSingleton<INotificationsRepository>(
   'NotificationsRepository',
   NotificationsRepository,
+);
+
+container.registerSingleton<IMenusRepository>(
+  'MenusRepository',
+  MenusRepository,
 );
