@@ -38,6 +38,8 @@ class MenusController {
     } = req.body;
 
     const user_id = req.user.id;
+    console.log(req.file);
+
 
     const createMenuItem = container.resolve(CreateMenuService);
 
@@ -49,8 +51,9 @@ class MenusController {
       type,
       options,
       price,
-      photo_filename: req.file.filename,
+      photo_filename: req.file.path,
     });
+
 
     return res.json(menuItem);
   }

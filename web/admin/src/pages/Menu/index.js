@@ -52,8 +52,6 @@ const Menu = () => {
     return menus && Array(menus.types);
   }, [menus])
 
-  console.log(totalCategories)
-
 
  //handle update schedule
  const handleUpdateMenu = useCallback((menu) => {

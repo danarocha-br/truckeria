@@ -5,13 +5,20 @@ import { FiMapPin  } from 'react-icons/fi';
 import TextInput from '~/components/TextInput';
 // import Select from '~/components/Select';
 import Button from '~/components/Button';
+import Upload from '~/components/Upload';
 
 const NewMenuForm = ( ) => {
 
-  const { values, isSubmitting, touched, isValid } = useFormikContext();
+  const { values, setFieldValue, valueField, isSubmitting, touched, isValid } = useFormikContext();
 
   return (
     <Form>
+      <Upload
+        values={values}
+        name='files'
+        valueField="files"
+        setFieldValue={setFieldValue}
+        />
       <TextInput icon={FiMapPin} name='title' label='Food Title' />
       <TextInput icon={FiMapPin} name='description' label='Food Description' />
       <TextInput icon={FiMapPin} name='price' label='Food Price' />

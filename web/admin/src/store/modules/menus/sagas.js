@@ -1,5 +1,6 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { toast } from "react-toastify";
+import axios from 'axios';
 
 import ActionTypes from './types';
 import api from '~/services/api';
@@ -19,6 +20,7 @@ import {
   deleteMenuSuccess
 } from './actions';
 import { hideModal } from "../modals/actions";
+
 
 export function* loadAllMenus({ payload: { truck_id } }) {
 
@@ -60,19 +62,23 @@ export function* loadMenusByTypes({ payload: { truck_id, type} }) {
 
 export function* createMenu({ payload: { data } }) {
 
-  const { title, description, type, options, price, photo_filename } = data.values;
-  const { truck_id } = data;
+  const { title, description, type, options, price, files, truck_id } = data;
+
+  let formData = new FormData();
+
+  formData.append('photo_filename', files);
+  formData.append('truck_id', truck_id);
+  formData.append('title', title);
+  formData.append('description', description);
+  formData.append('type', type);
+  formData.append('options', options);
+  formData.append('price', price);
 
   try {
-    const response = yield call(api.post, 'menus', {
-      truck_id,
-      title,
-      description,
-      type,
-      options,
-      price,
-      photo_filename
-    });
+    const response = yield call(api.post, 'menus', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }});
     yield put(createMenuSuccess(response.data));
     yield put(hideModal());
     yield put(loadMenusRequest(truck_id));
@@ -80,6 +86,7 @@ export function* createMenu({ payload: { data } }) {
     yield put(createMenusFailure(error));
     toast.error(`An error occurred: ${error.response.data.message}`);
   }
+
 }
 
 export function* updateMenu({ payload: { data }}) {

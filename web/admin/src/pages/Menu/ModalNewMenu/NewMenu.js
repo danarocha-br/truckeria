@@ -9,6 +9,7 @@ import Form from './NewMenuForm';
 import { createMenuRequest } from "~/store/modules/menus/actions";
 
 const MenuSchema = Yup.object().shape({
+  files: Yup.mixed(),
   title: Yup.string().required('Please insert a title for the menu item.'),
   description: Yup.string().required('Description is required.'),
   type: Yup.string().required('Please choose a category type.'),
@@ -22,18 +23,17 @@ const MenuSchema = Yup.object().shape({
       .nullable()
   )
   .max(3, 'You can add up to 3 options.'),
-  photo_filename: Yup.string(),
   price: Yup.number().required('Please provide a price.')
 });
 
 const NewMenuItem = ({ truck_id }) => {
 
   const initialValues = {
+    files: null,
     title: '',
     description: '',
     type: '',
     options: [],
-    photo_filename: '',
     price: '',
   };
 
@@ -41,7 +41,8 @@ const NewMenuItem = ({ truck_id }) => {
   const dispatch = useDispatch();
 
   const handleSubmit = useCallback((values) => {
-     dispatch(createMenuRequest({values, truck_id}))
+
+    dispatch(createMenuRequest({ ...values, truck_id}));
   }, [dispatch, truck_id]);
 
 

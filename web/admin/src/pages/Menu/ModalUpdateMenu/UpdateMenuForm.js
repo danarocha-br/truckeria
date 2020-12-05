@@ -5,15 +5,21 @@ import { useSelector } from 'react-redux';
 
 import DateInput from '~/components/DateInput';
 import Button from '~/components/Button';
+import  Upload  from '~/components/Upload';
 
 const UpdateScheduleForm = () => {
 
   const isLoading = useSelector(state => state.menus.loading);
 
-  const { isSubmitting, isValid } = useFormikContext();
+  const { values, setFieldValue, isSubmitting, isValid } = useFormikContext();
 
   return (
     <Form>
+      <Upload
+        values={values}
+        valueField="files"
+        setFieldValue={setFieldValue}
+        />
       <DateInput icon={FiMapPin} name='title' label='Food Title' isLoading={isLoading} />
       <DateInput icon={FiMapPin} name='description' label='Food Description' isLoading={isLoading}/>
       <DateInput icon={FiMapPin} name='price' label='Food Price' isLoading={isLoading}/>

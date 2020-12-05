@@ -3,28 +3,19 @@ import { useDropzone } from 'react-dropzone';
 import { AiOutlinePicture } from 'react-icons/ai';
 
 import { Container, Thumb, InfoRejected } from './style';
-import colors from '../../styles/tokens/colors';
+import colors from '~/styles/tokens/colors';
 
-const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
+const Upload = ({ values, valueField, setFieldValue, ...rest }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       // do nothing if no files
       if (acceptedFiles.length === 0) {
         return;
       }
-
-
-      // const files = new FormData();
-      // files.append('files', acceptedFiles[0]);
-
-      setFieldValue(valueField, acceptedFiles);
+        setFieldValue(valueField, acceptedFiles);
     },
     [setFieldValue, valueField]
   );
-
-  // const onFileDelete = useCallback((file, key) => {
-  //   return firebase.deleteFile(file.fullPath, `${filesPath}/${key}`);
-  // });
 
   const {
     getRootProps,
@@ -52,10 +43,14 @@ const Upload = ({ values, setFieldValue, valueField, ...rest }) => {
       <input {...getInputProps()} {...rest} onDrop={onDrop} />
 
       {values.files && values.files.length > 0 ? (
+        <>
+        <h1>oi</h1>
         <Thumb
           src={URL.createObjectURL(values.files[0])}
           alt={values.files[0].name}
+          files={values.files}
         />
+        </>
       ) : (
         <>
           <p className="flex flex-col items-center c-upload__content">
