@@ -23,7 +23,7 @@
 
 I am developing this project for my personal portfolio, so, don't hesitate in providing me any feedback you might have.
 
-@: dana@danarocha.com.br
+[hello@danarocha.com](mailto:hello@danarocha.com).
 
 Connect with me at [LinkedIn](https://www.linkedin.com/in/danarocha/).
 
@@ -86,19 +86,22 @@ You need to install these prerequisites on your computer before you can use "**T
 
 <h4>PostgreSQL</h4> <a href="https://hub.docker.com/_/postgres" target="_blank">with these instructions</a>.
 
-<h4>Some Params</h4>
 
-<ul>
-  <li>POSTGRES_DB=truckeria</li>
-  <li>POSTGRES_USER=postgres</li>
-  <li>POSTGRES_PASSWORD=docker</li>
-</ul>
+
 
 ```
-docker run --name truckeria -e POSTGRES_DB=truckeria -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
+docker run --name truckeria -e POSTGRES_DB=truckeria -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
 ```
 
-<h4>REST API Client</h4>
+```
+docker run --name truckeria_redis -p 6379:6379 -d -t redis:alpine
+```
+
+```
+docker run --name mongodb -p 27017:27017 -d -t mongo
+```
+
+## REST API Client
 
 Finally, you will need a rest client to test "**Truckeria**". Here are some:
 
@@ -109,9 +112,26 @@ Finally, you will need a rest client to test "**Truckeria**". Here are some:
 
 After repository clone:
 
-- Run **`yarn`** to install dependencies;
-- Run **`yarn typeorm migration:run`** to create the migrations;
-- Run **`yarn dev`** to start de aplication.
+```
+# Clone this repository
+$ git clone https://github.com/danarocha-br/truckeria.git
+
+# Go into the repository
+$ cd truckeria
+
+# Install dependencies
+$ yarn install
+
+# Create .env file
+# Create ormconfig.json file
+
+# Run migrations
+$ yarn typeorm migration:run
+
+# Run the app
+$ yarn dev:server
+```
+
 
 Now you can use your REST Client to test **Truckeria**.
 
